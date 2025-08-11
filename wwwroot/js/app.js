@@ -26,6 +26,8 @@ const API_BASE = (() => {
   }
   return '/api';
 })();
+// === XÁC ĐỊNH CÓ BACKEND KHÔNG ===
+const HAS_BACKEND = !location.hostname.endsWith('github.io'); // đơn giản: nếu trên pages => không
 
 // Danh sách chương trình (có thể mở rộng sau)
 const programs = {
@@ -212,6 +214,30 @@ form.addEventListener('submit', async (e) => {
   const file = fileInput.files[0];
   if (!file.name.toLowerCase().endsWith('.xlsx')) { setStatus('File phải là .xlsx', 'error'); return; }
 
+  // Nếu không có backend -> chuyển sang parse local
+  if (!HAS_BACKEND) {
+    clearResult();
+    setStatus('Đang phân tích tại trình duyệt...', 'loading');
+    busy = true;
+    const originalText = btnUpload.textContent;
+    btnUpload.disabled = true;
+    btnUpload.textContent = btnUpload.getAttribute('data-busy-text') || 'Đang xử lý...';
+    const t0 = performance.now();
+    try {
+      const data = await parseExcelClient(file, mssvInput.value.trim());
+      renderResult(data);
+      const t1 = performance.now();
+      setStatus(`Hoàn thành (client) trong ${(t1 - t0).toFixed(0)} ms`, 'ok');
+    } catch (err) {
+      setStatus('Lỗi đọc Excel (client): ' + (err.message || err), 'error');
+    } finally {
+      busy = false;
+      btnUpload.disabled = false;
+      btnUpload.textContent = originalText;
+    }
+    return;
+  }
+
   // Nếu đang ở GitHub Pages mà chưa cấu hình backend thật -> cảnh báo & dừng
   if (location.hostname.endsWith('github.io') && API_BASE.includes('your-backend-host-here')) {
     setStatus('Bạn đang chạy trên GitHub Pages nhưng chưa cấu hình URL backend (thay "your-backend-host-here" trong app.js).', 'error');
@@ -383,5 +409,66 @@ function formatSize(bytes) {
   let i = 0;
   while (v >= 1024 && i < units.length - 1) { v /= 1024; i++; }
   return v.toFixed(v < 10 ? 2 : 1) + ' ' + units[i];
+}
+
+// === HÀM PARSE EXCEL TRÊN CLIENT (FALLBACK) ===
+async function parseExcelClient(file, mssv) {
+  if (typeof XLSX === 'undefined') throw new Error('Thiếu thư viện XLSX.');
+  const buf = await file.arrayBuffer();
+  const wb = XLSX.read(buf, { type: 'array' });
+  // Chọn sheet đầu tiên có header hợp lệ
+  let sheet;
+  for (const name of wb.SheetNames) {
+    const ws = wb.Sheets[name];
+    const aoa = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, blankrows: false });
+    if (!aoa.length) continue;
+    const header = aoa[0].map(h => (h || '').toString().trim().toLowerCase());
+    // tìm cột tối thiểu
+    if (header.some(h => ['mã','ma','code','mã học phần','course code'].includes(h))) {
+      sheet = { ws, aoa, header };
+      break;
+    }
+  }
+  if (!sheet) throw new Error('Không tìm thấy sheet phù hợp.');
+  const { aoa, header } = sheet;
+
+  // Map tên cột -> index
+  function colIdx(keys) {
+    return header.findIndex(h => keys.includes(h));
+  }
+  const idxCode = colIdx(['mã','ma','code','mã học phần','course code']);
+  const idxName = colIdx(['tên','ten','tên học phần','course name','name']);
+  const idxCredits = colIdx(['tc','số tc','sotinchi','số tín chỉ','credits','credit']);
+  const idx10 = colIdx(['tk(10)','điểm 10','score10','tk10','điểm tổng (10)']);
+  const idx4 = colIdx(['tk(4)','điểm 4','gpa4','score4']);
+  const idxLetter = colIdx(['tk(ch)','điểm chữ','letter','grade','letter grade']);
+
+  const grades = [];
+  for (let r = 1; r < aoa.length; r++) {
+    const row = aoa[r];
+    if (!row) continue;
+    const rawCode = row[idxCode] ?? '';
+    const code = String(rawCode).trim();
+    if (!code) continue;
+    const grade = {
+      courseCode: code,
+      courseName: idxName >= 0 ? String(row[idxName] ?? '').trim() : '',
+      credits: idxCredits >= 0 ? Number(row[idxCredits]) || null : null,
+      score10: idx10 >= 0 ? Number(row[idx10]) || null : null,
+      letterGrade: idxLetter >= 0 ? String(row[idxLetter] ?? '').trim() : '',
+      gpa4: idx4 >= 0 ? Number(row[idx4]) || null : null
+    };
+    grades.push(grade);
+  }
+
+  return {
+    studentId: mssv,
+    programCode: currentProgram?.programCode || null,
+    curriculumFound: !!currentProgram,
+    department: currentProgram?.department || null,
+    academicYear: currentProgram?.year || null,
+    totalCredits: currentProgram?.totalCredits || null,
+    grades
+  };
 }
 
