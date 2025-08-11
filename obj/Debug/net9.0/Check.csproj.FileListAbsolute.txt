@@ -183,8 +183,6 @@ C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\Check.sourcelink.json
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\scopedcss\bundle\Check.styles.css
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\t4cvf4cpex-soucc6ojfc.gz
-C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\mp96bqbs7n-844gfnf7sj.gz
-C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\61l45jh54i-k6vtlk45s7.gz
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\staticwebassets.build.endpoints.json
@@ -200,3 +198,5 @@ C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\Check.pdb
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\Check.genruntimeconfig.cache
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\ref\Check.dll
+C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\mp96bqbs7n-2xr9a16hxe.gz
+C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\61l45jh54i-jy84tkafzw.gz

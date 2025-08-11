@@ -420,50 +420,145 @@ async function parseExcelClient(file, mssv) {
   if (typeof XLSX === 'undefined') throw new Error('Thiếu thư viện XLSX.');
   const buf = await file.arrayBuffer();
   const wb = XLSX.read(buf, { type: 'array' });
-  // Chọn sheet đầu tiên có header hợp lệ
-  let sheet;
-  for (const name of wb.SheetNames) {
-    const ws = wb.Sheets[name];
+
+  function normalize(str) {
+    return (str || '').toString().trim().toLowerCase().replace(/\s+/g,' ');
+  }
+  const keywordSets = {
+    code: ['mã','ma','code','mã học phần','course code','mã hp','mh'],
+    name: ['tên','ten','tên học phần','course name','name'],
+    credits: ['tc','số tc','sotinchi','số tín chỉ','tín chỉ','credits','credit'],
+    score10: ['tk(10)','điểm 10','score10','tk10','điểm tổng (10)','diem 10'],
+    score4: ['tk(4)','điểm 4','gpa4','score4','diem 4'],
+    letter: ['tk(ch)','điểm chữ','letter','grade','letter grade','diem chu']
+  };
+  const allSheetsInfo = [];
+
+  // Thu thập thông tin từng sheet (tối đa 200 dòng đầu)
+  for (const sheetName of wb.SheetNames) {
+    const ws = wb.Sheets[sheetName];
     const aoa = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, blankrows: false });
     if (!aoa.length) continue;
-    const header = aoa[0].map(h => (h || '').toString().trim().toLowerCase());
-    // tìm cột tối thiểu
-    if (header.some(h => ['mã','ma','code','mã học phần','course code'].includes(h))) {
-      sheet = { ws, aoa, header };
-      break;
+    allSheetsInfo.push({ name: sheetName, aoa });
+  }
+  if (!allSheetsInfo.length) throw new Error('File rỗng.');
+
+  function scoreHeaderRow(cells) {
+    let score = 0;
+    const norm = cells.map(normalize);
+    for (const c of norm) {
+      if (keywordSets.code.some(k => c.includes(k))) score += 3;
+      if (keywordSets.name.some(k => c.includes(k))) score += 2;
+      if (keywordSets.credits.some(k => c.includes(k))) score += 2;
+      if (keywordSets.score10.some(k => c.includes(k))) score += 1;
+      if (keywordSets.score4.some(k => c.includes(k))) score += 1;
+      if (keywordSets.letter.some(k => c.includes(k))) score += 1;
+    }
+    return score;
+  }
+
+  function findHeader(aoa) {
+    const limit = Math.min(aoa.length, 15);
+    let best = { idx: -1, score: -1 };
+    for (let i = 0; i < limit; i++) {
+      const row = aoa[i];
+      if (!row || row.length === 0) continue;
+      const score = scoreHeaderRow(row);
+      if (score > best.score) best = { idx: i, score };
+    }
+    if (best.score >= 2) return best.idx; // ngưỡng
+    return 0; // fallback dùng dòng đầu
+  }
+
+  function findColumnIdx(headerNorm, keywords) {
+    // so khớp chứa thay vì bằng
+    let idx = headerNorm.findIndex(h => keywords.some(k => h === k));
+    if (idx >= 0) return idx;
+    idx = headerNorm.findIndex(h => keywords.some(k => h.includes(k)));
+    return idx;
+  }
+
+  function isLikelyCode(val) {
+    if (val == null) return false;
+    const s = String(val).trim();
+    if (s.length < 3 || s.length > 15) return false;
+    // có ít nhất 1 chữ + 1 số
+    return /[A-Za-z]/.test(s) && /\d/.test(s) && /^[A-Za-z0-9\-_]+$/.test(s);
+  }
+
+  let chosen = null;
+
+  for (const info of allSheetsInfo) {
+    const { aoa } = info;
+    const headerRowIdx = findHeader(aoa);
+    const headerRaw = aoa[headerRowIdx] || [];
+    const headerNorm = headerRaw.map(normalize);
+
+    const idxCode = findColumnIdx(headerNorm, keywordSets.code);
+    const idxName = findColumnIdx(headerNorm, keywordSets.name);
+    const idxCredits = findColumnIdx(headerNorm, keywordSets.credits);
+    const idx10 = findColumnIdx(headerNorm, keywordSets.score10);
+    const idx4 = findColumnIdx(headerNorm, keywordSets.score4);
+    const idxLetter = findColumnIdx(headerNorm, keywordSets.letter);
+
+    // Nếu chưa có cột code -> đoán bằng pattern
+    let finalIdxCode = idxCode;
+    if (finalIdxCode < 0) {
+      // quét từng cột, đếm số ô giống mã
+      const colCount = Math.max(...aoa.slice(headerRowIdx + 1, headerRowIdx + 21).map(r => r.length), 0);
+      let bestCol = -1, bestHits = 0;
+      for (let c = 0; c < colCount; c++) {
+        let hits = 0, rowsChecked = 0;
+        for (let r = headerRowIdx + 1; r < aoa.length && r < headerRowIdx + 30; r++) {
+          const cell = aoa[r]?.[c];
+            if (cell == null || cell === '') continue;
+          rowsChecked++;
+          if (isLikelyCode(cell)) hits++;
+        }
+        if (hits >= 2 && hits > bestHits) { bestHits = hits; bestCol = c; }
+      }
+      if (bestCol >= 0) finalIdxCode = bestCol;
+    }
+
+    if (finalIdxCode >= 0) {
+      chosen = {
+        aoa,
+        headerRowIdx,
+        idx: {
+          code: finalIdxCode,
+          name: idxName,
+          credits: idxCredits,
+          score10: idx10,
+          score4: idx4,
+          letter: idxLetter
+        }
+      };
+      break; // ưu tiên sheet đầu tiên hợp lệ
     }
   }
-  if (!sheet) throw new Error('Không tìm thấy sheet phù hợp.');
-  const { aoa, header } = sheet;
 
-  // Map tên cột -> index
-  function colIdx(keys) {
-    return header.findIndex(h => keys.includes(h));
-  }
-  const idxCode = colIdx(['mã','ma','code','mã học phần','course code']);
-  const idxName = colIdx(['tên','ten','tên học phần','course name','name']);
-  const idxCredits = colIdx(['tc','số tc','sotinchi','số tín chỉ','credits','credit']);
-  const idx10 = colIdx(['tk(10)','điểm 10','score10','tk10','điểm tổng (10)']);
-  const idx4 = colIdx(['tk(4)','điểm 4','gpa4','score4']);
-  const idxLetter = colIdx(['tk(ch)','điểm chữ','letter','grade','letter grade']);
+  if (!chosen) throw new Error('Không tìm thấy sheet phù hợp.');
 
+  const { aoa, headerRowIdx, idx } = chosen;
   const grades = [];
-  for (let r = 1; r < aoa.length; r++) {
+  for (let r = headerRowIdx + 1; r < aoa.length; r++) {
     const row = aoa[r];
     if (!row) continue;
-    const rawCode = row[idxCode] ?? '';
-    const code = String(rawCode).trim();
+    const rawCode = row[idx.code];
+    const code = rawCode == null ? '' : String(rawCode).trim();
     if (!code) continue;
     const grade = {
       courseCode: code,
-      courseName: idxName >= 0 ? String(row[idxName] ?? '').trim() : '',
-      credits: idxCredits >= 0 ? Number(row[idxCredits]) || null : null,
-      score10: idx10 >= 0 ? Number(row[idx10]) || null : null,
-      letterGrade: idxLetter >= 0 ? String(row[idxLetter] ?? '').trim() : '',
-      gpa4: idx4 >= 0 ? Number(row[idx4]) || null : null
+      courseName: idx.name >= 0 ? String(row[idx.name] ?? '').trim() : '',
+      credits: idx.credits >= 0 ? (Number(row[idx.credits]) || null) : null,
+      score10: idx.score10 >= 0 ? (Number(row[idx.score10]) || null) : null,
+      letterGrade: idx.letter >= 0 ? String(row[idx.letter] ?? '').trim() : '',
+      gpa4: idx.score4 >= 0 ? (Number(row[idx.score4]) || null) : null
     };
     grades.push(grade);
   }
+
+  if (!grades.length) throw new Error('Không đọc được dữ liệu điểm.');
 
   return {
     studentId: mssv,
