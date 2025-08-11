@@ -16,6 +16,17 @@ const deptSelect = document.getElementById('deptSelect');
 let busy = false;
 let currentProgram = null;
 
+// === CẤU HÌNH API (thêm mới) ===
+const API_BASE = (() => {
+  // Có thể gán window.API_BASE_URL trong HTML trước khi load file này để override
+  if (window.API_BASE_URL) return window.API_BASE_URL.replace(/\/+$/,'')
+  if (location.hostname.endsWith('github.io')) {
+    // TODO: THAY bằng URL backend thật của bạn (KHÔNG để nguyên chuỗi mặc định này)
+    return 'https://chunhanhoa.github.io/Hutech-StudyMate/';
+  }
+  return '/api';
+})();
+
 // Danh sách chương trình (có thể mở rộng sau)
 const programs = {
   "2022": [
@@ -201,6 +212,12 @@ form.addEventListener('submit', async (e) => {
   const file = fileInput.files[0];
   if (!file.name.toLowerCase().endsWith('.xlsx')) { setStatus('File phải là .xlsx', 'error'); return; }
 
+  // Nếu đang ở GitHub Pages mà chưa cấu hình backend thật -> cảnh báo & dừng
+  if (location.hostname.endsWith('github.io') && API_BASE.includes('your-backend-host-here')) {
+    setStatus('Bạn đang chạy trên GitHub Pages nhưng chưa cấu hình URL backend (thay "your-backend-host-here" trong app.js).', 'error');
+    return;
+  }
+
   clearResult();
   setStatus('Đang tải lên & phân tích...', 'loading');
   busy = true;
@@ -219,7 +236,9 @@ form.addEventListener('submit', async (e) => {
 
   const t0 = performance.now();
   try {
-    const res = await fetch('/api/upload', { method: 'POST', body: formData });
+    // === SỬA: dùng API_BASE động ===
+    const uploadEndpoint = API_BASE.endsWith('/upload') ? API_BASE : (API_BASE.replace(/\/+$/,'') + '/upload');
+    const res = await fetch(uploadEndpoint, { method: 'POST', body: formData });
     const t1 = performance.now();
     if (!res.ok) {
       const text = await res.text();
