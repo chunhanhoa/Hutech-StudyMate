@@ -1,0 +1,47 @@
+name: Deploy GitHub Pages (static)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Nếu chỉ cần static: copy trực tiếp wwwroot + ProgramJson
+      - name: Prepare artifact
+        run: |
+          mkdir dist
+          cp -R wwwroot/* dist/
+          # Đảm bảo ProgramJson ở gốc xuất (nếu ProgramJson nằm ngoài wwwroot)
+          if [ -d ProgramJson ]; then cp -R ProgramJson dist/ProgramJson; fi
+          # Tạo 404 fallback (optional)
+          cp dist/index.html dist/404.html || true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
