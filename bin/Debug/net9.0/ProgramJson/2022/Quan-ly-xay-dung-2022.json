@@ -1,0 +1,626 @@
+{
+  "department": "Quản lý xây dựng",
+  "program_code": "7580302",
+  "academic_year": "2022",
+  "total_credits": 150,
+  "non_accumulated_credits": 5,
+  "non_accumulated_program": "Chương trình Giáo dục Quốc phòng và an ninh",
+  "courses": [
+    {
+      "category": "Kiến thức giáo dục đại cương",
+      "total_credits": 47,
+      "subjects": [
+        {
+          "code": "POS104",
+          "name": "Triết học Mác - Lênin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS105",
+          "name": "Kinh tế chính trị Mác - Lênin",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS106",
+          "name": "Chủ nghĩa xã hội khoa học",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS107",
+          "name": "Lịch sử Đảng Cộng sản Việt Nam",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS103",
+          "name": "Tư tưởng Hồ Chí Minh",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC101",
+          "name": "Tiếng Anh 1",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC102",
+          "name": "Tiếng Anh 2",
+          "credits": 3,
+          "prerequisites": ["ENC101"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC103",
+          "name": "Tiếng Anh 3",
+          "credits": 3,
+          "prerequisites": ["ENC102"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC104",
+          "name": "Tiếng Anh 4",
+          "credits": 3,
+          "prerequisites": ["ENC103"],
+          "corequisites": []
+        },
+        {
+          "code": "CAP211",
+          "name": "Nhập môn công nghệ thông tin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "MAT106",
+          "name": "Đại số tuyến tính và giải tích",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENS109",
+          "name": "Môi trường",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "MAN116",
+          "name": "Quản trị học",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "CET183",
+          "name": "Công tác kỹ sư ngành Quản lý xây dựng",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "LAW106",
+          "name": "Pháp luật đại cương",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL115",
+          "name": "Tư duy thiết kế dự án",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL116",
+          "name": "Đổi mới sáng tạo và tư duy khởi nghiệp",
+          "credits": 3,
+          "prerequisites": ["SKL115"],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức giáo dục chuyên nghiệp",
+      "total_credits": 103,
+      "subcategories": [
+        {
+          "name": "Kiến thức bắt buộc",
+          "total_credits": 93,
+          "subjects": [
+            {
+              "code": "EGM101",
+              "name": "Cơ học đất và địa chất công trình",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET102",
+              "name": "Cơ học và sức bền vật liệu",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET190",
+              "name": "Chuyên đề quản lý thi công",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ECO102",
+              "name": "Đấu thầu trong hoạt động xây dựng",
+              "credits": 3,
+              "prerequisites": ["ECO212"],
+              "corequisites": []
+            },
+            {
+              "code": "ECO212",
+              "name": "Định mức kinh tế kỹ thuật và định giá xây dựng công trình",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ECO413",
+              "name": "Đồ án định giá xây dựng công trình",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ARH427",
+              "name": "Đồ án kiến trúc",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET448",
+              "name": "Đồ án kỹ thuật thi công",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET461",
+              "name": "Đồ án mô hình thông tin công trình 1",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET453",
+              "name": "Đồ án tổ chức thi công",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET104",
+              "name": "Hệ thống kỹ thuật công trình",
+              "credits": 3,
+              "prerequisites": ["ARH107"],
+              "corequisites": []
+            },
+            {
+              "code": "CET109",
+              "name": "Kết cấu công trình",
+              "credits": 3,
+              "prerequisites": ["MET102"],
+              "corequisites": []
+            },
+            {
+              "code": "ARH107",
+              "name": "Kiến trúc và cấu tạo kiến trúc",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ECO109",
+              "name": "Kinh tế xây dựng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET114",
+              "name": "Kỹ thuật thi công",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "FIN103",
+              "name": "Lập và thẩm định dự án đầu tư xây dựng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET115",
+              "name": "Máy xây dựng và an toàn lao động",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET263",
+              "name": "Mô hình thông tin công trình 1",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET116",
+              "name": "Nền và móng công trình",
+              "credits": 3,
+              "prerequisites": ["EGM101"],
+              "corequisites": []
+            },
+            {
+              "code": "MAN105",
+              "name": "Quản lý dự án xây dựng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAN1017",
+              "name": "Quản lý thanh toán, quyết toán trong xây dựng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAN248",
+              "name": "Quản lý tiến độ dự án xây dựng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAN109",
+              "name": "Quản lý và tổ chức khai thác công trình",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET128",
+              "name": "Thống kê xây dựng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET340",
+              "name": "Thực tập công nhân kỹ thuật",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CAP216",
+              "name": "Tin học ứng dụng trong kinh tế và quản lý xây dựng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET130",
+              "name": "Tổ chức thi công",
+              "credits": 3,
+              "prerequisites": ["CET114"],
+              "corequisites": []
+            },
+            {
+              "code": "CET132",
+              "name": "Trắc địa",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET133",
+              "name": "Vật liệu xây dựng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CET267",
+              "name": "Vẽ kỹ thuật và Autocad",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAN574",
+              "name": "Thực tập tốt nghiệp ngành Quản lý xây dựng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAN475",
+              "name": "Đồ án tốt nghiệp ngành Quản lý xây dựng",
+              "credits": 12,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        },
+        {
+          "name": "Kiến thức tự chọn",
+          "total_credits": 10,
+          "groups": [
+            {
+              "group_name": "Quản lý dự án xây dựng",
+              "subjects": [
+                {
+                  "code": "CET165",
+                  "name": "Phân tích định lượng trong quản lý xây dựng",
+                  "credits": 3,
+                  "prerequisites": ["CET130"],
+                  "corequisites": []
+                },
+                {
+                  "code": "CET264",
+                  "name": "Mô hình thông tin công trình 2",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "MAN145",
+                  "name": "Quản ly chất lượng công trình xây dựng",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "CET462",
+                  "name": "Đồ án mô hình thông tin công trình 2",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Tài chính trong xây dựng",
+              "subjects": [
+                {
+                  "code": "ACC114",
+                  "name": "Nguyên lý kế toán",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "ECO101",
+                  "name": "Chiến lược và kế hoạch hóa",
+                  "credits": 3,
+                  "prerequisites": ["ECO212"],
+                  "corequisites": []
+                },
+                {
+                  "code": "ECO119",
+                  "name": "Kế toán và phân tích hoạt động kinh tế trong doanh nghiệp xây dựng",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "ECO414",
+                  "name": "Đồ án kinh tế đầu tư",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức không tích lũy",
+      "total_credits": 5,
+      "subcategories": [
+        {
+          "name": "Giáo dục thể chất",
+          "total_credits": 5,
+          "note": "Tự chọn 1 trong 5 nhóm",
+          "groups": [
+            {
+              "group_name": "Nhóm 1: Bóng chuyền",
+              "subjects": [
+                {
+                  "code": "PHT304",
+                  "name": "Bóng chuyền 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT305",
+                  "name": "Bóng chuyền 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT304"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT306",
+                  "name": "Bóng chuyền 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT305"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 2: Bóng rổ",
+              "subjects": [
+                {
+                  "code": "PHT307",
+                  "name": "Bóng rổ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT308",
+                  "name": "Bóng rổ 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT307"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT309",
+                  "name": "Bóng rổ 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT308"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 3: Thể hình - Thẩm mỹ",
+              "subjects": [
+                {
+                  "code": "PHT310",
+                  "name": "Thể hình - Thẩm mỹ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT311",
+                  "name": "Thể hình - Thẩm mỹ 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT310"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT312",
+                  "name": "Thể hình - Thẩm mỹ 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT311"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 4: Vovinam",
+              "subjects": [
+                {
+                  "code": "PHT313",
+                  "name": "Vovinam 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT314",
+                  "name": "Vovinam 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT313"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT315",
+                  "name": "Vovinam 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT314"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 5: Bóng đá",
+              "subjects": [
+                {
+                  "code": "PHT316",
+                  "name": "Bóng đá 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT317",
+                  "name": "Bóng đá 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT316"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT318",
+                  "name": "Bóng đá 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT317"],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chương trình Giáo dục quốc phòng và an ninh",
+          "note": "Bắt buộc, không tích lũy",
+          "subjects": [
+            {
+              "code": "NDF108",
+              "name": "Quốc phòng, an ninh 1",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF109",
+              "name": "Quốc phòng, an ninh 2",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF210",
+              "name": "Quốc phòng, an ninh 3",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF211",
+              "name": "Quốc phòng, an ninh 4",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "additional_info": {
+    "decision_number": "1488/QĐ-ĐKC",
+    "decision_date": "15 tháng 6 năm 2022",
+    "signed_by": "GS. TS. Nguyễn Trung Kiên",
+    "note": "Sinh viên được xét điều kiện Thực tập, Đồ án tốt nghiệp theo quy định của Khoa."
+  }
+}
