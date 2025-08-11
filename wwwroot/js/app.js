@@ -26,8 +26,13 @@ const API_BASE = (() => {
   }
   return '/api';
 })();
-// === XÁC ĐỊNH CÓ BACKEND KHÔNG ===
-const HAS_BACKEND = !location.hostname.endsWith('github.io'); // đơn giản: nếu trên pages => không
+// === XÁC ĐỊNH CÓ BACKEND KHÔNG (cập nhật) ===
+const HAS_BACKEND = (() => {
+  if (window.FORCE_CLIENT_PARSE) return false;          // ép dùng client
+  if (location.hostname.endsWith('github.io')) return false; // pages mặc định không backend
+  // Có thể mở rộng thêm detect khác (gọi thử /api/health) nếu cần
+  return true;
+})();
 
 // Danh sách chương trình (có thể mở rộng sau)
 const programs = {
@@ -214,38 +219,8 @@ form.addEventListener('submit', async (e) => {
   const file = fileInput.files[0];
   if (!file.name.toLowerCase().endsWith('.xlsx')) { setStatus('File phải là .xlsx', 'error'); return; }
 
-  // Nếu không có backend -> chuyển sang parse local
-  if (!HAS_BACKEND) {
-    clearResult();
-    setStatus('Đang phân tích tại trình duyệt...', 'loading');
-    busy = true;
-    const originalText = btnUpload.textContent;
-    btnUpload.disabled = true;
-    btnUpload.textContent = btnUpload.getAttribute('data-busy-text') || 'Đang xử lý...';
-    const t0 = performance.now();
-    try {
-      const data = await parseExcelClient(file, mssvInput.value.trim());
-      renderResult(data);
-      const t1 = performance.now();
-      setStatus(`Hoàn thành (client) trong ${(t1 - t0).toFixed(0)} ms`, 'ok');
-    } catch (err) {
-      setStatus('Lỗi đọc Excel (client): ' + (err.message || err), 'error');
-    } finally {
-      busy = false;
-      btnUpload.disabled = false;
-      btnUpload.textContent = originalText;
-    }
-    return;
-  }
-
-  // Nếu đang ở GitHub Pages mà chưa cấu hình backend thật -> cảnh báo & dừng
-  if (location.hostname.endsWith('github.io') && API_BASE.includes('your-backend-host-here')) {
-    setStatus('Bạn đang chạy trên GitHub Pages nhưng chưa cấu hình URL backend (thay "your-backend-host-here" trong app.js).', 'error');
-    return;
-  }
-
   clearResult();
-  setStatus('Đang tải lên & phân tích...', 'loading');
+  setStatus('Đang xử lý...', 'loading');
   busy = true;
   const originalText = btnUpload.textContent;
   btnUpload.disabled = true;
@@ -261,20 +236,49 @@ form.addEventListener('submit', async (e) => {
   }
 
   const t0 = performance.now();
-  try {
-    // === SỬA: dùng API_BASE động ===
-    const uploadEndpoint = API_BASE.endsWith('/upload') ? API_BASE : (API_BASE.replace(/\/+$/,'') + '/upload');
-    const res = await fetch(uploadEndpoint, { method: 'POST', body: formData });
-    const t1 = performance.now();
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(text || ('HTTP ' + res.status));
-    }
-    const data = await res.json();
+  let usedClient = false;
+
+  async function runClientParse(fallbackReason) {
+    if (fallbackReason) setStatus(fallbackReason + ' → chuyển sang phân tích tại trình duyệt...', 'warning');
+    const data = await parseExcelClient(file, mssvInput.value.trim());
     renderResult(data);
-    setStatus(`Hoàn thành trong ${(t1 - t0).toFixed(0)} ms`, 'ok');
+    usedClient = true;
+  }
+
+  try {
+    if (HAS_BACKEND) {
+      // Thử upload backend
+      const uploadEndpoint = API_BASE.endsWith('/upload') ? API_BASE : (API_BASE.replace(/\/+$/,'') + '/upload');
+      let res;
+      try {
+        res = await fetch(uploadEndpoint, { method: 'POST', body: formData });
+      } catch (netErr) {
+        await runClientParse('Không kết nối được backend');
+      }
+      if (!usedClient) {
+        if (res.status === 405 || res.status === 404) {
+          await runClientParse('Backend không hỗ trợ (HTTP ' + res.status + ')');
+        } else if (!res.ok) {
+          const text = await res.text();
+          await runClientParse('Lỗi backend: ' + (text || ('HTTP ' + res.status)));
+        } else {
+          const data = await res.json();
+          renderResult(data);
+        }
+      }
+    } else {
+      // Không có backend ngay từ đầu
+      await runClientParse('');
+    }
+
+    const t1 = performance.now();
+    if (!usedClient) {
+      setStatus(`Hoàn thành (server) trong ${(t1 - t0).toFixed(0)} ms`, 'ok');
+    } else {
+      setStatus(`Hoàn thành (client) trong ${(t1 - t0).toFixed(0)} ms`, 'ok');
+    }
   } catch (err) {
-    setStatus('Lỗi: ' + (err.message || err), 'error');
+    setStatus('Lỗi cuối: ' + (err.message || err), 'error');
   } finally {
     busy = false;
     btnUpload.disabled = false;
