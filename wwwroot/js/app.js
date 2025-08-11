@@ -12,35 +12,22 @@ const btnUpload = document.getElementById('btnUpload');
 const dropZoneText = document.getElementById('dropZoneText');
 const yearSelect = document.getElementById('yearSelect');
 const deptSelect = document.getElementById('deptSelect');
-// Thêm: phát hiện chạy trên GitHub Pages và base path repo
-const IS_GH_PAGES = location.hostname.endsWith('github.io');
-const REPO_BASE = IS_GH_PAGES ? ('/' + location.pathname.split('/').filter(Boolean)[0] + '/') : '/';
-function programUrl(p) { return REPO_BASE + p.replace(/^\//,''); }
-console.log('[App] IS_GH_PAGES:', IS_GH_PAGES, 'REPO_BASE:', REPO_BASE);
+const aiSection = document.getElementById('aiSection');
+const btnGetAdvice = document.getElementById('btnGetAdvice');
+const adviceOutput = document.getElementById('adviceOutput');
+const chatMessagesEl = document.getElementById('chatMessages');
+const chatInput = document.getElementById('chatInput');
+const btnSendChat = document.getElementById('btnSendChat');
+const paginationEl = document.getElementById('pagination');
 
-// Đánh dấu app đã init cho bootstrap biết
-window.__APP_INITIALIZED__ = true;
-
-// Đảm bảo site.css đã nạp (trường hợp link đầu 404 trước khi fallback sửa)
-(function ensureCss(){
-  const has = Array.from(document.styleSheets || []).some(ss => (ss.href || '').includes('site.css'));
-  if(!has){
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = programUrl('css/site.css');
-    link.id = 'lateCssInject';
-    link.onload = () => console.log('[App] Inject CSS thành công');
-    link.onerror = () => console.warn('[App] Inject CSS thất bại:', link.href);
-    document.head.appendChild(link);
-  }
-})();
-
-// Xóa fallback nếu app khởi tạo được
-const _fb = document.getElementById('jsFallback');
-if (_fb) _fb.remove();
+const pageSize = 10;
 
 let busy = false;
 let currentProgram = null;
+let lastResult = null;
+let chatHistory = []; // {role,content}
+let currentPage = 1;
+let gradesData = [];
 
 // Danh sách chương trình (có thể mở rộng sau)
 const programs = {
@@ -151,12 +138,8 @@ deptSelect.addEventListener('change', async () => {
   const entry = (programs[year] || []).find(p => p.key === key);
   if (!entry) return;
   try {
-    const res = await fetch(programUrl(entry.file));
-    // Debug nếu 404
-    if (!res.ok) {
-      console.warn('Fetch chương trình thất bại', programUrl(entry.file), res.status);
-      throw new Error('Không tải được chương trình');
-    }
+    const res = await fetch(entry.file);
+    if (!res.ok) throw new Error('Không tải được chương trình');
     const json = await res.json();
     const codeNameMap = {};
     const nonAccCodes = new Set();
@@ -238,22 +221,6 @@ form.addEventListener('submit', async (e) => {
   btnUpload.disabled = true;
   btnUpload.textContent = btnUpload.getAttribute('data-busy-text') || 'Đang xử lý...';
 
-  // Thêm: nếu chạy GitHub Pages -> phân tích local, bỏ qua API
-  if (IS_GH_PAGES) {
-    try {
-      const data = await parseLocalExcel(file);
-      renderResult(data);
-      setStatus('Hoàn thành (phân tích cục bộ GitHub Pages)', 'ok');
-    } catch (err) {
-      setStatus('Lỗi phân tích cục bộ: ' + (err.message || err), 'error');
-    } finally {
-      busy = false;
-      btnUpload.disabled = false;
-      btnUpload.textContent = originalText;
-    }
-    return;
-  }
-
   const formData = new FormData();
   formData.append('mssv', mssvInput.value.trim());
   formData.append('file', file);
@@ -289,7 +256,6 @@ function renderResult(data) {
   rawJson.textContent = JSON.stringify(data, null, 2);
   rawJsonBlock.classList.remove('hidden');
 
-  // merge meta với currentProgram nếu có
   const merged = {
     studentId: data.studentId,
     programCode: data.programCode || (currentProgram && currentProgram.programCode),
@@ -298,7 +264,6 @@ function renderResult(data) {
     academicYear: data.academicYear || (currentProgram && currentProgram.year),
     totalCredits: data.totalCredits || (currentProgram && currentProgram.totalCredits) || '—'
   };
-
   const items = [
     ['MSSV', merged.studentId],
     ['Program Code', merged.programCode || '—'],
@@ -307,51 +272,108 @@ function renderResult(data) {
     ['Tổng TC CTĐT', merged.totalCredits],
     ['Số môn đã học', data.grades.length]
   ];
-
   summary.innerHTML = items.map(([k,v]) => `
-    <div class="item">
+    <div class="item fade-in">
       <span class="k">${k}</span>
       <span class="v">${escapeHtml(String(v))}</span>
     </div>
   `).join('');
   summary.classList.remove('hidden');
 
-  let matched = 0;
-  let unmatched = 0;
+  // ===== TÍNH TOÁN DUY NHẤT 1 LẦN =====
   const map = currentProgram && currentProgram.codeNameMap;
   const nonAccSet = currentProgram && currentProgram.nonAccCodes;
 
+  let matched = 0;
+  let unmatched = 0;
   let accCredits = 0;
   let nonAccCredits = 0;
   let sumGpa4Weighted = 0;
   let sumScore10Weighted = 0;
 
-  if (data.grades.length) {
-    gradesTableBody.innerHTML = data.grades.map((g,i) => {
-      const code = (g.courseCode ?? g.CourseCode ?? '').toString().trim();
-      const codeUpper = code.toUpperCase();
-      let name = g.courseName ?? g.CourseName ?? '';
-      const inProgram = !!(map && codeUpper && map[codeUpper]);
-      if ((!name || !name.trim()) && inProgram) name = map[codeUpper] || '';
-      if (code) {
-        if (inProgram) matched++; else unmatched++;
+  gradesData = data.grades.slice();
+  for (const g of gradesData) {
+    const code = (g.courseCode ?? g.CourseCode ?? '').toString().trim();
+    if (!code) continue;
+    const codeUpper = code.toUpperCase();
+    const inProgram = !!(map && map[codeUpper]);
+    if (inProgram) matched++; else unmatched++;
+    const credits = Number(g.credits ?? g.Credits ?? NaN);
+    const score10Raw = g.score10 ?? g.Score10;
+    const gpa4Raw = g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4;
+    const gpa4Num = Number(gpa4Raw);
+    const score10Num = Number(score10Raw);
+    const isNonAcc = !!(nonAccSet && nonAccSet.has(codeUpper));
+    if (inProgram && Number.isFinite(credits)) {
+      if (isNonAcc) {
+        nonAccCredits += credits;
+      } else {
+        accCredits += credits;
+        if (Number.isFinite(gpa4Num)) sumGpa4Weighted += gpa4Num * credits;
+        if (Number.isFinite(score10Num)) sumScore10Weighted += score10Num * credits;
       }
-      const credits = Number(g.credits ?? g.Credits ?? NaN);
-      const score10Raw = g.score10 ?? g.Score10;
-      const gpa4Raw = g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4;
-      const gpa4Num = Number(gpa4Raw);
-      const score10Num = Number(score10Raw);
-      const isNonAcc = !!(nonAccSet && nonAccSet.has(codeUpper));
-      if (inProgram && Number.isFinite(credits)) {
-        if (isNonAcc) nonAccCredits += credits; else {
-          accCredits += credits;
-          if (Number.isFinite(gpa4Num)) sumGpa4Weighted += gpa4Num * credits;
-          if (Number.isFinite(score10Num)) sumScore10Weighted += score10Num * credits;
-        }
-      }
-      return `
-      <tr>
-        <td class="num">${i + 1}</td>
+    }
+  }
+
+  if (gradesData.length) {
+    renderGradesPage(1);
+    gradesWrapper.classList.remove('hidden');
+  }
+
+  const gpa4Avg = accCredits > 0 && sumGpa4Weighted > 0 ? (sumGpa4Weighted / accCredits).toFixed(2) : '—';
+  const gpa10Avg = accCredits > 0 && sumScore10Weighted > 0 ? (sumScore10Weighted / accCredits).toFixed(2) : '—';
+  const totalAccRequired = Number(currentProgram?.totalCredits);
+  const totalNonAccRequired = Number(currentProgram?.nonAccTotal);
+  const accDisplay = Number.isFinite(totalAccRequired) ? `${accCredits} / ${totalAccRequired}` : `${accCredits}`;
+  const nonAccDisplay = Number.isFinite(totalNonAccRequired) ? `${nonAccCredits} / ${totalNonAccRequired}` : `${nonAccCredits}`;
+
+  const summaryExtra = `
+    <div class="item fade-in"><span class="k">Thuộc CTĐT</span><span class="v">${matched}</span></div>
+    <div class="item fade-in"><span class="k">Ngoài CTĐT</span><span class="v">${unmatched}</span></div>
+    <div class="item fade-in"><span class="k">TC tích lũy</span><span class="v">${accDisplay}</span></div>
+    <div class="item fade-in"><span class="k">TC không tích lũy</span><span class="v">${nonAccDisplay}</span></div>
+    <div class="item fade-in"><span class="k">GPA TL (4)</span><span class="v">${gpa4Avg}</span></div>
+    <div class="item fade-in"><span class="k">GPA TL (10)</span><span class="v">${gpa10Avg}</span></div>`;
+  summary.insertAdjacentHTML('beforeend', summaryExtra);
+
+  lastResult = data;
+  if (aiSection) {
+    aiSection.classList.remove('hidden');
+    adviceOutput.textContent = '';
+    chatMessagesEl && (chatMessagesEl.innerHTML = '');
+    chatHistory = [];
+  }
+
+  // Cuộn đến kết quả
+  gradesWrapper.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// Cập nhật renderGradesPage để dùng map/nonAccSet trong phạm vi global hiện tại
+function renderGradesPage(page) {
+  if (!gradesData) return;
+  const totalPages = Math.ceil(gradesData.length / pageSize) || 1;
+  if (page < 1) page = 1;
+  if (page > totalPages) page = totalPages;
+  currentPage = page;
+  const start = (page - 1) * pageSize;
+  const slice = gradesData.slice(start, start + pageSize);
+  const map = currentProgram && currentProgram.codeNameMap;
+  const nonAccSet = currentProgram && currentProgram.nonAccCodes;
+  gradesTableBody.innerHTML = slice.map((g, idx) => {
+    const absoluteIndex = start + idx;
+    const code = (g.courseCode ?? g.CourseCode ?? '').toString().trim();
+    const codeUpper = code.toUpperCase();
+    let name = g.courseName ?? g.CourseName ?? '';
+    const inProgram = !!(map && codeUpper && map[codeUpper]);
+    if ((!name || !name.trim()) && inProgram) name = map[codeUpper] || '';
+    const credits = Number(g.credits ?? g.Credits ?? NaN);
+    const score10Num = Number(g.score10 ?? g.Score10);
+    const gpa4Num = Number(g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4);
+    const isNonAcc = !!(nonAccSet && nonAccSet.has(codeUpper));
+    const rowClass = inProgram ? (isNonAcc ? 'nonacc' : 'in') : 'out';
+    return `
+      <tr class="${rowClass}">
+        <td class="num">${absoluteIndex + 1}</td>
         <td>${escapeHtml(code)}</td>
         <td>${escapeHtml(name)}</td>
         <td class="num">${Number.isFinite(credits) ? credits : ''}</td>
@@ -359,26 +381,47 @@ function renderResult(data) {
         <td>${escapeHtml(g.letterGrade ?? g.LetterGrade ?? '')}</td>
         <td class="num">${Number.isFinite(gpa4Num) ? gpa4Num : ''}</td>
       </tr>`;
-    }).join('');
-    gradesWrapper.classList.remove('hidden');
+  }).join('');
+  updatePagination(totalPages);
+}
+
+function updatePagination(totalPages) {
+  if (!paginationEl) return;
+  if (totalPages <= 1) {
+    paginationEl.innerHTML = '';
+    return;
   }
+  const maxButtons = 7;
+  let start = Math.max(1, currentPage - 3);
+  let end = Math.min(totalPages, start + maxButtons - 1);
+  if (end - start + 1 < maxButtons) start = Math.max(1, end - maxButtons + 1);
 
-  const gpa4Avg = accCredits > 0 && sumGpa4Weighted > 0 ? (sumGpa4Weighted / accCredits).toFixed(2) : '—';
-  const gpa10Avg = accCredits > 0 && sumScore10Weighted > 0 ? (sumScore10Weighted / accCredits).toFixed(2) : '—';
+  const parts = [];
+  parts.push(`<button data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}>&laquo;</button>`);
+  if (start > 1) {
+    parts.push(`<button data-page="1">1</button>`);
+    if (start > 2) parts.push(`<span style="padding:.3rem .4rem;">...</span>`);
+  }
+  for (let p = start; p <= end; p++) {
+    parts.push(`<button data-page="${p}" class="${p === currentPage ? 'active' : ''}">${p}</button>`);
+  }
+  if (end < totalPages) {
+    if (end < totalPages - 1) parts.push(`<span style="padding:.3rem .4rem;">...</span>`);
+    parts.push(`<button data-page="${totalPages}">${totalPages}</button>`);
+  }
+  parts.push(`<button data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>&raquo;</button>`);
+  paginationEl.innerHTML = parts.join('');
+}
 
-  const totalAccRequired = Number(currentProgram?.totalCredits);
-  const totalNonAccRequired = Number(currentProgram?.nonAccTotal);
-  const accDisplay = Number.isFinite(totalAccRequired) ? `${accCredits} / ${totalAccRequired}` : `${accCredits}`;
-  const nonAccDisplay = Number.isFinite(totalNonAccRequired) ? `${nonAccCredits} / ${totalNonAccRequired}` : `${nonAccCredits}`;
-
-  const summaryExtra = `
-    <div class="item"><span class="k">Thuộc CTĐT</span><span class="v">${matched}</span></div>
-    <div class="item"><span class="k">Ngoài CTĐT</span><span class="v">${unmatched}</span></div>
-    <div class="item"><span class="k">TC tích lũy</span><span class="v">${accDisplay}</span></div>
-    <div class="item"><span class="k">TC không tích lũy</span><span class="v">${nonAccDisplay}</span></div>
-    <div class="item"><span class="k">GPA TL (4)</span><span class="v">${gpa4Avg}</span></div>
-    <div class="item"><span class="k">GPA TL (10)</span><span class="v">${gpa10Avg}</span></div>`;
-  summary.insertAdjacentHTML('beforeend', summaryExtra);
+// Sự kiện phân trang
+if (paginationEl) {
+  paginationEl.addEventListener('click', e => {
+    const btn = e.target.closest('button[data-page]');
+    if (!btn) return;
+    const page = Number(btn.getAttribute('data-page'));
+    if (!Number.isFinite(page)) return;
+    renderGradesPage(page);
+  });
 }
 
 function escapeHtml(str) {
@@ -412,78 +455,82 @@ function formatSize(bytes) {
   return v.toFixed(v < 10 ? 2 : 1) + ' ' + units[i];
 }
 
-// Thêm: hàm phân tích Excel cục bộ (fallback GitHub Pages)
-async function parseLocalExcel(file) {
-  if (typeof XLSX === 'undefined') throw new Error('Thiếu thư viện XLSX.');
-  const ab = await file.arrayBuffer();
-  const wb = XLSX.read(ab, { type: 'array' });
-  if (!wb.SheetNames.length) throw new Error('Không tìm thấy sheet.');
-  const sheet = wb.Sheets[wb.SheetNames[0]];
-  const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: true });
-  if (!rows.length) throw new Error('Sheet rỗng.');
-  // Tìm dòng header (heuristic)
-  let headerRow = rows[0];
-  let headerIndex = 0;
-  for (let i = 0; i < Math.min(rows.length, 10); i++) {
-    const row = rows[i].map(v => (v ?? '').toString().toLowerCase());
-    if (row.some(c => c.includes('mã'))) {
-      headerRow = rows[i];
-      headerIndex = i;
-      break;
+if (btnGetAdvice) {
+  btnGetAdvice.addEventListener('click', async () => {
+    if (!lastResult) return;
+    adviceOutput.textContent = 'Đang lấy gợi ý...';
+    try {
+      const body = {
+        mssv: lastResult.studentId,
+        grades: (lastResult.grades || []).map(g => ({
+          courseCode: g.courseCode || g.CourseCode,
+          courseName: g.courseName || g.CourseName,
+          credits: g.credits ?? g.Credits,
+            score10: g.score10 ?? g.Score10,
+          letterGrade: g.letterGrade ?? g.LetterGrade,
+          gpa4: g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4
+        }))
+      };
+      const res = await fetch('/api/advice', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(body)
+      });
+      const json = await res.json();
+      adviceOutput.textContent = json.advice || '(Không có phản hồi)';
+    } catch (e) {
+      adviceOutput.textContent = 'Lỗi: ' + e.message;
     }
-  }
-  const mapIdx = {};
-  headerRow.forEach((h, idx) => {
-    const k = (h ?? '').toString().trim().toLowerCase();
-    if (!k) return;
-    if (k.includes('mã')) mapIdx.code = idx;
-    else if (k.includes('tên')) mapIdx.name = idx;
-    else if (k.includes('tín') || k === 'tc' || k.includes('số tc')) mapIdx.credits = idx;
-    else if ((k.includes('10') && k.includes('đ')) || k.includes('tk(10)')) mapIdx.score10 = idx;
-    else if (k.includes('chữ') || k.includes('letter')) mapIdx.letter = idx;
-    else if (k.includes('(4)') || k.includes('gpa') || k.includes('4')) mapIdx.gpa4 = idx;
   });
-  const grades = [];
-  for (let r = headerIndex + 1; r < rows.length; r++) {
-    const row = rows[r];
-    if (!row || row.every(v => v === null || v === undefined || v === '')) continue;
-    const code = getCell(row, mapIdx.code);
-    const name = getCell(row, mapIdx.name);
-    if (!code && !name) continue;
-    grades.push({
-      courseCode: code || '',
-      courseName: name || '',
-      credits: num(getCell(row, mapIdx.credits)),
-      score10: num(getCell(row, mapIdx.score10)),
-      letterGrade: getCell(row, mapIdx.letter),
-      gpa4: num(getCell(row, mapIdx.gpa4))
-    });
-  }
-  return {
-    studentId: mssvInput.value.trim(),
-    academicYear: currentProgram?.year,
-    department: currentProgram?.department,
-    programCode: currentProgram?.programCode,
-    grades
-  };
+}
 
-  function getCell(row, idx) {
-    if (idx == null) return '';
-    const v = row[idx];
-    return v == null ? '' : String(v).trim();
-  }
-  function num(v) {
-    const n = parseFloat(v);
-    return Number.isFinite(n) ? n : undefined;
+function appendChat(role, content) {
+  if (!chatMessagesEl) return;
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.textContent = (role === 'user' ? 'Bạn: ' : 'AI: ') + content;
+  chatMessagesEl.appendChild(div);
+  chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+}
+
+async function sendChat() {
+  if (!lastResult || !chatInput || !chatInput.value.trim()) return;
+  const text = chatInput.value.trim();
+  chatInput.value = '';
+  appendChat('user', text);
+  chatHistory.push({role:'user', content:text});
+  appendChat('assistant', 'Đang trả lời...');
+  try {
+    const body = {
+      mssv: lastResult.studentId,
+      grades: (lastResult.grades || []).map(g => ({
+        courseCode: g.courseCode || g.CourseCode,
+        courseName: g.courseName || g.CourseName,
+        credits: g.credits ?? g.Credits,
+        score10: g.score10 ?? g.Score10,
+        letterGrade: g.letterGrade ?? g.LetterGrade,
+        gpa4: g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4
+      })),
+      messages: chatHistory
+    };
+    const res = await fetch('/api/advice/chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(body)
+    });
+    const json = await res.json();
+    // replace "Đang trả lời..."
+    const lastMsg = chatMessagesEl.querySelector('.msg.assistant:last-child');
+    if (lastMsg) lastMsg.textContent = 'AI: ' + (json.reply || '(rỗng)');
+    chatHistory.push({role:'assistant', content: json.reply || ''});
+  } catch (e) {
+    const lastMsg = chatMessagesEl.querySelector('.msg.assistant:last-child');
+    if (lastMsg) lastMsg.textContent = 'AI: Lỗi - ' + e.message;
   }
 }
 
-// Ở cuối file: đảm bảo báo lỗi nếu parseLocalExcel gặp lỗi chưa catch (phòng hờ)
-window.addEventListener('unhandledrejection', ev => {
-  const st = document.getElementById('status');
-  if (st) {
-    st.className = 'status error';
-    st.textContent = 'Unhandled promise: ' + (ev.reason && ev.reason.message || ev.reason);
-  }
+if (btnSendChat) btnSendChat.addEventListener('click', sendChat);
+if (chatInput) chatInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); sendChat(); }
 });
 

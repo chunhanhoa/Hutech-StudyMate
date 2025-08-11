@@ -104,4 +104,8 @@ public class ProgramService : IProgramService
         !string.IsNullOrWhiteSpace(code) && _courseNameByCode.ContainsKey(code);
 
     public IReadOnlyCollection<string> AllCourseCodes => _courseNameByCode.Keys.ToList().AsReadOnly();
+
+    // NEW: Trả về tuple (code, name)
+    public IEnumerable<(string code, string name)> EnumerateCourses() =>
+        _courseNameByCode.Select(kv => (kv.Key, kv.Value));
 }

@@ -11,6 +11,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddSingleton<IProgramService, ProgramService>();
 builder.Services.AddSingleton<IExcelGradeParser, ExcelGradeParser>();
+builder.Services.AddHttpClient("ai");
+builder.Services.AddSingleton<IAdviceService, AdviceService>();
 
 var app = builder.Build();
 
