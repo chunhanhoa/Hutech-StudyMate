@@ -12,6 +12,10 @@ const btnUpload = document.getElementById('btnUpload');
 const dropZoneText = document.getElementById('dropZoneText');
 const yearSelect = document.getElementById('yearSelect');
 const deptSelect = document.getElementById('deptSelect');
+// Thêm: phát hiện chạy trên GitHub Pages và base path repo
+const IS_GH_PAGES = location.hostname.endsWith('github.io');
+const REPO_BASE = IS_GH_PAGES ? ('/' + location.pathname.split('/').filter(Boolean)[0] + '/') : '/';
+function programUrl(p) { return REPO_BASE + p.replace(/^\//,''); }
 
 let busy = false;
 let currentProgram = null;
@@ -125,7 +129,7 @@ deptSelect.addEventListener('change', async () => {
   const entry = (programs[year] || []).find(p => p.key === key);
   if (!entry) return;
   try {
-    const res = await fetch(entry.file);
+    const res = await fetch(programUrl(entry.file)); // chỉnh dùng base linh hoạt
     if (!res.ok) throw new Error('Không tải được chương trình');
     const json = await res.json();
     const codeNameMap = {};
@@ -207,6 +211,22 @@ form.addEventListener('submit', async (e) => {
   const originalText = btnUpload.textContent;
   btnUpload.disabled = true;
   btnUpload.textContent = btnUpload.getAttribute('data-busy-text') || 'Đang xử lý...';
+
+  // Thêm: nếu chạy GitHub Pages -> phân tích local, bỏ qua API
+  if (IS_GH_PAGES) {
+    try {
+      const data = await parseLocalExcel(file);
+      renderResult(data);
+      setStatus('Hoàn thành (phân tích cục bộ GitHub Pages)', 'ok');
+    } catch (err) {
+      setStatus('Lỗi phân tích cục bộ: ' + (err.message || err), 'error');
+    } finally {
+      busy = false;
+      btnUpload.disabled = false;
+      btnUpload.textContent = originalText;
+    }
+    return;
+  }
 
   const formData = new FormData();
   formData.append('mssv', mssvInput.value.trim());
@@ -364,5 +384,71 @@ function formatSize(bytes) {
   let i = 0;
   while (v >= 1024 && i < units.length - 1) { v /= 1024; i++; }
   return v.toFixed(v < 10 ? 2 : 1) + ' ' + units[i];
+}
+
+// Thêm: hàm phân tích Excel cục bộ (fallback GitHub Pages)
+async function parseLocalExcel(file) {
+  if (typeof XLSX === 'undefined') throw new Error('Thiếu thư viện XLSX.');
+  const ab = await file.arrayBuffer();
+  const wb = XLSX.read(ab, { type: 'array' });
+  if (!wb.SheetNames.length) throw new Error('Không tìm thấy sheet.');
+  const sheet = wb.Sheets[wb.SheetNames[0]];
+  const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: true });
+  if (!rows.length) throw new Error('Sheet rỗng.');
+  // Tìm dòng header (heuristic)
+  let headerRow = rows[0];
+  let headerIndex = 0;
+  for (let i = 0; i < Math.min(rows.length, 10); i++) {
+    const row = rows[i].map(v => (v ?? '').toString().toLowerCase());
+    if (row.some(c => c.includes('mã'))) {
+      headerRow = rows[i];
+      headerIndex = i;
+      break;
+    }
+  }
+  const mapIdx = {};
+  headerRow.forEach((h, idx) => {
+    const k = (h ?? '').toString().trim().toLowerCase();
+    if (!k) return;
+    if (k.includes('mã')) mapIdx.code = idx;
+    else if (k.includes('tên')) mapIdx.name = idx;
+    else if (k.includes('tín') || k === 'tc' || k.includes('số tc')) mapIdx.credits = idx;
+    else if ((k.includes('10') && k.includes('đ')) || k.includes('tk(10)')) mapIdx.score10 = idx;
+    else if (k.includes('chữ') || k.includes('letter')) mapIdx.letter = idx;
+    else if (k.includes('(4)') || k.includes('gpa') || k.includes('4')) mapIdx.gpa4 = idx;
+  });
+  const grades = [];
+  for (let r = headerIndex + 1; r < rows.length; r++) {
+    const row = rows[r];
+    if (!row || row.every(v => v === null || v === undefined || v === '')) continue;
+    const code = getCell(row, mapIdx.code);
+    const name = getCell(row, mapIdx.name);
+    if (!code && !name) continue;
+    grades.push({
+      courseCode: code || '',
+      courseName: name || '',
+      credits: num(getCell(row, mapIdx.credits)),
+      score10: num(getCell(row, mapIdx.score10)),
+      letterGrade: getCell(row, mapIdx.letter),
+      gpa4: num(getCell(row, mapIdx.gpa4))
+    });
+  }
+  return {
+    studentId: mssvInput.value.trim(),
+    academicYear: currentProgram?.year,
+    department: currentProgram?.department,
+    programCode: currentProgram?.programCode,
+    grades
+  };
+
+  function getCell(row, idx) {
+    if (idx == null) return '';
+    const v = row[idx];
+    return v == null ? '' : String(v).trim();
+  }
+  function num(v) {
+    const n = parseFloat(v);
+    return Number.isFinite(n) ? n : undefined;
+  }
 }
 
