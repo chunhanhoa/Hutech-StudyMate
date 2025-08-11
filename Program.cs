@@ -4,13 +4,8 @@ using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// (BỎ dòng UseUrls cố định tránh xung đột 5000/5001)
-// Hỗ trợ đặt PORT qua biến môi trường (triển khai hosting PaaS)
-var portEnv = Environment.GetEnvironmentVariable("PORT");
-if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var dynPort))
-{
-    builder.WebHost.ConfigureKestrel(o => o.ListenAnyIP(dynPort));
-}
+// Thêm: ấn định cổng (có thể đổi nếu bị chiếm)
+builder.WebHost.UseUrls("http://localhost:5000", "https://localhost:5001");
 
 builder.Services.AddControllers();
 

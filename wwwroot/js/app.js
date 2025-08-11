@@ -16,86 +16,68 @@ const deptSelect = document.getElementById('deptSelect');
 let busy = false;
 let currentProgram = null;
 
-// === CẤU HÌNH API (thêm mới) ===
-const API_BASE = (() => {
-  // Có thể gán window.API_BASE_URL trong HTML trước khi load file này để override
-  if (window.API_BASE_URL) return window.API_BASE_URL.replace(/\/+$/,'')
-  if (location.hostname.endsWith('github.io')) {
-    // TODO: THAY bằng URL backend thật của bạn (KHÔNG để nguyên chuỗi mặc định này)
-    return 'https://chunhanhoa.github.io/Hutech-StudyMate/';
-  }
-  return '/api';
-})();
-// === XÁC ĐỊNH CÓ BACKEND KHÔNG (cập nhật) ===
-const HAS_BACKEND = (() => {
-  if (window.FORCE_CLIENT_PARSE) return false;          // ép dùng client
-  if (location.hostname.endsWith('github.io')) return false; // pages mặc định không backend
-  // Có thể mở rộng thêm detect khác (gọi thử /api/health) nếu cần
-  return true;
-})();
-
 // Danh sách chương trình (có thể mở rộng sau)
 const programs = {
   "2022": [
-    { key: "an-toan-thong-tin-2022", department: "An toàn thông tin", file: "ProgramJson/2022/An-toan-thong-tin-2022.json" },
-    { key: "chan-nuoi-2022", department: "Chăn nuôi", file: "ProgramJson/2022/Chan-nuoi-2022.json" },
-    { key: "cong-nghe-det-may-2022", department: "Công nghệ dệt, may", file: "ProgramJson/2022/Cong-nghe-det-may-2022.json" },
-    { key: "cong-nghe-dien-anh-truyen-hinh-2022", department: "Công nghệ điện ảnh - truyền hình", file: "ProgramJson/2022/Cong-nghe-dien-anh-truyen-hinh-2022.json" },
-    { key: "cong-nghe-sinh-hoc-2022", department: "Công nghệ sinh học", file: "ProgramJson/2022/Cong-nghe-sinh-hoc-2022.json" },
-    { key: "cong-nghe-thong-tin-2022", department: "Công nghệ thông tin", file: "ProgramJson/2022/Cong-nghe-thong-tin-2022.json" },
-    { key: "cong-nghe-thuc-pham-2022", department: "Công nghệ thực phẩm", file: "ProgramJson/2022/Cong-nghe-thuc-pham-2022.json" },
-    { key: "dieu-duong-2022", department: "Điều dưỡng", file: "ProgramJson/2022/Dieu-duong-2022.json" },
-    { key: "digital-marketing-2022", department: "Digital Marketing", file: "ProgramJson/2022/Digital-marketing-2022.json" },
-    { key: "dinh-duong-khoa-hoc-thuc-pham-2022", department: "Dinh dưỡng khoa học thực phẩm", file: "ProgramJson/2022/Dinh-duong-khoa-hoc-thuc-pham-2022.json" },
-    { key: "dong-phuong-hoc-2022", department: "Đông phương học", file: "ProgramJson/2022/Dong-phuong-hoc-2022.json" },
-    { key: "duoc-hoc-2022", department: "Dược học", file: "ProgramJson/2022/Duoc-hoc-2022.json" },
-    { key: "he-thong-thong-tin-quan-ly-2022", department: "Hệ thống thông tin quản lý", file: "ProgramJson/2022/He-thong-thong-tin-quan-ly-2022.json" },
-    { key: "ke-toan-2022", department: "Kế toán", file: "ProgramJson/2022/Ke-toan-2022.json" },
-    { key: "khoa-hoc-du-lieu-2022", department: "Khoa học dữ liệu", file: "ProgramJson/2022/Khoa-hoc-du-lieu-2022.json" },
-    { key: "kien-truc-2022", department: "Kiến trúc", file: "ProgramJson/2022/Kien-truc-2022.json" },
-    { key: "kinh-doanh-quoc-te-2022", department: "Kinh doanh quốc tế", file: "ProgramJson/2022/Kinh-doanh-quoc-te-2022.json" },
-    { key: "kinh-doanh-thuong-mai-2022", department: "Kinh doanh thương mại", file: "ProgramJson/2022/Kinh-doanh-thuong-mai-2022.json" },
-    { key: "kinh-te-quoc-te-2022", department: "Kinh tế quốc tế", file: "ProgramJson/2022/Kinh-te-quoc-te-2022.json" },
-    { key: "ky-thuat-co-dien-tu-2022", department: "Kỹ thuật cơ điện tử", file: "ProgramJson/2022/Ky-thuat-co-dien-tu-2022.json" },
-    { key: "ky-thuat-co-khi-2022", department: "Kỹ thuật cơ khí", file: "ProgramJson/2022/Ky-thuat-co-khi-2022.json" },
-    { key: "ky-thuat-dien-2022", department: "Kỹ thuật điện", file: "ProgramJson/2022/Ky-thuat-dien-2022.json" },
-    { key: "ky-thuat-dien-tu-vien-thong-2022", department: "Kỹ thuật điện tử - viễn thông", file: "ProgramJson/2022/Ky-thuat-dien-tu-vien-thong-2022.json" },
-    { key: "ky-thuat-moi-truong-2022", department: "Kỹ thuật môi trường", file: "ProgramJson/2022/Ky-thuat-moi-truong-2022.json" },
-    { key: "ky-thuat-o-to-2022", department: "Kỹ thuật ô tô", file: "ProgramJson/2022/Ky-thuat-o-to-2022.json" },
-    { key: "ky-thuat-xay-dung-2022", department: "Kỹ thuật xây dựng", file: "ProgramJson/2022/Ky-thuat-xay-dung-2022.json" },
-    { key: "ky-thuat-xet-nghiem-y-hoc-2022", department: "Kỹ thuật xét nghiệm y học", file: "ProgramJson/2022/Ky-thuat-xet-nghiem-y-hoc-2022.json" },
-    { key: "ky-thuat-y-sinh-2022", department: "Kỹ thuật y sinh", file: "ProgramJson/2022/Ky-thuat-y-sinh-2022.json" },
-    { key: "logistic-va-quan-ly-cung-ung-2022", department: "Logistic và quản lý cung ứng", file: "ProgramJson/2022/Logistic-va-quan-ly-cung-ung-2022.json" },
-    { key: "luat-2022", department: "Luật", file: "ProgramJson/2022/Luat-2022.json" },
-    { key: "luat-kinh-te-2022", department: "Luật kinh tế", file: "ProgramJson/2022/Luat-kinh-te-2022.json" },
-    { key: "marketing-2022", department: "Marketing", file: "ProgramJson/2022/Marketing-2022.json" },
-    { key: "nghe-thuat-so-2022", department: "Nghệ thuật số", file: "ProgramJson/2022/Nghe-thuat-so-2022.json" },
-    { key: "ngon-ngu-anh-2022", department: "Ngôn ngữ Anh", file: "ProgramJson/2022/Ngon-ngu-anh-2022.json" },
-    { key: "ngon-ngu-han-2022", department: "Ngôn ngữ Hàn", file: "ProgramJson/2022/Ngon-ngu-han-2022.json" },
-    { key: "ngon-ngu-nhat-2022", department: "Ngôn ngữ Nhật", file: "ProgramJson/2022/Ngon-ngu-nhat-2022.json" },
-    { key: "ngon-ngu-trung-quoc-2022", department: "Ngôn ngữ Trung Quốc", file: "ProgramJson/2022/Ngon-ngu-trung-quoc-2022.json" },
-    { key: "quan-he-cong-chung-2022", department: "Quan hệ công chúng", file: "ProgramJson/2022/Quan-he-cong-chung-2022.json" },
-    { key: "quan-he-quoc-te-2022", department: "Quan hệ quốc tế", file: "ProgramJson/2022/Quan-he-quoc-te-2022.json" },
-    { key: "quan-ly-tai-nguyen-moi-truong-2022", department: "Quản lý tài nguyên môi trường", file: "ProgramJson/2022/Quan-ly-tai-nguyen-moi-truong-2022.json" },
-    { key: "quan-ly-xay-dung-2022", department: "Quản lý xây dựng", file: "ProgramJson/2022/Quan-ly-xay-dung-2022.json" },
-    { key: "quan-tri-dich-vu-va-du-lich-2022", department: "Quản trị dịch vụ và du lịch", file: "ProgramJson/2022/Quan-tri-dich-vu-va-du-lich-2022.json" },
-    { key: "quan-tri-khach-san-2022", department: "Quản trị khách sạn", file: "ProgramJson/2022/Quan-tri-khach-san-2022.json" },
-    { key: "quan-tri-kinh-doanh-2022", department: "Quản trị kinh doanh", file: "ProgramJson/2022/Quan-tri-kinh-doanh-2022.json" },
-    { key: "quan-tri-nha-hang-va-dich-vu-an-uong-2022", department: "Quản trị nhà hàng và dịch vụ ăn uống", file: "ProgramJson/2022/Quan-tri-nha-hang-va-dich-vu-an-uong-2022.json" },
-    { key: "quan-tri-nhan-luc-2022", department: "Quản trị nhân lực", file: "ProgramJson/2022/Quan-tri-nhan-luc-2022.json" },
-    { key: "quan-tri-su-kien-2022", department: "Quản trị sự kiện", file: "ProgramJson/2022/Quan-tri-su-kien-2022.json" },
-    { key: "robot-va-tri-tue-nhan-tao-2022", department: "Robot và trí tuệ nhân tạo", file: "ProgramJson/2022/Robot-va-tri-tue-nhan-tao-2022.json" },
-    { key: "tai-chinh-ngan-hang-2022", department: "Tài chính ngân hàng", file: "ProgramJson/2022/Tai-chinh-ngan-hang-2022.json" },
-    { key: "tai-chinh-quoc-te-2022", department: "Tài chính quốc tế", file: "ProgramJson/2022/Tai-chinh-quoc-te-2022.json" },
-    { key: "tam-ly-hoc-2022", department: "Tâm lý học", file: "ProgramJson/2022/Tam-ly-hoc-2022.json" },
-    { key: "thanh-nhac-2022", department: "Thanh nhạc", file: "ProgramJson/2022/Thanh-nhac-2022.json" },
-    { key: "thiet-ke-do-hoa-2022", department: "Thiết kế đồ họa", file: "ProgramJson/2022/Thiet-ke-do-hoa-2022.json" },
-    { key: "thiet-ke-noi-that-2022", department: "Thiết kế nội thất", file: "ProgramJson/2022/Thiet-ke-noi-that-2022.json" },
-    { key: "thiet-ke-thoi-trang-2022", department: "Thiết kế thời trang", file: "ProgramJson/2022/Thiet-ke-thoi-trang-2022.json" },
-    { key: "thu-y-2022", department: "Thú y", file: "ProgramJson/2022/Thu-y-2022.json" },
-    { key: "thuong-mai-dien-tu-2022", department: "Thương mại điện tử", file: "ProgramJson/2022/Thuong-mai-dien-tu-2022.json" },
-    { key: "truyen-thong-da-phuong-tien-2022", department: "Truyền thông đa phương tiện", file: "ProgramJson/2022/Truyen-thong-da-phuong-tien-2022.json" },
-    { key: "tu-dong-hoa-2022", department: "Tự động hóa", file: "ProgramJson/2022/Tu-dong-hoa-2022.json" }
+    { key: "an-toan-thong-tin-2022", department: "An toàn thông tin", file: "/ProgramJson/2022/An-toan-thong-tin-2022.json" },
+    { key: "chan-nuoi-2022", department: "Chăn nuôi", file: "/ProgramJson/2022/Chan-nuoi-2022.json" },
+    { key: "cong-nghe-det-may-2022", department: "Công nghệ dệt, may", file: "/ProgramJson/2022/Cong-nghe-det-may-2022.json" },
+    { key: "cong-nghe-dien-anh-truyen-hinh-2022", department: "Công nghệ điện ảnh - truyền hình", file: "/ProgramJson/2022/Cong-nghe-dien-anh-truyen-hinh-2022.json" },
+    { key: "cong-nghe-sinh-hoc-2022", department: "Công nghệ sinh học", file: "/ProgramJson/2022/Cong-nghe-sinh-hoc-2022.json" },
+    { key: "cong-nghe-thong-tin-2022", department: "Công nghệ thông tin", file: "/ProgramJson/2022/Cong-nghe-thong-tin-2022.json" },
+    { key: "cong-nghe-thuc-pham-2022", department: "Công nghệ thực phẩm", file: "/ProgramJson/2022/Cong-nghe-thuc-pham-2022.json" },
+    { key: "dieu-duong-2022", department: "Điều dưỡng", file: "/ProgramJson/2022/Dieu-duong-2022.json" },
+    { key: "digital-marketing-2022", department: "Digital Marketing", file: "/ProgramJson/2022/Digital-marketing-2022.json" },
+    { key: "dinh-duong-khoa-hoc-thuc-pham-2022", department: "Dinh dưỡng khoa học thực phẩm", file: "/ProgramJson/2022/Dinh-duong-khoa-hoc-thuc-pham-2022.json" },
+    { key: "dong-phuong-hoc-2022", department: "Đông phương học", file: "/ProgramJson/2022/Dong-phuong-hoc-2022.json" },
+    { key: "duoc-hoc-2022", department: "Dược học", file: "/ProgramJson/2022/Duoc-hoc-2022.json" },
+    { key: "he-thong-thong-tin-quan-ly-2022", department: "Hệ thống thông tin quản lý", file: "/ProgramJson/2022/He-thong-thong-tin-quan-ly-2022.json" },
+    { key: "ke-toan-2022", department: "Kế toán", file: "/ProgramJson/2022/Ke-toan-2022.json" },
+    { key: "khoa-hoc-du-lieu-2022", department: "Khoa học dữ liệu", file: "/ProgramJson/2022/Khoa-hoc-du-lieu-2022.json" },
+    { key: "kien-truc-2022", department: "Kiến trúc", file: "/ProgramJson/2022/Kien-truc-2022.json" },
+    { key: "kinh-doanh-quoc-te-2022", department: "Kinh doanh quốc tế", file: "/ProgramJson/2022/Kinh-doanh-quoc-te-2022.json" },
+    { key: "kinh-doanh-thuong-mai-2022", department: "Kinh doanh thương mại", file: "/ProgramJson/2022/Kinh-doanh-thuong-mai-2022.json" },
+    { key: "kinh-te-quoc-te-2022", department: "Kinh tế quốc tế", file: "/ProgramJson/2022/Kinh-te-quoc-te-2022.json" },
+    { key: "ky-thuat-co-dien-tu-2022", department: "Kỹ thuật cơ điện tử", file: "/ProgramJson/2022/Ky-thuat-co-dien-tu-2022.json" },
+    { key: "ky-thuat-co-khi-2022", department: "Kỹ thuật cơ khí", file: "/ProgramJson/2022/Ky-thuat-co-khi-2022.json" },
+    { key: "ky-thuat-dien-2022", department: "Kỹ thuật điện", file: "/ProgramJson/2022/Ky-thuat-dien-2022.json" },
+    { key: "ky-thuat-dien-tu-vien-thong-2022", department: "Kỹ thuật điện tử - viễn thông", file: "/ProgramJson/2022/Ky-thuat-dien-tu-vien-thong-2022.json" },
+    { key: "ky-thuat-moi-truong-2022", department: "Kỹ thuật môi trường", file: "/ProgramJson/2022/Ky-thuat-moi-truong-2022.json" },
+    { key: "ky-thuat-o-to-2022", department: "Kỹ thuật ô tô", file: "/ProgramJson/2022/Ky-thuat-o-to-2022.json" },
+    { key: "ky-thuat-xay-dung-2022", department: "Kỹ thuật xây dựng", file: "/ProgramJson/2022/Ky-thuat-xay-dung-2022.json" },
+    { key: "ky-thuat-xet-nghiem-y-hoc-2022", department: "Kỹ thuật xét nghiệm y học", file: "/ProgramJson/2022/Ky-thuat-xet-nghiem-y-hoc-2022.json" },
+    { key: "ky-thuat-y-sinh-2022", department: "Kỹ thuật y sinh", file: "/ProgramJson/2022/Ky-thuat-y-sinh-2022.json" },
+    { key: "logistic-va-quan-ly-cung-ung-2022", department: "Logistic và quản lý cung ứng", file: "/ProgramJson/2022/Logistic-va-quan-ly-cung-ung-2022.json" },
+    { key: "luat-2022", department: "Luật", file: "/ProgramJson/2022/Luat-2022.json" },
+    { key: "luat-kinh-te-2022", department: "Luật kinh tế", file: "/ProgramJson/2022/Luat-kinh-te-2022.json" },
+    { key: "marketing-2022", department: "Marketing", file: "/ProgramJson/2022/Marketing-2022.json" },
+    { key: "nghe-thuat-so-2022", department: "Nghệ thuật số", file: "/ProgramJson/2022/Nghe-thuat-so-2022.json" },
+    { key: "ngon-ngu-anh-2022", department: "Ngôn ngữ Anh", file: "/ProgramJson/2022/Ngon-ngu-anh-2022.json" },
+    { key: "ngon-ngu-han-2022", department: "Ngôn ngữ Hàn", file: "/ProgramJson/2022/Ngon-ngu-han-2022.json" },
+    { key: "ngon-ngu-nhat-2022", department: "Ngôn ngữ Nhật", file: "/ProgramJson/2022/Ngon-ngu-nhat-2022.json" },
+    { key: "ngon-ngu-trung-quoc-2022", department: "Ngôn ngữ Trung Quốc", file: "/ProgramJson/2022/Ngon-ngu-trung-quoc-2022.json" },
+    { key: "quan-he-cong-chung-2022", department: "Quan hệ công chúng", file: "/ProgramJson/2022/Quan-he-cong-chung-2022.json" },
+    { key: "quan-he-quoc-te-2022", department: "Quan hệ quốc tế", file: "/ProgramJson/2022/Quan-he-quoc-te-2022.json" },
+    { key: "quan-ly-tai-nguyen-moi-truong-2022", department: "Quản lý tài nguyên môi trường", file: "/ProgramJson/2022/Quan-ly-tai-nguyen-moi-truong-2022.json" },
+    { key: "quan-ly-xay-dung-2022", department: "Quản lý xây dựng", file: "/ProgramJson/2022/Quan-ly-xay-dung-2022.json" },
+    { key: "quan-tri-dich-vu-va-du-lich-2022", department: "Quản trị dịch vụ và du lịch", file: "/ProgramJson/2022/Quan-tri-dich-vu-va-du-lich-2022.json" },
+    { key: "quan-tri-khach-san-2022", department: "Quản trị khách sạn", file: "/ProgramJson/2022/Quan-tri-khach-san-2022.json" },
+    { key: "quan-tri-kinh-doanh-2022", department: "Quản trị kinh doanh", file: "/ProgramJson/2022/Quan-tri-kinh-doanh-2022.json" },
+    { key: "quan-tri-nha-hang-va-dich-vu-an-uong-2022", department: "Quản trị nhà hàng và dịch vụ ăn uống", file: "/ProgramJson/2022/Quan-tri-nha-hang-va-dich-vu-an-uong-2022.json" },
+    { key: "quan-tri-nhan-luc-2022", department: "Quản trị nhân lực", file: "/ProgramJson/2022/Quan-tri-nhan-luc-2022.json" },
+    { key: "quan-tri-su-kien-2022", department: "Quản trị sự kiện", file: "/ProgramJson/2022/Quan-tri-su-kien-2022.json" },
+    { key: "robot-va-tri-tue-nhan-tao-2022", department: "Robot và trí tuệ nhân tạo", file: "/ProgramJson/2022/Robot-va-tri-tue-nhan-tao-2022.json" },
+    { key: "tai-chinh-ngan-hang-2022", department: "Tài chính ngân hàng", file: "/ProgramJson/2022/Tai-chinh-ngan-hang-2022.json" },
+    { key: "tai-chinh-quoc-te-2022", department: "Tài chính quốc tế", file: "/ProgramJson/2022/Tai-chinh-quoc-te-2022.json" },
+    { key: "tam-ly-hoc-2022", department: "Tâm lý học", file: "/ProgramJson/2022/Tam-ly-hoc-2022.json" },
+    { key: "thanh-nhac-2022", department: "Thanh nhạc", file: "/ProgramJson/2022/Thanh-nhac-2022.json" },
+    { key: "thiet-ke-do-hoa-2022", department: "Thiết kế đồ họa", file: "/ProgramJson/2022/Thiet-ke-do-hoa-2022.json" },
+    { key: "thiet-ke-noi-that-2022", department: "Thiết kế nội thất", file: "/ProgramJson/2022/Thiet-ke-noi-that-2022.json" },
+    { key: "thiet-ke-thoi-trang-2022", department: "Thiết kế thời trang", file: "/ProgramJson/2022/Thiet-ke-thoi-trang-2022.json" },
+    { key: "thu-y-2022", department: "Thú y", file: "/ProgramJson/2022/Thu-y-2022.json" },
+    { key: "thuong-mai-dien-tu-2022", department: "Thương mại điện tử", file: "/ProgramJson/2022/Thuong-mai-dien-tu-2022.json" },
+    { key: "truyen-thong-da-phuong-tien-2022", department: "Truyền thông đa phương tiện", file: "/ProgramJson/2022/Truyen-thong-da-phuong-tien-2022.json" },
+    { key: "tu-dong-hoa-2022", department: "Tự động hóa", file: "/ProgramJson/2022/Tu-dong-hoa-2022.json" }
   ]
 };
 
@@ -220,7 +202,7 @@ form.addEventListener('submit', async (e) => {
   if (!file.name.toLowerCase().endsWith('.xlsx')) { setStatus('File phải là .xlsx', 'error'); return; }
 
   clearResult();
-  setStatus('Đang xử lý...', 'loading');
+  setStatus('Đang tải lên & phân tích...', 'loading');
   busy = true;
   const originalText = btnUpload.textContent;
   btnUpload.disabled = true;
@@ -236,49 +218,18 @@ form.addEventListener('submit', async (e) => {
   }
 
   const t0 = performance.now();
-  let usedClient = false;
-
-  async function runClientParse(fallbackReason) {
-    if (fallbackReason) setStatus(fallbackReason + ' → chuyển sang phân tích tại trình duyệt...', 'warning');
-    const data = await parseExcelClient(file, mssvInput.value.trim());
-    renderResult(data);
-    usedClient = true;
-  }
-
   try {
-    if (HAS_BACKEND) {
-      // Thử upload backend
-      const uploadEndpoint = API_BASE.endsWith('/upload') ? API_BASE : (API_BASE.replace(/\/+$/,'') + '/upload');
-      let res;
-      try {
-        res = await fetch(uploadEndpoint, { method: 'POST', body: formData });
-      } catch (netErr) {
-        await runClientParse('Không kết nối được backend');
-      }
-      if (!usedClient) {
-        if (res.status === 405 || res.status === 404) {
-          await runClientParse('Backend không hỗ trợ (HTTP ' + res.status + ')');
-        } else if (!res.ok) {
-          const text = await res.text();
-          await runClientParse('Lỗi backend: ' + (text || ('HTTP ' + res.status)));
-        } else {
-          const data = await res.json();
-          renderResult(data);
-        }
-      }
-    } else {
-      // Không có backend ngay từ đầu
-      await runClientParse('');
-    }
-
+    const res = await fetch('/api/upload', { method: 'POST', body: formData });
     const t1 = performance.now();
-    if (!usedClient) {
-      setStatus(`Hoàn thành (server) trong ${(t1 - t0).toFixed(0)} ms`, 'ok');
-    } else {
-      setStatus(`Hoàn thành (client) trong ${(t1 - t0).toFixed(0)} ms`, 'ok');
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text || ('HTTP ' + res.status));
     }
+    const data = await res.json();
+    renderResult(data);
+    setStatus(`Hoàn thành trong ${(t1 - t0).toFixed(0)} ms`, 'ok');
   } catch (err) {
-    setStatus('Lỗi cuối: ' + (err.message || err), 'error');
+    setStatus('Lỗi: ' + (err.message || err), 'error');
   } finally {
     busy = false;
     btnUpload.disabled = false;
@@ -413,161 +364,5 @@ function formatSize(bytes) {
   let i = 0;
   while (v >= 1024 && i < units.length - 1) { v /= 1024; i++; }
   return v.toFixed(v < 10 ? 2 : 1) + ' ' + units[i];
-}
-
-// === HÀM PARSE EXCEL TRÊN CLIENT (FALLBACK) ===
-async function parseExcelClient(file, mssv) {
-  if (typeof XLSX === 'undefined') throw new Error('Thiếu thư viện XLSX.');
-  const buf = await file.arrayBuffer();
-  const wb = XLSX.read(buf, { type: 'array' });
-
-  function normalize(str) {
-    return (str || '').toString().trim().toLowerCase().replace(/\s+/g,' ');
-  }
-  const keywordSets = {
-    code: ['mã','ma','code','mã học phần','course code','mã hp','mh'],
-    name: ['tên','ten','tên học phần','course name','name'],
-    credits: ['tc','số tc','sotinchi','số tín chỉ','tín chỉ','credits','credit'],
-    score10: ['tk(10)','điểm 10','score10','tk10','điểm tổng (10)','diem 10'],
-    score4: ['tk(4)','điểm 4','gpa4','score4','diem 4'],
-    letter: ['tk(ch)','điểm chữ','letter','grade','letter grade','diem chu']
-  };
-  const allSheetsInfo = [];
-
-  // Thu thập thông tin từng sheet (tối đa 200 dòng đầu)
-  for (const sheetName of wb.SheetNames) {
-    const ws = wb.Sheets[sheetName];
-    const aoa = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, blankrows: false });
-    if (!aoa.length) continue;
-    allSheetsInfo.push({ name: sheetName, aoa });
-  }
-  if (!allSheetsInfo.length) throw new Error('File rỗng.');
-
-  function scoreHeaderRow(cells) {
-    let score = 0;
-    const norm = cells.map(normalize);
-    for (const c of norm) {
-      if (keywordSets.code.some(k => c.includes(k))) score += 3;
-      if (keywordSets.name.some(k => c.includes(k))) score += 2;
-      if (keywordSets.credits.some(k => c.includes(k))) score += 2;
-      if (keywordSets.score10.some(k => c.includes(k))) score += 1;
-      if (keywordSets.score4.some(k => c.includes(k))) score += 1;
-      if (keywordSets.letter.some(k => c.includes(k))) score += 1;
-    }
-    return score;
-  }
-
-  function findHeader(aoa) {
-    const limit = Math.min(aoa.length, 15);
-    let best = { idx: -1, score: -1 };
-    for (let i = 0; i < limit; i++) {
-      const row = aoa[i];
-      if (!row || row.length === 0) continue;
-      const score = scoreHeaderRow(row);
-      if (score > best.score) best = { idx: i, score };
-    }
-    if (best.score >= 2) return best.idx; // ngưỡng
-    return 0; // fallback dùng dòng đầu
-  }
-
-  function findColumnIdx(headerNorm, keywords) {
-    // so khớp chứa thay vì bằng
-    let idx = headerNorm.findIndex(h => keywords.some(k => h === k));
-    if (idx >= 0) return idx;
-    idx = headerNorm.findIndex(h => keywords.some(k => h.includes(k)));
-    return idx;
-  }
-
-  function isLikelyCode(val) {
-    if (val == null) return false;
-    const s = String(val).trim();
-    if (s.length < 3 || s.length > 15) return false;
-    // có ít nhất 1 chữ + 1 số
-    return /[A-Za-z]/.test(s) && /\d/.test(s) && /^[A-Za-z0-9\-_]+$/.test(s);
-  }
-
-  let chosen = null;
-
-  for (const info of allSheetsInfo) {
-    const { aoa } = info;
-    const headerRowIdx = findHeader(aoa);
-    const headerRaw = aoa[headerRowIdx] || [];
-    const headerNorm = headerRaw.map(normalize);
-
-    const idxCode = findColumnIdx(headerNorm, keywordSets.code);
-    const idxName = findColumnIdx(headerNorm, keywordSets.name);
-    const idxCredits = findColumnIdx(headerNorm, keywordSets.credits);
-    const idx10 = findColumnIdx(headerNorm, keywordSets.score10);
-    const idx4 = findColumnIdx(headerNorm, keywordSets.score4);
-    const idxLetter = findColumnIdx(headerNorm, keywordSets.letter);
-
-    // Nếu chưa có cột code -> đoán bằng pattern
-    let finalIdxCode = idxCode;
-    if (finalIdxCode < 0) {
-      // quét từng cột, đếm số ô giống mã
-      const colCount = Math.max(...aoa.slice(headerRowIdx + 1, headerRowIdx + 21).map(r => r.length), 0);
-      let bestCol = -1, bestHits = 0;
-      for (let c = 0; c < colCount; c++) {
-        let hits = 0, rowsChecked = 0;
-        for (let r = headerRowIdx + 1; r < aoa.length && r < headerRowIdx + 30; r++) {
-          const cell = aoa[r]?.[c];
-            if (cell == null || cell === '') continue;
-          rowsChecked++;
-          if (isLikelyCode(cell)) hits++;
-        }
-        if (hits >= 2 && hits > bestHits) { bestHits = hits; bestCol = c; }
-      }
-      if (bestCol >= 0) finalIdxCode = bestCol;
-    }
-
-    if (finalIdxCode >= 0) {
-      chosen = {
-        aoa,
-        headerRowIdx,
-        idx: {
-          code: finalIdxCode,
-          name: idxName,
-          credits: idxCredits,
-          score10: idx10,
-          score4: idx4,
-          letter: idxLetter
-        }
-      };
-      break; // ưu tiên sheet đầu tiên hợp lệ
-    }
-  }
-
-  if (!chosen) throw new Error('Không tìm thấy sheet phù hợp.');
-
-  const { aoa, headerRowIdx, idx } = chosen;
-  const grades = [];
-  for (let r = headerRowIdx + 1; r < aoa.length; r++) {
-    const row = aoa[r];
-    if (!row) continue;
-    const rawCode = row[idx.code];
-    const code = rawCode == null ? '' : String(rawCode).trim();
-    if (!code) continue;
-    const grade = {
-      courseCode: code,
-      courseName: idx.name >= 0 ? String(row[idx.name] ?? '').trim() : '',
-      credits: idx.credits >= 0 ? (Number(row[idx.credits]) || null) : null,
-      score10: idx.score10 >= 0 ? (Number(row[idx.score10]) || null) : null,
-      letterGrade: idx.letter >= 0 ? String(row[idx.letter] ?? '').trim() : '',
-      gpa4: idx.score4 >= 0 ? (Number(row[idx.score4]) || null) : null
-    };
-    grades.push(grade);
-  }
-
-  if (!grades.length) throw new Error('Không đọc được dữ liệu điểm.');
-
-  return {
-    studentId: mssv,
-    programCode: currentProgram?.programCode || null,
-    curriculumFound: !!currentProgram,
-    department: currentProgram?.department || null,
-    academicYear: currentProgram?.year || null,
-    totalCredits: currentProgram?.totalCredits || null,
-    grades
-  };
 }
 
