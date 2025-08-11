@@ -16,6 +16,28 @@ const deptSelect = document.getElementById('deptSelect');
 const IS_GH_PAGES = location.hostname.endsWith('github.io');
 const REPO_BASE = IS_GH_PAGES ? ('/' + location.pathname.split('/').filter(Boolean)[0] + '/') : '/';
 function programUrl(p) { return REPO_BASE + p.replace(/^\//,''); }
+console.log('[App] IS_GH_PAGES:', IS_GH_PAGES, 'REPO_BASE:', REPO_BASE);
+
+// Đánh dấu app đã init cho bootstrap biết
+window.__APP_INITIALIZED__ = true;
+
+// Đảm bảo site.css đã nạp (trường hợp link đầu 404 trước khi fallback sửa)
+(function ensureCss(){
+  const has = Array.from(document.styleSheets || []).some(ss => (ss.href || '').includes('site.css'));
+  if(!has){
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = programUrl('css/site.css');
+    link.id = 'lateCssInject';
+    link.onload = () => console.log('[App] Inject CSS thành công');
+    link.onerror = () => console.warn('[App] Inject CSS thất bại:', link.href);
+    document.head.appendChild(link);
+  }
+})();
+
+// Xóa fallback nếu app khởi tạo được
+const _fb = document.getElementById('jsFallback');
+if (_fb) _fb.remove();
 
 let busy = false;
 let currentProgram = null;
@@ -129,8 +151,12 @@ deptSelect.addEventListener('change', async () => {
   const entry = (programs[year] || []).find(p => p.key === key);
   if (!entry) return;
   try {
-    const res = await fetch(programUrl(entry.file)); // chỉnh dùng base linh hoạt
-    if (!res.ok) throw new Error('Không tải được chương trình');
+    const res = await fetch(programUrl(entry.file));
+    // Debug nếu 404
+    if (!res.ok) {
+      console.warn('Fetch chương trình thất bại', programUrl(entry.file), res.status);
+      throw new Error('Không tải được chương trình');
+    }
     const json = await res.json();
     const codeNameMap = {};
     const nonAccCodes = new Set();
@@ -451,4 +477,13 @@ async function parseLocalExcel(file) {
     return Number.isFinite(n) ? n : undefined;
   }
 }
+
+// Ở cuối file: đảm bảo báo lỗi nếu parseLocalExcel gặp lỗi chưa catch (phòng hờ)
+window.addEventListener('unhandledrejection', ev => {
+  const st = document.getElementById('status');
+  if (st) {
+    st.className = 'status error';
+    st.textContent = 'Unhandled promise: ' + (ev.reason && ev.reason.message || ev.reason);
+  }
+});
 

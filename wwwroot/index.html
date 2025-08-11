@@ -4,12 +4,22 @@
     <meta charset="utf-8" />
     <title>Phân tích điểm HUTECH</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/site.css" id="mainCss"
+          onerror="(function(l){var seg=location.pathname.split('/').filter(Boolean)[0]||'';l.href='/' + (seg?seg+'/':'') + 'css/site.css'; l.onerror=null;})(this)">
   </head>
   <body class="light">
     <header class="app-header">
       <h1>Phân tích điểm sinh viên</h1>
     </header>
+
+    <noscript style="display:block;margin:1rem 0;padding:.75rem 1rem;background:#ffe1e1;color:#900;border:1px solid #f99">
+      Trình duyệt đang tắt JavaScript – bật lên để xem giao diện.
+    </noscript>
+
+    <!-- Fallback nếu JS lỗi (sẽ bị ghi đè khi app chạy) -->
+    <div id="jsFallback" style="margin:1rem 0;font-size:.9rem;color:#555;">
+      Đang tải ứng dụng... Nếu màn hình đứng im >5s hãy mở Console (F12) để xem lỗi.
+    </div>
 
     <main class="container">
       <section class="panel">
@@ -76,7 +86,43 @@
     </footer>
 
     <!-- Thêm: thư viện XLSX để chạy client-side trên GitHub Pages -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.19.3/dist/xlsx.full.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.19.3/dist/xlsx.full.min.js"
+            id="xlsxCdn"
+            onerror="console.error('CDN XLSX lỗi');"></script>
+
+    <!-- Bootstrap: gắn fallback nếu app.js 404 -->
+    <script>
+      (function(){
+        var seg = location.pathname.split('/').filter(Boolean)[0]||'';
+        var base = '/' + (seg?seg+'/':'') + '';
+        // Gắn listener error cho script chính (sau khi thêm)
+        function attachFallback(scr){
+          scr.addEventListener('error', function(){
+            console.warn('app.js load thất bại, thử lại với base', base);
+            var ns = document.createElement('script');
+            ns.src = base + 'js/app.js';
+            ns.id = 'mainJsRetry';
+            document.body.appendChild(ns);
+          }, { once:true });
+        }
+        // Gắn script chính (thay vì inline thẳng) để có sự kiện error
+        var main = document.createElement('script');
+        main.src = 'js/app.js';
+        main.id = 'mainJs';
+        attachFallback(main);
+        document.body.appendChild(main);
+
+        // Cảnh báo nếu sau 3s chưa có dấu hiệu init
+        setTimeout(function(){
+          if(!window.__APP_INITIALIZED__){
+            var st = document.getElementById('status');
+            if(st){
+              st.className='status error';
+              st.textContent='Chưa khởi tạo được ứng dụng (kiểm tra Console).';
+            }
+          }
+        },3000);
+      })();
+    </script>
   </body>
 </html>
