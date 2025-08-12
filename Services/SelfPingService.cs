@@ -16,8 +16,8 @@ public class SelfPingService : BackgroundService
         _logger = logger;
         // Ưu tiên biến do bạn tự set; sau đó Render cung cấp.
         _targetUrl =
-            cfg["SELF_PING_URL"] ??
-            Environment.GetEnvironmentVariable("SELF_PING_URL") ??
+            cfg["https://hutech-studymate.onrender.com"] ??
+            Environment.GetEnvironmentVariable("https://hutech-studymate.onrender.com") ??
             Environment.GetEnvironmentVariable("https://hutech-studymate.onrender.com"); // vd: https://tên.onrender.com
         if (!string.IsNullOrWhiteSpace(_targetUrl) && !_targetUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
             _targetUrl = "https://" + _targetUrl.Trim().TrimEnd('/');

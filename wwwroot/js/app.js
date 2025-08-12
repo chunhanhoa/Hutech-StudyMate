@@ -68,7 +68,7 @@ const programs = {
     { key: "quan-he-quoc-te-2022", department: "Quan hệ quốc tế", file: "/ProgramJson/2022/Quan-he-quoc-te-2022.json" },
     { key: "quan-ly-tai-nguyen-moi-truong-2022", department: "Quản lý tài nguyên môi trường", file: "/ProgramJson/2022/Quan-ly-tai-nguyen-moi-truong-2022.json" },
     { key: "quan-ly-xay-dung-2022", department: "Quản lý xây dựng", file: "/ProgramJson/2022/Quan-ly-xay-dung-2022.json" },
-    { key: "quan-tri-dich-vu-va-du-lich-2022", department: "Quản trị dịch vụ và du lịch", file: "/ProgramJson/2022/Quan-tri-dich-vu-va-du-lich-2022.json" },
+    { key: "quan-tri-dich-vu-du-lich-va-lu-hanh-2022", department: "Quản trị dịch vụ du lịch và lữ hành", file: "/ProgramJson/2022/Quan-tri-dich-vu-du-lich-va-lu-hanh-2022.json" },
     { key: "quan-tri-khach-san-2022", department: "Quản trị khách sạn", file: "/ProgramJson/2022/Quan-tri-khach-san-2022.json" },
     { key: "quan-tri-kinh-doanh-2022", department: "Quản trị kinh doanh", file: "/ProgramJson/2022/Quan-tri-kinh-doanh-2022.json" },
     { key: "quan-tri-nha-hang-va-dich-vu-an-uong-2022", department: "Quản trị nhà hàng và dịch vụ ăn uống", file: "/ProgramJson/2022/Quan-tri-nha-hang-va-dich-vu-an-uong-2022.json" },
