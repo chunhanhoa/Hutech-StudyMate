@@ -1,20 +1,29 @@
 using Check.Services;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using System; // thêm
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Thêm: ấn định cổng (có thể đổi nếu bị chiếm)
-builder.WebHost.UseUrls("http://localhost:5000", "https://localhost:5001");
+// Thay cấu hình cứng bằng PORT động (Render cung cấp biến PORT)
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrWhiteSpace(port))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
+else
+{
+    builder.WebHost.UseUrls("http://localhost:5000");
+}
 
 builder.Services.AddControllers();
-
 builder.Services.AddSingleton<IProgramService, ProgramService>();
 builder.Services.AddSingleton<IExcelGradeParser, ExcelGradeParser>();
+builder.Services.AddHttpClient(); // thêm
+builder.Services.AddHostedService<SelfPingService>(); // thêm
 
 var app = builder.Build();
 
-// Thêm: phục vụ index.html khi truy cập "/"
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
@@ -24,12 +33,10 @@ app.UseStaticFiles(new StaticFileOptions {
     RequestPath = "/ProgramJson"
 });
 
-// (tùy chọn) fallback để luôn trả index cho route front-end (giữ nếu cần)
 app.MapFallbackToFile("index.html");
 
 app.UseRouting();
 app.MapControllers();
 
-app.Run();
-app.Run();
+// Giữ duy nhất một lệnh Run
 app.Run();
