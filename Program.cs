@@ -30,6 +30,6 @@ app.MapFallbackToFile("index.html");
 app.UseRouting();
 app.MapControllers();
 
-app.Run();
+// Giữ duy nhất 1 lệnh chạy
 app.Run();
 app.Run();
