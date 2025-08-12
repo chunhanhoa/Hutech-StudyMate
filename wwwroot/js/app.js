@@ -18,14 +18,6 @@ const resultYearSelect = document.getElementById('resultYearSelect');
 const resultDeptSelect = document.getElementById('resultDeptSelect');
 const btnNewAnalysis = document.getElementById('btnNewAnalysis');
 
-// Thêm: nhận diện deploy dưới sub-path GitHub Pages
-const rootPrefix = (location.hostname.endsWith('github.io'))
-  ? ('/' + location.pathname.split('/').filter(x => x)[0])  // ví dụ /Hutech-StudyMate
-  : '';
-
-// Thêm: chế độ static (không backend /api)
-const staticMode = location.hostname.endsWith('github.io');
-
 const pageSize = 10;
 let busy = false;
 let currentProgram = null;
@@ -150,9 +142,7 @@ deptSelect.addEventListener('change', async () => {
   const entry = (programs[year] || []).find(p => p.key === key);
   if (!entry) return;
   try {
-    // Sửa: dùng rootPrefix
-    const fileUrl = (rootPrefix && entry.file.startsWith('/')) ? (rootPrefix + entry.file) : entry.file;
-    const res = await fetch(fileUrl);
+    const res = await fetch(entry.file);
     if (!res.ok) throw new Error('Không tải được chương trình');
     const json = await res.json();
     const codeNameMap = {};
@@ -238,6 +228,9 @@ form.addEventListener('submit', async (e) => {
   if (!mssvInput.value.trim()) { setStatus('Chưa nhập MSSV.', 'error'); return; }
   if (!yearSelect.value) { setStatus('Chưa chọn niên khóa.', 'error'); return; }
   if (!deptSelect.value) { setStatus('Chưa chọn khoa / viện.', 'error'); return; }
+  const file = fileInput.files[0];
+  if (!file.name.toLowerCase().endsWith('.xlsx')) { setStatus('File phải là .xlsx', 'error'); return; }
+
   clearResult();
   setStatus('Đang tải lên & phân tích...', 'loading');
   busy = true;
@@ -245,33 +238,23 @@ form.addEventListener('submit', async (e) => {
   btnUpload.disabled = true;
   btnUpload.textContent = btnUpload.getAttribute('data-busy-text') || 'Đang xử lý...';
 
-  const file = fileInput.files[0];
+  const formData = new FormData();
+  formData.append('mssv', mssvInput.value.trim());
+  formData.append('file', file);
+  if (currentProgram) {
+    formData.append('academicYear', currentProgram.year);
+    formData.append('department', currentProgram.department);
+    formData.append('programCode', currentProgram.programCode);
+  }
 
   const t0 = performance.now();
   try {
-    if (staticMode) {
-      // Phân tích client-side
-      const data = await parseExcelFile(file, mssvInput.value.trim());
-      renderResult(data);
-      const t1 = performance.now();
-      setStatus(`Hoàn thành (client) ${(t1 - t0).toFixed(0)} ms`, 'ok');
-    } else {
-      // Giữ nguyên logic backend
-      const formData = new FormData();
-      formData.append('mssv', mssvInput.value.trim());
-      formData.append('file', file);
-      if (currentProgram) {
-        formData.append('academicYear', currentProgram.year);
-        formData.append('department', currentProgram.department);
-        formData.append('programCode', currentProgram.programCode);
-      }
-      const res = await fetch('/api/upload', { method: 'POST', body: formData });
-      const t1 = performance.now();
-      if (!res.ok) throw new Error(await res.text() || ('HTTP ' + res.status));
-      const data = await res.json();
-      renderResult(data);
-      setStatus(`Hoàn thành ${(t1 - t0).toFixed(0)} ms`, 'ok');
-    }
+    const res = await fetch('/api/upload', { method: 'POST', body: formData });
+    const t1 = performance.now();
+    if (!res.ok) throw new Error(await res.text() || ('HTTP ' + res.status));
+    const data = await res.json();
+    renderResult(data);
+    setStatus(`Hoàn thành trong ${(t1 - t0).toFixed(0)} ms`, 'ok');
   } catch (err) {
     setStatus('Lỗi: ' + (err.message || err), 'error');
   } finally {
@@ -479,9 +462,7 @@ resultDeptSelect.addEventListener('change', async () => {
   const entry = (programs[year] || []).find(p => p.key === key);
   if (!entry) return;
   try {
-    // Sửa: dùng rootPrefix khi fetch JSON chương trình
-    const fileUrl = (rootPrefix && entry.file.startsWith('/')) ? (rootPrefix + entry.file) : entry.file;
-    const res = await fetch(fileUrl);
+    const res = await fetch(entry.file);
     if (!res.ok) throw new Error('Không tải được chương trình');
     const json = await res.json();
     const codeNameMap = {};
@@ -527,65 +508,5 @@ if (btnNewAnalysis) {
     form.reset();
     setStatus('', '');
     if (dropZoneText) dropZoneText.textContent = 'Chọn hoặc kéo thả file vào đây';
-  });
-}
-
-// Thêm: hàm parse Excel client-side (fallback GitHub Pages)
-async function parseExcelFile(file, studentId) {
-  if (typeof XLSX === 'undefined') throw new Error('Thiếu thư viện XLSX');
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onerror = () => reject(new Error('Không đọc được file'));
-    reader.onload = () => {
-      try {
-        const wb = XLSX.read(new Uint8Array(reader.result), { type: 'array' });
-        const sheetName = wb.SheetNames[0];
-        const ws = wb.Sheets[sheetName];
-        const rows = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, defval: '' });
-
-        if (!rows.length) return resolve({ studentId, grades: [] });
-
-        const header = rows[0].map(h => String(h).trim().toLowerCase());
-        function idx(keys) {
-          for (const k of keys)
-            { const i = header.indexOf(k); if (i >= 0) return i; }
-          return -1;
-        }
-        const idxCode = idx(['mã môn', 'mã', 'course code', 'code']);
-        const idxName = idx(['tên môn', 'tên', 'course name', 'name']);
-        const idxCredits = idx(['số tc', 'tc', 'tín chỉ', 'credits']);
-        const idxScore10 = idx(['điểm 10', 'tk(10)', 'score10', '10']);
-        const idxLetter = idx(['điểm chữ', 'tk(ch)', 'letter', 'chữ']);
-        const idxGpa4 = idx(['điểm 4', 'tk(4)', 'gpa4', '4']);
-
-        const grades = [];
-        for (let r = 1; r < rows.length; r++) {
-            const row = rows[r];
-            if (!row || row.every(v => (v === '' || v == null))) continue;
-            const courseCode = idxCode >= 0 ? String(row[idxCode]).trim() : '';
-            if (!courseCode) continue;
-            grades.push({
-              courseCode,
-              courseName: idxName >= 0 ? String(row[idxName]).trim() : '',
-              credits: idxCredits >= 0 ? Number(row[idxCredits]) || null : null,
-              score10: idxScore10 >= 0 ? Number(row[idxScore10]) || null : null,
-              letterGrade: idxLetter >= 0 ? String(row[idxLetter]).trim() : '',
-              gpa4: idxGpa4 >= 0 ? Number(row[idxGpa4]) || null : null
-            });
-        }
-
-        resolve({
-          studentId,
-            academicYear: currentProgram?.year,
-            department: currentProgram?.department,
-            programCode: currentProgram?.programCode,
-            totalCredits: currentProgram?.totalCredits,
-          grades
-        });
-      } catch (e) {
-        reject(e);
-      }
-    };
-    reader.readAsArrayBuffer(file);
   });
 }
