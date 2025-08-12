@@ -5,31 +5,26 @@ const statusEl = document.getElementById('status');
 const summary = document.getElementById('summary');
 const gradesWrapper = document.getElementById('gradesWrapper');
 const gradesTableBody = document.querySelector('#gradesTable tbody');
-const rawJson = document.getElementById('rawJson');
-const rawJsonBlock = document.getElementById('rawJsonBlock');
 const dropZone = document.getElementById('dropZone');
 const btnUpload = document.getElementById('btnUpload');
 const dropZoneText = document.getElementById('dropZoneText');
 const yearSelect = document.getElementById('yearSelect');
 const deptSelect = document.getElementById('deptSelect');
-const aiSection = document.getElementById('aiSection');
-const btnGetAdvice = document.getElementById('btnGetAdvice');
-const adviceOutput = document.getElementById('adviceOutput');
-const chatMessagesEl = document.getElementById('chatMessages');
-const chatInput = document.getElementById('chatInput');
-const btnSendChat = document.getElementById('btnSendChat');
 const paginationEl = document.getElementById('pagination');
+const paginationInfoEl = document.getElementById('paginationInfo');
+const resultsLayout = document.querySelector('.results-layout');
+const uploadPanel = document.getElementById('uploadPanel');
+const resultYearSelect = document.getElementById('resultYearSelect');
+const resultDeptSelect = document.getElementById('resultDeptSelect');
+const btnNewAnalysis = document.getElementById('btnNewAnalysis');
 
 const pageSize = 10;
-
 let busy = false;
 let currentProgram = null;
 let lastResult = null;
-let chatHistory = []; // {role,content}
 let currentPage = 1;
 let gradesData = [];
 
-// Danh sách chương trình (có thể mở rộng sau)
 const programs = {
   "2022": [
     { key: "an-toan-thong-tin-2022", department: "An toàn thông tin", file: "/ProgramJson/2022/An-toan-thong-tin-2022.json" },
@@ -98,19 +93,28 @@ function setStatus(text, cls) {
   statusEl.textContent = text;
   statusEl.className = 'status ' + (cls || '');
 }
+
 function clearResult() {
   summary.innerHTML = '';
   gradesTableBody.innerHTML = '';
   summary.classList.add('hidden');
   gradesWrapper.classList.add('hidden');
-  rawJsonBlock.classList.add('hidden');
+  resultsLayout.classList.add('hidden');
+  uploadPanel.classList.remove('hidden');
+  gradesData = [];
+  currentPage = 1;
 }
 
-// Populate năm
 Object.keys(programs).sort().forEach(y => {
   const opt = document.createElement('option');
-  opt.value = y; opt.textContent = y;
+  opt.value = y;
+  opt.textContent = y;
   yearSelect.appendChild(opt);
+  
+  const resultOpt = document.createElement('option');
+  resultOpt.value = y;
+  resultOpt.textContent = y;
+  resultYearSelect.appendChild(resultOpt);
 });
 
 yearSelect.addEventListener('change', () => {
@@ -148,22 +152,19 @@ deptSelect.addEventListener('change', async () => {
       arr.forEach(s => {
         if (s && s.code) {
           const up = s.code.toUpperCase();
-            if (s.name) codeNameMap[up] = s.name;
-            if (isNonAcc) nonAccCodes.add(up);
+          if (s.name) codeNameMap[up] = s.name;
+          if (isNonAcc) nonAccCodes.add(up);
         }
       });
     }
-    // quét tất cả courses
     (json.courses || []).forEach(c => {
       const isNonAcc = (c.category || '').toLowerCase().includes('không tích lũy');
       if (c.subjects) addSubjects(c.subjects, isNonAcc);
-      // subcategories
       if (c.subcategories) c.subcategories.forEach(sc => {
         const scNonAcc = isNonAcc || (sc.name || '').toLowerCase().includes('không tích lũy');
         if (sc.subjects) addSubjects(sc.subjects, scNonAcc);
         if (sc.groups) sc.groups.forEach(g => addSubjects(g.subjects, scNonAcc));
       });
-      // groups trực tiếp (nếu có)
       if (c.groups) c.groups.forEach(g => addSubjects(g.subjects, isNonAcc));
     });
     currentProgram = {
@@ -181,11 +182,26 @@ deptSelect.addEventListener('change', async () => {
   }
 });
 
-dropZone.addEventListener('dragenter', e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.add('dragging'); });
-dropZone.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); });
-dropZone.addEventListener('dragleave', e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('dragging'); });
+dropZone.addEventListener('dragenter', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  dropZone.classList.add('dragging');
+});
+
+dropZone.addEventListener('dragover', e => {
+  e.preventDefault();
+  e.stopPropagation();
+});
+
+dropZone.addEventListener('dragleave', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  dropZone.classList.remove('dragging');
+});
+
 dropZone.addEventListener('drop', e => {
-  e.preventDefault(); e.stopPropagation();
+  e.preventDefault();
+  e.stopPropagation();
   dropZone.classList.remove('dragging');
   const files = e.dataTransfer.files;
   if (files && files.length) {
@@ -193,6 +209,7 @@ dropZone.addEventListener('drop', e => {
     if (dropZoneText) dropZoneText.textContent = 'Đã chọn: ' + files[0].name;
   }
 });
+
 fileInput.addEventListener('change', () => {
   if (fileInput.files.length && dropZoneText)
     dropZoneText.textContent = 'Đã chọn: ' + fileInput.files[0].name;
@@ -201,13 +218,13 @@ fileInput.addEventListener('change', () => {
 form.addEventListener('reset', () => {
   setStatus('Đã xóa dữ liệu.', '');
   clearResult();
-  if (dropZoneText) dropZoneText.textContent = 'Kéo thả file vào đây';
+  if (dropZoneText) dropZoneText.textContent = 'Chọn hoặc kéo thả file vào đây';
 });
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (busy) return;
-  if (!fileInput.files.length) { setStatus('Chưa có file (hãy kéo thả vào vùng).', 'error'); return; }
+  if (!fileInput.files.length) { setStatus('Chưa có file.', 'error'); return; }
   if (!mssvInput.value.trim()) { setStatus('Chưa nhập MSSV.', 'error'); return; }
   if (!yearSelect.value) { setStatus('Chưa chọn niên khóa.', 'error'); return; }
   if (!deptSelect.value) { setStatus('Chưa chọn khoa / viện.', 'error'); return; }
@@ -234,10 +251,7 @@ form.addEventListener('submit', async (e) => {
   try {
     const res = await fetch('/api/upload', { method: 'POST', body: formData });
     const t1 = performance.now();
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(text || ('HTTP ' + res.status));
-    }
+    if (!res.ok) throw new Error(await res.text() || ('HTTP ' + res.status));
     const data = await res.json();
     renderResult(data);
     setStatus(`Hoàn thành trong ${(t1 - t0).toFixed(0)} ms`, 'ok');
@@ -253,9 +267,7 @@ form.addEventListener('submit', async (e) => {
 dropZone.addEventListener('click', () => fileInput.click());
 
 function renderResult(data) {
-  rawJson.textContent = JSON.stringify(data, null, 2);
-  rawJsonBlock.classList.remove('hidden');
-
+  uploadPanel.classList.add('hidden');
   const merged = {
     studentId: data.studentId,
     programCode: data.programCode || (currentProgram && currentProgram.programCode),
@@ -264,7 +276,18 @@ function renderResult(data) {
     academicYear: data.academicYear || (currentProgram && currentProgram.year),
     totalCredits: data.totalCredits || (currentProgram && currentProgram.totalCredits) || '—'
   };
-  const items = [
+
+  if (merged.academicYear) {
+    resultYearSelect.value = merged.academicYear;
+    resultYearSelect.dispatchEvent(new Event('change'));
+    setTimeout(() => {
+      const deptEntry = Object.values(programs).flat()
+        .find(p => p.department === merged.department);
+      if (deptEntry) resultDeptSelect.value = deptEntry.key;
+    }, 100);
+  }
+
+  const baseItems = [
     ['MSSV', merged.studentId],
     ['Program Code', merged.programCode || '—'],
     ['Khoa', merged.department || '—'],
@@ -272,42 +295,31 @@ function renderResult(data) {
     ['Tổng TC CTĐT', merged.totalCredits],
     ['Số môn đã học', data.grades.length]
   ];
-  summary.innerHTML = items.map(([k,v]) => `
-    <div class="item fade-in">
-      <span class="k">${k}</span>
-      <span class="v">${escapeHtml(String(v))}</span>
-    </div>
-  `).join('');
+  summary.innerHTML = baseItems.map(([k, v]) =>
+    `<div class="item"><span class="k">${k}</span><span class="v">${escapeHtml(String(v))}</span></div>`
+  ).join('');
   summary.classList.remove('hidden');
 
-  // ===== TÍNH TOÁN DUY NHẤT 1 LẦN =====
   const map = currentProgram && currentProgram.codeNameMap;
   const nonAccSet = currentProgram && currentProgram.nonAccCodes;
 
-  let matched = 0;
-  let unmatched = 0;
-  let accCredits = 0;
-  let nonAccCredits = 0;
-  let sumGpa4Weighted = 0;
-  let sumScore10Weighted = 0;
+  let matched = 0, unmatched = 0, accCredits = 0, nonAccCredits = 0;
+  let sumGpa4Weighted = 0, sumScore10Weighted = 0;
 
   gradesData = data.grades.slice();
   for (const g of gradesData) {
-    const code = (g.courseCode ?? g.CourseCode ?? '').toString().trim();
+    const code = (g.courseCode ?? g.CourseCode ?? '').trim();
     if (!code) continue;
     const codeUpper = code.toUpperCase();
     const inProgram = !!(map && map[codeUpper]);
     if (inProgram) matched++; else unmatched++;
-    const credits = Number(g.credits ?? g.Credits ?? NaN);
-    const score10Raw = g.score10 ?? g.Score10;
-    const gpa4Raw = g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4;
-    const gpa4Num = Number(gpa4Raw);
-    const score10Num = Number(score10Raw);
+    const credits = Number(g.credits ?? g.Credits);
+    const score10Num = Number(g.score10 ?? g.Score10);
+    const gpa4Num = Number(g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4);
     const isNonAcc = !!(nonAccSet && nonAccSet.has(codeUpper));
     if (inProgram && Number.isFinite(credits)) {
-      if (isNonAcc) {
-        nonAccCredits += credits;
-      } else {
+      if (isNonAcc) nonAccCredits += credits;
+      else {
         accCredits += credits;
         if (Number.isFinite(gpa4Num)) sumGpa4Weighted += gpa4Num * credits;
         if (Number.isFinite(score10Num)) sumScore10Weighted += score10Num * credits;
@@ -327,210 +339,174 @@ function renderResult(data) {
   const accDisplay = Number.isFinite(totalAccRequired) ? `${accCredits} / ${totalAccRequired}` : `${accCredits}`;
   const nonAccDisplay = Number.isFinite(totalNonAccRequired) ? `${nonAccCredits} / ${totalNonAccRequired}` : `${nonAccCredits}`;
 
-  const summaryExtra = `
-    <div class="item fade-in"><span class="k">Thuộc CTĐT</span><span class="v">${matched}</span></div>
-    <div class="item fade-in"><span class="k">Ngoài CTĐT</span><span class="v">${unmatched}</span></div>
-    <div class="item fade-in"><span class="k">TC tích lũy</span><span class="v">${accDisplay}</span></div>
-    <div class="item fade-in"><span class="k">TC không tích lũy</span><span class="v">${nonAccDisplay}</span></div>
-    <div class="item fade-in"><span class="k">GPA TL (4)</span><span class="v">${gpa4Avg}</span></div>
-    <div class="item fade-in"><span class="k">GPA TL (10)</span><span class="v">${gpa10Avg}</span></div>`;
-  summary.insertAdjacentHTML('beforeend', summaryExtra);
+  summary.insertAdjacentHTML('beforeend', `
+    <div class="item"><span class="k">Thuộc CTĐT</span><span class="v">${matched}</span></div>
+    <div class="item"><span class="k">Ngoài CTĐT</span><span class="v">${unmatched}</span></div>
+    <div class="item"><span class="k">TC tích lũy</span><span class="v">${accDisplay}</span></div>
+    <div class="item"><span class="k">TC không tích lũy</span><span class="v">${nonAccDisplay}</span></div>
+    <div class="item"><span class="k">GPA TL (4)</span><span class="v">${gpa4Avg}</span></div>
+    <div class="item"><span class="k">GPA TL (10)</span><span class="v">${gpa10Avg}</span></div>`);
 
   lastResult = data;
-  if (aiSection) {
-    aiSection.classList.remove('hidden');
-    adviceOutput.textContent = '';
-    chatMessagesEl && (chatMessagesEl.innerHTML = '');
-    chatHistory = [];
-  }
-
-  // Cuộn đến kết quả
-  gradesWrapper.scrollIntoView({behavior:'smooth', block:'start'});
+  resultsLayout.classList.remove('hidden');
+  resultsLayout.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Cập nhật renderGradesPage để dùng map/nonAccSet trong phạm vi global hiện tại
 function renderGradesPage(page) {
-  if (!gradesData) return;
+  if (!gradesData.length) return;
   const totalPages = Math.ceil(gradesData.length / pageSize) || 1;
-  if (page < 1) page = 1;
-  if (page > totalPages) page = totalPages;
+  page = Math.min(Math.max(page, 1), totalPages);
   currentPage = page;
   const start = (page - 1) * pageSize;
-  const slice = gradesData.slice(start, start + pageSize);
+  const end = Math.min(start + pageSize, gradesData.length);
+  const slice = gradesData.slice(start, end);
+
   const map = currentProgram && currentProgram.codeNameMap;
   const nonAccSet = currentProgram && currentProgram.nonAccCodes;
+
   gradesTableBody.innerHTML = slice.map((g, idx) => {
-    const absoluteIndex = start + idx;
-    const code = (g.courseCode ?? g.CourseCode ?? '').toString().trim();
-    const codeUpper = code.toUpperCase();
+    const abs = start + idx;
+    const code = (g.courseCode ?? g.CourseCode ?? '').trim();
+    const codeU = code.toUpperCase();
     let name = g.courseName ?? g.CourseName ?? '';
-    const inProgram = !!(map && codeUpper && map[codeUpper]);
-    if ((!name || !name.trim()) && inProgram) name = map[codeUpper] || '';
-    const credits = Number(g.credits ?? g.Credits ?? NaN);
+    const inProgram = !!(map && codeU && map[codeU]);
+    if ((!name || !name.trim()) && inProgram) name = map[codeU] || '';
+    const credits = Number(g.credits ?? g.Credits);
     const score10Num = Number(g.score10 ?? g.Score10);
     const gpa4Num = Number(g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4);
-    const isNonAcc = !!(nonAccSet && nonAccSet.has(codeUpper));
-    const rowClass = inProgram ? (isNonAcc ? 'nonacc' : 'in') : 'out';
-    return `
-      <tr class="${rowClass}">
-        <td class="num">${absoluteIndex + 1}</td>
-        <td>${escapeHtml(code)}</td>
-        <td>${escapeHtml(name)}</td>
-        <td class="num">${Number.isFinite(credits) ? credits : ''}</td>
-        <td class="num">${Number.isFinite(score10Num) ? score10Num : ''}</td>
-        <td>${escapeHtml(g.letterGrade ?? g.LetterGrade ?? '')}</td>
-        <td class="num">${Number.isFinite(gpa4Num) ? gpa4Num : ''}</td>
-      </tr>`;
+    const isNonAcc = !!(nonAccSet && nonAccSet.has(codeU));
+    let rowClass = 'incorrect';
+    if (inProgram) rowClass = isNonAcc ? 'nonacc' : 'correct';
+    return `<tr class="${rowClass}">
+      <td class="num">${abs + 1}</td>
+      <td>${escapeHtml(code)}</td>
+      <td>${escapeHtml(name)}</td>
+      <td class="num">${Number.isFinite(credits) ? credits : ''}</td>
+      <td class="num">${Number.isFinite(score10Num) ? score10Num.toFixed(2) : ''}</td>
+      <td>${escapeHtml(g.letterGrade ?? g.LetterGrade ?? '')}</td>
+      <td class="num">${Number.isFinite(gpa4Num) ? gpa4Num.toFixed(2) : ''}</td>
+    </tr>`;
   }).join('');
+
   updatePagination(totalPages);
+  updatePaginationInfo(start + 1, end, gradesData.length);
 }
 
 function updatePagination(totalPages) {
   if (!paginationEl) return;
-  if (totalPages <= 1) {
-    paginationEl.innerHTML = '';
-    return;
+  if (totalPages <= 1) { paginationEl.innerHTML = ''; return; }
+  const maxVisible = 7;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+  if (endPage - startPage + 1 < maxVisible)
+    startPage = Math.max(1, endPage - maxVisible + 1);
+  const buttons = [];
+  if (startPage > 1) {
+    buttons.push(`<button class="page-btn" data-page="1">1</button>`);
+    if (startPage > 2) buttons.push(`<span class="page-dots">...</span>`);
   }
-  const maxButtons = 7;
-  let start = Math.max(1, currentPage - 3);
-  let end = Math.min(totalPages, start + maxButtons - 1);
-  if (end - start + 1 < maxButtons) start = Math.max(1, end - maxButtons + 1);
-
-  const parts = [];
-  parts.push(`<button data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}>&laquo;</button>`);
-  if (start > 1) {
-    parts.push(`<button data-page="1">1</button>`);
-    if (start > 2) parts.push(`<span style="padding:.3rem .4rem;">...</span>`);
+  for (let p = startPage; p <= endPage; p++) {
+    buttons.push(`<button class="page-btn ${p === currentPage ? 'active' : ''}" data-page="${p}">${p}</button>`);
   }
-  for (let p = start; p <= end; p++) {
-    parts.push(`<button data-page="${p}" class="${p === currentPage ? 'active' : ''}">${p}</button>`);
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) buttons.push(`<span class="page-dots">...</span>`);
+    buttons.push(`<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`);
   }
-  if (end < totalPages) {
-    if (end < totalPages - 1) parts.push(`<span style="padding:.3rem .4rem;">...</span>`);
-    parts.push(`<button data-page="${totalPages}">${totalPages}</button>`);
-  }
-  parts.push(`<button data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>&raquo;</button>`);
-  paginationEl.innerHTML = parts.join('');
+  const prevBtn = currentPage > 1 ? `<button class="nav-btn" data-page="${currentPage - 1}">‹ Trước</button>` : '';
+  const nextBtn = currentPage < totalPages ? `<button class="nav-btn" data-page="${currentPage + 1}">Sau ›</button>` : '';
+  paginationEl.innerHTML = `${prevBtn}${buttons.join('')}${nextBtn}`;
 }
 
-// Sự kiện phân trang
+function updatePaginationInfo(start, end, total) {
+  if (paginationInfoEl)
+    paginationInfoEl.textContent = `Hiển thị ${start}-${end} trong tổng số ${total} môn học`;
+}
+
 if (paginationEl) {
   paginationEl.addEventListener('click', e => {
     const btn = e.target.closest('button[data-page]');
     if (!btn) return;
     const page = Number(btn.getAttribute('data-page'));
-    if (!Number.isFinite(page)) return;
-    renderGradesPage(page);
+    if (Number.isFinite(page) && page !== currentPage) renderGradesPage(page);
   });
 }
 
 function escapeHtml(str) {
-  return str
-    .replaceAll('&','&amp;')
-    .replaceAll('<','&lt;')
-    .replaceAll('>','&gt;')
-    .replaceAll('"','&quot;')
-    .replaceAll("'",'&#39;');
-}
-        
-
-function showFileInfo(file) {
-  if (!filePreview) return;
-  fileNameEl.textContent = file.name;
-  fileSizeEl.textContent = formatSize(file.size);
-  if (lastFileUrl) URL.revokeObjectURL(lastFileUrl);
-  lastFileUrl = URL.createObjectURL(file);
-  downloadLink.href = lastFileUrl;
-  downloadLink.download = file.name;
-  filePreview.classList.remove('hidden');
-  if (dropZoneText) dropZoneText.textContent = 'Đã chọn: ' + file.name;
+  if (!str) return '';
+  return String(str)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
 }
 
-function formatSize(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  const units = ['KB','MB','GB'];
-  let v = bytes / 1024;
-  let i = 0;
-  while (v >= 1024 && i < units.length - 1) { v /= 1024; i++; }
-  return v.toFixed(v < 10 ? 2 : 1) + ' ' + units[i];
-}
-
-if (btnGetAdvice) {
-  btnGetAdvice.addEventListener('click', async () => {
-    if (!lastResult) return;
-    adviceOutput.textContent = 'Đang lấy gợi ý...';
-    try {
-      const body = {
-        mssv: lastResult.studentId,
-        grades: (lastResult.grades || []).map(g => ({
-          courseCode: g.courseCode || g.CourseCode,
-          courseName: g.courseName || g.CourseName,
-          credits: g.credits ?? g.Credits,
-            score10: g.score10 ?? g.Score10,
-          letterGrade: g.letterGrade ?? g.LetterGrade,
-          gpa4: g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4
-        }))
-      };
-      const res = await fetch('/api/advice', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(body)
-      });
-      const json = await res.json();
-      adviceOutput.textContent = json.advice || '(Không có phản hồi)';
-    } catch (e) {
-      adviceOutput.textContent = 'Lỗi: ' + e.message;
-    }
+// Dropdown kết quả (thay đổi CTĐT sau khi xem)
+resultYearSelect.addEventListener('change', () => {
+  resultDeptSelect.innerHTML = '<option value="">-- Chọn khoa / viện --</option>';
+  if (!resultYearSelect.value) { resultDeptSelect.disabled = true; return; }
+  const list = programs[resultYearSelect.value] || [];
+  list.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.key;
+    opt.textContent = p.department;
+    resultDeptSelect.appendChild(opt);
   });
-}
-
-function appendChat(role, content) {
-  if (!chatMessagesEl) return;
-  const div = document.createElement('div');
-  div.className = 'msg ' + role;
-  div.textContent = (role === 'user' ? 'Bạn: ' : 'AI: ') + content;
-  chatMessagesEl.appendChild(div);
-  chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-}
-
-async function sendChat() {
-  if (!lastResult || !chatInput || !chatInput.value.trim()) return;
-  const text = chatInput.value.trim();
-  chatInput.value = '';
-  appendChat('user', text);
-  chatHistory.push({role:'user', content:text});
-  appendChat('assistant', 'Đang trả lời...');
-  try {
-    const body = {
-      mssv: lastResult.studentId,
-      grades: (lastResult.grades || []).map(g => ({
-        courseCode: g.courseCode || g.CourseCode,
-        courseName: g.courseName || g.CourseName,
-        credits: g.credits ?? g.Credits,
-        score10: g.score10 ?? g.Score10,
-        letterGrade: g.letterGrade ?? g.LetterGrade,
-        gpa4: g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4
-      })),
-      messages: chatHistory
-    };
-    const res = await fetch('/api/advice/chat', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(body)
-    });
-    const json = await res.json();
-    // replace "Đang trả lời..."
-    const lastMsg = chatMessagesEl.querySelector('.msg.assistant:last-child');
-    if (lastMsg) lastMsg.textContent = 'AI: ' + (json.reply || '(rỗng)');
-    chatHistory.push({role:'assistant', content: json.reply || ''});
-  } catch (e) {
-    const lastMsg = chatMessagesEl.querySelector('.msg.assistant:last-child');
-    if (lastMsg) lastMsg.textContent = 'AI: Lỗi - ' + e.message;
-  }
-}
-
-if (btnSendChat) btnSendChat.addEventListener('click', sendChat);
-if (chatInput) chatInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') { e.preventDefault(); sendChat(); }
+  resultDeptSelect.disabled = false;
 });
 
+resultDeptSelect.addEventListener('change', async () => {
+  if (!resultYearSelect.value || !resultDeptSelect.value) return;
+  const year = resultYearSelect.value;
+  const key = resultDeptSelect.value;
+  const entry = (programs[year] || []).find(p => p.key === key);
+  if (!entry) return;
+  try {
+    const res = await fetch(entry.file);
+    if (!res.ok) throw new Error('Không tải được chương trình');
+    const json = await res.json();
+    const codeNameMap = {};
+    const nonAccCodes = new Set();
+    function addSubjects(arr, isNonAcc = false) {
+      if (!Array.isArray(arr)) return;
+      arr.forEach(s => {
+        if (s && s.code) {
+          const up = s.code.toUpperCase();
+            if (s.name) codeNameMap[up] = s.name;
+            if (isNonAcc) nonAccCodes.add(up);
+        }
+      });
+    }
+    (json.courses || []).forEach(c => {
+      const isNonAcc = (c.category || '').toLowerCase().includes('không tích lũy');
+      if (c.subjects) addSubjects(c.subjects, isNonAcc);
+      if (c.subcategories) c.subcategories.forEach(sc => {
+        const scNonAcc = isNonAcc || (sc.name || '').toLowerCase().includes('không tích lũy');
+        if (sc.subjects) addSubjects(sc.subjects, scNonAcc);
+        if (sc.groups) sc.groups.forEach(g => addSubjects(g.subjects, scNonAcc));
+      });
+      if (c.groups) c.groups.forEach(g => addSubjects(g.subjects, isNonAcc));
+    });
+    currentProgram = {
+      year: json.academic_year || year,
+      department: json.department || entry.department,
+      programCode: json.program_code || '',
+      totalCredits: json.total_credits || '',
+      nonAccTotal: json.non_accumulated_credits || '',
+      codeNameMap,
+      nonAccCodes
+    };
+    if (lastResult) renderResult(lastResult);
+  } catch (e) {
+    setStatus('Lỗi tải chương trình: ' + e.message, 'error');
+  }
+});
+
+if (btnNewAnalysis) {
+  btnNewAnalysis.addEventListener('click', () => {
+    clearResult();
+    form.reset();
+    setStatus('', '');
+    if (dropZoneText) dropZoneText.textContent = 'Chọn hoặc kéo thả file vào đây';
+  });
+}

@@ -11,8 +11,6 @@ builder.Services.AddControllers();
 
 builder.Services.AddSingleton<IProgramService, ProgramService>();
 builder.Services.AddSingleton<IExcelGradeParser, ExcelGradeParser>();
-builder.Services.AddHttpClient("ai");
-builder.Services.AddSingleton<IAdviceService, AdviceService>();
 
 var app = builder.Build();
 
@@ -32,4 +30,6 @@ app.MapFallbackToFile("index.html");
 app.UseRouting();
 app.MapControllers();
 
+app.Run();
+app.Run();
 app.Run();

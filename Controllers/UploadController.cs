@@ -70,6 +70,6 @@ public class UploadController : ControllerBase
             year,
             totalCredits,
             enriched
-        ));
+    ));
     }
 }
