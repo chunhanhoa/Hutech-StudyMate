@@ -5,6 +5,17 @@
   <title>Phân tích điểm HUTECH</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="css/site.css" />
+  <style>
+    /* Căn trái toàn bộ bảng điểm */
+    #gradesTable th, #gradesTable td { text-align:left; }
+    /* Giữ độ rộng đồng đều và không bị wrap các số */
+    #gradesTable td.credits, 
+    #gradesTable td.score10, 
+    #gradesTable td.letter, 
+    #gradesTable td.gpa4 { white-space:nowrap; }
+    /* Số thứ tự vẫn hẹp hơn */
+    #gradesTable td.stt { width:46px; }
+  </style>
 </head>
 <body class="light">
   <header class="app-header">
@@ -36,10 +47,10 @@
           </div>
         </div>
         <div class="field">
-          <label>File Excel (.xlsx) – Bảng điểm</label>
+          <label>File Excel (.xlsx, .xls) – Bảng điểm</label>
           <div id="dropZone" class="drop-zone">
-            <input type="file" id="file" name="file" accept=".xlsx" style="display:none" />
-            <span id="dropZoneText">Chọn hoặc kéo thả file vào đây</span>
+            <input type="file" id="file" name="file" accept=".xlsx,.xls" style="display:none" />
+            <span id="dropZoneText">Chọn hoặc kéo thả file (.xlsx, .xls) vào đây</span>
           </div>
         </div>
         <div class="actions">

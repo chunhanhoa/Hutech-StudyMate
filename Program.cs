@@ -2,6 +2,7 @@ using Check.Services;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using System; // thêm
+using System.Text; // thêm
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,9 @@ builder.Services.AddHttpClient(); // thêm
 builder.Services.AddHostedService<SelfPingService>(); // thêm
 
 var app = builder.Build();
+
+// Đăng ký Encoding cho định dạng .xls (ExcelDataReader)
+Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

@@ -211,8 +211,9 @@ dropZone.addEventListener('drop', e => {
 });
 
 fileInput.addEventListener('change', () => {
-  if (fileInput.files.length && dropZoneText)
+  if (fileInput.files.length && dropZoneText) {
     dropZoneText.textContent = 'Đã chọn: ' + fileInput.files[0].name;
+  }
 });
 
 form.addEventListener('reset', () => {
@@ -229,7 +230,10 @@ form.addEventListener('submit', async (e) => {
   if (!yearSelect.value) { setStatus('Chưa chọn niên khóa.', 'error'); return; }
   if (!deptSelect.value) { setStatus('Chưa chọn khoa / viện.', 'error'); return; }
   const file = fileInput.files[0];
-  if (!file.name.toLowerCase().endsWith('.xlsx')) { setStatus('File phải là .xlsx', 'error'); return; }
+  const lower = file.name.toLowerCase();
+  if (!(lower.endsWith('.xlsx') || lower.endsWith('.xls'))) {
+    setStatus('File phải là .xlsx hoặc .xls', 'error'); return;
+  }
 
   clearResult();
   setStatus('Đang tải lên & phân tích...', 'loading');
@@ -352,6 +356,12 @@ function renderResult(data) {
   resultsLayout.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+function formatNumber(val, dec = 2, trimZero = true) {
+  if (!Number.isFinite(val)) return '';
+  const fixed = val.toFixed(dec);
+  return trimZero ? fixed.replace(/(\.\d*?[1-9])0+$/,'$1').replace(/\.0+$/,'') : fixed;
+}
+
 function renderGradesPage(page) {
   if (!gradesData.length) return;
   const totalPages = Math.ceil(gradesData.length / pageSize) || 1;
@@ -378,13 +388,13 @@ function renderGradesPage(page) {
     let rowClass = 'incorrect';
     if (inProgram) rowClass = isNonAcc ? 'nonacc' : 'correct';
     return `<tr class="${rowClass}">
-      <td class="num">${abs + 1}</td>
-      <td>${escapeHtml(code)}</td>
-      <td>${escapeHtml(name)}</td>
-      <td class="num">${Number.isFinite(credits) ? credits : ''}</td>
-      <td class="num">${Number.isFinite(score10Num) ? score10Num.toFixed(2) : ''}</td>
-      <td>${escapeHtml(g.letterGrade ?? g.LetterGrade ?? '')}</td>
-      <td class="num">${Number.isFinite(gpa4Num) ? gpa4Num.toFixed(2) : ''}</td>
+      <td class="stt">${abs + 1}</td>
+      <td class="code">${escapeHtml(code)}</td>
+      <td class="name">${escapeHtml(name)}</td>
+      <td class="credits">${Number.isFinite(credits) ? credits : ''}</td>
+      <td class="score10">${formatNumber(score10Num)}</td>
+      <td class="letter">${escapeHtml(g.letterGrade ?? g.LetterGrade ?? '')}</td>
+      <td class="gpa4">${formatNumber(gpa4Num)}</td>
     </tr>`;
   }).join('');
 
