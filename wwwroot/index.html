@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="utf-8" />
-  <title>Phân tích điểm HUTECH</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="css/site.css" />
-  <style>
+  <head>
+    <meta charset="utf-8" />
+    <title>Phân tích điểm HUTECH</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/site.css" />
+    <style>
     /* Căn trái toàn bộ bảng điểm */
     #gradesTable th, #gradesTable td { text-align:left; }
     /* Giữ độ rộng đồng đều và không bị wrap các số */
@@ -15,106 +15,233 @@
     #gradesTable td.gpa4 { white-space:nowrap; }
     /* Số thứ tự vẫn hẹp hơn */
     #gradesTable td.stt { width:46px; }
+    /* Responsive cho màn hình nhỏ hơn 768px */
+@media screen and (max-width: 768px) {
+  /* Tối ưu hóa layout chính */
+  .results-layout {
+    padding: 10px;
+  }
+
+  .results-main {
+    width: 100%;
+  }
+
+  /* Tối ưu hóa header của kết quả phân tích */
+  .results-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .results-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .results-controls .field-inline {
+    margin-bottom: 10px;
+  }
+
+  .results-controls .field-inline select {
+    width: 100%;
+  }
+
+  .btn-new {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Tối ưu hóa bảng điểm */
+  #gradesTable {
+    display: block;
+    overflow-x: auto; /* Cho phép cuộn ngang */
+    white-space: nowrap;
+    font-size: 14px; /* Giảm kích thước chữ */
+  }
+
+  #gradesTable th,
+  #gradesTable td {
+    padding: 8px; /* Giảm padding */
+    min-width: 80px; /* Đảm bảo cột không quá hẹp */
+  }
+
+  /* Ẩn cột STT và TK(4) trên di động */
+  #gradesTable th:nth-child(1),
+  #gradesTable td.stt,
+  #gradesTable th:nth-child(7),
+  #gradesTable td.gpa4 {
+    display: none;
+  }
+
+  /* Tối ưu hóa chú thích màu */
+  .color-legend {
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  .legend-item {
+    display: block;
+    width: 100%;
+  }
+
+  /* Tối ưu hóa phân trang */
+  .pagination-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pagination-info {
+    margin-bottom: 10px;
+  }
+
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  /* Tối ưu hóa drop zone và form upload */
+  .upload-panel-center {
+    padding: 15px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr; /* Xếp dọc các field */
+    gap: 10px;
+  }
+
+  .drop-zone {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
+
+/* Tăng kích thước vùng chạm cho nút và select box trên di động */
+@media screen and (max-width: 768px) {
+  button,
+  select,
+  input {
+    min-height: 44px; /* Đảm bảo vùng chạm đủ lớn */
+    font-size: 16px;
+  }
+}
   </style>
-</head>
-<body class="light">
-  <header class="app-header">
-    <h1>Phân tích điểm sinh viên</h1>
-    <p class="intro">Chào mừng bạn đến với công cụ phân tích điểm HUTECH! Tải lên bảng điểm Excel (.xlsx) để xem thống kê chi tiết về tín chỉ và điểm số.</p>
-  </header>
+  </head>
+  <body class="light">
+    <header class="app-header">
+      <h1>Phân tích điểm sinh viên</h1>
+      <p class="intro">Chào mừng bạn đến với công cụ phân tích điểm HUTECH! Tải
+        lên bảng điểm Excel (.xlsx) để xem thống kê chi tiết về tín chỉ và điểm
+        số.</p>
+    </header>
 
-  <main class="container">
-    <!-- Upload Panel - Centered -->
-    <section id="uploadPanel" class="panel upload-panel-center">
-      <h2>Tải lên bảng điểm</h2>
-      <form id="uploadForm" novalidate>
-        <div class="form-grid">
-          <div class="field">
-            <label for="mssv">MSSV</label>
-            <input id="mssv" name="mssv" required />
+    <main class="container">
+      <!-- Upload Panel - Centered -->
+      <section id="uploadPanel" class="panel upload-panel-center">
+        <h2>Tải lên bảng điểm</h2>
+        <form id="uploadForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="mssv">MSSV</label>
+              <input id="mssv" name="mssv" required />
+            </div>
+            <div class="field">
+              <label for="yearSelect">Niên khóa</label>
+              <select id="yearSelect" required>
+                <option value>-- Chọn niên khóa --</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="deptSelect">Khoa / Viện</label>
+              <select id="deptSelect" required disabled>
+                <option value>-- Chọn khoa / viện --</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label for="yearSelect">Niên khóa</label>
-            <select id="yearSelect" required>
-              <option value="">-- Chọn niên khóa --</option>
-            </select>
+            <label>File Excel (.xlsx, .xls) – Bảng điểm</label>
+            <div id="dropZone" class="drop-zone">
+              <input type="file" id="file" name="file" accept=".xlsx,.xls"
+                style="display:none" />
+              <span id="dropZoneText">Chọn hoặc kéo thả file (.xlsx, .xls) vào
+                đây</span>
+            </div>
           </div>
-          <div class="field">
-            <label for="deptSelect">Khoa / Viện</label>
-            <select id="deptSelect" required disabled>
-              <option value="">-- Chọn khoa / viện --</option>
-            </select>
+          <div class="actions">
+            <button type="submit" id="btnUpload"
+              data-busy-text="Đang xử lý...">Phân tích</button>
+            <button type="reset" class="secondary">Xóa</button>
           </div>
-        </div>
-        <div class="field">
-          <label>File Excel (.xlsx, .xls) – Bảng điểm</label>
-          <div id="dropZone" class="drop-zone">
-            <input type="file" id="file" name="file" accept=".xlsx,.xls" style="display:none" />
-            <span id="dropZoneText">Chọn hoặc kéo thả file (.xlsx, .xls) vào đây</span>
-          </div>
-        </div>
-        <div class="actions">
-          <button type="submit" id="btnUpload" data-busy-text="Đang xử lý...">Phân tích</button>
-          <button type="reset" class="secondary">Xóa</button>
-        </div>
-      </form>
-      <div id="status" class="status"></div>
-    </section>
+        </form>
+        <div id="status" class="status"></div>
+      </section>
 
-    <div class="results-layout hidden">
-      <div class="results-main">
-        <!-- Panel kết quả -->
-        <section class="panel results-panel">
-          <div class="results-header">
-            <h2>Kết quả phân tích</h2>
-            <div class="results-controls">
-              <div class="field-inline">
-                <label for="resultYearSelect">Niên khóa:</label>
-                <select id="resultYearSelect">
-                  <option value="">-- Chọn niên khóa --</option>
-                </select>
+      <div class="results-layout hidden">
+        <div class="results-main">
+          <!-- Panel kết quả -->
+          <section class="panel results-panel">
+            <div class="results-header">
+              <h2>Kết quả phân tích</h2>
+              <div class="results-controls">
+                <div class="field-inline">
+                  <label for="resultYearSelect">Niên khóa:</label>
+                  <select id="resultYearSelect">
+                    <option value>-- Chọn niên khóa --</option>
+                  </select>
+                </div>
+                <div class="field-inline">
+                  <label for="resultDeptSelect">Khoa / Viện:</label>
+                  <select id="resultDeptSelect" disabled>
+                    <option value>-- Chọn khoa / viện --</option>
+                  </select>
+                </div>
+                <button id="btnNewAnalysis" class="btn-new">Phân tích
+                  mới</button>
               </div>
-              <div class="field-inline">
-                <label for="resultDeptSelect">Khoa / Viện:</label>
-                <select id="resultDeptSelect" disabled>
-                  <option value="">-- Chọn khoa / viện --</option>
-                </select>
+            </div>
+            <div id="summary" class="summary-grid hidden"></div>
+            <div id="gradesWrapper" class="hidden wide">
+              <h3>Môn đã nhận dạng</h3>
+              <div class="color-legend">
+                <span class="legend-item correct">✓ Đúng CTĐT - Tích lũy</span>
+                <span class="legend-item nonacc">⚠ Đúng CTĐT - Không tích
+                  lũy</span>
+                <span class="legend-item incorrect">✗ Ngoài CTĐT</span>
               </div>
-              <button id="btnNewAnalysis" class="btn-new">Phân tích mới</button>
-            </div>
-          </div>
-          <div id="summary" class="summary-grid hidden"></div>
-          <div id="gradesWrapper" class="hidden wide">
-            <h3>Môn đã nhận dạng</h3>
-            <div class="color-legend">
-              <span class="legend-item correct">✓ Đúng CTĐT - Tích lũy</span>
-              <span class="legend-item nonacc">⚠ Đúng CTĐT - Không tích lũy</span>
-              <span class="legend-item incorrect">✗ Ngoài CTĐT</span>
-            </div>
-            <table id="gradesTable">
-              <thead>
-                <tr>
-                  <th>STT</th><th>Mã</th><th>Tên môn</th><th>TC</th><th>TK(10)</th><th>TK(CH)</th><th>TK(4)</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-            <div class="pagination-wrapper">
-              <div class="pagination-info">
-                <span id="paginationInfo"></span>
+              <table id="gradesTable">
+                <thead>
+                  <tr>
+                    <th>STT</th><th>Mã</th><th>Tên
+                      môn</th><th>TC</th><th>TK(10)</th><th>TK(CH)</th><th>TK(4)</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <div class="pagination-wrapper">
+                <div class="pagination-info">
+                  <span id="paginationInfo"></span>
+                </div>
+                <div id="pagination" class="pagination"></div>
               </div>
-              <div id="pagination" class="pagination"></div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <footer class="footer">
-    <small>Demo • Phân tích bảng điểm.</small>
-  </footer>
+    <footer class="footer">
+      <small>Demo • Phân tích bảng điểm.</small>
+    </footer>
 
-  <script src="js/app.js"></script>
-</body>
+    <script src="js/app.js"></script>
+  </body>
 </html>

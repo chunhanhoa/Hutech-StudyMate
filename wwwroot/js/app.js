@@ -174,7 +174,8 @@ deptSelect.addEventListener('change', async () => {
       totalCredits: json.total_credits || '',
       nonAccTotal: json.non_accumulated_credits || '',
       codeNameMap,
-      nonAccCodes
+      nonAccCodes,
+      key: entry.key // lưu key để đồng bộ dropdown kết quả
     };
     setStatus('Đã tải chương trình: ' + currentProgram.department, 'ok');
   } catch (e) {
@@ -270,6 +271,19 @@ form.addEventListener('submit', async (e) => {
 
 dropZone.addEventListener('click', () => fileInput.click());
 
+// Helper: cập nhật nhanh một mục trong summary theo nhãn
+function updateSummaryItem(label, value) {
+  const items = summary.querySelectorAll('.item');
+  for (const it of items) {
+    const k = it.querySelector('.k');
+    const v = it.querySelector('.v');
+    if (k && v && k.textContent.trim() === label) {
+      v.textContent = value ?? '—';
+      break;
+    }
+  }
+}
+
 function renderResult(data) {
   uploadPanel.classList.add('hidden');
   const merged = {
@@ -282,13 +296,14 @@ function renderResult(data) {
   };
 
   if (merged.academicYear) {
+    // Đồng bộ ngay không dùng setTimeout để tránh trễ
     resultYearSelect.value = merged.academicYear;
     resultYearSelect.dispatchEvent(new Event('change'));
-    setTimeout(() => {
-      const deptEntry = Object.values(programs).flat()
-        .find(p => p.department === merged.department);
-      if (deptEntry) resultDeptSelect.value = deptEntry.key;
-    }, 100);
+    const list = programs[merged.academicYear] || [];
+    // Ưu tiên dùng key đang có, fallback theo tên khoa
+    const desiredKey = (currentProgram && currentProgram.key) ||
+      (list.find(p => p.department === merged.department)?.key);
+    if (desiredKey) resultDeptSelect.value = desiredKey;
   }
 
   const baseItems = [
@@ -351,6 +366,15 @@ function renderResult(data) {
     <div class="item"><span class="k">GPA TL (4)</span><span class="v">${gpa4Avg}</span></div>
     <div class="item"><span class="k">GPA TL (10)</span><span class="v">${gpa10Avg}</span></div>`);
 
+  currentProgram && (function ensureKey() {
+    // đảm bảo có key khi render lần đầu từ server
+    if (!currentProgram.key && merged.academicYear && merged.department) {
+      const list = programs[merged.academicYear] || [];
+      const found = list.find(p => p.department === currentProgram.department);
+      if (found) currentProgram.key = found.key;
+    }
+  })();
+
   lastResult = data;
   resultsLayout.classList.remove('hidden');
   resultsLayout.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -360,6 +384,13 @@ function formatNumber(val, dec = 2, trimZero = true) {
   if (!Number.isFinite(val)) return '';
   const fixed = val.toFixed(dec);
   return trimZero ? fixed.replace(/(\.\d*?[1-9])0+$/,'$1').replace(/\.0+$/,'') : fixed;
+}
+
+// Định dạng riêng cho GPA hệ 4: 1 chữ số thập phân, riêng 0 => "0"
+function formatGpa4(val) {
+  if (!Number.isFinite(val)) return '';
+  if (val === 0) return '0';
+  return val.toFixed(1);
 }
 
 function renderGradesPage(page) {
@@ -394,7 +425,7 @@ function renderGradesPage(page) {
       <td class="credits">${Number.isFinite(credits) ? credits : ''}</td>
       <td class="score10">${formatNumber(score10Num)}</td>
       <td class="letter">${escapeHtml(g.letterGrade ?? g.LetterGrade ?? '')}</td>
-      <td class="gpa4">${formatNumber(gpa4Num)}</td>
+      <td class="gpa4">${formatGpa4(gpa4Num)}</td>
     </tr>`;
   }).join('');
 
@@ -463,6 +494,11 @@ resultYearSelect.addEventListener('change', () => {
     resultDeptSelect.appendChild(opt);
   });
   resultDeptSelect.disabled = false;
+
+  // Cập nhật ngay trong summary phần “Niên khóa”
+  if (!summary.classList.contains('hidden')) {
+    updateSummaryItem('Niên khóa', resultYearSelect.value);
+  }
 });
 
 resultDeptSelect.addEventListener('change', async () => {
@@ -471,6 +507,13 @@ resultDeptSelect.addEventListener('change', async () => {
   const key = resultDeptSelect.value;
   const entry = (programs[year] || []).find(p => p.key === key);
   if (!entry) return;
+
+  // Cập nhật ngay trong summary phần “Khoa” (trước khi tải JSON) để phản hồi tức thì
+  if (!summary.classList.contains('hidden')) {
+    updateSummaryItem('Khoa', entry.department);
+    updateSummaryItem('Niên khóa', year);
+  }
+
   try {
     const res = await fetch(entry.file);
     if (!res.ok) throw new Error('Không tải được chương trình');
@@ -504,8 +547,10 @@ resultDeptSelect.addEventListener('change', async () => {
       totalCredits: json.total_credits || '',
       nonAccTotal: json.non_accumulated_credits || '',
       codeNameMap,
-      nonAccCodes
+      nonAccCodes,
+      key: entry.key // giữ key để đồng bộ dropdown
     };
+    // Rerender theo CTĐT mới (sử dụng lastResult)
     if (lastResult) renderResult(lastResult);
   } catch (e) {
     setStatus('Lỗi tải chương trình: ' + e.message, 'error');
