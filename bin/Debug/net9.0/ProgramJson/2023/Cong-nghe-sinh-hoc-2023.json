@@ -1,0 +1,715 @@
+{
+  "department": "Công nghệ sinh học",
+  "program_code": "7420201",
+  "academic_year": "2023",
+  "total_credits": 150,
+  "non_accumulated_credits": 5,
+  "non_accumulated_program": "Chương trình Giáo dục Quốc phòng và an ninh",
+  "courses": [
+    {
+      "category": "Kiến thức giáo dục đại cương",
+      "total_credits": 47,
+      "subjects": [
+        {
+          "code": "ENS109",
+          "name": "Môi trường",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "FOT160",
+          "name": "Dinh dưỡng, thực phẩm và sức khỏe",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "PSY167",
+          "name": "Tâm lý học ứng dụng",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "MAN116",
+          "name": "Quản trị học",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "CAP211",
+          "name": "Nhập môn công nghệ thông tin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS104",
+          "name": "Triết học Mác - Lênin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS105",
+          "name": "Kinh tế chính trị Mác - Lênin",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS106",
+          "name": "Chủ nghĩa xã hội khoa học",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS107",
+          "name": "Lịch sử Đảng Cộng sản Việt Nam",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS103",
+          "name": "Tư tưởng Hồ Chí Minh",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC120",
+          "name": "Anh ngữ 1",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC121",
+          "name": "Anh ngữ 2",
+          "credits": 3,
+          "prerequisites": ["ENC120"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC122",
+          "name": "Anh ngữ 3",
+          "credits": 3,
+          "prerequisites": ["ENC121"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC123",
+          "name": "Anh ngữ 4",
+          "credits": 3,
+          "prerequisites": ["ENC122"],
+          "corequisites": []
+        },
+        {
+          "code": "LAW106",
+          "name": "Pháp luật đại cương",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL115",
+          "name": "Tư duy thiết kế dự án",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL116",
+          "name": "Đổi mới sáng tạo và tư duy khởi nghiệp",
+          "credits": 3,
+          "prerequisites": ["SKL115"],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức giáo dục chuyên nghiệp",
+      "total_credits": 103,
+      "subcategories": [
+        {
+          "name": "Kiến thức bắt buộc",
+          "total_credits": 91,
+          "subjects": [
+            {
+              "code": "BIO109",
+              "name": "Sinh học phân tử tế bào",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO328",
+              "name": "Thực hành sinh học",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO110",
+              "name": "Sinh lý động thực vật",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "CHE313",
+              "name": "Thực hành kỹ thuật phòng thí nghiệm hóa",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CHE104",
+              "name": "Hóa sinh",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "CHE312",
+              "name": "Thực hành hóa sinh",
+              "credits": 1,
+              "prerequisites": ["CHE313"],
+              "corequisites": []
+            },
+            {
+              "code": "CHE103",
+              "name": "Hóa phân tích",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CHE311",
+              "name": "Thực hành hóa phân tích",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO113",
+              "name": "Vi sinh đại cương",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO329",
+              "name": "Thực hành vi sinh đại cương",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO116",
+              "name": "Vi sinh ứng dụng",
+              "credits": 3,
+              "prerequisites": ["BIO113"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO332",
+              "name": "Thực hành vi sinh ứng dụng",
+              "credits": 1,
+              "prerequisites": ["BIO329"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO102",
+              "name": "Các phương pháp phân tích vi sinh",
+              "credits": 3,
+              "prerequisites": ["BIO113"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO327",
+              "name": "Thực hành kỹ thuật phân tích vi sinh",
+              "credits": 1,
+              "prerequisites": ["BIO329"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO433",
+              "name": "Đồ án các phương pháp phân tích vi sinh",
+              "credits": 1,
+              "prerequisites": ["BIO102"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO198",
+              "name": "Công nghệ di truyền và tái tổ hợp",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO399",
+              "name": "Thực hành sinh học phân tử",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO103",
+              "name": "Công nghệ lên men",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO322",
+              "name": "Thực hành công nghệ lên men thực phẩm",
+              "credits": 1,
+              "prerequisites": ["BIO329"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO323",
+              "name": "Thực hành công nghệ sản xuất chế phẩm sinh học",
+              "credits": 1,
+              "prerequisites": ["BIO329"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO434",
+              "name": "Đồ án Công nghệ lên men",
+              "credits": 1,
+              "prerequisites": ["BIO103"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO105",
+              "name": "Công nghệ sinh học thực vật",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO324",
+              "name": "Thực hành công nghệ sinh học thực vật",
+              "credits": 1,
+              "prerequisites": ["BIO328"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO437",
+              "name": "Đồ án Công nghệ sinh học thực vật",
+              "credits": 1,
+              "prerequisites": ["BIO105"],
+              "corequisites": []
+            },
+            {
+              "code": "CET267",
+              "name": "Vẽ kỹ thuật và Autocad",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO1001",
+              "name": "Quá trình và thiết bị công nghệ sinh - hoá học",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CAP203",
+              "name": "Quy hoạch và xử lý số liệu thực nghiệm",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO169",
+              "name": "Công nghệ sản xuất sinh - dược phẩm",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO370",
+              "name": "Thực hành công nghệ sản xuất sinh - dược phẩm",
+              "credits": 1,
+              "prerequisites": ["BIO169"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO173",
+              "name": "Công nghệ sinh học thủy sản",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO112",
+              "name": "Ứng dụng Công nghệ sinh học trong bảo vệ thực vật",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO325",
+              "name": "Thực hành đấu tranh sinh học",
+              "credits": 1,
+              "prerequisites": ["BIO112"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO111",
+              "name": "Thương mại hóa sản phẩm công nghệ sinh học",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO171",
+              "name": "Công nghệ sản xuất và ứng dụng enzyme",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO372",
+              "name": "Thực hành công nghệ sản xuất và ứng dụng enzyme",
+              "credits": 1,
+              "prerequisites": ["BIO171"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO1002",
+              "name": "Phương pháp nghiên cứu công nghệ sinh học",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO1003",
+              "name": "Kiểm nghiệm sản phẩm công nghệ sinh học",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO476",
+              "name": "Đồ án sản xuất sản phẩm công nghệ sinh học",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BIO1004",
+              "name": "Hợp chất thiên nhiên có hoạt tính sinh học",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO1005",
+              "name": "Công nghệ sinh học trong chăn nuôi thú y",
+              "credits": 3,
+              "prerequisites": ["BIO109"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO3006",
+              "name": "Thực hành kiểm nghiệm sản phẩm công nghệ sinh học",
+              "credits": 1,
+              "prerequisites": ["BIO1003"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO374",
+              "name": "Thực hành công nghệ sinh học thủy sản",
+              "credits": 1,
+              "prerequisites": ["BIO173"],
+              "corequisites": []
+            },
+            {
+              "code": "BIO561",
+              "name": "Thực tập tốt nghiệp ngành Công nghệ sinh học (*)",
+              "credits": 3,
+              "prerequisites": ["BIO433", "BIO434", "BIO437"],
+              "corequisites": []
+            }
+          ]
+        },
+        {
+          "name": "Kiến thức tự chọn",
+          "total_credits": 12,
+          "groups": [
+            {
+              "group_name": "Công nghệ sinh học mỹ phẩm",
+              "subjects": [
+                {
+                  "code": "BIO2007",
+                  "name": "Mỹ phẩm đại cương",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "BIO2008",
+                  "name": "Ứng dụng công nghệ sinh học trong sản xuất mỹ phẩm",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "BIO1009",
+                  "name": "Kỹ thuật sản xuất mỹ phẩm",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "BIO4010",
+                  "name": "Đồ án ứng dụng công nghệ sinh học trong sản xuất mỹ phẩm",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Công nghệ sinh học thực phẩm",
+              "subjects": [
+                {
+                  "code": "FOT218",
+                  "name": "Công nghệ thực phẩm đại cương",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "FOT217",
+                  "name": "Công nghệ sản xuất nguyên liệu thực phẩm",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "BIO1011",
+                  "name": "Công nghệ sinh học sau thu hoạch và bảo quản thực phẩm",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "BIO4012",
+                  "name": "Đồ án ứng dụng công nghệ sinh học trong sản xuất thực phẩm",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Đồ án tốt nghiệp",
+              "subjects": [
+                {
+                  "code": "BIO464",
+                  "name": "Đồ án tốt nghiệp ngành Công nghệ sinh học (*)",
+                  "credits": 12,
+                  "prerequisites": ["BIO433", "BIO434", "BIO437"],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức không tích lũy",
+      "total_credits": 5,
+      "subcategories": [
+        {
+          "name": "Giáo dục thể chất",
+          "total_credits": 5,
+          "note": "tự chọn 1 trong 5 nhóm",
+          "groups": [
+            {
+              "group_name": "Nhóm 1",
+              "subjects": [
+                {
+                  "code": "PHT304",
+                  "name": "Bóng chuyền 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT305",
+                  "name": "Bóng chuyền 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT306",
+                  "name": "Bóng chuyền 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 2",
+              "subjects": [
+                {
+                  "code": "PHT307",
+                  "name": "Bóng rổ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT308",
+                  "name": "Bóng rổ 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT309",
+                  "name": "Bóng rổ 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 3",
+              "subjects": [
+                {
+                  "code": "PHT310",
+                  "name": "Thể hình - Thẩm mỹ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT311",
+                  "name": "Thể hình - Thẩm mỹ 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT312",
+                  "name": "Thể hình - Thẩm mỹ 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 4",
+              "subjects": [
+                {
+                  "code": "PHT313",
+                  "name": "Vovinam 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT314",
+                  "name": "Vovinam 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT315",
+                  "name": "Vovinam 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 5",
+              "subjects": [
+                {
+                  "code": "PHT316",
+                  "name": "Bóng đá 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT317",
+                  "name": "Bóng đá 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT318",
+                  "name": "Bóng đá 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chương trình Giáo dục quốc phòng và an ninh",
+          "note": "Bắt buộc, không tích lũy",
+          "subjects": [
+            {
+              "code": "NDF108",
+              "name": "Quốc phòng, an ninh 1",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF109",
+              "name": "Quốc phòng, an ninh 2",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF210",
+              "name": "Quốc phòng, an ninh 3",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF211",
+              "name": "Quốc phòng, an ninh 4",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "additional_info": {
+    "decision_number": "1698/QĐ-ĐKC",
+    "decision_date": "12 tháng 6 năm 2023",
+    "signed_by": "GS.TS. Nguyễn Trung Kiên",
+    "note": "Sinh viên được xét điều kiện Thực tập, Đồ án tốt nghiệp theo quy định của Viện."
+  }
+}

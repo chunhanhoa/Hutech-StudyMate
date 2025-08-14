@@ -21,6 +21,14 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<IProgramService, ProgramService>();
 builder.Services.AddSingleton<IExcelGradeParser, ExcelGradeParser>();
 builder.Services.AddHttpClient(); // thêm
+
+// Cấu hình HttpClient cho ping với timeout và retry policy tốt hơn
+builder.Services.AddHttpClient("SelfPing", client =>
+{
+    client.Timeout = TimeSpan.FromSeconds(30);
+    client.DefaultRequestHeaders.Add("User-Agent", "Hutech-StudyMate-SelfPing/1.0");
+});
+
 builder.Services.AddHostedService<SelfPingService>(); // thêm
 
 var app = builder.Build();

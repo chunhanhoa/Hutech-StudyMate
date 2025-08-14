@@ -997,3 +997,75 @@ if (filterMajor) {
     renderGradesPage(1);
   });
 }
+
+// Thêm client-side ping để hỗ trợ server-side ping
+class ClientPingHelper {
+  constructor() {
+    this.isActive = false;
+    this.pingCount = 0;
+  }
+
+  startPinging() {
+    if (this.isActive) return;
+    this.isActive = true;
+    this.pingCount = 0;
+    console.log('🔄 Client ping helper khởi động');
+    this.scheduleNextPing();
+  }
+
+  stopPinging() {
+    this.isActive = false;
+    console.log('⏹️ Client ping helper dừng');
+  }
+
+  async scheduleNextPing() {
+    if (!this.isActive) return;
+    
+    // Ping mỗi 10 phút từ client
+    const delay = 10 * 60 * 1000; 
+    setTimeout(() => this.performPing(), delay);
+  }
+
+  async performPing() {
+    if (!this.isActive) return;
+    
+    try {
+      this.pingCount++;
+      const start = performance.now();
+      
+      // Ping đơn giản bằng fetch
+      const response = await fetch('/', { 
+        method: 'HEAD',
+        cache: 'no-cache'
+      });
+      
+      const duration = Math.round(performance.now() - start);
+      
+      if (response.ok) {
+        console.log(`✅ Client ping #${this.pingCount} thành công (${duration}ms)`);
+      } else {
+        console.warn(`⚠️ Client ping #${this.pingCount} lỗi ${response.status} (${duration}ms)`);
+      }
+    } catch (error) {
+      console.warn(`❌ Client ping #${this.pingCount} thất bại:`, error.message);
+    }
+    
+    this.scheduleNextPing();
+  }
+}
+
+// Khởi tạo client ping helper
+const clientPingHelper = new ClientPingHelper();
+
+// Bắt đầu ping khi trang load
+document.addEventListener('DOMContentLoaded', () => {
+  // Delay 30 giây sau khi trang load
+  setTimeout(() => {
+    clientPingHelper.startPinging();
+  }, 30000);
+});
+
+// Dừng ping khi trang sắp đóng
+window.addEventListener('beforeunload', () => {
+  clientPingHelper.stopPinging();
+});
