@@ -1,0 +1,671 @@
+{
+  "department": "Kinh doanh thương mại",
+  "program_code": "7340121",
+  "academic_year": "2023",
+  "total_credits": 137,
+  "non_accumulated_credits": 5,
+  "non_accumulated_program": "Chương trình Giáo dục Quốc phòng và an ninh",
+  "courses": [
+    {
+      "category": "Kiến thức giáo dục đại cương",
+      "total_credits": 47,
+      "subjects": [
+        {
+          "code": "MAT106",
+          "name": "Đại số tuyến tính và giải tích",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SOS101",
+          "name": "Cơ sở văn hóa Việt Nam",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "MAN116",
+          "name": "Quản trị học",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "PSY167",
+          "name": "Tâm lý học ứng dụng",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "CAP211",
+          "name": "Nhập môn công nghệ thông tin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS104",
+          "name": "Triết học Mác - Lênin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS105",
+          "name": "Kinh tế chính trị Mác - Lênin",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS106",
+          "name": "Chủ nghĩa xã hội khoa học",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS107",
+          "name": "Lịch sử Đảng Cộng sản Việt Nam",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS103",
+          "name": "Tư tưởng Hồ Chí Minh",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC120",
+          "name": "Anh ngữ 1",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC121",
+          "name": "Anh ngữ 2",
+          "credits": 3,
+          "prerequisites": ["ENC120"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC122",
+          "name": "Anh ngữ 3",
+          "credits": 3,
+          "prerequisites": ["ENC121"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC123",
+          "name": "Anh ngữ 4",
+          "credits": 3,
+          "prerequisites": ["ENC122"],
+          "corequisites": []
+        },
+        {
+          "code": "LAW158",
+          "name": "Luật và Khởi nghiệp",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL103",
+          "name": "Kỹ năng tư duy sáng tạo và quản lý thời gian",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL102",
+          "name": "Kỹ năng thuyết trình và tìm việc",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức giáo dục chuyên nghiệp",
+      "total_credits": 90,
+      "subcategories": [
+        {
+          "name": "Kiến thức bắt buộc",
+          "total_credits": 78,
+          "subjects": [
+            {
+              "code": "ECO117",
+              "name": "Kinh tế học",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ACC114",
+              "name": "Nguyên lý kế toán",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ECO241",
+              "name": "Phương pháp nghiên cứu kinh tế",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "FIN169",
+              "name": "Tài chính doanh nghiệp",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BUS155",
+              "name": "Quản lý nhà nước về kinh doanh thương mại",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ECO122",
+              "name": "Nhập môn kinh doanh thương mại",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAR146",
+              "name": "Nguyên lý marketing",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BUS135",
+              "name": "Đạo đức kinh doanh",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BUS130",
+              "name": "Thống kê kinh doanh và phân tích dữ liệu",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BUS139",
+              "name": "Phương pháp dự báo kinh doanh và đặt chỉ tiêu",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BUS129",
+              "name": "Hành vi khách hàng trong kỹ thuật số",
+              "credits": 3,
+              "prerequisites": ["ECO117"],
+              "corequisites": []
+            },
+            {
+              "code": "MIS118",
+              "name": "Hệ thống thông tin quản trị trong kinh doanh",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAR137",
+              "name": "Tiếp thị và bán hàng trực tuyến",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAN1003",
+              "name": "Quản trị chuỗi cung ứng trong kinh doanh thương mại",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAN1070",
+              "name": "Quản trị tác nghiệp thương mại điện tử",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BUS134",
+              "name": "Kỹ năng bán hàng và quản trị bán hàng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BUS136",
+              "name": "Kỹ thuật đàm phán và giao tiếp trong kinh doanh",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAN1015",
+              "name": "Quản trị vận hành",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "FIN148",
+              "name": "Thẩm định dự án đầu tư",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BUS156",
+              "name": "Đầu tư và kinh doanh bất động sản",
+              "credits": 3,
+              "prerequisites": ["FIN169"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS140",
+              "name": "Nghiệp vụ kinh doanh xuất nhập khẩu và thanh toán quốc tế",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ECO440",
+              "name": "Đồ án nghiên cứu trong kinh tế",
+              "credits": 1,
+              "prerequisites": ["ECO241"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS437",
+              "name": "Đồ án phân tích báo cáo kinh doanh",
+              "credits": 1,
+              "prerequisites": ["BUS139"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS457",
+              "name": "Đồ án hệ thống thông tin quản trị trong kinh doanh",
+              "credits": 1,
+              "prerequisites": ["MIS118"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS458",
+              "name": "Đồ án nghiệp vụ kinh doanh xuất nhập khẩu và thanh toán quốc tế",
+              "credits": 1,
+              "prerequisites": ["BUS140"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS441",
+              "name": "Đồ án chuyên ngành Kinh doanh thương mại",
+              "credits": 1,
+              "prerequisites": ["MIS118", "MAN1003"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS359",
+              "name": "Thực hành thống kê kinh doanh và phân tích dữ liệu",
+              "credits": 1,
+              "prerequisites": ["BUS130"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS360",
+              "name": "Thực hành nghiệp vụ kinh doanh xuất nhập khẩu và thanh toán quốc tế",
+              "credits": 1,
+              "prerequisites": ["BUS140"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS361",
+              "name": "Thực hành tác nghiệp thương mại điện tử",
+              "credits": 1,
+              "prerequisites": ["MAN1070"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS362",
+              "name": "Thực hành kinh doanh thương mại",
+              "credits": 1,
+              "prerequisites": ["MIS118", "MAN1003"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS563",
+              "name": "Dự án doanh nghiệp ngành Kinh doanh thương mại",
+              "credits": 3,
+              "prerequisites": ["BUS441"],
+              "corequisites": []
+            },
+            {
+              "code": "BUS543",
+              "name": "Thực tập tốt nghiệp ngành Kinh doanh thương mại (*)",
+              "credits": 3,
+              "prerequisites": ["BUS441", "BUS362"],
+              "corequisites": []
+            }
+          ]
+        },
+        {
+          "name": "Kiến thức tự chọn",
+          "total_credits": 12,
+          "groups": [
+            {
+              "group_name": "Thương mại quốc tế",
+              "subjects": [
+                {
+                  "code": "BUS164",
+                  "name": "Quảng cáo và truyền thông kinh doanh quốc tế",
+                  "credits": 3,
+                  "prerequisites": ["MAR137"],
+                  "corequisites": []
+                },
+                {
+                  "code": "BUS145",
+                  "name": "Bảo hiểm và vận tải quốc tế",
+                  "credits": 3,
+                  "prerequisites": ["BUS140"],
+                  "corequisites": []
+                },
+                {
+                  "code": "MAR147",
+                  "name": "Quản trị marketing quốc tế",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "BUS165",
+                  "name": "Xúc tiến thương mại và đầu tư quốc tế",
+                  "credits": 3,
+                  "prerequisites": ["ECO117"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Quản lý chuỗi cung ứng",
+              "subjects": [
+                {
+                  "code": "MAN1013",
+                  "name": "Hệ thống thông tin logistics",
+                  "credits": 3,
+                  "prerequisites": ["MAN1003"],
+                  "corequisites": []
+                },
+                {
+                  "code": "BUS145",
+                  "name": "Bảo hiểm và vận tải quốc tế",
+                  "credits": 3,
+                  "prerequisites": ["BUS140"],
+                  "corequisites": []
+                },
+                {
+                  "code": "MAN1069",
+                  "name": "Quản trị kênh phân phối",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "MAN1012",
+                  "name": "Quản trị rủi ro trong kinh doanh",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Điều phối dự án",
+              "subjects": [
+                {
+                  "code": "BUS166",
+                  "name": "Xây dựng và quản lý dự án kinh doanh",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "MAN1011",
+                  "name": "Quản trị quan hệ khách hàng",
+                  "credits": 3,
+                  "prerequisites": ["BUS134"],
+                  "corequisites": []
+                },
+                {
+                  "code": "BUS146",
+                  "name": "Tư vấn kinh doanh",
+                  "credits": 3,
+                  "prerequisites": ["BUS134"],
+                  "corequisites": []
+                },
+                {
+                  "code": "MAN1012",
+                  "name": "Quản trị rủi ro trong kinh doanh",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Khóa luận tốt nghiệp",
+              "subjects": [
+                {
+                  "code": "BUS447",
+                  "name": "Khóa luận tốt nghiệp ngành Kinh doanh thương mại (*)",
+                  "credits": 12,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức không tích lũy",
+      "total_credits": 5,
+      "subcategories": [
+        {
+          "name": "Giáo dục thể chất",
+          "total_credits": 5,
+          "note": "tự chọn 1 trong 5 nhóm",
+          "groups": [
+            {
+              "group_name": "Nhóm 1",
+              "subjects": [
+                {
+                  "code": "PHT304",
+                  "name": "Bóng chuyền 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT305",
+                  "name": "Bóng chuyền 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT306",
+                  "name": "Bóng chuyền 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 2",
+              "subjects": [
+                {
+                  "code": "PHT307",
+                  "name": "Bóng rổ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT308",
+                  "name": "Bóng rổ 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT309",
+                  "name": "Bóng rổ 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 3",
+              "subjects": [
+                {
+                  "code": "PHT310",
+                  "name": "Thể hình - Thẩm mỹ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT311",
+                  "name": "Thể hình - Thẩm mỹ 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT312",
+                  "name": "Thể hình - Thẩm mỹ 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 4",
+              "subjects": [
+                {
+                  "code": "PHT313",
+                  "name": "Vovinam 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT314",
+                  "name": "Vovinam 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT315",
+                  "name": "Vovinam 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 5",
+              "subjects": [
+                {
+                  "code": "PHT316",
+                  "name": "Bóng đá 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT317",
+                  "name": "Bóng đá 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT318",
+                  "name": "Bóng đá 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chương trình Giáo dục quốc phòng và an ninh",
+          "note": "Bắt buộc, không tích lũy",
+          "subjects": [
+            {
+              "code": "NDF108",
+              "name": "Quốc phòng, an ninh 1",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF109",
+              "name": "Quốc phòng, an ninh 2",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF210",
+              "name": "Quốc phòng, an ninh 3",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF211",
+              "name": "Quốc phòng, an ninh 4",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "additional_info": {
+    "decision_number": "1698/QĐ-ĐKC",
+    "decision_date": "12 tháng 6 năm 2023",
+    "signed_by": "GS. TS. Nguyễn Trung Kiên",
+    "note": "Sinh viên được xét điều kiện Thực tập, Khóa luận tốt nghiệp theo quy định của Khoa."
+  }
+}

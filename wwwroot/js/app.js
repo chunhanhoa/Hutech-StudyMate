@@ -450,36 +450,82 @@ function getNotLearnedSubjects() {
       .filter(code => code)
   );
 
-  // Kiểm tra xem có nhóm thể chất nào hoàn thành chưa (5 tín chỉ)
-  let physicalGroupsCompleted = false;
-  const physicalGroups = (currentProgram.courses || [])
+  // Tìm subcategory thể chất
+  const physicalSubcategory = (currentProgram.courses || [])
     .find(c => c.category && c.category.toLowerCase().includes('không tích lũy'))
-    ?.subcategories?.find(sc => sc.name && sc.name.toLowerCase().includes('thể chất'))
-    ?.groups || [];
+    ?.subcategories?.find(sc => sc.name && sc.name.toLowerCase().includes('thể chất'));
+
+  if (!physicalSubcategory) {
+    // Nếu không có subcategory thể chất, dùng logic cũ
+    return (currentProgram.allSubjects || []).filter(subject => 
+      !learnedCodes.has(subject.code)
+    );
+  }
+
+  const physicalGroups = physicalSubcategory.groups || [];
+  
+  // Kiểm tra xem sinh viên đã học nhóm thể chất nào chưa
+  let activePhysicalGroup = null;
+  let completedPhysicalGroup = null;
 
   for (const group of physicalGroups) {
     const groupCodes = new Set((group.subjects || []).map(s => s.code.toUpperCase()));
     let groupCredits = 0;
+    let hasAnySubject = false;
+
     for (const grade of gradesData) {
       const code = (grade.courseCode ?? grade.CourseCode ?? '').trim().toUpperCase();
       if (groupCodes.has(code)) {
+        hasAnySubject = true;
         groupCredits += Number(grade.credits ?? grade.Credits ?? 0);
       }
     }
-    if (groupCredits >= 5) {
-      physicalGroupsCompleted = true;
-      break;
+
+    if (hasAnySubject) {
+      if (groupCredits >= 5) {
+        completedPhysicalGroup = group;
+        break; // Đã hoàn thành nhóm này
+      } else {
+        activePhysicalGroup = group; // Đang học nhóm này
+        break;
+      }
     }
   }
 
   // Lọc môn chưa học
-  return (currentProgram.allSubjects || []).filter(subject => {
-    // Nếu đã hoàn thành một nhóm thể chất, loại bỏ tất cả môn thể chất
-    if (physicalGroupsCompleted && subject.code.startsWith('PHT')) {
-      return false;
+  const notLearnedSubjects = [];
+
+  for (const subject of (currentProgram.allSubjects || [])) {
+    // Bỏ qua nếu đã học
+    if (learnedCodes.has(subject.code)) continue;
+
+    // Xử lý đặc biệt cho môn thể chất
+    if (subject.code.startsWith('PHT')) {
+      // Nếu đã hoàn thành một nhóm thể chất, bỏ qua tất cả môn thể chất
+      if (completedPhysicalGroup) continue;
+
+      // Nếu đang học một nhóm thể chất cụ thể
+      if (activePhysicalGroup) {
+        const activeGroupCodes = new Set(
+          (activePhysicalGroup.subjects || []).map(s => s.code.toUpperCase())
+        );
+        // Chỉ hiển thị môn thuộc nhóm đang học
+        if (activeGroupCodes.has(subject.code)) {
+          notLearnedSubjects.push(subject);
+        }
+        // Bỏ qua các môn thể chất không thuộc nhóm đang học
+        continue;
+      }
+
+      // Nếu chưa học môn thể chất nào, hiển thị tất cả
+      notLearnedSubjects.push(subject);
+    } else {
+      // Môn không phải thể chất
+      notLearnedSubjects.push(subject);
     }
-    return !learnedCodes.has(subject.code);
-  });
+  }
+
+  return notLearnedSubjects;
 }
 
 function updateMajorOptions() {
