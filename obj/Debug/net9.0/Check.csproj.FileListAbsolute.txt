@@ -200,6 +200,5 @@ C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\bin\Debug\net9.0\ExcelDataReader.dll
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\bin\Debug\net9.0\ExcelDataReader.DataSet.dll
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\t4cvf4cpex-xix8tastm3.gz
-C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\g7vtsx9qzu-1iz7rcdw95.gz
-C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\mp96bqbs7n-09k5xszndt.gz
-C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\61l45jh54i-ke14nyvond.gz
+C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\mp96bqbs7n-8sxif1r7r3.gz
+C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\61l45jh54i-b7rlncy9ei.gz

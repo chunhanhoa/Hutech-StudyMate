@@ -17,6 +17,9 @@ const uploadPanel = document.getElementById('uploadPanel');
 const resultYearSelect = document.getElementById('resultYearSelect');
 const resultDeptSelect = document.getElementById('resultDeptSelect');
 const btnNewAnalysis = document.getElementById('btnNewAnalysis');
+const filterStatus = document.getElementById('filterStatus');
+const filterElective = document.getElementById('filterElective');
+const filterMajor = document.getElementById('filterMajor');
 
 const pageSize = 10;
 let busy = false;
@@ -145,28 +148,156 @@ deptSelect.addEventListener('change', async () => {
     const res = await fetch(entry.file);
     if (!res.ok) throw new Error('Không tải được chương trình');
     const json = await res.json();
+
     const codeNameMap = {};
     const nonAccCodes = new Set();
-    function addSubjects(arr, isNonAcc = false) {
+    const allSubjects = [];
+    const electiveSubjects = [];
+    let electiveGroups = [];
+    let electiveTotalCredits = 0;
+
+    function addBaseSubjects(arr, isNonAcc = false) {
       if (!Array.isArray(arr)) return;
       arr.forEach(s => {
         if (s && s.code) {
-          const up = s.code.toUpperCase();
+          const up = String(s.code).toUpperCase();
           if (s.name) codeNameMap[up] = s.name;
           if (isNonAcc) nonAccCodes.add(up);
+          allSubjects.push({
+            code: up,
+            name: s.name || '',
+            credits: Number(s.credits) || 0
+          });
         }
       });
     }
-    (json.courses || []).forEach(c => {
-      const isNonAcc = (c.category || '').toLowerCase().includes('không tích lũy');
-      if (c.subjects) addSubjects(c.subjects, isNonAcc);
-      if (c.subcategories) c.subcategories.forEach(sc => {
-        const scNonAcc = isNonAcc || (sc.name || '').toLowerCase().includes('không tích lũy');
-        if (sc.subjects) addSubjects(sc.subjects, scNonAcc);
-        if (sc.groups) sc.groups.forEach(g => addSubjects(g.subjects, scNonAcc));
+
+    if (Array.isArray(json.courses)) {
+      json.courses.forEach(c => {
+        const isNonAcc = (c.category || '').toLowerCase().includes('không tích lũy');
+        const catIsElective = (c.category || '').toLowerCase().includes('tự chọn');
+
+        if (Array.isArray(c.subjects)) {
+          addBaseSubjects(c.subjects, isNonAcc);
+        }
+
+        if (Array.isArray(c.groups)) {
+          c.groups.forEach(g => {
+            if (Array.isArray(g.subjects)) {
+              addBaseSubjects(g.subjects, isNonAcc);
+            }
+          });
+        }
+
+        if (Array.isArray(c.subcategories)) {
+          c.subcategories.forEach(sc => {
+            const scNonAcc = isNonAcc || (sc.name || '').toLowerCase().includes('không tích lũy');
+            const scIsElective = (sc.name || '').toLowerCase().includes('tự chọn');
+
+            if (Array.isArray(sc.subjects)) {
+              addBaseSubjects(sc.subjects, scNonAcc);
+            }
+
+            if (scIsElective) {
+              electiveTotalCredits = Number(sc.total_credits) || electiveTotalCredits;
+
+              if (Array.isArray(sc.subjects)) {
+                sc.subjects.forEach(s => {
+                  if (s?.code) {
+                    electiveSubjects.push({
+                      code: String(s.code).toUpperCase(),
+                      name: s.name || '',
+                      credits: Number(s.credits) || 0
+                    });
+                  }
+                });
+              }
+              if (Array.isArray(sc.groups)) {
+                electiveGroups = sc.groups.map(g => ({
+                  group_name: g.group_name || '',
+                  subjects: Array.isArray(g.subjects) ? g.subjects.map(s => ({
+                    code: String(s.code).toUpperCase(),
+                    name: s.name || '',
+                    credits: Number(s.credits) || 0
+                  })) : []
+                }));
+                sc.groups.forEach(g => {
+                  if (Array.isArray(g.subjects)) {
+                    g.subjects.forEach(s => {
+                      if (s?.code) {
+                        electiveSubjects.push({
+                          code: String(s.code).toUpperCase(),
+                          name: s.name || '',
+                          credits: Number(s.credits) || 0
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            } else if (Array.isArray(sc.groups)) {
+              sc.groups.forEach(g => {
+                if (Array.isArray(g.subjects)) {
+                  addBaseSubjects(g.subjects, scNonAcc);
+                }
+              });
+            }
+          });
+        }
+
+        if (catIsElective) {
+          if (Array.isArray(c.subjects)) {
+            c.subjects.forEach(s => {
+              if (s?.code) {
+                electiveSubjects.push({
+                  code: String(s.code).toUpperCase(),
+                  name: s.name || '',
+                  credits: Number(s.credits) || 0
+                });
+              }
+            });
+          }
+          if (Array.isArray(c.groups)) {
+            electiveGroups = c.groups.map(g => ({
+              group_name: g.group_name || '',
+              subjects: Array.isArray(g.subjects) ? g.subjects.map(s => ({
+                code: String(s.code).toUpperCase(),
+                name: s.name || '',
+                credits: Number(s.credits) || 0
+              })) : []
+            }));
+            c.groups.forEach(g => {
+              if (Array.isArray(g.subjects)) {
+                g.subjects.forEach(s => {
+                  if (s?.code) {
+                    electiveSubjects.push({
+                      code: String(s.code).toUpperCase(),
+                      name: s.name || '',
+                      credits: Number(s.credits) || 0
+                    });
+                  }
+                });
+              }
+            });
+          }
+        }
       });
-      if (c.groups) c.groups.forEach(g => addSubjects(g.subjects, isNonAcc));
+    }
+
+    const seen = new Set();
+    const dedupElectives = electiveSubjects.filter(s => {
+      const key = s.code;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
     });
+    const dedupAll = allSubjects.filter(s => {
+      const key = s.code;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
     currentProgram = {
       year: json.academic_year || year,
       department: json.department || entry.department,
@@ -175,8 +306,14 @@ deptSelect.addEventListener('change', async () => {
       nonAccTotal: json.non_accumulated_credits || '',
       codeNameMap,
       nonAccCodes,
-      key: entry.key // lưu key để đồng bộ dropdown kết quả
+      allSubjects: dedupAll,
+      electiveSubjects: dedupElectives,
+      electiveGroups,
+      electiveTotalCredits: electiveTotalCredits || 12,
+      key: entry.key,
+      courses: json.courses || []
     };
+    updateMajorOptions();
     setStatus('Đã tải chương trình: ' + currentProgram.department, 'ok');
   } catch (e) {
     setStatus('Lỗi tải chương trình: ' + e.message, 'error');
@@ -271,7 +408,6 @@ form.addEventListener('submit', async (e) => {
 
 dropZone.addEventListener('click', () => fileInput.click());
 
-// Helper: cập nhật nhanh một mục trong summary theo nhãn
 function updateSummaryItem(label, value) {
   const items = summary.querySelectorAll('.item');
   for (const it of items) {
@@ -282,6 +418,116 @@ function updateSummaryItem(label, value) {
       break;
     }
   }
+}
+
+function checkElectiveCredits() {
+  const learnedCodes = new Set(
+    gradesData
+      .map(g => (g.courseCode ?? g.CourseCode ?? '').trim().toUpperCase())
+      .filter(code => code)
+  );
+  let totalElectiveCredits = 0;
+  const electiveCodes = (currentProgram.electiveSubjects || []).map(s => s.code);
+  for (const grade of gradesData) {
+    const code = (grade.courseCode ?? grade.CourseCode ?? '').trim().toUpperCase();
+    if (electiveCodes.includes(code)) {
+      totalElectiveCredits += Number(grade.credits ?? grade.Credits ?? 0);
+    }
+  }
+  const req = Number(currentProgram.electiveTotalCredits ?? 12) || 12;
+  return {
+    totalElectiveCredits,
+    missingCredits: Math.max(0, req - totalElectiveCredits),
+    required: req
+  };
+}
+
+function getNotLearnedSubjects() {
+  if (!currentProgram) return [];
+  const learnedCodes = new Set(
+    gradesData
+      .map(g => (g.courseCode ?? g.CourseCode ?? '').trim().toUpperCase())
+      .filter(code => code)
+  );
+
+  // Kiểm tra xem có nhóm thể chất nào hoàn thành chưa (5 tín chỉ)
+  let physicalGroupsCompleted = false;
+  const physicalGroups = (currentProgram.courses || [])
+    .find(c => c.category && c.category.toLowerCase().includes('không tích lũy'))
+    ?.subcategories?.find(sc => sc.name && sc.name.toLowerCase().includes('thể chất'))
+    ?.groups || [];
+
+  for (const group of physicalGroups) {
+    const groupCodes = new Set((group.subjects || []).map(s => s.code.toUpperCase()));
+    let groupCredits = 0;
+    for (const grade of gradesData) {
+      const code = (grade.courseCode ?? grade.CourseCode ?? '').trim().toUpperCase();
+      if (groupCodes.has(code)) {
+        groupCredits += Number(grade.credits ?? grade.Credits ?? 0);
+      }
+    }
+    if (groupCredits >= 5) {
+      physicalGroupsCompleted = true;
+      break;
+    }
+  }
+
+  // Lọc môn chưa học
+  return (currentProgram.allSubjects || []).filter(subject => {
+    // Nếu đã hoàn thành một nhóm thể chất, loại bỏ tất cả môn thể chất
+    if (physicalGroupsCompleted && subject.code.startsWith('PHT')) {
+      return false;
+    }
+    return !learnedCodes.has(subject.code);
+  });
+}
+
+function updateMajorOptions() {
+  if (!filterMajor) return;
+  filterMajor.innerHTML = '<option value="all">Tất cả</option>';
+  const groups = currentProgram?.electiveGroups || [];
+  const ci = s => (s || '').toLowerCase();
+  groups
+    .filter(g => !ci(g.group_name).includes('tốt nghiệp'))
+    .forEach(g => {
+      const opt = document.createElement('option');
+      opt.value = g.group_name;
+      opt.textContent = g.group_name;
+      filterMajor.appendChild(opt);
+    });
+}
+
+function filterElectiveSubjects(subjects, filterValue) {
+  const groups = currentProgram?.electiveGroups || [];
+  const ci = (s) => (s || '').toLowerCase();
+  const getCode = (it) => {
+    const code = (it?.courseCode ?? it?.CourseCode ?? it?.code ?? '').trim();
+    return code ? code.toUpperCase() : '';
+  };
+  if (filterValue === 'all') return subjects;
+
+  if (filterValue === 'thesis') {
+    const thesis = groups.find(g => ci(g.group_name).includes('tốt nghiệp'));
+    const thesisCodes = new Set((thesis?.subjects || []).map(s => (s.code || '').toUpperCase()));
+    return subjects.filter(item => thesisCodes.has(getCode(item)));
+  }
+
+  if (filterValue === 'four-subjects') {
+    let allowedCodes = new Set(
+      groups
+        .filter(g => !ci(g.group_name).includes('tốt nghiệp'))
+        .flatMap(g => (g.subjects || []))
+        .map(s => (s.code || '').toUpperCase())
+    );
+    const majorVal = filterMajor?.value;
+    if (majorVal && majorVal !== 'all') {
+      const major = groups.find(g => g.group_name === majorVal);
+      allowedCodes = new Set((major?.subjects || []).map(s => (s.code || '').toUpperCase()));
+    }
+    return subjects.filter(item => allowedCodes.has(getCode(item)));
+  }
+
+  return subjects;
 }
 
 function renderResult(data) {
@@ -296,11 +542,9 @@ function renderResult(data) {
   };
 
   if (merged.academicYear) {
-    // Đồng bộ ngay không dùng setTimeout để tránh trễ
     resultYearSelect.value = merged.academicYear;
     resultYearSelect.dispatchEvent(new Event('change'));
     const list = programs[merged.academicYear] || [];
-    // Ưu tiên dùng key đang có, fallback theo tên khoa
     const desiredKey = (currentProgram && currentProgram.key) ||
       (list.find(p => p.department === merged.department)?.key);
     if (desiredKey) resultDeptSelect.value = desiredKey;
@@ -346,31 +590,26 @@ function renderResult(data) {
     }
   }
 
-  if (gradesData.length) {
-    renderGradesPage(1);
-    gradesWrapper.classList.remove('hidden');
-  }
-
-  const gpa4Avg = accCredits > 0 && sumGpa4Weighted > 0 ? (sumGpa4Weighted / accCredits).toFixed(2) : '—';
-  const gpa10Avg = accCredits > 0 && sumScore10Weighted > 0 ? (sumScore10Weighted / accCredits).toFixed(2) : '—';
-  const totalAccRequired = Number(currentProgram?.totalCredits);
-  const totalNonAccRequired = Number(currentProgram?.nonAccTotal);
-  const accDisplay = Number.isFinite(totalAccRequired) ? `${accCredits} / ${totalAccRequired}` : `${accCredits}`;
-  const nonAccDisplay = Number.isFinite(totalNonAccRequired) ? `${nonAccCredits} / ${totalNonAccRequired}` : `${nonAccCredits}`;
-
+  const { totalElectiveCredits, missingCredits, required } = checkElectiveCredits();
   summary.insertAdjacentHTML('beforeend', `
     <div class="item"><span class="k">Thuộc CTĐT</span><span class="v">${matched}</span></div>
     <div class="item"><span class="k">Ngoài CTĐT</span><span class="v">${unmatched}</span></div>
-    <div class="item"><span class="k">TC tích lũy</span><span class="v">${accDisplay}</span></div>
-    <div class="item"><span class="k">TC không tích lũy</span><span class="v">${nonAccDisplay}</span></div>
-    <div class="item"><span class="k">GPA TL (4)</span><span class="v">${gpa4Avg}</span></div>
-    <div class="item"><span class="k">GPA TL (10)</span><span class="v">${gpa10Avg}</span></div>`);
+    <div class="item"><span class="k">TC tích lũy</span><span class="v">${accCredits} / ${currentProgram.totalCredits}</span></div>
+    <div class="item"><span class="k">TC không tích lũy</span><span class="v">${nonAccCredits} / ${currentProgram.nonAccTotal}</span></div>
+    <div class="item"><span class="k">GPA TL (4)</span><span class="v">${accCredits > 0 && sumGpa4Weighted > 0 ? (sumGpa4Weighted / accCredits).toFixed(2) : '—'}</span></div>
+    <div class="item"><span class="k">GPA TL (10)</span><span class="v">${accCredits > 0 && sumScore10Weighted > 0 ? (sumScore10Weighted / accCredits).toFixed(2) : '—'}</span></div>
+  `);
+
+  if (gradesData.length || currentProgram.allSubjects.length) {
+    renderGradesPage(1);
+    gradesWrapper.classList.remove('hidden');
+  }
+  updateMajorOptions();
 
   currentProgram && (function ensureKey() {
-    // đảm bảo có key khi render lần đầu từ server
     if (!currentProgram.key && merged.academicYear && merged.department) {
       const list = programs[merged.academicYear] || [];
-      const found = list.find(p => p.department === currentProgram.department);
+      const found = list.find(p => p.department === merged.department);
       if (found) currentProgram.key = found.key;
     }
   })();
@@ -386,7 +625,6 @@ function formatNumber(val, dec = 2, trimZero = true) {
   return trimZero ? fixed.replace(/(\.\d*?[1-9])0+$/,'$1').replace(/\.0+$/,'') : fixed;
 }
 
-// Định dạng riêng cho GPA hệ 4: 1 chữ số thập phân, riêng 0 => "0"
 function formatGpa4(val) {
   if (!Number.isFinite(val)) return '';
   if (val === 0) return '0';
@@ -394,43 +632,93 @@ function formatGpa4(val) {
 }
 
 function renderGradesPage(page) {
-  if (!gradesData.length) return;
-  const totalPages = Math.ceil(gradesData.length / pageSize) || 1;
+  const filterStatusValue = filterStatus.value;
+  const filterElectiveValue = filterElective.value;
+
+  let displayData = [];
+  const learnedCodes = new Set(gradesData.map(g => (g.courseCode ?? g.CourseCode ?? '').trim().toUpperCase()));
+
+  if (filterStatusValue === 'learned') {
+    displayData = gradesData;
+    displayData = filterElectiveSubjects(displayData, filterElectiveValue);
+  } else if (filterStatusValue === 'not-learned') {
+    let notLearned = getNotLearnedSubjects();
+    displayData = notLearned;
+
+    if (filterElectiveValue !== 'all') {
+      let specificSubjects = [];
+      const ci = (s) => (s || '').toLowerCase();
+
+      if (filterElectiveValue === 'thesis') {
+        const thesis = currentProgram.electiveGroups.find(g => ci(g.group_name).includes('tốt nghiệp'));
+        specificSubjects = thesis ? thesis.subjects : [];
+      } else if (filterElectiveValue === 'four-subjects') {
+        const majorVal = filterMajor.value;
+        if (majorVal && majorVal !== 'all') {
+          const major = currentProgram.electiveGroups.find(g => g.group_name === majorVal);
+          specificSubjects = major ? major.subjects : [];
+        } else {
+          specificSubjects = currentProgram.electiveGroups
+            .filter(g => !ci(g.group_name).includes('tốt nghiệp'))
+            .flatMap(g => g.subjects);
+        }
+      }
+
+      const displayCodes = new Set(displayData.map(item => item.code));
+
+      for (const subj of specificSubjects) {
+        const codeU = subj.code;
+        if (displayCodes.has(codeU)) continue;
+
+        const grade = gradesData.find(g => (g.courseCode ?? g.CourseCode ?? '').trim().toUpperCase() === codeU);
+        if (grade) {
+          displayData.push(grade);
+        } else {
+          displayData.push(subj);
+        }
+      }
+    }
+  }
+
+  const totalPages = Math.ceil(displayData.length / pageSize) || 1;
   page = Math.min(Math.max(page, 1), totalPages);
   currentPage = page;
   const start = (page - 1) * pageSize;
-  const end = Math.min(start + pageSize, gradesData.length);
-  const slice = gradesData.slice(start, end);
+  const end = Math.min(start + pageSize, displayData.length);
+  const slice = displayData.slice(start, end);
 
   const map = currentProgram && currentProgram.codeNameMap;
   const nonAccSet = currentProgram && currentProgram.nonAccCodes;
 
   gradesTableBody.innerHTML = slice.map((g, idx) => {
     const abs = start + idx;
-    const code = (g.courseCode ?? g.CourseCode ?? '').trim();
+    const code = (g.courseCode ?? g.CourseCode ?? g.code ?? '').trim();
     const codeU = code.toUpperCase();
-    let name = g.courseName ?? g.CourseName ?? '';
+    let name = g.courseName ?? g.CourseName ?? g.name ?? '';
     const inProgram = !!(map && codeU && map[codeU]);
-    if ((!name || !name.trim()) && inProgram) name = map[codeU] || '';
-    const credits = Number(g.credits ?? g.Credits);
+    if (inProgram && !name.trim()) name = map[codeU] || '';
+    const credits = Number(g.credits ?? g.Credits ?? 3);
     const score10Num = Number(g.score10 ?? g.Score10);
+    const letter = g.letterGrade ?? g.LetterGrade ?? '';
     const gpa4Num = Number(g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4);
     const isNonAcc = !!(nonAccSet && nonAccSet.has(codeU));
     let rowClass = 'incorrect';
     if (inProgram) rowClass = isNonAcc ? 'nonacc' : 'correct';
+    if (Number.isNaN(score10Num)) rowClass = 'not-learned';
+
     return `<tr class="${rowClass}">
       <td class="stt">${abs + 1}</td>
       <td class="code">${escapeHtml(code)}</td>
       <td class="name">${escapeHtml(name)}</td>
       <td class="credits">${Number.isFinite(credits) ? credits : ''}</td>
-      <td class="score10">${formatNumber(score10Num)}</td>
-      <td class="letter">${escapeHtml(g.letterGrade ?? g.LetterGrade ?? '')}</td>
-      <td class="gpa4">${formatGpa4(gpa4Num)}</td>
+      <td class="score10">${Number.isFinite(score10Num) ? formatNumber(score10Num) : ''}</td>
+      <td class="letter">${letter ? escapeHtml(letter) : ''}</td>
+      <td class="gpa4">${Number.isFinite(gpa4Num) ? formatGpa4(gpa4Num) : ''}</td>
     </tr>`;
   }).join('');
 
   updatePagination(totalPages);
-  updatePaginationInfo(start + 1, end, gradesData.length);
+  updatePaginationInfo(start + 1, end, displayData.length);
 }
 
 function updatePagination(totalPages) {
@@ -482,10 +770,12 @@ function escapeHtml(str) {
     .replaceAll("'", '&#39;');
 }
 
-// Dropdown kết quả (thay đổi CTĐT sau khi xem)
 resultYearSelect.addEventListener('change', () => {
   resultDeptSelect.innerHTML = '<option value="">-- Chọn khoa / viện --</option>';
-  if (!resultYearSelect.value) { resultDeptSelect.disabled = true; return; }
+  if (!resultYearSelect.value) { 
+    resultDeptSelect.disabled = true; 
+    return; 
+  }
   const list = programs[resultYearSelect.value] || [];
   list.forEach(p => {
     const opt = document.createElement('option');
@@ -494,8 +784,6 @@ resultYearSelect.addEventListener('change', () => {
     resultDeptSelect.appendChild(opt);
   });
   resultDeptSelect.disabled = false;
-
-  // Cập nhật ngay trong summary phần “Niên khóa”
   if (!summary.classList.contains('hidden')) {
     updateSummaryItem('Niên khóa', resultYearSelect.value);
   }
@@ -507,39 +795,164 @@ resultDeptSelect.addEventListener('change', async () => {
   const key = resultDeptSelect.value;
   const entry = (programs[year] || []).find(p => p.key === key);
   if (!entry) return;
-
-  // Cập nhật ngay trong summary phần “Khoa” (trước khi tải JSON) để phản hồi tức thì
   if (!summary.classList.contains('hidden')) {
     updateSummaryItem('Khoa', entry.department);
     updateSummaryItem('Niên khóa', year);
   }
-
   try {
     const res = await fetch(entry.file);
     if (!res.ok) throw new Error('Không tải được chương trình');
     const json = await res.json();
+
     const codeNameMap = {};
     const nonAccCodes = new Set();
-    function addSubjects(arr, isNonAcc = false) {
+    const allSubjects = [];
+    const electiveSubjects = [];
+    let electiveGroups = [];
+    let electiveTotalCredits = 0;
+
+    function addBaseSubjects(arr, isNonAcc = false) {
       if (!Array.isArray(arr)) return;
       arr.forEach(s => {
         if (s && s.code) {
-          const up = s.code.toUpperCase();
-            if (s.name) codeNameMap[up] = s.name;
-            if (isNonAcc) nonAccCodes.add(up);
+          const up = String(s.code).toUpperCase();
+          if (s.name) codeNameMap[up] = s.name;
+          if (isNonAcc) nonAccCodes.add(up);
+          allSubjects.push({
+            code: up,
+            name: s.name || '',
+            credits: Number(s.credits) || 0
+          });
         }
       });
     }
-    (json.courses || []).forEach(c => {
-      const isNonAcc = (c.category || '').toLowerCase().includes('không tích lũy');
-      if (c.subjects) addSubjects(c.subjects, isNonAcc);
-      if (c.subcategories) c.subcategories.forEach(sc => {
-        const scNonAcc = isNonAcc || (sc.name || '').toLowerCase().includes('không tích lũy');
-        if (sc.subjects) addSubjects(sc.subjects, scNonAcc);
-        if (sc.groups) sc.groups.forEach(g => addSubjects(g.subjects, scNonAcc));
+
+    if (Array.isArray(json.courses)) {
+      json.courses.forEach(c => {
+        const isNonAcc = (c.category || '').toLowerCase().includes('không tích lũy');
+        const catIsElective = (c.category || '').toLowerCase().includes('tự chọn');
+
+        if (Array.isArray(c.subjects)) {
+          addBaseSubjects(c.subjects, isNonAcc);
+        }
+
+        if (Array.isArray(c.groups)) {
+          c.groups.forEach(g => {
+            if (Array.isArray(g.subjects)) {
+              addBaseSubjects(g.subjects, isNonAcc);
+            }
+          });
+        }
+
+        if (Array.isArray(c.subcategories)) {
+          c.subcategories.forEach(sc => {
+            const scNonAcc = isNonAcc || (sc.name || '').toLowerCase().includes('không tích lũy');
+            const scIsElective = (sc.name || '').toLowerCase().includes('tự chọn');
+
+            if (Array.isArray(sc.subjects)) {
+              addBaseSubjects(sc.subjects, scNonAcc);
+            }
+
+            if (scIsElective) {
+              electiveTotalCredits = Number(sc.total_credits) || electiveTotalCredits;
+
+              if (Array.isArray(sc.subjects)) {
+                sc.subjects.forEach(s => {
+                  if (s?.code) {
+                    electiveSubjects.push({
+                      code: String(s.code).toUpperCase(),
+                      name: s.name || '',
+                      credits: Number(s.credits) || 0
+                    });
+                  }
+                });
+              }
+              if (Array.isArray(sc.groups)) {
+                electiveGroups = sc.groups.map(g => ({
+                  group_name: g.group_name || '',
+                  subjects: Array.isArray(g.subjects) ? g.subjects.map(s => ({
+                    code: String(s.code).toUpperCase(),
+                    name: s.name || '',
+                    credits: Number(s.credits) || 0
+                  })) : []
+                }));
+                sc.groups.forEach(g => {
+                  if (Array.isArray(g.subjects)) {
+                    g.subjects.forEach(s => {
+                      if (s?.code) {
+                        electiveSubjects.push({
+                          code: String(s.code).toUpperCase(),
+                          name: s.name || '',
+                          credits: Number(s.credits) || 0
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            } else if (Array.isArray(sc.groups)) {
+              sc.groups.forEach(g => {
+                if (Array.isArray(g.subjects)) {
+                  addBaseSubjects(g.subjects, scNonAcc);
+                }
+              });
+            }
+          });
+        }
+
+        if (catIsElective) {
+          if (Array.isArray(c.subjects)) {
+            c.subjects.forEach(s => {
+              if (s?.code) {
+                electiveSubjects.push({
+                  code: String(s.code).toUpperCase(),
+                  name: s.name || '',
+                  credits: Number(s.credits) || 0
+                });
+              }
+            });
+          }
+          if (Array.isArray(c.groups)) {
+            electiveGroups = c.groups.map(g => ({
+              group_name: g.group_name || '',
+              subjects: Array.isArray(g.subjects) ? g.subjects.map(s => ({
+                code: String(s.code).toUpperCase(),
+                name: s.name || '',
+                credits: Number(s.credits) || 0
+              })) : []
+            }));
+            c.groups.forEach(g => {
+              if (Array.isArray(g.subjects)) {
+                g.subjects.forEach(s => {
+                  if (s?.code) {
+                    electiveSubjects.push({
+                      code: String(s.code).toUpperCase(),
+                      name: s.name || '',
+                      credits: Number(s.credits) || 0
+                    });
+                  }
+                });
+              }
+            });
+          }
+        }
       });
-      if (c.groups) c.groups.forEach(g => addSubjects(g.subjects, isNonAcc));
+    }
+
+    const seen = new Set();
+    const dedupElectives = electiveSubjects.filter(s => {
+      const key = s.code;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
     });
+    const dedupAll = allSubjects.filter(s => {
+      const key = s.code;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
     currentProgram = {
       year: json.academic_year || year,
       department: json.department || entry.department,
@@ -548,9 +961,14 @@ resultDeptSelect.addEventListener('change', async () => {
       nonAccTotal: json.non_accumulated_credits || '',
       codeNameMap,
       nonAccCodes,
-      key: entry.key // giữ key để đồng bộ dropdown
+      allSubjects: dedupAll,
+      electiveSubjects: dedupElectives,
+      electiveGroups,
+      electiveTotalCredits: electiveTotalCredits || 12,
+      key: entry.key,
+      courses: json.courses || []
     };
-    // Rerender theo CTĐT mới (sử dụng lastResult)
+    updateMajorOptions();
     if (lastResult) renderResult(lastResult);
   } catch (e) {
     setStatus('Lỗi tải chương trình: ' + e.message, 'error');
@@ -563,5 +981,19 @@ if (btnNewAnalysis) {
     form.reset();
     setStatus('', '');
     if (dropZoneText) dropZoneText.textContent = 'Chọn hoặc kéo thả file vào đây';
+  });
+}
+
+filterStatus.addEventListener('change', () => {
+  renderGradesPage(1);
+});
+
+filterElective.addEventListener('change', () => {
+  renderGradesPage(1);
+});
+
+if (filterMajor) {
+  filterMajor.addEventListener('change', () => {
+    renderGradesPage(1);
   });
 }
