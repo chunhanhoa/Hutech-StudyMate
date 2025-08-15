@@ -63,8 +63,10 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 ## Lưu ý bảo trì
 
 - Khi thêm CTĐT mới: đặt vào `ProgramJson/<năm>/...json`
+- Hiện tại hỗ trợ niên khóa: **2022**, **2023**
 - Giữ đồng nhất `code` (UPPERCASE không bắt buộc nhưng parser chuẩn hóa)
 - Tránh đổi format JSON trừ khi cập nhật logic parse
+- Khi thêm niên khóa mới, cần cập nhật object `programs` trong `wwwroot/js/app.js`
 
 ## Giấy phép
 
