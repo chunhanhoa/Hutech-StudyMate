@@ -1,0 +1,652 @@
+{
+  "department": "Khoa học máy tính",
+  "program_code": "7480101",
+  "academic_year": "2024",
+  "total_credits": 150,
+  "non_accumulated_credits": 5,
+  "non_accumulated_program": "Chương trình Giáo dục Quốc phòng và an ninh",
+  "courses": [
+    {
+      "category": "Kiến thức giáo dục đại cương",
+      "total_credits": 47,
+      "subjects": [
+        {
+          "code": "POS104",
+          "name": "Triết học Mác - Lênin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS105",
+          "name": "Kinh tế chính trị Mác - Lênin",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS106",
+          "name": "Chủ nghĩa xã hội khoa học",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS107",
+          "name": "Lịch sử Đảng Cộng sản Việt Nam",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS103",
+          "name": "Tư tưởng Hồ Chí Minh",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC120",
+          "name": "Anh ngữ 1",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC121",
+          "name": "Anh ngữ 2",
+          "credits": 3,
+          "prerequisites": ["ENC120"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC122",
+          "name": "Anh ngữ 3",
+          "credits": 3,
+          "prerequisites": ["ENC121"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC123",
+          "name": "Anh ngữ 4",
+          "credits": 3,
+          "prerequisites": ["ENC122"],
+          "corequisites": []
+        },
+        {
+          "code": "COS155",
+          "name": "Công tác kỹ sư ngành Khoa học máy tính",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "MAT101",
+          "name": "Đại số tuyến tính",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "MAT118",
+          "name": "Giải tích",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENS109",
+          "name": "Môi trường",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "PSY167",
+          "name": "Tâm lý học ứng dụng",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL115",
+          "name": "Tư duy thiết kế dự án",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL116",
+          "name": "Đổi mới sáng tạo và tư duy khởi nghiệp",
+          "credits": 3,
+          "prerequisites": ["SKL115"],
+          "corequisites": []
+        },
+        {
+          "code": "LAW106",
+          "name": "Pháp luật đại cương",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức giáo dục chuyên nghiệp",
+      "total_credits": 103,
+      "subcategories": [
+        {
+          "name": "Kiến thức bắt buộc",
+          "total_credits": 91,
+          "subjects": [
+            {
+              "code": "MAT105",
+              "name": "Xác suất thống kê",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MAT104",
+              "name": "Toán rời rạc",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CMP1074",
+              "name": "Cơ sở lập trình",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CMP164",
+              "name": "Kỹ thuật lập trình",
+              "credits": 3,
+              "prerequisites": ["CMP1074"],
+              "corequisites": []
+            },
+            {
+              "code": "CMP167",
+              "name": "Lập trình hướng đối tượng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS135",
+              "name": "Nhập môn cơ sở dữ liệu",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS136",
+              "name": "Phân tích và quản trị cơ sở dữ liệu",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS120",
+              "name": "Cấu trúc dữ liệu và giải thuật",
+              "credits": 3,
+              "prerequisites": ["CMP164"],
+              "corequisites": []
+            },
+            {
+              "code": "COS129",
+              "name": "Điện toán đám mây",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS157",
+              "name": "Phân tích và thiết kế giải thuật",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "AIT103",
+              "name": "Lập trình cho trí tuệ nhân tạo",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CMP175",
+              "name": "Lập trình web",
+              "credits": 3,
+              "prerequisites": ["CMP167"],
+              "corequisites": []
+            },
+            {
+              "code": "CMP172",
+              "name": "Mạng máy tính",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CMP169",
+              "name": "Hệ điều hành",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CMP177",
+              "name": "Lập trình trên thiết bị di động",
+              "credits": 3,
+              "prerequisites": ["CMP167"],
+              "corequisites": []
+            },
+            {
+              "code": "COS158",
+              "name": "Kiểm thử phần mềm",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS159",
+              "name": "Quản lý dự án phần mềm",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS160",
+              "name": "An ninh mạng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS161",
+              "name": "Công nghệ phần mềm",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS162",
+              "name": "Hệ thống thông tin",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS321",
+              "name": "Thực hành cấu trúc dữ liệu và giải thuật",
+              "credits": 1,
+              "prerequisites": ["COS120"],
+              "corequisites": []
+            },
+            {
+              "code": "COS323",
+              "name": "Thực hành cơ sở dữ liệu",
+              "credits": 1,
+              "prerequisites": ["COS135"],
+              "corequisites": []
+            },
+            {
+              "code": "CMP3075",
+              "name": "Thực hành cơ sở lập trình",
+              "credits": 1,
+              "prerequisites": ["CMP1074"],
+              "corequisites": []
+            },
+            {
+              "code": "CMP365",
+              "name": "Thực hành kỹ thuật lập trình",
+              "credits": 1,
+              "prerequisites": ["CMP164"],
+              "corequisites": []
+            },
+            {
+              "code": "CMP368",
+              "name": "Thực hành lập trình hướng đối tượng",
+              "credits": 1,
+              "prerequisites": ["CMP167"],
+              "corequisites": []
+            },
+            {
+              "code": "CMP376",
+              "name": "Thực hành lập trình web",
+              "credits": 1,
+              "prerequisites": ["CMP175"],
+              "corequisites": []
+            },
+            {
+              "code": "CMP373",
+              "name": "Thực hành mạng máy tính",
+              "credits": 1,
+              "prerequisites": ["CMP172"],
+              "corequisites": []
+            },
+            {
+              "code": "COS361",
+              "name": "Thực hành điện toán đám mây",
+              "credits": 1,
+              "prerequisites": ["COS129"],
+              "corequisites": []
+            },
+            {
+              "code": "COS324",
+              "name": "Thực hành quản trị cơ sở dữ liệu",
+              "credits": 1,
+              "prerequisites": ["COS136"],
+              "corequisites": []
+            },
+            {
+              "code": "COS325",
+              "name": "Thực hành phân tích và thiết kế giải thuật",
+              "credits": 1,
+              "prerequisites": ["COS157"],
+              "corequisites": []
+            },
+            {
+              "code": "AIT305",
+              "name": "Thực hành lập trình cho trí tuệ nhân tạo",
+              "credits": 1,
+              "prerequisites": ["AIT103"],
+              "corequisites": []
+            },
+            {
+              "code": "COS426",
+              "name": "Đồ án cơ sở khoa học máy tính",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS427",
+              "name": "Đồ án chuyên ngành khoa học máy tính",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "COS528",
+              "name": "Thực tập tốt nghiệp ngành Khoa học máy tính (*)",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        },
+        {
+          "name": "Kiến thức tự chọn",
+          "total_credits": 12,
+          "groups": [
+            {
+              "group_name": "Nhóm 1: Trí tuệ nhân tạo",
+              "subjects": [
+                {
+                  "code": "AIT104",
+                  "name": "Máy học",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "CMP1020",
+                  "name": "Học sâu",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "AIT108",
+                  "name": "Xử lý ảnh và ứng dụng",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "AIT109",
+                  "name": "Xử lý ngôn ngữ tự nhiên và ứng dụng",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 2: Hệ thống thông tin",
+              "subjects": [
+                {
+                  "code": "COS163",
+                  "name": "Phân tích hệ thống thông tin",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "COS164",
+                  "name": "Thiết kế hệ thống thông tin",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "COS165",
+                  "name": "Quản lý hệ thống thông tin",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "COS166",
+                  "name": "Đồ án hệ thống thông tin",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 3: Đồ án tốt nghiệp",
+              "subjects": [
+                {
+                  "code": "COS529",
+                  "name": "Đồ án tốt nghiệp ngành Khoa học máy tính (*)",
+                  "credits": 12,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức không tích lũy",
+      "total_credits": 5,
+      "subcategories": [
+        {
+          "name": "Giáo dục thể chất",
+          "total_credits": 5,
+          "note": "tự chọn 1 trong 5 nhóm",
+          "groups": [
+            {
+              "group_name": "Nhóm 1",
+              "subjects": [
+                {
+                  "code": "PHT304",
+                  "name": "Bóng chuyền 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT305",
+                  "name": "Bóng chuyền 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT304"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT306",
+                  "name": "Bóng chuyền 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT305"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 2",
+              "subjects": [
+                {
+                  "code": "PHT307",
+                  "name": "Bóng rổ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT308",
+                  "name": "Bóng rổ 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT307"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT309",
+                  "name": "Bóng rổ 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT308"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 3",
+              "subjects": [
+                {
+                  "code": "PHT310",
+                  "name": "Thể hình - Thẩm mỹ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT311",
+                  "name": "Thể hình - Thẩm mỹ 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT310"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT312",
+                  "name": "Thể hình - Thẩm mỹ 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT311"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 4",
+              "subjects": [
+                {
+                  "code": "PHT313",
+                  "name": "Vovinam 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT314",
+                  "name": "Vovinam 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT313"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT315",
+                  "name": "Vovinam 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT314"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 5",
+              "subjects": [
+                {
+                  "code": "PHT316",
+                  "name": "Bóng đá 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT317",
+                  "name": "Bóng đá 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT316"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT318",
+                  "name": "Bóng đá 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT317"],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chương trình Giáo dục quốc phòng và an ninh",
+          "note": "Bắt buộc, không tích lũy",
+          "subjects": [
+            {
+              "code": "NDF108",
+              "name": "Quốc phòng, an ninh 1",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF109",
+              "name": "Quốc phòng, an ninh 2",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF210",
+              "name": "Quốc phòng, an ninh 3",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF211",
+              "name": "Quốc phòng, an ninh 4",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "additional_info": {
+    "decision_number": "556/QĐ-ĐKC",
+    "decision_date": "27 tháng 02 năm 2024",
+    "signed_by": "Hiệu trưởng",
+    "note": "Sinh viên được xét điều kiện Thực tập, Khóa luận tốt nghiệp theo quy định của Khoa."
+  }
+}
