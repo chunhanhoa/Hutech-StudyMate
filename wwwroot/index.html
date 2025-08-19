@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Phân tích điểm HUTECH</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/site.css" />
+    <style>
+      /* Căn trái toàn bộ bảng điểm */
+      #gradesTable th, #gradesTable td { text-align: left; }
+      /* Giữ độ rộng đồng đều và không bị wrap các số */
+      #gradesTable td.credits, 
+      #gradesTable td.score10, 
+      #gradesTable td.letter, 
+      #gradesTable td.gpa4 { white-space: nowrap; }
+      /* Số thứ tự vẫn hẹp hơn */
+      #gradesTable td.stt { width: 46px; }
+      /* Màu cho môn chưa học */
+      .not-learned {
+        background-color: #f0f0f0; /* Màu trắng nhạt cho môn chưa học */
+      }
+      /* Responsive cho màn hình nhỏ hơn 768px */
+      @media screen and (max-width: 768px) {
+        /* Tối ưu hóa layout chính */
+        .results-layout {
+          padding: 10px;
+        }
+        .results-main {
+          width: 100%;
+        }
+        /* Tối ưu hóa header của kết quả phân tích */
+        .results-header {
+          flex-direction: column;
+          gap: 10px;
+        }
+        .results-controls {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .results-controls .field-inline {
+          margin-bottom: 10px;
+        }
+        .results-controls .field-inline select {
+          width: 100%;
+        }
+        .btn-new {
+          width: 100%;
+          margin-top: 10px;
+        }
+        /* Tối ưu hóa bảng điểm */
+        #gradesTable {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+          font-size: 14px;
+        }
+        #gradesTable th,
+        #gradesTable td {
+          padding: 8px;
+          min-width: 80px;
+        }
+        /* Ẩn cột STT và TK(4) trên di động */
+        #gradesTable th:nth-child(1),
+        #gradesTable td.stt,
+        #gradesTable th:nth-child(7),
+        #gradesTable td.gpa4 {
+          display: none;
+        }
+        /* Tối ưu hóa chú thích màu */
+        .color-legend {
+          flex-direction: column;
+          gap: 8px;
+          font-size: 14px;
+        }
+        .legend-item {
+          display: block;
+          width: 100%;
+        }
+        /* Tối ưu hóa phân trang */
+        .pagination-wrapper {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .pagination-info {
+          margin-bottom: 10px;
+        }
+        .pagination {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+        }
+        /* Tối ưu hóa drop zone và form upload */
+        .upload-panel-center {
+          padding: 15px;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .drop-zone {
+          padding: 15px;
+          font-size: 14px;
+        }
+        .actions {
+          flex-direction: column;
+          gap: 10px;
+        }
+        .actions button {
+          width: 100%;
+        }
+      }
+      /* Tăng kích thước vùng chạm cho nút và select box trên di động */
+      @media screen and (max-width: 768px) {
+        button,
+        select,
+        input {
+          min-height: 44px;
+          font-size: 16px;
+        }
+      }
+
+      /* NEW: căn hàng chú thích + bộ lọc nằm ngang */
+      .color-legend {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .color-legend .legend-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: auto; /* đẩy bộ lọc qua phải cùng hàng */
+      }
+      .color-legend .legend-controls .field-inline {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* Giữ legend + 3 dropdown trên cùng 1 hàng (desktop) */
+      .color-legend {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: nowrap;           /* không xuống dòng */
+        overflow-x: auto;            /* tràn thì cho cuộn ngang */
+      }
+      .legend-item { white-space: nowrap; } /* không xuống dòng từng nhãn */
+
+      .color-legend .legend-controls {
+        margin-left: auto;           /* đẩy cụm dropdown sang phải */
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: nowrap;           /* không xuống dòng trong cụm dropdown */
+      }
+      .color-legend .legend-controls .field-inline {
+        display: inline-flex;        /* canh giữa label + select theo hàng ngang */
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+      }
+
+      /* Mobile vẫn xếp dọc như hiện tại */
+      @media screen and (max-width: 768px) {
+        /* ...existing code... */
+        .color-legend {
+          flex-direction: column;
+          gap: 8px;
+          font-size: 14px;
+        }
+        .color-legend .legend-controls {
+          width: 100%;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .legend-item {
+          display: block;
+          width: 100%;
+        }
+      }
+
+      /* Căn chú thích + 3 dropdown trên 1 hàng, thu nhỏ để không phải kéo */
+      .color-legend {
+        display: flex;
+        align-items: center;
+        gap: 8px;               /* giảm khoảng cách */
+        flex-wrap: nowrap;      /* không xuống dòng */
+        overflow-x: auto;       /* nếu tràn vẫn có thể cuộn nhẹ */
+        font-size: 13px;        /* thu nhỏ nhãn màu */
+      }
+      .legend-item { white-space: nowrap; }
+
+      .color-legend .legend-controls {
+        margin-left: auto;      /* đẩy cụm dropdown sang phải */
+        display: flex;
+        align-items: center;
+        gap: 8px;               /* giảm khoảng cách */
+        flex-wrap: nowrap;      /* giữ trên 1 hàng */
+      }
+      .color-legend .legend-controls .field-inline {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;               /* sát hơn giữa label/select */
+        white-space: nowrap;
+      }
+      .color-legend .legend-controls label {
+        font-size: 12px;        /* nhãn nhỏ hơn */
+        line-height: 1.2;
+      }
+      .color-legend .legend-controls select {
+        font-size: 12px;        /* select nhỏ hơn */
+        height: 30px;           /* thấp hơn */
+        padding: 2px 6px;       /* gọn hơn */
+        width: auto;            /* tự co theo nội dung */
+        max-width: 180px;       /* giới hạn để không quá dài */
+      }
+
+      /* Mobile vẫn xếp dọc như hiện tại */
+      @media screen and (max-width: 768px) {
+        /* ...existing code... */
+        .color-legend {
+          flex-direction: column;
+          gap: 8px;
+          font-size: 14px;      /* tăng nhẹ cho dễ đọc */
+        }
+        .color-legend .legend-controls {
+          width: 100%;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .legend-item {
+          display: block;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body class="light">
+    <header class="app-header">
+      <h1>Phân tích điểm sinh viên</h1>
+      <p class="intro">Chào mừng bạn đến với công cụ phân tích điểm HUTECH! Tải
+        lên bảng điểm Excel (.xlsx) để xem thống kê chi tiết về tín chỉ và điểm
+        số.</p>
+    </header>
+    <main class="container">
+      <!-- Upload Panel - Centered -->
+      <section id="uploadPanel" class="panel upload-panel-center">
+        <h2>Tải lên bảng điểm</h2>
+        <form id="uploadForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="mssv">MSSV</label>
+              <input id="mssv" name="mssv" required />
+            </div>
+            <div class="field">
+              <label for="yearSelect">Niên khóa</label>
+              <select id="yearSelect" required>
+                <option value>-- Chọn niên khóa --</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="deptSelect">Khoa / Viện</label>
+              <select id="deptSelect" required disabled>
+                <option value>-- Chọn khoa / viện --</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>File Excel (.xlsx, .xls) – Bảng điểm</label>
+            <div id="dropZone" class="drop-zone">
+              <input type="file" id="file" name="file" accept=".xlsx,.xls"
+                style="display:none" />
+              <span id="dropZoneText">Chọn hoặc kéo thả file (.xlsx, .xls) vào
+                đây</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" id="btnUpload"
+              data-busy-text="Đang xử lý...">Phân tích</button>
+            <button type="reset" class="secondary">Xóa</button>
+          </div>
+        </form>
+        <div id="status" class="status"></div>
+      </section>
+      <div class="results-layout hidden">
+        <div class="results-main">
+          <section class="panel results-panel">
+            <div class="results-header">
+              <h2>Kết quả phân tích</h2>
+              <div class="results-controls">
+                <div class="field-inline">
+                  <label for="resultYearSelect">Niên khóa:</label>
+                  <select id="resultYearSelect">
+                    <option value>-- Chọn niên khóa --</option>
+                  </select>
+                </div>
+                <div class="field-inline">
+                  <label for="resultDeptSelect">Khoa / Viện:</label>
+                  <select id="resultDeptSelect" disabled>
+                    <option value>-- Chọn khoa / viện --</option>
+                  </select>
+                </div>
+                <button id="btnNewAnalysis" class="btn-new">Phân tích mới</button>
+              </div>
+            </div>
+            <div id="summary" class="summary-grid hidden"></div>
+            <div id="gradesWrapper" class="hidden wide">
+              <h3>Môn đã nhận dạng</h3>
+
+              <div class="color-legend">
+                <span class="legend-item correct">✓ Đúng CTĐT - Tích lũy</span>
+                <span class="legend-item nonacc">⚠ Đúng CTĐT - Không tích lũy</span>
+                <span class="legend-item incorrect">✗ Ngoài CTĐT</span>
+                <span class="legend-item not-learned">⬜ Chưa học</span>
+
+                <div class="legend-controls">
+                  <div class="field-inline">
+                    <label for="filterStatus">Trạng thái môn học:</label>
+                    <select id="filterStatus">
+                      <option value="learned">Môn đã học</option>
+                      <option value="not-learned">Môn chưa học</option>
+                    </select>
+                  </div>
+                  <!-- NEW: Chuyên ngành -->
+                  <div class="field-inline">
+                    <label for="filterMajor">Chuyên ngành:</label>
+                    <select id="filterMajor">
+                      <option value="all">Tất cả</option>
+                    </select>
+                  </div>
+                  <div class="field-inline">
+                    <label for="filterElective">Khối tự chọn:</label>
+                    <select id="filterElective">
+                      <option value="all">Tất cả</option>
+                      <option value="four-subjects">4 môn thay thế</option>
+                      <option value="thesis">Đồ án tốt nghiệp</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <table id="gradesTable">
+                <thead>
+                  <tr>
+                    <th>STT</th><th>Mã</th><th>Tên môn</th><th>TC</th><th>TK(10)</th><th>TK(CH)</th><th>TK(4)</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <div class="pagination-wrapper">
+                <div class="pagination-info">
+                  <span id="paginationInfo"></span>
+                </div>
+                <div id="pagination" class="pagination"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <small>Demo • Phân tích bảng điểm.</small>
+    </footer>
+    <script src="js/app.js"></script>
+  </body>
+</html>

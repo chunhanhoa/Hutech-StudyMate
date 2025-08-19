@@ -1,0 +1,673 @@
+{
+  "department": "Thiết kế đồ họa",
+  "program_code": "7210403",
+  "academic_year": "2022",
+  "total_credits": 137,
+  "non_accumulated_credits": 5,
+  "non_accumulated_program": "Chương trình Giáo dục Quốc phòng và an ninh",
+  "courses": [
+    {
+      "category": "Kiến thức giáo dục đại cương",
+      "total_credits": 47,
+      "subjects": [
+        {
+          "code": "POS104",
+          "name": "Triết học Mác - Lênin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS105",
+          "name": "Kinh tế chính trị Mác - Lênin",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS106",
+          "name": "Chủ nghĩa xã hội khoa học",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS107",
+          "name": "Lịch sử Đảng Cộng sản Việt Nam",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS103",
+          "name": "Tư tưởng Hồ Chí Minh",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC101",
+          "name": "Tiếng Anh 1",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC102",
+          "name": "Tiếng Anh 2",
+          "credits": 3,
+          "prerequisites": ["ENC101"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC103",
+          "name": "Tiếng Anh 3",
+          "credits": 3,
+          "prerequisites": ["ENC102"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC104",
+          "name": "Tiếng Anh 4",
+          "credits": 3,
+          "prerequisites": ["ENC103"],
+          "corequisites": []
+        },
+        {
+          "code": "CAP211",
+          "name": "Nhập môn công nghệ thông tin",
+          "credits": 3,
+         Kỹ thuật đồ họa",
+          "program_code": "7210403",
+          "academic_year": "2022",
+          "total_credits": 137,
+          "non_accumulated_credits": 5,
+          "non_accumulated_program": "Chương trình Giáo dục Quốc phòng và an ninh",
+          "courses": [
+            {
+              "category": "Kiến thức giáo dục đại cương",
+              "total_credits": 47,
+              "subjects": [
+                {
+                  "code": "POS104",
+                  "name": "Triết học Mác - Lênin",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "POS105",
+                  "name": "Kinh tế chính trị Mác - Lênin",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "POS106",
+                  "name": "Chủ nghĩa xã hội khoa học",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "POS107",
+                  "name": "Lịch sử Đảng Cộng sản Việt Nam",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "POS103",
+                  "name": "Tư tưởng Hồ Chí Minh",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "ENC101",
+                  "name": "Tiếng Anh 1",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "ENC102",
+                  "name": "Tiếng Anh 2",
+                  "credits": 3,
+                  "prerequisites": ["ENC101"],
+                  "corequisites": []
+                },
+                {
+                  "code": "ENC103",
+                  "name": "Tiếng Anh 3",
+                  "credits": 3,
+                  "prerequisites": ["ENC102"],
+                  "corequisites": []
+                },
+                {
+                  "code": "ENC104",
+                  "name": "Tiếng Anh 4",
+                  "credits": 3,
+                  "prerequisites": ["ENC103"],
+                  "corequisites": []
+                },
+                {
+                  "code": "CAP211",
+                  "name": "Nhập môn công nghệ thông tin",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "SOS101",
+                  "name": "Cơ sở văn hóa Việt Nam",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "SOS103",
+                  "name": "Lịch sử văn minh Thế giới",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "ENS109",
+                  "name": "Môi trường",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PSY140",
+                  "name": "Giáo dục cảm xúc",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "LAW106",
+                  "name": "Pháp luật đại cương",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "SKL115",
+                  "name": "Tư duy thiết kế dự án",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "SKL116",
+                  "name": "Đổi mới sáng tạo và tư duy khởi nghiệp",
+                  "credits": 3,
+                  "prerequisites": ["SKL115"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "category": "Kiến thức giáo dục chuyên nghiệp",
+              "total_credits": 90,
+              "subcategories": [
+                {
+                  "name": "Kiến thức bắt buộc",
+                  "total_credits": 78,
+                  "subjects": [
+                    {
+                      "code": "PSY139",
+                      "name": "Cảm thụ nghệ thuật truyền thông",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD128",
+                      "name": "Lịch sử thiết kế đồ họa",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD156",
+                      "name": "Chuyên đề bố cục tạo hình cơ bản",
+                      "credits": 1,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD258",
+                      "name": "Tạo hình đồ họa",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "ART268",
+                      "name": "Tạo hình mỹ thuật",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD259",
+                      "name": "Tạo hình mỹ thuật nâng cao",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD157",
+                      "name": "Chuyên đề pháp lý trong thiết kế đồ họa",
+                      "credits": 1,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD131",
+                      "name": "Nghệ thuật chữ 1",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD232",
+                      "name": "Nghệ thuật chữ 2",
+                      "credits": 3,
+                      "prerequisites": ["GRD131"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD460",
+                      "name": "Đồ án nghiên cứu vốn cổ dân tộc",
+                      "credits": 3,
+                      "prerequisites": ["GRD259"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD129",
+                      "name": "Nguyên lý thiết kế",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD161",
+                      "name": "Chuyên đề thiết kế và tiếp thị",
+                      "credits": 1,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "CAP239",
+                      "name": "Tin học thiết kế đồ họa 1",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "CAP240",
+                      "name": "Tin học thiết kế đồ họa 2",
+                      "credits": 3,
+                      "prerequisites": ["CAP239"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "CAP241",
+                      "name": "Tin học thiết kế đồ họa 3",
+                      "credits": 3,
+                      "prerequisites": ["CAP239"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD262",
+                      "name": "Kỹ thuật nhiếp ảnh",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD463",
+                      "name": "Đồ án nhiếp ảnh nâng cao",
+                      "credits": 1,
+                      "prerequisites": ["GRD262"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD235",
+                      "name": "Minh họa",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD264",
+                      "name": "Đồ họa UI - UX",
+                      "credits": 3,
+                      "prerequisites": ["CAP240"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD265",
+                      "name": "Thiết kế bao bì",
+                      "credits": 3,
+                      "prerequisites": ["CAP241"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD250",
+                      "name": "Thiết kế dàn trang",
+                      "credits": 3,
+                      "prerequisites": ["CAP241", "GRD232"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD266",
+                      "name": "Thiết kế nhận diện thương hiệu",
+                      "credits": 3,
+                      "prerequisites": ["CAP241", "GRD232"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD267",
+                      "name": "Thiết kế đồ họa thông tin",
+                      "credits": 3,
+                      "prerequisites": ["CAP241", "GRD232"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD468",
+                      "name": "Đồ án tổng hợp chuyên ngành đồ họa",
+                      "credits": 1,
+                      "prerequisites": ["GRD266"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD442",
+                      "name": "Đồ án hồ sơ năng lực thiết kế",
+                      "credits": 1,
+                      "prerequisites": ["GRD250"],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD543",
+                      "name": "Thực tập tốt nghiệp ngành Thiết kế đồ họa",
+                      "credits": 3,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "GRD448",
+                      "name": "Đồ án tốt nghiệp ngành Thiết kế đồ họa",
+                      "credits": 12,
+                      "prerequisites": ["GRD468"],
+                      "corequisites": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Kiến thức tự chọn",
+                  "total_credits": 12,
+                  "groups": [
+                    {
+                      "group_name": "Minh họa",
+                      "subjects": [
+                        {
+                          "code": "GRD269",
+                          "name": "Vẽ kỹ thuật số",
+                          "credits": 3,
+                          "prerequisites": ["CAP240"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "GRD270",
+                          "name": "Minh họa nâng cao",
+                          "credits": 3,
+                          "prerequisites": ["GRD235"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "GRD144",
+                          "name": "Xây dựng kịch bản phân cảnh",
+                          "credits": 3,
+                          "prerequisites": ["GRD259"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "GRD245",
+                          "name": "Thiết kế dựng hình",
+                          "credits": 3,
+                          "prerequisites": [],
+                          "corequisites": []
+                        }
+                      ]
+                    },
+                    {
+                      "group_name": "Đồ họa",
+                      "subjects": [
+                        {
+                          "code": "GRD271",
+                          "name": "Thiết kế dàn trang nâng cao",
+                          "credits": 3,
+                          "prerequisites": ["GRD250"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "GRD272",
+                          "name": "Thiết kế nhận diện thương hiệu nâng cao",
+                          "credits": 3,
+                          "prerequisites": ["GRD266"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "GRD273",
+                          "name": "Đồ họa thiết kế sự kiện",
+                          "credits": 3,
+                          "prerequisites": ["GRD267"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "CAP242",
+                          "name": "Tin học thiết kế đồ họa 4",
+                          "credits": 3,
+                          "prerequisites": ["CAP240"],
+                          "corequisites": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "category": "Kiến thức không tích lũy",
+              "total_credits": 5,
+              "subcategories": [
+                {
+                  "name": "Giáo dục thể chất",
+                  "total_credits": 5,
+                  "note": "Tự chọn 1 trong 5 nhóm",
+                  "groups": [
+                    {
+                      "group_name": "Nhóm 1: Bóng chuyền",
+                      "subjects": [
+                        {
+                          "code": "PHT304",
+                          "name": "Bóng chuyền 1",
+                          "credits": 2,
+                          "prerequisites": [],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "PHT305",
+                          "name": "Bóng chuyền 2",
+                          "credits": 2,
+                          "prerequisites": ["PHT304"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "PHT306",
+                          "name": "Bóng chuyền 3",
+                          "credits": 1,
+                          "prerequisites": ["PHT305"],
+                          "corequisites": []
+                        }
+                      ]
+                    },
+                    {
+                      "group_name": "Nhóm 2: Bóng rổ",
+                      "subjects": [
+                        {
+                          "code": "PHT307",
+                          "name": "Bóng rổ 1",
+                          "credits": 2,
+                          "prerequisites": [],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "PHT308",
+                          "name": "Bóng rổ 2",
+                          "credits": 2,
+                          "prerequisites": ["PHT307"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "PHT309",
+                          "name": "Bóng rổ 3",
+                          "credits": 1,
+                          "prerequisites": ["PHT308"],
+                          "corequisites": []
+                        }
+                      ]
+                    },
+                    {
+                      "group_name": "Nhóm 3: Thể hình - Thẩm mỹ",
+                      "subjects": [
+                        {
+                          "code": "PHT310",
+                          "name": "Thể hình - Thẩm mỹ 1",
+                          "credits": 2,
+                          "prerequisites": [],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "PHT311",
+                          "name": "Thể hình - Thẩm mỹ 2",
+                          "credits": 2,
+                          "prerequisites": ["PHT310"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "PHT312",
+                          "name": "Thể hình - Thẩm mỹ 3",
+                          "credits": 1,
+                          "prerequisites": ["PHT311"],
+                          "corequisites": []
+                        }
+                      ]
+                    },
+                    {
+                      "group_name": "Nhóm 4: Vovinam",
+                      "subjects": [
+                        {
+                          "code": "PHT313",
+                          "name": "Vovinam 1",
+                          "credits": 2,
+                          "prerequisites": [],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "PHT314",
+                          "name": "Vovinam 2",
+                          "credits": 2,
+                          "prerequisites": ["PHT313"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "PHT315",
+                          "name": "Vovinam 3",
+                          "credits": 1,
+                          "prerequisites": ["PHT314"],
+                          "corequisites": []
+                        }
+                      ]
+                    },
+                    {
+                      "group_name": "Nhóm 5: Bóng đá",
+                      "subjects": [
+                        {
+                          "code": "PHT316",
+                          "name": "Bóng đá 1",
+                          "credits": 2,
+                          "prerequisites": [],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "PHT317",
+                          "name": "Bóng đá 2",
+                          "credits": 2,
+                          "prerequisites": ["PHT316"],
+                          "corequisites": []
+                        },
+                        {
+                          "code": "PHT318",
+                          "name": "Bóng đá 3",
+                          "credits": 1,
+                          "prerequisites": ["PHT317"],
+                          "corequisites": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Chương trình Giáo dục quốc phòng và an ninh",
+                  "note": "Bắt buộc, không tích lũy",
+                  "subjects": [
+                    {
+                      "code": "NDF108",
+                      "name": "Quốc phòng, an ninh 1",
+                      "credits": 0,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "NDF109",
+                      "name": "Quốc phòng, an ninh 2",
+                      "credits": 0,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "NDF210",
+                      "name": "Quốc phòng, an ninh 3",
+                      "credits": 0,
+                      "prerequisites": [],
+                      "corequisites": []
+                    },
+                    {
+                      "code": "NDF211",
+                      "name": "Quốc phòng, an ninh 4",
+                      "credits": 0,
+                      "prerequisites": [],
+                      "corequisites": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "additional_info": {
+            "decision_number": "1488/QĐ-ĐKC",
+            "decision_date": "15 tháng 6 năm 2022",
+            "signed_by": "GS. TS. Nguyễn Trung Kiên",
+            "note": "Sinh viên được xét điều kiện Thực tập, Đồ án tốt nghiệp theo quy định của Khoa."
+          }
+        }
+      ]
+    }
+  ]
+}
