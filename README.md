@@ -1,4 +1,4 @@
-# Hutech-StudyMate – Phân tích bảng điểm & CTĐT + Trợ lý AI
+# Hutech-StudyMate – Phân tích bảng điểm & CTĐT + AI
 
 Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại đây nè:  <a href="https://hutech-studymate.onrender.com/" target="_blank">Hutech-StudyMate</a>
 
@@ -11,13 +11,13 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - Tính GPA có trọng số
 - Phân loại môn đúng CTĐT, ngoài CTĐT, không tích lũy
 - Hỗ trợ nhiều định dạng bảng điểm (kể cả .xls cũ, xuất web, CSV / HTML bảng)
-- **🤖 Trợ lý AI học tập**: Tư vấn cá nhân hóa dựa trên kết quả phân tích
+- Trợ lý AI học tập: Tư vấn cá nhân hóa dựa trên kết quả phân tích
 
 Ứng dụng thuần **ASP.NET Core (Minimal Hosting)** + **Vanilla JS** (không framework front-end nặng).
 
 ## Tính năng chính
 
-### 🤖 Trợ lý AI học tập (MỚI!)
+### Trợ lý AI học tập
 - **Tư vấn cá nhân hóa**: Dựa trên kết quả phân tích thực tế của bạn
 - **Gợi ý đăng ký môn**: Môn nào nên học tiếp theo
 - **Chiến lược cải thiện GPA**: Lời khuyên cụ thể để nâng cao điểm
@@ -70,20 +70,6 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - Chặn file rỗng / định dạng không hợp lệ với thông báo thân thiện
 - Không crash nếu thiếu trường trong JSON CTĐT (bỏ qua an toàn)
 
-## Cách sử dụng Trợ lý AI
-
-1. **Tải lên bảng điểm**: Upload file Excel bảng điểm của bạn
-2. **Chờ phân tích**: Hệ thống sẽ tự động phân tích và so sánh với CTĐT
-3. **Mở chat AI**: Nhấp vào nút "Trợ lý AI" ở góc dưới phải
-4. **Hỏi đáp tự do**: Đặt câu hỏi bằng tiếng Việt về việc học
-
-### Câu hỏi gợi ý cho AI:
-- "Tôi nên đăng ký môn gì ở học kỳ tới?"
-- "Làm thế nào để cải thiện GPA của tôi?"
-- "Tôi còn thiếu những môn nào để tốt nghiệp?"
-- "Nên chọn chuyên ngành nào phù hợp?"
-- "Tôi có thể tốt nghiệp đúng hạn không?"
-
 ## Lưu ý bảo trì
 
 - Khi thêm CTĐT mới: đặt vào `ProgramJson/<năm>/...json`
@@ -91,7 +77,6 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - Giữ đồng nhất `code` (UPPERCASE không bắt buộc nhưng parser chuẩn hóa)
 - Tránh đổi format JSON trừ khi cập nhật logic parse
 - Khi thêm niên khóa mới, cần cập nhật object `programs` trong `wwwroot/js/app.js`
-- **API Key**: Groq API key được cấu hình trong `appsettings.json`
 
 ## Công nghệ sử dụng
 
@@ -103,6 +88,6 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 
 ## Giấy phép
 
-Dự án mục đích học tập / demo nội bộ.
+Dự án mục đích học tập 
 
 **Phát triển bởi**: Nhóm phát triển Hutech-StudyMate
