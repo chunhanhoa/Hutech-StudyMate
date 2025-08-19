@@ -162,6 +162,13 @@ function clearResult() {
   gradesTableBody.innerHTML = '';
   summary.classList.add('hidden');
   gradesWrapper.classList.add('hidden');
+  
+  // Ẩn chatbot AI khi xóa kết quả
+  const aiChatSection = document.getElementById('aiChatSection');
+  if (aiChatSection) {
+    aiChatSection.classList.add('hidden');
+  }
+  
   resultsLayout.classList.add('hidden');
   uploadPanel.classList.remove('hidden');
   gradesData = [];
@@ -534,7 +541,7 @@ function getNotLearnedSubjects() {
     let hasAnySubject = false;
 
     for (const grade of gradesData) {
-      const code = (grade.courseCode ?? grade.CourseCode ?? '').trim().toUpperCase();
+      const code = (grade.courseCode ?? g.CourseCode ?? '').trim().toUpperCase();
       if (groupCodes.has(code)) {
         hasAnySubject = true;
         groupCredits += Number(grade.credits ?? grade.Credits ?? 0);
@@ -722,12 +729,48 @@ function renderResult(data) {
 
   lastResult = data;
   resultsLayout.classList.remove('hidden');
-  resultsLayout.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Cuộn lên đầu trang khi vào kết quả phân tích
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // Hiển thị chatbot AI inline ngay sau khi có kết quả
+  const aiChatSection = document.getElementById('aiChatSection');
+  if (aiChatSection) {
+    aiChatSection.classList.remove('hidden');
+  }
+  
+  // Update chatbot with study data
+  if (window.studyChatBot) {
+    const studyAnalysis = {
+      studentId: merged.studentId,
+      department: merged.department,
+      academicYear: merged.academicYear,
+      programCode: merged.programCode,
+      totalCredits: merged.totalCredits,
+      grades: data.grades,
+      currentProgram: currentProgram,
+      summary: {
+        totalSubjects: data.grades.length,
+        matchedSubjects: matched,
+        unmatchedSubjects: unmatched,
+        accumulatedCredits: accCredits,
+        nonAccumulatedCredits: nonAccCredits,
+        gpa4: accCredits > 0 && sumGpa4Weighted > 0 ? (sumGpa4Weighted / accCredits) : null,
+        gpa10: accCredits > 0 && sumScore10Weighted > 0 ? (sumScore10Weighted / accCredits) : null,
+        electiveCredits: totalElectiveCredits,
+        missingElectiveCredits: missingCredits,
+        requiredElectiveCredits: required,
+        notLearnedSubjects: getNotLearnedSubjects()
+      }
+    };
+    window.studyChatBot.updateStudyData(studyAnalysis);
+  }
 }
 
 function formatNumber(val, dec = 2, trimZero = true) {
   if (!Number.isFinite(val)) return '';
+  // Sửa lại: luôn có 1 số thập phân cho điểm TK(10)
   const fixed = val.toFixed(dec);
+  if (dec === 1) return fixed; // luôn giữ 1 số thập phân
   return trimZero ? fixed.replace(/(\.\d*?[1-9])0+$/,'$1').replace(/\.0+$/,'') : fixed;
 }
 
@@ -817,7 +860,7 @@ function renderGradesPage(page) {
       <td class="code">${escapeHtml(code)}</td>
       <td class="name">${escapeHtml(name)}</td>
       <td class="credits">${Number.isFinite(credits) ? credits : ''}</td>
-      <td class="score10">${Number.isFinite(score10Num) ? formatNumber(score10Num) : ''}</td>
+      <td class="score10">${Number.isFinite(score10Num) ? formatNumber(score10Num, 1, false) : ''}</td>
       <td class="letter">${letter ? escapeHtml(letter) : ''}</td>
       <td class="gpa4">${Number.isFinite(gpa4Num) ? formatGpa4(gpa4Num) : ''}</td>
     </tr>`;

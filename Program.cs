@@ -20,6 +20,7 @@ else
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IProgramService, ProgramService>();
 builder.Services.AddSingleton<IExcelGradeParser, ExcelGradeParser>();
+builder.Services.AddSingleton<IAIService, GroqAIService>();
 builder.Services.AddHttpClient(); // thêm
 
 // Cấu hình HttpClient cho ping với timeout và retry policy tốt hơn

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MoBexgxA+3bu6d35c62AXpM7sTCCtDE2ojb9+zIVWR0=",
+  "Hash": "ouyP92/VCJNySHCSvv0XLAY0bxPT2GQYU3KaivjM15s=",
   "Source": "Check",
   "BasePath": "_content/Check",
   "Mode": "Default",
@@ -17,12 +17,33 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\61l45jh54i-nrcfx6uaa5.gz",
+      "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\0bcxyj6k4h-tao3cwlkfq.gz",
       "SourceId": "Check",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Check",
-      "RelativePath": "js/app#[.{fingerprint=nrcfx6uaa5}]?.js.gz",
+      "RelativePath": "css/chat#[.{fingerprint=tao3cwlkfq}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\chat.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "ez7kb82bze",
+      "Integrity": "lq9sbR9JbmSI2TMo+Fj9thJOIgAuQE0CO6W5qScewpE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\chat.css"
+    },
+    {
+      "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\61l45jh54i-30psyackb5.gz",
+      "SourceId": "Check",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Check",
+      "RelativePath": "js/app#[.{fingerprint=30psyackb5}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -31,19 +52,19 @@
       "RelatedAsset": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\app.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "fwtnew9ea2",
-      "Integrity": "H1X9tQLTV1YqRtBganABpHQX08BjHv1U3CIzDhypNzA=",
+      "Fingerprint": "z5lue587lq",
+      "Integrity": "pwj7b4mAFZ4aJ/OL7jNQXDcntVLUBY6U4AmVimas+3g=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\app.js"
     },
     {
-      "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\mp96bqbs7n-40n7tonidn.gz",
+      "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\mp96bqbs7n-qqpk4pvuyx.gz",
       "SourceId": "Check",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Check",
-      "RelativePath": "index#[.{fingerprint=40n7tonidn}]?.html.gz",
+      "RelativePath": "index#[.{fingerprint=qqpk4pvuyx}]?.html.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -52,19 +73,19 @@
       "RelatedAsset": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\index.html",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "k7u3hwwziq",
-      "Integrity": "sKxpjHQ4JeFJTRnN796TOkElijSnrUVAUtE6J/R0kRw=",
+      "Fingerprint": "msmynlk6i3",
+      "Integrity": "5lLGKsXb0rVMXefYOeIAiugLZsm51dXDAY4ulYWJ41c=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\t4cvf4cpex-xix8tastm3.gz",
+      "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\t4cvf4cpex-tzab34cuk9.gz",
       "SourceId": "Check",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Check",
-      "RelativePath": "css/site#[.{fingerprint=xix8tastm3}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=tzab34cuk9}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -73,11 +94,53 @@
       "RelatedAsset": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "ufopjnn8ws",
-      "Integrity": "BpkFneVmloGxLiKbvS1Wx+kUpWpwv8c+D2OgWF1xz2I=",
+      "Fingerprint": "5mkxl5tx9a",
+      "Integrity": "Y6AcnTsfNqnZwwlTsEzWLl1D8figmpPUD1D4J0fW+uw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\yuftkx4fwh-1dp689e5b4.gz",
+      "SourceId": "Check",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Check",
+      "RelativePath": "js/chat#[.{fingerprint=1dp689e5b4}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\chat.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "8df5h8vhdz",
+      "Integrity": "9CG1JnTcbVW50LDJteUE9SMUbAeht7BHmoTbTv3CIz8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\chat.js"
+    },
+    {
+      "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\chat.css",
+      "SourceId": "Check",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\",
+      "BasePath": "_content/Check",
+      "RelativePath": "css/chat#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "tao3cwlkfq",
+      "Integrity": "OwYlcm8WcEO2/wBx1gzDnMYW/svaZslTYWjXI61Y1+Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\chat.css"
     },
     {
       "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\site.css",
@@ -94,8 +157,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "xix8tastm3",
-      "Integrity": "uQAdTrHfzssGGIJwe7YYY4WJZ/P4txTLBuvr7Vp0+p0=",
+      "Fingerprint": "tzab34cuk9",
+      "Integrity": "l0CICDexolCTQmJbVIgLK2Bb7wxMS7c39w201u0JWtU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -115,8 +178,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "40n7tonidn",
-      "Integrity": "NP1PVwfeZKMB4sB0pALpMu82sZ6HcXVW0gOKzISyQ6M=",
+      "Fingerprint": "qqpk4pvuyx",
+      "Integrity": "UrdD4OhADllPuka6tY2f+NhyRiuS/QsZR5WDcEySaQg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
@@ -136,22 +199,43 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "nrcfx6uaa5",
-      "Integrity": "nRinq0lUkSrPYUJwT2BG3THswZpwUP7NOQUAE1N/S2E=",
+      "Fingerprint": "30psyackb5",
+      "Integrity": "bQgpto/RCvHnFaamt2+XMkzE+nCr18uVxxIzg10tHek=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\app.js"
+    },
+    {
+      "Identity": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\chat.js",
+      "SourceId": "Check",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\",
+      "BasePath": "_content/Check",
+      "RelativePath": "js/chat#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "1dp689e5b4",
+      "Integrity": "5bFmpuvZflYlkqawiF1Q74AOLwi53yVLpobHvp6QZOw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\chat.js"
     }
   ],
   "Endpoints": [
     {
-      "Route": "css/site.css",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\t4cvf4cpex-xix8tastm3.gz",
+      "Route": "css/chat.css",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\0bcxyj6k4h-tao3cwlkfq.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000240038406"
+          "Quality": "0.000569151964"
         }
       ],
       "ResponseHeaders": [
@@ -161,15 +245,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4165"
+          "Value": "1756"
         },
         {
           "Name": "ETag",
-          "Value": "\"BpkFneVmloGxLiKbvS1Wx+kUpWpwv8c+D2OgWF1xz2I=\""
+          "Value": "\"lq9sbR9JbmSI2TMo+Fj9thJOIgAuQE0CO6W5qScewpE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 02:29:12 GMT"
+          "Value": "Fri, 15 Aug 2025 15:51:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -189,13 +273,311 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"uQAdTrHfzssGGIJwe7YYY4WJZ/P4txTLBuvr7Vp0+p0=\""
+          "Value": "W/\"OwYlcm8WcEO2/wBx1gzDnMYW/svaZslTYWjXI61Y1+Q=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-uQAdTrHfzssGGIJwe7YYY4WJZ/P4txTLBuvr7Vp0+p0="
+          "Value": "sha256-OwYlcm8WcEO2/wBx1gzDnMYW/svaZslTYWjXI61Y1+Q="
+        }
+      ]
+    },
+    {
+      "Route": "css/chat.css",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\chat.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6469"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OwYlcm8WcEO2/wBx1gzDnMYW/svaZslTYWjXI61Y1+Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 15:51:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OwYlcm8WcEO2/wBx1gzDnMYW/svaZslTYWjXI61Y1+Q="
+        }
+      ]
+    },
+    {
+      "Route": "css/chat.css.gz",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\0bcxyj6k4h-tao3cwlkfq.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1756"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lq9sbR9JbmSI2TMo+Fj9thJOIgAuQE0CO6W5qScewpE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 15:51:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-lq9sbR9JbmSI2TMo+Fj9thJOIgAuQE0CO6W5qScewpE="
+        }
+      ]
+    },
+    {
+      "Route": "css/chat.tao3cwlkfq.css",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\0bcxyj6k4h-tao3cwlkfq.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000569151964"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1756"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lq9sbR9JbmSI2TMo+Fj9thJOIgAuQE0CO6W5qScewpE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 15:51:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"OwYlcm8WcEO2/wBx1gzDnMYW/svaZslTYWjXI61Y1+Q=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tao3cwlkfq"
+        },
+        {
+          "Name": "label",
+          "Value": "css/chat.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OwYlcm8WcEO2/wBx1gzDnMYW/svaZslTYWjXI61Y1+Q="
+        }
+      ]
+    },
+    {
+      "Route": "css/chat.tao3cwlkfq.css",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\chat.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6469"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OwYlcm8WcEO2/wBx1gzDnMYW/svaZslTYWjXI61Y1+Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 15:51:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tao3cwlkfq"
+        },
+        {
+          "Name": "label",
+          "Value": "css/chat.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OwYlcm8WcEO2/wBx1gzDnMYW/svaZslTYWjXI61Y1+Q="
+        }
+      ]
+    },
+    {
+      "Route": "css/chat.tao3cwlkfq.css.gz",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\0bcxyj6k4h-tao3cwlkfq.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1756"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lq9sbR9JbmSI2TMo+Fj9thJOIgAuQE0CO6W5qScewpE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 15:51:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tao3cwlkfq"
+        },
+        {
+          "Name": "label",
+          "Value": "css/chat.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lq9sbR9JbmSI2TMo+Fj9thJOIgAuQE0CO6W5qScewpE="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.css",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\t4cvf4cpex-tzab34cuk9.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000204331835"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4893"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y6AcnTsfNqnZwwlTsEzWLl1D8figmpPUD1D4J0fW+uw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 04:57:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"l0CICDexolCTQmJbVIgLK2Bb7wxMS7c39w201u0JWtU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-l0CICDexolCTQmJbVIgLK2Bb7wxMS7c39w201u0JWtU="
         }
       ]
     },
@@ -210,7 +592,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "19259"
+          "Value": "23288"
         },
         {
           "Name": "Content-Type",
@@ -218,11 +600,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"uQAdTrHfzssGGIJwe7YYY4WJZ/P4txTLBuvr7Vp0+p0=\""
+          "Value": "\"l0CICDexolCTQmJbVIgLK2Bb7wxMS7c39w201u0JWtU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 02:29:12 GMT"
+          "Value": "Tue, 19 Aug 2025 04:57:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -232,13 +614,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-uQAdTrHfzssGGIJwe7YYY4WJZ/P4txTLBuvr7Vp0+p0="
+          "Value": "sha256-l0CICDexolCTQmJbVIgLK2Bb7wxMS7c39w201u0JWtU="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\t4cvf4cpex-xix8tastm3.gz",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\t4cvf4cpex-tzab34cuk9.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -247,7 +629,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4165"
+          "Value": "4893"
         },
         {
           "Name": "Content-Type",
@@ -255,11 +637,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"BpkFneVmloGxLiKbvS1Wx+kUpWpwv8c+D2OgWF1xz2I=\""
+          "Value": "\"Y6AcnTsfNqnZwwlTsEzWLl1D8figmpPUD1D4J0fW+uw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 02:29:12 GMT"
+          "Value": "Tue, 19 Aug 2025 04:57:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -277,18 +659,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-BpkFneVmloGxLiKbvS1Wx+kUpWpwv8c+D2OgWF1xz2I="
+          "Value": "sha256-Y6AcnTsfNqnZwwlTsEzWLl1D8figmpPUD1D4J0fW+uw="
         }
       ]
     },
     {
-      "Route": "css/site.xix8tastm3.css",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\t4cvf4cpex-xix8tastm3.gz",
+      "Route": "css/site.tzab34cuk9.css",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\t4cvf4cpex-tzab34cuk9.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000240038406"
+          "Quality": "0.000204331835"
         }
       ],
       "ResponseHeaders": [
@@ -298,15 +680,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4165"
+          "Value": "4893"
         },
         {
           "Name": "ETag",
-          "Value": "\"BpkFneVmloGxLiKbvS1Wx+kUpWpwv8c+D2OgWF1xz2I=\""
+          "Value": "\"Y6AcnTsfNqnZwwlTsEzWLl1D8figmpPUD1D4J0fW+uw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 02:29:12 GMT"
+          "Value": "Tue, 19 Aug 2025 04:57:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -326,13 +708,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"uQAdTrHfzssGGIJwe7YYY4WJZ/P4txTLBuvr7Vp0+p0=\""
+          "Value": "W/\"l0CICDexolCTQmJbVIgLK2Bb7wxMS7c39w201u0JWtU=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "xix8tastm3"
+          "Value": "tzab34cuk9"
         },
         {
           "Name": "label",
@@ -340,12 +722,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-uQAdTrHfzssGGIJwe7YYY4WJZ/P4txTLBuvr7Vp0+p0="
+          "Value": "sha256-l0CICDexolCTQmJbVIgLK2Bb7wxMS7c39w201u0JWtU="
         }
       ]
     },
     {
-      "Route": "css/site.xix8tastm3.css",
+      "Route": "css/site.tzab34cuk9.css",
       "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -355,7 +737,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "19259"
+          "Value": "23288"
         },
         {
           "Name": "Content-Type",
@@ -363,11 +745,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"uQAdTrHfzssGGIJwe7YYY4WJZ/P4txTLBuvr7Vp0+p0=\""
+          "Value": "\"l0CICDexolCTQmJbVIgLK2Bb7wxMS7c39w201u0JWtU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 02:29:12 GMT"
+          "Value": "Tue, 19 Aug 2025 04:57:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -377,7 +759,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "xix8tastm3"
+          "Value": "tzab34cuk9"
         },
         {
           "Name": "label",
@@ -385,13 +767,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-uQAdTrHfzssGGIJwe7YYY4WJZ/P4txTLBuvr7Vp0+p0="
+          "Value": "sha256-l0CICDexolCTQmJbVIgLK2Bb7wxMS7c39w201u0JWtU="
         }
       ]
     },
     {
-      "Route": "css/site.xix8tastm3.css.gz",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\t4cvf4cpex-xix8tastm3.gz",
+      "Route": "css/site.tzab34cuk9.css.gz",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\t4cvf4cpex-tzab34cuk9.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -400,7 +782,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4165"
+          "Value": "4893"
         },
         {
           "Name": "Content-Type",
@@ -408,11 +790,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"BpkFneVmloGxLiKbvS1Wx+kUpWpwv8c+D2OgWF1xz2I=\""
+          "Value": "\"Y6AcnTsfNqnZwwlTsEzWLl1D8figmpPUD1D4J0fW+uw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 02:29:12 GMT"
+          "Value": "Tue, 19 Aug 2025 04:57:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -430,7 +812,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "xix8tastm3"
+          "Value": "tzab34cuk9"
         },
         {
           "Name": "label",
@@ -438,18 +820,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-BpkFneVmloGxLiKbvS1Wx+kUpWpwv8c+D2OgWF1xz2I="
+          "Value": "sha256-Y6AcnTsfNqnZwwlTsEzWLl1D8figmpPUD1D4J0fW+uw="
         }
       ]
     },
     {
-      "Route": "index.40n7tonidn.html",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\mp96bqbs7n-40n7tonidn.gz",
+      "Route": "index.html",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\mp96bqbs7n-qqpk4pvuyx.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000313873195"
+          "Quality": "0.000180635838"
         }
       ],
       "ResponseHeaders": [
@@ -459,19 +841,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3185"
+          "Value": "5535"
         },
         {
           "Name": "ETag",
-          "Value": "\"sKxpjHQ4JeFJTRnN796TOkElijSnrUVAUtE6J/R0kRw=\""
+          "Value": "\"5lLGKsXb0rVMXefYOeIAiugLZsm51dXDAY4ulYWJ41c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 05:47:38 GMT"
+          "Value": "Tue, 19 Aug 2025 04:54:19 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -487,26 +869,18 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"NP1PVwfeZKMB4sB0pALpMu82sZ6HcXVW0gOKzISyQ6M=\""
+          "Value": "W/\"UrdD4OhADllPuka6tY2f+NhyRiuS/QsZR5WDcEySaQg=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "40n7tonidn"
-        },
-        {
-          "Name": "label",
-          "Value": "index.html"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-NP1PVwfeZKMB4sB0pALpMu82sZ6HcXVW0gOKzISyQ6M="
+          "Value": "sha256-UrdD4OhADllPuka6tY2f+NhyRiuS/QsZR5WDcEySaQg="
         }
       ]
     },
     {
-      "Route": "index.40n7tonidn.html",
+      "Route": "index.html",
       "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\index.html",
       "Selectors": [],
       "ResponseHeaders": [
@@ -516,7 +890,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13215"
+          "Value": "22478"
         },
         {
           "Name": "Content-Type",
@@ -524,11 +898,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"NP1PVwfeZKMB4sB0pALpMu82sZ6HcXVW0gOKzISyQ6M=\""
+          "Value": "\"UrdD4OhADllPuka6tY2f+NhyRiuS/QsZR5WDcEySaQg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 05:47:38 GMT"
+          "Value": "Tue, 19 Aug 2025 04:54:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-UrdD4OhADllPuka6tY2f+NhyRiuS/QsZR5WDcEySaQg="
+        }
+      ]
+    },
+    {
+      "Route": "index.html.gz",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\mp96bqbs7n-qqpk4pvuyx.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5535"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5lLGKsXb0rVMXefYOeIAiugLZsm51dXDAY4ulYWJ41c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 04:54:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5lLGKsXb0rVMXefYOeIAiugLZsm51dXDAY4ulYWJ41c="
+        }
+      ]
+    },
+    {
+      "Route": "index.qqpk4pvuyx.html",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\mp96bqbs7n-qqpk4pvuyx.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000180635838"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5535"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5lLGKsXb0rVMXefYOeIAiugLZsm51dXDAY4ulYWJ41c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 04:54:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"UrdD4OhADllPuka6tY2f+NhyRiuS/QsZR5WDcEySaQg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qqpk4pvuyx"
+        },
+        {
+          "Name": "label",
+          "Value": "index.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-UrdD4OhADllPuka6tY2f+NhyRiuS/QsZR5WDcEySaQg="
+        }
+      ]
+    },
+    {
+      "Route": "index.qqpk4pvuyx.html",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22478"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UrdD4OhADllPuka6tY2f+NhyRiuS/QsZR5WDcEySaQg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 04:54:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -538,7 +1057,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "40n7tonidn"
+          "Value": "qqpk4pvuyx"
         },
         {
           "Name": "label",
@@ -546,13 +1065,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-NP1PVwfeZKMB4sB0pALpMu82sZ6HcXVW0gOKzISyQ6M="
+          "Value": "sha256-UrdD4OhADllPuka6tY2f+NhyRiuS/QsZR5WDcEySaQg="
         }
       ]
     },
     {
-      "Route": "index.40n7tonidn.html.gz",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\mp96bqbs7n-40n7tonidn.gz",
+      "Route": "index.qqpk4pvuyx.html.gz",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\mp96bqbs7n-qqpk4pvuyx.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -561,7 +1080,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3185"
+          "Value": "5535"
         },
         {
           "Name": "Content-Type",
@@ -569,11 +1088,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"sKxpjHQ4JeFJTRnN796TOkElijSnrUVAUtE6J/R0kRw=\""
+          "Value": "\"5lLGKsXb0rVMXefYOeIAiugLZsm51dXDAY4ulYWJ41c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 05:47:38 GMT"
+          "Value": "Tue, 19 Aug 2025 04:54:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -591,7 +1110,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "40n7tonidn"
+          "Value": "qqpk4pvuyx"
         },
         {
           "Name": "label",
@@ -599,18 +1118,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-sKxpjHQ4JeFJTRnN796TOkElijSnrUVAUtE6J/R0kRw="
+          "Value": "sha256-5lLGKsXb0rVMXefYOeIAiugLZsm51dXDAY4ulYWJ41c="
         }
       ]
     },
     {
-      "Route": "index.html",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\mp96bqbs7n-40n7tonidn.gz",
+      "Route": "js/app.30psyackb5.js",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\61l45jh54i-30psyackb5.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000313873195"
+          "Quality": "0.000097087379"
         }
       ],
       "ResponseHeaders": [
@@ -620,156 +1139,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3185"
+          "Value": "10299"
         },
         {
           "Name": "ETag",
-          "Value": "\"sKxpjHQ4JeFJTRnN796TOkElijSnrUVAUtE6J/R0kRw=\""
+          "Value": "\"pwj7b4mAFZ4aJ/OL7jNQXDcntVLUBY6U4AmVimas+3g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 05:47:38 GMT"
+          "Value": "Tue, 19 Aug 2025 04:52:05 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/html"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"NP1PVwfeZKMB4sB0pALpMu82sZ6HcXVW0gOKzISyQ6M=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-NP1PVwfeZKMB4sB0pALpMu82sZ6HcXVW0gOKzISyQ6M="
-        }
-      ]
-    },
-    {
-      "Route": "index.html",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\index.html",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "13215"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/html"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"NP1PVwfeZKMB4sB0pALpMu82sZ6HcXVW0gOKzISyQ6M=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 05:47:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-NP1PVwfeZKMB4sB0pALpMu82sZ6HcXVW0gOKzISyQ6M="
-        }
-      ]
-    },
-    {
-      "Route": "index.html.gz",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\mp96bqbs7n-40n7tonidn.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "3185"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/html"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"sKxpjHQ4JeFJTRnN796TOkElijSnrUVAUtE6J/R0kRw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 05:47:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-sKxpjHQ4JeFJTRnN796TOkElijSnrUVAUtE6J/R0kRw="
-        }
-      ]
-    },
-    {
-      "Route": "js/app.js",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\61l45jh54i-nrcfx6uaa5.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000113546043"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "8806"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"H1X9tQLTV1YqRtBganABpHQX08BjHv1U3CIzDhypNzA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 14:07:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -785,18 +1167,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"nRinq0lUkSrPYUJwT2BG3THswZpwUP7NOQUAE1N/S2E=\""
+          "Value": "W/\"bQgpto/RCvHnFaamt2+XMkzE+nCr18uVxxIzg10tHek=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "30psyackb5"
+        },
+        {
+          "Name": "label",
+          "Value": "js/app.js"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-nRinq0lUkSrPYUJwT2BG3THswZpwUP7NOQUAE1N/S2E="
+          "Value": "sha256-bQgpto/RCvHnFaamt2+XMkzE+nCr18uVxxIzg10tHek="
         }
       ]
     },
     {
-      "Route": "js/app.js",
+      "Route": "js/app.30psyackb5.js",
       "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\app.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -806,7 +1196,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "44128"
+          "Value": "55189"
         },
         {
           "Name": "Content-Type",
@@ -814,121 +1204,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"nRinq0lUkSrPYUJwT2BG3THswZpwUP7NOQUAE1N/S2E=\""
+          "Value": "\"bQgpto/RCvHnFaamt2+XMkzE+nCr18uVxxIzg10tHek=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 14:07:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-nRinq0lUkSrPYUJwT2BG3THswZpwUP7NOQUAE1N/S2E="
-        }
-      ]
-    },
-    {
-      "Route": "js/app.js.gz",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\61l45jh54i-nrcfx6uaa5.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "8806"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"H1X9tQLTV1YqRtBganABpHQX08BjHv1U3CIzDhypNzA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 14:07:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-H1X9tQLTV1YqRtBganABpHQX08BjHv1U3CIzDhypNzA="
-        }
-      ]
-    },
-    {
-      "Route": "js/app.nrcfx6uaa5.js",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\61l45jh54i-nrcfx6uaa5.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000113546043"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "8806"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"H1X9tQLTV1YqRtBganABpHQX08BjHv1U3CIzDhypNzA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 14:07:05 GMT"
+          "Value": "Tue, 19 Aug 2025 04:52:05 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"nRinq0lUkSrPYUJwT2BG3THswZpwUP7NOQUAE1N/S2E=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "nrcfx6uaa5"
+          "Value": "30psyackb5"
         },
         {
           "Name": "label",
@@ -936,13 +1226,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-nRinq0lUkSrPYUJwT2BG3THswZpwUP7NOQUAE1N/S2E="
+          "Value": "sha256-bQgpto/RCvHnFaamt2+XMkzE+nCr18uVxxIzg10tHek="
         }
       ]
     },
     {
-      "Route": "js/app.nrcfx6uaa5.js",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\app.js",
+      "Route": "js/app.30psyackb5.js.gz",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\61l45jh54i-30psyackb5.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -951,7 +1241,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "44128"
+          "Value": "10299"
         },
         {
           "Name": "Content-Type",
@@ -959,56 +1249,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"nRinq0lUkSrPYUJwT2BG3THswZpwUP7NOQUAE1N/S2E=\""
+          "Value": "\"pwj7b4mAFZ4aJ/OL7jNQXDcntVLUBY6U4AmVimas+3g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 14:07:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "nrcfx6uaa5"
-        },
-        {
-          "Name": "label",
-          "Value": "js/app.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-nRinq0lUkSrPYUJwT2BG3THswZpwUP7NOQUAE1N/S2E="
-        }
-      ]
-    },
-    {
-      "Route": "js/app.nrcfx6uaa5.js.gz",
-      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\61l45jh54i-nrcfx6uaa5.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "8806"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"H1X9tQLTV1YqRtBganABpHQX08BjHv1U3CIzDhypNzA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 14 Aug 2025 14:07:05 GMT"
+          "Value": "Tue, 19 Aug 2025 04:52:05 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1026,7 +1271,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "nrcfx6uaa5"
+          "Value": "30psyackb5"
         },
         {
           "Name": "label",
@@ -1034,7 +1279,442 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-H1X9tQLTV1YqRtBganABpHQX08BjHv1U3CIzDhypNzA="
+          "Value": "sha256-pwj7b4mAFZ4aJ/OL7jNQXDcntVLUBY6U4AmVimas+3g="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.js",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\61l45jh54i-30psyackb5.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000097087379"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10299"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pwj7b4mAFZ4aJ/OL7jNQXDcntVLUBY6U4AmVimas+3g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 04:52:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"bQgpto/RCvHnFaamt2+XMkzE+nCr18uVxxIzg10tHek=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bQgpto/RCvHnFaamt2+XMkzE+nCr18uVxxIzg10tHek="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.js",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\app.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "55189"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bQgpto/RCvHnFaamt2+XMkzE+nCr18uVxxIzg10tHek=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 04:52:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bQgpto/RCvHnFaamt2+XMkzE+nCr18uVxxIzg10tHek="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.js.gz",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\61l45jh54i-30psyackb5.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pwj7b4mAFZ4aJ/OL7jNQXDcntVLUBY6U4AmVimas+3g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 04:52:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-pwj7b4mAFZ4aJ/OL7jNQXDcntVLUBY6U4AmVimas+3g="
+        }
+      ]
+    },
+    {
+      "Route": "js/chat.1dp689e5b4.js",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\yuftkx4fwh-1dp689e5b4.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000470145745"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2126"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9CG1JnTcbVW50LDJteUE9SMUbAeht7BHmoTbTv3CIz8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 16:39:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"5bFmpuvZflYlkqawiF1Q74AOLwi53yVLpobHvp6QZOw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1dp689e5b4"
+        },
+        {
+          "Name": "label",
+          "Value": "js/chat.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5bFmpuvZflYlkqawiF1Q74AOLwi53yVLpobHvp6QZOw="
+        }
+      ]
+    },
+    {
+      "Route": "js/chat.1dp689e5b4.js",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\chat.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6588"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5bFmpuvZflYlkqawiF1Q74AOLwi53yVLpobHvp6QZOw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 16:39:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1dp689e5b4"
+        },
+        {
+          "Name": "label",
+          "Value": "js/chat.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5bFmpuvZflYlkqawiF1Q74AOLwi53yVLpobHvp6QZOw="
+        }
+      ]
+    },
+    {
+      "Route": "js/chat.1dp689e5b4.js.gz",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\yuftkx4fwh-1dp689e5b4.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2126"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9CG1JnTcbVW50LDJteUE9SMUbAeht7BHmoTbTv3CIz8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 16:39:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1dp689e5b4"
+        },
+        {
+          "Name": "label",
+          "Value": "js/chat.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9CG1JnTcbVW50LDJteUE9SMUbAeht7BHmoTbTv3CIz8="
+        }
+      ]
+    },
+    {
+      "Route": "js/chat.js",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\yuftkx4fwh-1dp689e5b4.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000470145745"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2126"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9CG1JnTcbVW50LDJteUE9SMUbAeht7BHmoTbTv3CIz8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 16:39:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"5bFmpuvZflYlkqawiF1Q74AOLwi53yVLpobHvp6QZOw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5bFmpuvZflYlkqawiF1Q74AOLwi53yVLpobHvp6QZOw="
+        }
+      ]
+    },
+    {
+      "Route": "js/chat.js",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\chat.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6588"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5bFmpuvZflYlkqawiF1Q74AOLwi53yVLpobHvp6QZOw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 16:39:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5bFmpuvZflYlkqawiF1Q74AOLwi53yVLpobHvp6QZOw="
+        }
+      ]
+    },
+    {
+      "Route": "js/chat.js.gz",
+      "AssetFile": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\Debug\\net9.0\\compressed\\yuftkx4fwh-1dp689e5b4.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2126"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9CG1JnTcbVW50LDJteUE9SMUbAeht7BHmoTbTv3CIz8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Aug 2025 16:39:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9CG1JnTcbVW50LDJteUE9SMUbAeht7BHmoTbTv3CIz8="
         }
       ]
     }

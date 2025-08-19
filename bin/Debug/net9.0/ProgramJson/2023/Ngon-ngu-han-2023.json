@@ -1,0 +1,603 @@
+{
+  "department": "Ngôn ngữ Hàn Quốc",
+  "program_code": "7220210",
+  "academic_year": "2023",
+  "total_credits": 140,
+  "non_accumulated_credits": 5,
+  "non_accumulated_program": "Chương trình Giáo dục Quốc phòng và an ninh",
+  "courses": [
+    {
+      "category": "Kiến thức giáo dục đại cương",
+      "total_credits": 53,
+      "subjects": [
+        {
+          "code": "POS105",
+          "name": "Kinh tế Chính trị Mác - Lênin",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS106",
+          "name": "Chủ nghĩa xã hội khoa học",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS107",
+          "name": "Lịch sử Đảng Cộng sản Việt Nam",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS104",
+          "name": "Triết học Mác - Lênin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS103",
+          "name": "Tư tưởng Hồ Chí Minh",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC101",
+          "name": "Tiếng Anh 1",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC102",
+          "name": "Tiếng Anh 2",
+          "credits": 3,
+          "prerequisites": ["ENC101"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC103",
+          "name": "Tiếng Anh 3",
+          "credits": 3,
+          "prerequisites": ["ENC102"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC104",
+          "name": "Tiếng Anh 4",
+          "credits": 3,
+          "prerequisites": ["ENC103"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC105",
+          "name": "Tiếng Anh 5",
+          "credits": 3,
+          "prerequisites": ["ENC104"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC106",
+          "name": "Tiếng Anh 6",
+          "credits": 3,
+          "prerequisites": ["ENC105"],
+          "corequisites": []
+        },
+        {
+          "code": "CAP211",
+          "name": "Nhập môn công nghệ thông tin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "PSY140",
+          "name": "Giáo dục cảm xúc",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SOS101",
+          "name": "Cơ sở văn hóa Việt Nam",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SOS102",
+          "name": "Xã hội học",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SOS103",
+          "name": "Lịch sử văn minh thế giới",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "LAW158",
+          "name": "Luật và khởi nghiệp",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL103",
+          "name": "Kỹ năng tư duy sáng tạo và quản lý thời gian",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL102",
+          "name": "Kỹ năng thuyết trình và tìm việc",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức giáo dục chuyên nghiệp",
+      "total_credits": 87,
+      "subcategories": [
+        {
+          "name": "Kiến thức bắt buộc",
+          "total_credits": 75,
+          "subjects": [
+            {
+              "code": "KOR132",
+              "name": "Nhập môn Ngôn ngữ Hàn Quốc",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": ["KOR103", "KOR135", "KOR118"]
+            },
+            {
+              "code": "KOR101",
+              "name": "Tiếng Hàn - Nghe, nói 1",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR102",
+              "name": "Tiếng Hàn - Nghe, nói 2",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR103",
+              "name": "Tiếng Hàn - Nghe, nói 3",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR104",
+              "name": "Tiếng Hàn - Nghe, nói 4",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR105",
+              "name": "Tiếng Hàn - Nghe, nói 5",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR133",
+              "name": "Tiếng Hàn - Đọc, viết 1",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR134",
+              "name": "Tiếng Hàn - Đọc, viết 2",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR135",
+              "name": "Tiếng Hàn - Đọc, viết 3",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR136",
+              "name": "Tiếng Hàn - Đọc, viết 4",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR137",
+              "name": "Tiếng Hàn - Đọc, viết 5",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR116",
+              "name": "Ngữ pháp Tiếng Hàn 1",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR117",
+              "name": "Ngữ pháp Tiếng Hàn 2",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR118",
+              "name": "Ngữ pháp Tiếng Hàn 3",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR119",
+              "name": "Ngữ pháp Tiếng Hàn 4",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR120",
+              "name": "Ngữ pháp Tiếng Hàn 5",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "KOR158",
+              "name": "Hình vị và âm vị tiếng Hàn",
+              "credits": 3,
+              "prerequisites": ["KOR104", "KOR136", "KOR119"],
+              "corequisites": []
+            },
+            {
+              "code": "KOR140",
+              "name": "Từ vựng học Tiếng Hàn",
+              "credits": 3,
+              "prerequisites": ["KOR104", "KOR136", "KOR119"],
+              "corequisites": []
+            },
+            {
+              "code": "KOR141",
+              "name": "Cú pháp học Tiếng Hàn",
+              "credits": 3,
+              "prerequisites": ["KOR104", "KOR136", "KOR119"],
+              "corequisites": []
+            },
+            {
+              "code": "KOR142",
+              "name": "Lý thuyết biên, phiên dịch Tiếng Hàn",
+              "credits": 3,
+              "prerequisites": ["KOR104", "KOR136", "KOR119"],
+              "corequisites": []
+            },
+            {
+              "code": "SOS1029",
+              "name": "Giao tiếp liên văn hóa",
+              "credits": 3,
+              "prerequisites": ["KOR104", "KOR136", "KOR119"],
+              "corequisites": []
+            },
+            {
+              "code": "SOS113",
+              "name": "Lịch sử Hàn Quốc",
+              "credits": 3,
+              "prerequisites": ["KOR102", "KOR134", "KOR117"],
+              "corequisites": []
+            },
+            {
+              "code": "SOS114",
+              "name": "Văn hóa, xã hội Hàn Quốc",
+              "credits": 3,
+              "prerequisites": ["KOR119"],
+              "corequisites": []
+            },
+            {
+              "code": "KOR143",
+              "name": "Văn học Hàn Quốc",
+              "credits": 3,
+              "prerequisites": ["KOR104", "KOR136", "KOR119"],
+              "corequisites": []
+            },
+            {
+              "code": "KOR544",
+              "name": "Thực tập chuyên ngành Ngôn ngữ Hàn Quốc",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        },
+        {
+          "name": "Kiến thức tự chọn",
+          "total_credits": 12,
+          "groups": [
+            {
+              "group_name": "Biên phiên dịch",
+              "subjects": [
+                {
+                  "code": "KOR155",
+                  "name": "Biên dịch văn học",
+                  "credits": 3,
+                  "prerequisites": ["KOR142"],
+                  "corequisites": []
+                },
+                {
+                  "code": "KOR156",
+                  "name": "Phiên dịch hội thảo",
+                  "credits": 3,
+                  "prerequisites": ["KOR142"],
+                  "corequisites": []
+                },
+                {
+                  "code": "KOR157",
+                  "name": "Biên dịch thương mại",
+                  "credits": 3,
+                  "prerequisites": ["KOR142"],
+                  "corequisites": []
+                },
+                {
+                  "code": "KOR159",
+                  "name": "Phiên dịch cabin",
+                  "credits": 3,
+                  "prerequisites": ["KOR142"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Hàn Quốc học",
+              "subjects": [
+                {
+                  "code": "KOR160",
+                  "name": "Văn hóa doanh nghiệp Hàn Quốc",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "KOR161",
+                  "name": "Điện ảnh Hàn Quốc",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "KOR162",
+                  "name": "Âm nhạc Hàn Quốc",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "KOR163",
+                  "name": "Ẩm thực Hàn Quốc",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Khóa luận tốt nghiệp",
+              "subjects": [
+                {
+                  "code": "KOR445",
+                  "name": "Khóa luận tốt nghiệp ngành Ngôn ngữ Hàn Quốc",
+                  "credits": 12,
+                  "prerequisites": ["KOR544"],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức không tích lũy",
+      "total_credits": 5,
+      "subcategories": [
+        {
+          "name": "Giáo dục thể chất",
+          "total_credits": 5,
+          "note": "Tự chọn 1 trong 5 nhóm",
+          "groups": [
+            {
+              "group_name": "Nhóm 1: Bóng chuyền",
+              "subjects": [
+                {
+                  "code": "PHT304",
+                  "name": "Bóng chuyền 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT305",
+                  "name": "Bóng chuyền 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT304"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT306",
+                  "name": "Bóng chuyền 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT305"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 2: Bóng rổ",
+              "subjects": [
+                {
+                  "code": "PHT307",
+                  "name": "Bóng rổ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT308",
+                  "name": "Bóng rổ 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT307"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT309",
+                  "name": "Bóng rổ 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT308"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 3: Thể hình - Thẩm mỹ",
+              "subjects": [
+                {
+                  "code": "PHT310",
+                  "name": "Thể hình - Thẩm mỹ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT311",
+                  "name": "Thể hình - Thẩm mỹ 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT310"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT312",
+                  "name": "Thể hình - Thẩm mỹ 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT311"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 4: Vovinam",
+              "subjects": [
+                {
+                  "code": "PHT313",
+                  "name": "Vovinam 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT314",
+                  "name": "Vovinam 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT313"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT315",
+                  "name": "Vovinam 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT314"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 5: Bóng đá",
+              "subjects": [
+                {
+                  "code": "PHT316",
+                  "name": "Bóng đá 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT317",
+                  "name": "Bóng đá 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT316"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT318",
+                  "name": "Bóng đá 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT317"],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chương trình Giáo dục quốc phòng và an ninh",
+          "note": "Bắt buộc, không tích lũy",
+          "subjects": [
+            {
+              "code": "NDF108",
+              "name": "Quốc phòng, an ninh 1",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF109",
+              "name": "Quốc phòng, an ninh 2",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF210",
+              "name": "Quốc phòng, an ninh 3",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF211",
+              "name": "Quốc phòng, an ninh 4",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "additional_info": {
+    "decision_number": "1698/QĐ-ĐKC",
+    "decision_date": "12 tháng 6 năm 2023",
+    "signed_by": "GS. TS. Nguyễn Trung Kiên",
+    "note": "Sinh viên được xét điều kiện Thực tập, Khóa luận tốt nghiệp theo quy định của Khoa."
+  }
+}

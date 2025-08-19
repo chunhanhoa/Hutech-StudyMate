@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\chat.css",
+      "PackagePath": "staticwebassets\\css\\chat.css"
+    },
+    {
       "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -11,6 +15,10 @@
     {
       "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\app.js",
       "PackagePath": "staticwebassets\\js\\app.js"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\wwwroot\\js\\chat.js",
+      "PackagePath": "staticwebassets\\js\\chat.js"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Check.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

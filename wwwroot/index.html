@@ -5,6 +5,7 @@
     <title>Phân tích điểm HUTECH</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="/css/chat.css">
     <style>
       /* Căn trái toàn bộ bảng điểm */
       #gradesTable th, #gradesTable td { text-align: left; }
@@ -237,15 +238,160 @@
           width: 100%;
         }
       }
+
+      /* Modern Header */
+      .app-header {
+        background: linear-gradient(135deg, #ffb300 0%, #e53935 100%);
+        color: white;
+        padding: 1.5rem 0;
+        text-align: center;
+      }
+      .app-header img {
+        height: 70px;
+        border-radius: 12px;
+        background: white;
+        padding: 8px;
+      }
+      .app-header h1 {
+        margin: 0 0 0.5rem 0;
+        font-size: 2.7rem;
+        font-weight: 700;
+      }
+      .app-header .intro {
+        font-size: 1.15rem;
+        max-width: 600px;
+        margin: 0;
+      }
+
+      /* Modern Info Section */
+      .info-section {
+        background: #fffbe6;
+        border-radius: 16px;
+        max-width: 900px;
+        margin: 2rem auto 0 auto;
+        box-shadow: 0 2px 12px rgba(255, 179, 0, 0.08);
+        padding: 2rem;
+      }
+      .info-section h2 {
+        color: #e53935;
+        margin-top: 0;
+      }
+      .info-section ul {
+        font-size: 1.08rem;
+        line-height: 1.7;
+        color: #333;
+        margin-bottom: 1.5rem;
+      }
+      .info-section ul li {
+        margin-bottom: 0.5rem;
+      }
+      .info-section .benefits,
+      .info-section .university-info {
+        display: flex;
+        flex: 1;
+        min-width: 220px;
+        flex-direction: column;
+      }
+      .info-section .benefits h3,
+      .info-section .university-info h3 {
+        color: #ffb300;
+        margin-bottom: 0.5rem;
+      }
+      .info-section .university-info a {
+        color: #e53935;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding: 1rem 0;
+        background: #f8f8f8;
+        border-top: 1px solid #e0e0e0;
+      }
+      .footer small {
+        color: #666;
+        font-size: 0.9rem;
+      }
+      .footer a {
+        color: #e53935;
+        text-decoration: none;
+      }
+
+      /* Ẩn phần hướng dẫn khi đã vào trang phân tích */
+      .info-section.hidden { display: none !important; }
+
+      /* Tăng kích thước font cho các mục chú thích màu và các dropdown bộ lọc */
+      .color-legend {
+        /* ...existing code... */
+        font-size: 18px; /* Tăng kích thước chú thích màu */
+      }
+      .legend-item {
+        white-space: nowrap;
+        font-size: 18px; /* Tăng kích thước từng nhãn màu */
+        font-weight: 600;
+        padding: 0.3rem 0.7rem;
+      }
+      .color-legend .legend-controls label {
+        font-size: 17px; /* Tăng kích thước label dropdown */
+        font-weight: 500;
+      }
+      .color-legend .legend-controls select {
+        font-size: 17px; /* Tăng kích thước select */
+        height: 38px;
+        padding: 4px 12px;
+        font-weight: 500;
+      }
+      .color-legend .legend-controls option {
+        font-size: 17px;
+      }
     </style>
   </head>
   <body class="light">
+    <!-- Modern Header with HUTECH branding -->
     <header class="app-header">
-      <h1>Phân tích điểm sinh viên</h1>
-      <p class="intro">Chào mừng bạn đến với công cụ phân tích điểm HUTECH! Tải
-        lên bảng điểm Excel (.xlsx) để xem thống kê chi tiết về tín chỉ và điểm
-        số.</p>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+        <img src="https://hutech.edu.vn/images/logo.png" alt="HUTECH Logo" style="height: 70px; border-radius: 12px; background: white; padding: 8px;">
+        <div>
+          <h1 style="margin: 0 0 0.5rem 0; font-size: 2.7rem; font-weight: 700;">HUTECH StudyMate</h1>
+          <p class="intro" style="font-size: 1.15rem; max-width: 600px; margin: 0;">
+            Công cụ hiện đại giúp sinh viên HUTECH phân tích bảng điểm, kiểm tra tiến độ học tập, và nhận tư vấn AI cá nhân hóa.
+          </p>
+        </div>
+      </div>
     </header>
+
+    <!-- Modern Info Section -->
+    <section class="info-section" id="infoSection">
+      <h2 style="color: #e53935; margin-top: 0;">Hướng dẫn sử dụng</h2>
+      <ul style="font-size: 1.08rem; line-height: 1.7; color: #333; margin-bottom: 1.5rem;">
+        <li><b>Bước 1:</b> Nhập <span style="color:#e53935;font-weight:600;">MSSV</span> và chọn <span style="color:#e53935;font-weight:600;">Niên khóa</span>, <span style="color:#e53935;font-weight:600;">Khoa/Viện</span> của bạn.</li>
+        <li><b>Bước 2:</b> Tải lên <span style="color:#e53935;font-weight:600;">bảng điểm Excel (.xlsx, .xls)</span> của bạn.</li>
+        <li><b>Bước 3:</b> Nhấn <span style="color:#e53935;font-weight:600;">Phân tích</span> để xem kết quả, thống kê tín chỉ, GPA, và các môn còn thiếu.</li>
+        <li><b>Bước 4:</b> Sử dụng <span style="color:#e53935;font-weight:600;">Trợ lý AI</span> để nhận tư vấn học tập, lộ trình tốt nghiệp, và gợi ý đăng ký môn.</li>
+      </ul>
+      <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+        <div class="benefits" style="flex:1; min-width:220px;">
+          <h3 style="color:#ffb300; margin-bottom:0.5rem;">Lợi ích cho sinh viên HUTECH</h3>
+          <ul style="margin:0; padding-left:1.2rem; color:#444;">
+            <li>Kiểm tra tiến độ học tập, tín chỉ đã tích lũy</li>
+            <li>Phân loại môn học: tích lũy, không tích lũy, ngoài CTĐT</li>
+            <li>Gợi ý môn tự chọn, chuyên ngành phù hợp</li>
+            <li>Chiến lược cải thiện điểm số, GPA</li>
+            <li>Nhận tư vấn AI bằng tiếng Việt</li>
+          </ul>
+        </div>
+        <div class="university-info" style="flex:1; min-width:220px;">
+          <h3 style="color:#ffb300; margin-bottom:0.5rem;">Thông tin về trường HUTECH</h3>
+          <ul style="margin:0; padding-left:1.2rem; color:#444;">
+            <li><b>Địa chỉ:</b> 475A Điện Biên Phủ, P.25, Q.Bình Thạnh, TP.HCM</li>
+            <li><b>Website:</b> <a href="https://hutech.edu.vn" target="_blank" style="color:#e53935;">hutech.edu.vn</a></li>
+            <li><b>Hotline:</b> (028) 5445 7777</li>
+            <li><b>Fanpage:</b> <a href="https://facebook.com/hutechuniversity" target="_blank" style="color:#e53935;">facebook.com/hutechuniversity</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <main class="container">
       <!-- Upload Panel - Centered -->
       <section id="uploadPanel" class="panel upload-panel-center">
@@ -358,13 +504,80 @@
                 <div id="pagination" class="pagination"></div>
               </div>
             </div>
+
+            <!-- AI Chatbot Section - Always visible after analysis -->
+            <div id="aiChatSection" class="wide" style="margin-top: 30px;">
+              <h3>🤖 Trợ lý AI học tập</h3>
+              <div class="ai-chat-container">
+                <div class="chat-header-inline">
+                </div>
+                <div class="chat-messages-inline" id="chatMessagesInline">
+                  <div class="message ai-message">
+                    <div class="message-content">
+                      👋 Xin chào!
+                      
+                      Tôi là trợ lý AI học tập của HUTECH. Sau khi bạn upload bảng điểm, tôi sẽ giúp bạn:
+                      
+                      📊 Phân tích kết quả học tập
+                      🎯 Gợi ý môn học tiếp theo  
+                      📈 Chiến lược cải thiện GPA
+                      🎓 Lộ trình tốt nghiệp
+                      
+                      Hãy upload bảng điểm và bắt đầu **chat với tôi** nhé! 😊
+                    </div>
+                  </div>
+                </div>
+                <div class="chat-input-inline">
+                  <input type="text" id="chatInputInline" placeholder="Nhập câu hỏi của bạn..." class="chat-input-field">
+                  <button id="chatSendInline" class="chat-send-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22,2 15,22 11,13 2,9"></polygon>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
           </section>
         </div>
       </div>
     </main>
     <footer class="footer">
-      <small>Demo • Phân tích bảng điểm.</small>
+      <small>
+        <a href="https://hutech.edu.vn" target="_blank" style="color:#e53935;">Trường Đại học Công nghệ TP.HCM</a>
+        &nbsp;|&nbsp;
+        <a href="https://www.instagram.com/c.nhoa/" target="_blank" style="color:#e53935;">LH: @c.nhoa</a>
+      </small>
     </footer>
     <script src="js/app.js"></script>
+    <script src="js/chat.js"></script>
+    <script>
+      // Ẩn/hiện hướng dẫn khi chuyển sang kết quả phân tích
+      function toggleInfoSection(show) {
+        var infoSection = document.getElementById('infoSection');
+        if (infoSection) {
+          if (show) infoSection.classList.remove('hidden');
+          else infoSection.classList.add('hidden');
+        }
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var resultsLayout = document.querySelector('.results-layout');
+        var uploadPanel = document.getElementById('uploadPanel');
+        // Theo dõi khi chuyển sang kết quả
+        var observer = new MutationObserver(function() {
+          var isResultsVisible = !resultsLayout.classList.contains('hidden');
+          toggleInfoSection(!isResultsVisible);
+        });
+        observer.observe(resultsLayout, { attributes: true, attributeFilter: ['class'] });
+        // Khi reset về uploadPanel thì hiện lại hướng dẫn
+        if (uploadPanel) {
+          uploadPanel.addEventListener('transitionend', function() {
+            var isUploadVisible = !uploadPanel.classList.contains('hidden');
+            if (isUploadVisible) toggleInfoSection(true);
+          });
+        }
+      });
+    </script>
   </body>
 </html>

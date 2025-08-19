@@ -1,4 +1,4 @@
-# Hutech-StudyMate – Phân tích bảng điểm & CTĐT
+# Hutech-StudyMate – Phân tích bảng điểm & CTĐT + Trợ lý AI
 
 Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại đây nè:  <a href="https://hutech-studymate.onrender.com/" target="_blank">Hutech-StudyMate</a>
 
@@ -11,10 +11,20 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - Tính GPA có trọng số
 - Phân loại môn đúng CTĐT, ngoài CTĐT, không tích lũy
 - Hỗ trợ nhiều định dạng bảng điểm (kể cả .xls cũ, xuất web, CSV / HTML bảng)
+- **🤖 Trợ lý AI học tập**: Tư vấn cá nhân hóa dựa trên kết quả phân tích
 
 Ứng dụng thuần **ASP.NET Core (Minimal Hosting)** + **Vanilla JS** (không framework front-end nặng).
 
 ## Tính năng chính
+
+### 🤖 Trợ lý AI học tập (MỚI!)
+- **Tư vấn cá nhân hóa**: Dựa trên kết quả phân tích thực tế của bạn
+- **Gợi ý đăng ký môn**: Môn nào nên học tiếp theo
+- **Chiến lược cải thiện GPA**: Lời khuyên cụ thể để nâng cao điểm
+- **Tư vấn chuyên ngành**: Hướng dẫn chọn môn tự chọn phù hợp
+- **Lập kế hoạch học tập**: Lộ trình rõ ràng tới tốt nghiệp
+- **Chat thời gian thực**: Tương tác trực tiếp bằng tiếng Việt
+- **Sử dụng Groq AI**: API miễn phí, phản hồi nhanh
 
 ### Phân tích bảng điểm
 - Upload kéo thả / chọn file (.xlsx, .xls) – tự kiểm tra định dạng
@@ -29,7 +39,7 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - Hợp nhất map mã môn → tên môn
 - Phân loại:
   - Môn tích lũy
-  - Môn không tích lũy (ví dụ: thể chất / quy định “không tích lũy”)
+  - Môn không tích lũy (ví dụ: thể chất / quy định "không tích lũy")
   - Môn ngoài CTĐT
 - Tổng hợp số tín chỉ yêu cầu / đã đạt (tách tích lũy & không tích lũy)
 
@@ -47,6 +57,7 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - Drag & drop khu vực upload
 - Tự động cuộn tới phần kết quả sau khi xử lý
 - Khả năng chọn lại CTĐT khác để so sánh mà không cần upload lại file
+- **Chatbot tích hợp**: Nút nổi trợ lý AI luôn sẵn sàng hỗ trợ
 
 ### Khả năng phục vụ & Triển khai
 - Phục vụ tĩnh thư mục wwwroot + ProgramJson thông qua StaticFileProvider
@@ -59,6 +70,19 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - Chặn file rỗng / định dạng không hợp lệ với thông báo thân thiện
 - Không crash nếu thiếu trường trong JSON CTĐT (bỏ qua an toàn)
 
+## Cách sử dụng Trợ lý AI
+
+1. **Tải lên bảng điểm**: Upload file Excel bảng điểm của bạn
+2. **Chờ phân tích**: Hệ thống sẽ tự động phân tích và so sánh với CTĐT
+3. **Mở chat AI**: Nhấp vào nút "Trợ lý AI" ở góc dưới phải
+4. **Hỏi đáp tự do**: Đặt câu hỏi bằng tiếng Việt về việc học
+
+### Câu hỏi gợi ý cho AI:
+- "Tôi nên đăng ký môn gì ở học kỳ tới?"
+- "Làm thế nào để cải thiện GPA của tôi?"
+- "Tôi còn thiếu những môn nào để tốt nghiệp?"
+- "Nên chọn chuyên ngành nào phù hợp?"
+- "Tôi có thể tốt nghiệp đúng hạn không?"
 
 ## Lưu ý bảo trì
 
@@ -67,6 +91,15 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - Giữ đồng nhất `code` (UPPERCASE không bắt buộc nhưng parser chuẩn hóa)
 - Tránh đổi format JSON trừ khi cập nhật logic parse
 - Khi thêm niên khóa mới, cần cập nhật object `programs` trong `wwwroot/js/app.js`
+- **API Key**: Groq API key được cấu hình trong `appsettings.json`
+
+## Công nghệ sử dụng
+
+- **Backend**: ASP.NET Core 9.0, Minimal API
+- **Frontend**: Vanilla JavaScript, HTML5, CSS3
+- **AI**: Groq API (Llama 3.1 70B)
+- **Excel**: EPPlus + ExcelDataReader
+- **Hosting**: Render.com với Docker
 
 ## Giấy phép
 
