@@ -2,6 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 COPY . .
+
+# Thêm đoạn này để tạo file groq.key nếu có biến môi trường GROQ_API_KEY
+ARG GROQ_API_KEY
+RUN if [ -n "$GROQ_API_KEY" ]; then echo "$GROQ_API_KEY" > groq.key; fi
+
 RUN dotnet publish -c Release -o /out /p:UseAppHost=false
 
 # Runtime stage

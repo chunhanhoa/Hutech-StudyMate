@@ -27,17 +27,8 @@ public class GroqAIService : IAIService
         _httpClient = httpClientFactory.CreateClient();
         _logger = logger;
 
-        // Đọc API key từ file riêng hoặc biến môi trường
-        var keyPath = Path.Combine(AppContext.BaseDirectory, "groq.key");
-        if (File.Exists(keyPath))
-        {
-            _apiKey = File.ReadAllText(keyPath).Trim();
-        }
-        else
-        {
-            // Đọc từ biến môi trường GROQ_API_KEY (chuẩn cho Render)
-            _apiKey = Environment.GetEnvironmentVariable("GROQ_API_KEY") ?? "";
-        }
+        // Chỉ lấy từ biến môi trường
+        _apiKey = Environment.GetEnvironmentVariable("GROQ_API_KEY") ?? "";
 
         if (!string.IsNullOrEmpty(_apiKey))
         {
