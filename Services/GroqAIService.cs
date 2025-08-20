@@ -12,11 +12,14 @@ public class GroqAIService : IAIService
     // Danh sách models mới nhất của Groq
     private static readonly string[] AvailableModels = new[]
     {
-        "meta-llama/llama-4-scout-17b-16e-instruct",  // Model mới nhất
-        "gpt-4o-mini",                                // GPT OSS 20B
-        "llama-3.1-8b-instant",                       // Model nhanh
-        "llama-3.2-1b-preview",                       // Model nhỏ
-        "gemma2-9b-it"                                // Model backup
+        "meta-llama/llama-4-scout-17b-16e-instruct",   // Main: mạnh nhất cho phân tích bảng điểm + CTĐT
+        "Qwen2.5-14B-Instruct",                        // Reasoning backup, cũng giỏi xử lý dữ liệu có cấu trúc
+        "EleutherAI/gpt-neox-20b",                     // GPT-OSS 20B, open-source hoàn toàn, fallback
+        "gpt-4o-mini",                                 // Fast, realtime, chat nhanh
+        "llama-3.1-8b-instant",                        // Fast, cân bằng tốc độ & chất lượng
+        "llama-3.2-1b-preview",                        // Lightweight, siêu nhẹ
+        "Qwen2.5-VL-7B-Instruct",                      // Multimodal (text + image)
+        "gemma2-9b-it"                                 // Backup ổn định
     };
 
     public GroqAIService(IHttpClientFactory httpClientFactory, ILogger<GroqAIService> logger, IConfiguration config)
