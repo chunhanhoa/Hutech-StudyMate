@@ -326,5 +326,5 @@ C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\bin\Debug\net9.
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\t4cvf4cpex-tzab34cuk9.gz
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\61l45jh54i-bkibacmmpx.gz
 C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\yuftkx4fwh-1dp689e5b4.gz
-C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\0bcxyj6k4h-8luhtmzuxg.gz
-C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\mp96bqbs7n-ui1fe8ja2p.gz
+C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\mp96bqbs7n-jtjy2aoqh8.gz
+C:\Users\ASUS\OneDrive\Máy tính\Code\All_File\Hutech-StudyMate\obj\Debug\net9.0\compressed\0bcxyj6k4h-nz4j5hbzkc.gz
