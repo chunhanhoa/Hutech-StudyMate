@@ -11,20 +11,21 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - Tính GPA có trọng số
 - Phân loại môn đúng CTĐT, ngoài CTĐT, không tích lũy
 - Hỗ trợ nhiều định dạng bảng điểm (kể cả .xls cũ, xuất web, CSV / HTML bảng)
-- Trợ lý AI học tập: Tư vấn cá nhân hóa dựa trên kết quả phân tích
+- **Trợ lý AI học tập**: Tư vấn cá nhân hóa dựa trên kết quả phân tích, với giao diện chatbot sinh động (mô hình 3D từ Sketchfab)
 
 Ứng dụng thuần **ASP.NET Core (Minimal Hosting)** + **Vanilla JS** (không framework front-end nặng).
 
 ## Tính năng chính
 
 ### Trợ lý AI học tập
-- **Tư vấn cá nhân hóa**: Dựa trên kết quả phân tích thực tế của bạn
-- **Gợi ý đăng ký môn**: Môn nào nên học tiếp theo
-- **Chiến lược cải thiện GPA**: Lời khuyên cụ thể để nâng cao điểm
+- **Tư vấn cá nhân hóa**: Dựa trên kết quả phân tích thực tế của bạn (GPA, tín chỉ, môn còn thiếu)
+- **Gợi ý đăng ký môn**: Môn nào nên học tiếp theo dựa trên CTĐT
+- **Chiến lược cải thiện GPA**: Lời khuyên cụ thể để nâng cao điểm số
 - **Tư vấn chuyên ngành**: Hướng dẫn chọn môn tự chọn phù hợp
 - **Lập kế hoạch học tập**: Lộ trình rõ ràng tới tốt nghiệp
-- **Chat thời gian thực**: Tương tác trực tiếp bằng tiếng Việt
-- **Sử dụng Groq AI**: API miễn phí, phản hồi nhanh
+- **Chat thời gian thực**: Tương tác trực tiếp bằng tiếng Việt, với mô hình 3D anime sinh động (từ Sketchfab)
+- **Sử dụng Groq AI**: API miễn phí, phản hồi nhanh (Llama 3.1 70B)
+- **Tích hợp tự động**: Chatbot ẩn/hiện theo trạng thái kết quả phân tích
 
 ### Phân tích bảng điểm
 - Upload kéo thả / chọn file (.xlsx, .xls) – tự kiểm tra định dạng
@@ -57,13 +58,15 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - Drag & drop khu vực upload
 - Tự động cuộn tới phần kết quả sau khi xử lý
 - Khả năng chọn lại CTĐT khác để so sánh mà không cần upload lại file
-- **Chatbot tích hợp**: Nút nổi trợ lý AI luôn sẵn sàng hỗ trợ
+- **Chatbot tích hợp**: Nút nổi trợ lý AI luôn sẵn sàng hỗ trợ, với mô hình 3D responsive trên mobile
+- Responsive design: Tối ưu cho màn hình nhỏ (ẩn cột không cần thiết, điều chỉnh layout)
 
 ### Khả năng phục vụ & Triển khai
 - Phục vụ tĩnh thư mục wwwroot + ProgramJson thông qua StaticFileProvider
 - Hỗ trợ PORT động (Render / dịch vụ hosting)
 - Dockerfile đa stage (build → runtime)
 - Encoding provider đăng ký để đọc .xls (mã hóa Windows-1252 / code pages)
+- **SelfPingService**: Ping server tự động mỗi 10 phút để tránh idle timeout trên hosting miễn phí (như Render)
 
 ### Xử lý lỗi & Độ bền
 - Fallback nhiều lớp đọc Excel
@@ -73,7 +76,7 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 ## Lưu ý bảo trì
 
 - Khi thêm CTĐT mới: đặt vào `ProgramJson/<năm>/...json`
-- Hiện tại hỗ trợ niên khóa: **2022**, **2023**
+- Hiện tại hỗ trợ niên khóa: **2022**, **2023**, **2024**
 - Giữ đồng nhất `code` (UPPERCASE không bắt buộc nhưng parser chuẩn hóa)
 - Tránh đổi format JSON trừ khi cập nhật logic parse
 - Khi thêm niên khóa mới, cần cập nhật object `programs` trong `wwwroot/js/app.js`
@@ -84,6 +87,7 @@ Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại
 - **Frontend**: Vanilla JavaScript, HTML5, CSS3
 - **AI**: Groq API (Llama 3.1 70B)
 - **Excel**: EPPlus + ExcelDataReader
+- **3D Model**: Sketchfab (iframe nhúng mô hình anime)
 - **Hosting**: Render.com với Docker
 
 ## Giấy phép
