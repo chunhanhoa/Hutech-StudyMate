@@ -345,66 +345,6 @@
       .color-legend .legend-controls option {
         font-size: 17px;
       }
-
-      /* Thêm CSS cho bố cục mới của khu vực chat AI */
-      .ai-chat-container {
-        display: grid;
-        grid-template-columns: 3fr 7fr;
-        gap: 10px;
-        align-items: flex-start;
-      }
-      .ai-model-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-      .ai-model-image {
-        max-width: 100%;
-        border-radius: 12px;
-        margin-bottom: 10px;
-      }
-      .ai-model-caption {
-        font-size: 0.9rem;
-        color: #666;
-      }
-
-      /* Responsive cho khu vực chat AI */
-      @media screen and (max-width: 768px) {
-        .ai-chat-container {
-          grid-template-columns: 1fr;
-          flex-direction: column;
-        }
-        .ai-model-section {
-          margin-bottom: 15px;
-        }
-      }
-
-      /* Thay đổi: Thay thế img bằng iframe Sketchfab cho mô hình 3D */
-      .sketchfab-embed-wrapper {
-        width: 100%;
-        max-width: 300px; /* Giới hạn chiều rộng để vừa khít */
-        margin: 0 auto; /* Căn giữa */
-      }
-
-      .ai-model-iframe {
-        width: 100%;
-        height: 400px; /* Giữ nguyên hoặc điều chỉnh nếu cần */
-        border: none;
-        border-radius: 12px;
-        overflow: hidden;
-        margin-bottom: 10px;
-      }
-
-      /* Responsive cho mobile */
-      @media (max-width: 768px) {
-        .sketchfab-embed-wrapper {
-          max-width: 250px;
-        }
-        .ai-model-iframe {
-          height: 300px; /* Giảm chiều cao trên mobile */
-        }
-      }
     </style>
   </head>
   <body class="light">
@@ -570,60 +510,33 @@
             <div id="aiChatSection" class="wide" style="margin-top: 30px;">
               <h3>🤖 Trợ lý AI học tập</h3>
               <div class="ai-chat-container">
-                <!-- Thay đổi: Sử dụng mã nhúng Sketchfab đầy đủ cho mô hình 3D -->
-                <div class="ai-model-section">
-                  <div class="sketchfab-embed-wrapper">
-                    <iframe 
-                      title="Blu - Anime Girl Character" 
-                      frameborder="0" 
-                      allowfullscreen 
-                      mozallowfullscreen="true" 
-                      webkitallowfullscreen="true" 
-                      allow="autoplay; fullscreen; xr-spatial-tracking" 
-                      xr-spatial-tracking 
-                      execution-while-out-of-viewport 
-                      execution-while-not-rendered 
-                      web-share 
-                      src="https://sketchfab.com/models/c75ab6b43e1e49da952361ee6b36f0a4/embed" 
-                      class="ai-model-iframe">
-                    </iframe>
-                    <!-- Giữ lại phần mô tả tác giả nếu bạn muốn -->
-                    <!-- <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">
-                      <a href="https://sketchfab.com/3d-models/blu-anime-girl-character-c75ab6b43e1e49da952361ee6b36f0a4?utm_medium=embed&utm_campaign=share-popup&utm_content=c75ab6b43e1e49da952361ee6b36f0a4" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Blu - Anime Girl Character</a> by <a href="https://sketchfab.com/ridho.mnf?utm_medium=embed&utm_campaign=share-popup&utm_content=c75ab6b43e1e49da952361ee6b36f0a4" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">ridho.mnf</a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=c75ab6b43e1e49da952361ee6b36f0a4" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
-                    </p> -->
-                  </div>
-                  <p class="ai-model-caption">Chào bạn! Tôi là trợ lý AI của bạn 😊</p>
+                <div class="chat-header-inline">
                 </div>
-                <!-- Khu vực chat bên phải -->
-                <div class="ai-chat-section">
-                  <div class="chat-header-inline">
-                  </div>
-                  <div class="chat-messages-inline" id="chatMessagesInline">
-                    <div class="message ai-message">
-                      <div class="message-content">
-                        👋 Xin chào!
-                        
-                        Tôi là trợ lý AI học tập của HUTECH. Sau khi bạn upload bảng điểm, tôi sẽ giúp bạn:
-                        
-                        📊 Phân tích kết quả học tập
-                        🎯 Gợi ý môn học tiếp theo  
-                        📈 Chiến lược cải thiện GPA
-                        🎓 Lộ trình tốt nghiệp
-                        
-                        Hãy upload bảng điểm và bắt đầu **chat với tôi** nhé! 😊
-                      </div>
+                <div class="chat-messages-inline" id="chatMessagesInline">
+                  <div class="message ai-message">
+                    <div class="message-content">
+                      👋 Xin chào!
+                      
+                      Tôi là trợ lý AI học tập của HUTECH. Sau khi bạn upload bảng điểm, tôi sẽ giúp bạn:
+                      
+                      📊 Phân tích kết quả học tập
+                      🎯 Gợi ý môn học tiếp theo  
+                      📈 Chiến lược cải thiện GPA
+                      🎓 Lộ trình tốt nghiệp
+                      
+                      Hãy upload bảng điểm và bắt đầu **chat với tôi** nhé! 😊
                     </div>
                   </div>
-                  <div class="chat-input-inline">
-                    <input type="text" id="chatInputInline" placeholder="Nhập câu hỏi của bạn..." class="chat-input-field">
-                    <button id="chatSendInline" class="chat-send-btn" title="Gửi">
-                      <!-- Biểu tượng gửi (máy bay giấy) -->
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 2L11 13"></path>
-                        <polygon points="22,2 15,22 11,13 2,9"></polygon>
-                      </svg>
-                    </button>
-                  </div>
+                </div>
+                <div class="chat-input-inline">
+                  <input type="text" id="chatInputInline" placeholder="Nhập câu hỏi của bạn..." class="chat-input-field">
+                  <button id="chatSendInline" class="chat-send-btn" title="Gửi">
+                    <!-- Biểu tượng gửi (máy bay giấy) -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M22 2L11 13"></path>
+                      <polygon points="22,2 15,22 11,13 2,9"></polygon>
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>

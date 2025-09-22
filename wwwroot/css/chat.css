@@ -7,106 +7,57 @@
 #aiChatSection h3 {
   color: #667eea;
   margin-bottom: 30px;
-  font-size: 28px;
+  font-size: 28px; /* Tăng từ 22px lên 28px */
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-/* Bố cục mới cho AI Chat: Bên trái model (3 phần), bên phải chat (7 phần) */
 .ai-chat-container {
-  display: grid;
-  grid-template-columns: 3fr 7fr;
-  gap: 20px;
   background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
   border: 2px solid #e3e8ff;
-  border-radius: 16px;
-  padding: 40px;
+  border-radius: 16px; /* Tăng border radius */
+  padding: 40px; /* Tăng từ 25px lên 40px */
   max-width: 100%;
   width: 100%;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
-  align-items: stretch;
-}
-
-/* Style cho model hoạt hình bên trái */
-.ai-model-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  height: 100%;
-  min-height: 0;
-}
-
-.ai-model-image {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.ai-model-caption {
-  margin-top: 15px;
-  font-size: 14px;
-  color: #4f46e5;
-  text-align: center;
-  font-weight: 500;
-}
-
-/* Style cho khu vực chat bên phải */
-.ai-chat-section {
-  display: flex;
-  flex-direction: column;
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  height: 100%;
-  min-height: 0;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15); /* Thêm shadow đẹp hơn */
 }
 
 .chat-header-inline {
   margin-bottom: 30px;
-  flex-shrink: 0;
 }
 
 .chat-intro {
   color: #4f46e5;
-  font-size: 16px;
+  font-size: 16px; /* Tăng từ 15px lên 16px */
   line-height: 1.7;
   margin: 0;
   background: white;
-  padding: 20px 25px;
+  padding: 20px 25px; /* Tăng padding */
   border-radius: 12px;
-  border-left: 6px solid #667eea;
+  border-left: 6px solid #667eea; /* Tăng độ dày border */
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .chat-messages-inline {
-  flex: 1;
-  max-height: 800px;
-  min-height: 600px;
+  max-height: 800px; /* Tăng gấp đôi từ 400px lên 800px */
+  min-height: 600px; /* Tăng từ 400px lên 600px */
   overflow-y: auto;
   background: white;
-  border-radius: 16px;
-  padding: 30px;
+  border-radius: 16px; /* Tăng border radius */
+  padding: 30px; /* Tăng từ 20px lên 30px */
   margin-bottom: 30px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #e5e7eb; /* Tăng độ dày border */
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  gap: 20px; /* Tăng gap giữa các tin nhắn */
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08); /* Shadow đẹp hơn */
 }
 
 .chat-messages-inline .message {
   max-width: 85%;
-  animation: messageSlide 0.4s ease;
+  animation: messageSlide 0.4s ease; /* Tăng thời gian animation */
 }
 
 @keyframes messageSlide {
@@ -129,21 +80,23 @@
 }
 
 .chat-messages-inline .message-content {
-  padding: 20px 25px;
-  border-radius: 20px;
-  font-size: 16px;
-  line-height: 1.8;
+  padding: 20px 25px; /* Tăng gấp đôi padding tin nhắn */
+  border-radius: 20px; /* Tăng border radius */
+  font-size: 16px; /* Tăng từ 15px lên 16px */
+  line-height: 1.8; /* Tăng line height */
   white-space: pre-line;
   word-wrap: break-word;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Thêm shadow cho tin nhắn */
 }
 
+/* CSS để xử lý markdown **text** thành bold */
 .chat-messages-inline .ai-message .message-content {
   background: #f8f9fa;
   color: #333;
-  border: 2px solid #e9ecef;
+  border: 2px solid #e9ecef; /* Tăng độ dày border */
 }
 
+/* Style cho text in đậm trong tin nhắn AI */
 .chat-messages-inline .ai-message .message-content strong,
 .chat-messages-inline .ai-message .message-content b {
   font-weight: 700;
@@ -156,33 +109,38 @@
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
+.chat-messages-inline .ai-message .message-content {
+  background: #f8f9fa;
+  color: #333;
+  border: 2px solid #e9ecef; /* Tăng độ dày border */
+}
+
 .chat-input-inline {
   display: flex;
-  gap: 16px;
+  gap: 16px; /* Tăng gap */
   align-items: center;
-  padding: 20px;
+  padding: 20px; /* Thêm padding cho vùng input */
   background: rgba(255,255,255,0.8);
   border-radius: 16px;
   backdrop-filter: blur(10px);
-  flex-shrink: 0;
 }
 
 .chat-input-field {
   flex: 1;
-  border: 3px solid #e5e7eb;
-  border-radius: 30px;
-  padding: 20px 30px;
-  font-size: 16px;
+  border: 3px solid #e5e7eb; /* Tăng độ dày border */
+  border-radius: 30px; /* Tăng border radius */
+  padding: 20px 30px; /* Tăng gấp đôi padding */
+  font-size: 16px; /* Giữ font size */
   outline: none;
   transition: all 0.3s ease;
   background: white;
-  min-height: 60px;
+  min-height: 60px; /* Tăng chiều cao tối thiểu */
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .chat-input-field:focus {
   border-color: #667eea;
-  box-shadow: 0 0 0 6px rgba(102, 126, 234, 0.15);
+  box-shadow: 0 0 0 6px rgba(102, 126, 234, 0.15); /* Tăng shadow focus */
   transform: translateY(-2px);
 }
 
@@ -191,7 +149,7 @@
   color: white;
   border: none;
   border-radius: 50%;
-  width: 60px;
+  width: 60px; /* Tăng từ 50px lên 60px */
   height: 60px;
   display: flex;
   align-items: center;
@@ -202,18 +160,18 @@
 }
 
 .chat-send-btn:hover:not(:disabled) {
-  transform: translateY(-4px) scale(1.05);
+  transform: translateY(-4px) scale(1.05); /* Thêm hiệu ứng scale */
   box-shadow: 0 8px 24px rgba(102, 126, 234, 0.5);
 }
 
 .chat-send-btn svg {
-  width: 24px;
+  width: 24px; /* Tăng kích thước icon */
   height: 24px;
 }
 
 /* Typing indicator */
 .chat-messages-inline .typing .message-content {
-  padding: 25px;
+  padding: 25px; /* Tăng padding */
 }
 
 .chat-messages-inline .typing-dots {
@@ -223,7 +181,7 @@
 }
 
 .chat-messages-inline .typing-dots span {
-  width: 10px;
+  width: 10px; /* Tăng kích thước dots */
   height: 10px;
   border-radius: 50%;
   background: #999;
@@ -249,297 +207,51 @@
   }
 }
 
-/* Style cho iframe mô hình 3D Sketchfab */
-.sketchfab-embed-wrapper {
-  width: 100%;
-  max-width: none;
-  height: 80%;
-  margin: 0 auto;
-}
-
-.ai-model-iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 600px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.8);
-}
-
-/* RESPONSIVE CHO TABLET (768px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .ai-chat-container {
-    grid-template-columns: 1fr 2fr;
-    gap: 15px;
-    padding: 30px;
-  }
-  
-  .ai-model-iframe {
-    min-height: 500px;
-  }
-  
-  .chat-messages-inline {
-    min-height: 500px;
-    max-height: 700px;
-  }
-}
-
-/* RESPONSIVE CHO ĐIỆN THOẠI (768px trở xuống) - TỐI ƯU HÓA */
+/* Mobile responsive */
 @media (max-width: 768px) {
   .ai-chat-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    gap: 15px;
-    padding: 20px;
-    align-items: initial;
-  }
-  
-  /* AI Model Section trên mobile */
-  .ai-model-section {
-    order: 1;
-    height: auto;
-    min-height: 250px;
-    padding: 15px;
-  }
-  
-  .ai-model-image {
-    max-width: 120px;
-  }
-  
-  .ai-model-iframe {
-    height: 300px;
-    min-height: 250px;
-  }
-  
-  .sketchfab-embed-wrapper {
-    height: 300px;
-  }
-  
-  .ai-model-caption {
-    font-size: 12px;
-    margin-top: 10px;
-  }
-  
-  /* AI Chat Section trên mobile */
-  .ai-chat-section {
-    order: 2;
-    height: auto;
-    padding: 15px;
-  }
-  
-  .chat-header-inline {
-    margin-bottom: 20px;
-  }
-  
-  .chat-intro {
-    font-size: 14px;
-    padding: 15px 18px;
-    line-height: 1.6;
-  }
-  
-  .chat-messages-inline {
-    max-height: 400px;
-    min-height: 300px;
-    padding: 15px;
-    margin-bottom: 15px;
-    gap: 15px;
-  }
-  
-  .chat-messages-inline .message {
-    max-width: 90%;
-  }
-  
-  .chat-messages-inline .message-content {
-    font-size: 14px;
-    padding: 12px 15px;
-    line-height: 1.6;
+    padding: 25px; /* Giảm padding trên mobile */
   }
   
   .chat-input-inline {
-    gap: 10px;
-    padding: 12px;
-  }
-  
-  .chat-input-field {
-    padding: 12px 18px;
-    font-size: 16px;
-    min-height: 44px;
-    border-width: 2px;
-    border-radius: 25px;
-  }
-  
-  .chat-send-btn {
-    width: 44px;
-    height: 44px;
-    flex-shrink: 0;
-  }
-  
-  .chat-send-btn svg {
-    width: 18px;
-    height: 18px;
-  }
-  
-  #aiChatSection h3 {
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-}
-
-/* RESPONSIVE CHO ĐIỆN THOẠI NHỎ (480px trở xuống) */
-@media (max-width: 480px) {
-  /* Đảm bảo AI Chat Container gọn gàng trên mobile nhỏ */
-  .ai-chat-container {
-    padding: 15px;
     gap: 12px;
-    max-width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-  }
-  
-  .ai-model-section {
-    min-height: 200px;
-    max-height: 280px;
-    padding: 12px;
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-  }
-  
-  .ai-model-image {
-    max-width: 100px;
-    width: 100%;
-  }
-  
-  .ai-model-iframe {
-    height: 200px;
-    min-height: 180px;
-    max-height: 220px;
-    width: 100%;
-  }
-  
-  .sketchfab-embed-wrapper {
-    height: 200px;
-    max-height: 220px;
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  .ai-chat-section {
-    padding: 12px;
-    max-height: 500px;
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-  }
-  
-  .chat-messages-inline {
-    max-height: 300px;
-    min-height: 200px;
-    padding: 12px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .chat-messages-inline .message-content {
-    padding: 10px 12px;
-    font-size: 13px;
-  }
-  
-  .chat-input-inline {
-    padding: 10px;
-    gap: 8px;
-    width: 100%;
-    box-sizing: border-box;
+    padding: 15px;
   }
   
   .chat-input-field {
-    padding: 10px 15px;
+    padding: 15px 20px;
     font-size: 16px;
-    min-height: 40px;
-    width: 100%;
-    box-sizing: border-box;
+    min-height: 50px;
+    border-width: 2px;
   }
   
   .chat-send-btn {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
   }
   
   .chat-send-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .chat-messages-inline {
+    max-height: 600px; /* Tăng cho mobile */
+    min-height: 400px;
+    padding: 20px;
+  }
+  
+  .chat-messages-inline .message-content {
+    font-size: 15px;
+    padding: 15px 18px;
   }
   
   #aiChatSection h3 {
-    font-size: 20px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .chat-intro {
-    font-size: 13px;
-    padding: 12px 15px;
-    box-sizing: border-box;
+    font-size: 24px;
   }
 }
 
-/* CSS cho Grades Table - Đảm bảo nằm gọn trong wrapper */
-.gradesWrapper {
-  width: 100%;
-  overflow-x: auto;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-}
-
-.gradesTable {
-  width: 100%;
-  min-width: 600px; /* Đảm bảo table không bị co quá nhỏ */
-  border-collapse: collapse;
-  box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  .gradesWrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    box-sizing: border-box;
-    max-width: 100vw;
-  }
-  
-  .gradesTable {
-    min-width: 500px;
-    font-size: 14px;
-    box-sizing: border-box;
-  }
-  
-  .gradesTable th,
-  .gradesTable td {
-    padding: 8px 6px;
-    font-size: 13px;
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 480px) {
-  .gradesWrapper {
-    margin: 0 -15px;
-    padding: 0 15px;
-    max-width: calc(100vw - 30px);
-  }
-  
-  .gradesTable {
-    min-width: 450px;
-    font-size: 13px;
-  }
-  
-  .gradesTable th,
-  .gradesTable td {
-    padding: 6px 4px;
-    font-size: 12px;
-  }
-}
-
-/* Responsive cho phần summary kết quả phân tích - GIỮ NGUYÊN */
+/* Responsive cho phần summary kết quả phân tích */
 @media (max-width: 768px) {
   #summary.summary-grid {
     display: flex !important;
@@ -577,7 +289,7 @@
   }
 }
 
-/* Desktop: Kết quả phân tích chia 2 hàng 6 mục đều nhau - GIỮ NGUYÊN */
+/* Desktop: Kết quả phân tích chia 2 hàng 6 mục đều nhau */
 @media (min-width: 769px) {
   #summary.summary-grid {
     display: grid !important;
@@ -612,5 +324,25 @@
     color: #222;
     font-size: 18px;
     word-break: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-chat-container {
+    padding: 20px;
+  }
+  
+  .chat-messages-inline {
+    max-height: 500px;
+    min-height: 350px;
+    padding: 15px;
+  }
+  
+  .chat-messages-inline .message-content {
+    padding: 12px 16px;
+  }
+  
+  #aiChatSection h3 {
+    font-size: 22px;
   }
 }
