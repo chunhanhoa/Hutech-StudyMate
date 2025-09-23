@@ -1,3 +1,4 @@
+/*
 using System.Net.Http;
 using Microsoft.Extensions.Hosting;
 
@@ -107,3 +108,4 @@ public class SelfPingService : BackgroundService
         _logger.LogInformation("SelfPingService đã dừng");
     }
 }
+*/

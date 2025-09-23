@@ -1084,11 +1084,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\Check.csproj",
+      "projectUniqueName": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\Check.csproj",
       "projectName": "Check",
-      "projectPath": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\Check.csproj",
+      "projectPath": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\Check.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Hutech-StudyMate\\obj\\",
+      "outputPath": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

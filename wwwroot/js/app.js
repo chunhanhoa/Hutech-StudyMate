@@ -1063,6 +1063,7 @@ resultDeptSelect.addEventListener('change', async () => {
             const scNonAcc = isNonAcc || (sc.name || '').toLowerCase().includes('không tích lũy');
             const scIsElective = (sc.name || '').toLowerCase().includes('tự chọn');
 
+
             if (Array.isArray(sc.subjects)) {
               addBaseSubjects(sc.subjects, scNonAcc);
             }
@@ -1213,7 +1214,7 @@ if (filterMajor) {
 }
 
 // Thêm client-side ping để hỗ trợ server-side ping
-class ClientPingHelper {
+/* class ClientPingHelper {
   constructor() {
     this.isActive = false;
     this.pingCount = 0;
@@ -1283,3 +1284,4 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('beforeunload', () => {
   clientPingHelper.stopPinging();
 });
+*/

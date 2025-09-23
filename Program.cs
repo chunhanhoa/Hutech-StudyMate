@@ -30,7 +30,7 @@ builder.Services.AddHttpClient("SelfPing", client =>
     client.DefaultRequestHeaders.Add("User-Agent", "Hutech-StudyMate-SelfPing/1.0");
 });
 
-builder.Services.AddHostedService<SelfPingService>(); // thêm
+// builder.Services.AddHostedService<SelfPingService>(); // đã comment để tắt ping tự động
 
 var app = builder.Build();
 
