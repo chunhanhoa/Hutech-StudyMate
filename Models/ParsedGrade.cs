@@ -6,5 +6,6 @@ public record ParsedGrade(
     int? Credits,
     double? Score10,
     string? LetterGrade,
-    double? Gpa
+    double? Gpa,
+    bool IsFailed = false  // Môn rớt nếu điểm hệ 10 < 4
 );

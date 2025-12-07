@@ -214,7 +214,7 @@ const programs = {
     { key: "thuong-mai-dien-tu-2024", department: "Thương mại điện tử", file: "/ProgramJson/2024/Thuong-mai-dien-tu-2024.json" },
     { key: "tri-tue-nhan-tao-2024", department: "Trí tuệ nhân tạo", file: "/ProgramJson/2024/Tri-tue-nhan-tao-2024.json" },
     { key: "truyen-thong-da-phuong-tien-2024", department: "Truyền thông đa phương tiện", file: "/ProgramJson/2024/Truyen-thong-da-phuong-tien-2024.json" },
-]
+  ]
 };
 
 function setStatus(text, cls) {
@@ -227,13 +227,13 @@ function clearResult() {
   gradesTableBody.innerHTML = '';
   summary.classList.add('hidden');
   gradesWrapper.classList.add('hidden');
-  
+
   // Ẩn chatbot AI khi xóa kết quả
   const aiChatSection = document.getElementById('aiChatSection');
   if (aiChatSection) {
     aiChatSection.classList.add('hidden');
   }
-  
+
   resultsLayout.classList.add('hidden');
   uploadPanel.classList.remove('hidden');
   gradesData = [];
@@ -245,7 +245,7 @@ Object.keys(programs).sort().forEach(y => {
   opt.value = y;
   opt.textContent = y;
   yearSelect.appendChild(opt);
-  
+
   const resultOpt = document.createElement('option');
   resultOpt.value = y;
   resultOpt.textContent = y;
@@ -589,13 +589,13 @@ function getNotLearnedSubjects() {
 
   if (!physicalSubcategory) {
     // Nếu không có subcategory thể chất, dùng logic cũ
-    return (currentProgram.allSubjects || []).filter(subject => 
+    return (currentProgram.allSubjects || []).filter(subject =>
       !learnedCodes.has(subject.code)
     );
   }
 
   const physicalGroups = physicalSubcategory.groups || [];
-  
+
   // Kiểm tra xem sinh viên đã học nhóm thể chất nào chưa
   let activePhysicalGroup = null;
   let completedPhysicalGroup = null;
@@ -734,10 +734,13 @@ function renderResult(data) {
     ['Khoa', merged.department || '—'],
     ['Niên khóa', merged.academicYear || '—'],
     ['Tổng TC CTĐT', merged.totalCredits],
-    ['Số môn đã học', data.grades.length]
+    ['Tổng môn đã học', data.grades.length]
   ];
   summary.innerHTML = baseItems.map(([k, v]) =>
-    `<div class="item"><span class="k">${k}</span><span class="v">${escapeHtml(String(v))}</span></div>`
+    `<div class="info-box">
+       <span class="info-label">${k}:</span>
+       <span class="info-value">${escapeHtml(String(v))}</span>
+     </div>`
   ).join('');
   summary.classList.remove('hidden');
 
@@ -747,6 +750,8 @@ function renderResult(data) {
   let matched = 0, unmatched = 0, accCredits = 0, nonAccCredits = 0;
   let sumGpa4Weighted = 0, sumScore10Weighted = 0;
 
+  const bestScores = new Map();
+
   gradesData = data.grades.slice();
   for (const g of gradesData) {
     const code = (g.courseCode ?? g.CourseCode ?? '').trim();
@@ -754,28 +759,43 @@ function renderResult(data) {
     const codeUpper = code.toUpperCase();
     const inProgram = !!(map && map[codeUpper]);
     if (inProgram) matched++; else unmatched++;
+
     const credits = Number(g.credits ?? g.Credits);
     const score10Num = Number(g.score10 ?? g.Score10);
     const gpa4Num = Number(g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4);
     const isNonAcc = !!(nonAccSet && nonAccSet.has(codeUpper));
-    if (inProgram && Number.isFinite(credits)) {
-      if (isNonAcc) nonAccCredits += credits;
-      else {
-        accCredits += credits;
-        if (Number.isFinite(gpa4Num)) sumGpa4Weighted += gpa4Num * credits;
-        if (Number.isFinite(score10Num)) sumScore10Weighted += score10Num * credits;
+
+    if (inProgram && Number.isFinite(credits) && Number.isFinite(score10Num)) {
+      const existing = bestScores.get(codeUpper);
+      if (!existing || score10Num > existing.score10) {
+        bestScores.set(codeUpper, {
+          credits,
+          score10: score10Num,
+          gpa4: gpa4Num,
+          isNonAcc
+        });
       }
+    }
+  }
+
+  for (const [code, scores] of bestScores) {
+    if (scores.isNonAcc) {
+      nonAccCredits += scores.credits;
+    } else {
+      accCredits += scores.credits;
+      if (Number.isFinite(scores.gpa4)) sumGpa4Weighted += scores.gpa4 * scores.credits;
+      if (Number.isFinite(scores.score10)) sumScore10Weighted += scores.score10 * scores.credits;
     }
   }
 
   const { totalElectiveCredits, missingCredits, required } = checkElectiveCredits();
   summary.insertAdjacentHTML('beforeend', `
-    <div class="item"><span class="k">Thuộc CTĐT</span><span class="v">${matched}</span></div>
-    <div class="item"><span class="k">Ngoài CTĐT</span><span class="v">${unmatched}</span></div>
-    <div class="item"><span class="k">TC tích lũy</span><span class="v">${accCredits} / ${currentProgram.totalCredits}</span></div>
-    <div class="item"><span class="k">TC không tích lũy</span><span class="v">${nonAccCredits} / ${currentProgram.nonAccTotal}</span></div>
-    <div class="item"><span class="k">GPA TL (4)</span><span class="v">${accCredits > 0 && sumGpa4Weighted > 0 ? (sumGpa4Weighted / accCredits).toFixed(2) : '—'}</span></div>
-    <div class="item"><span class="k">GPA TL (10)</span><span class="v">${accCredits > 0 && sumScore10Weighted > 0 ? (sumScore10Weighted / accCredits).toFixed(2) : '—'}</span></div>
+    <div class="info-box"><span class="info-label">Thuộc CTĐT:</span><span class="info-value">${matched}</span></div>
+    <div class="info-box"><span class="info-label">Ngoài CTĐT:</span><span class="info-value">${unmatched}</span></div>
+    <div class="info-box"><span class="info-label">TC tích lũy:</span><span class="info-value">${accCredits} / ${currentProgram.totalCredits}</span></div>
+    <div class="info-box"><span class="info-label">TC không tích lũy:</span><span class="info-value">${nonAccCredits} / ${currentProgram.nonAccTotal}</span></div>
+    <div class="info-box"><span class="info-label">GPA TL (4):</span><span class="info-value highlight">${accCredits > 0 && sumGpa4Weighted > 0 ? (sumGpa4Weighted / accCredits).toFixed(2) : '—'}</span></div>
+    <div class="info-box"><span class="info-label">GPA TL (10):</span><span class="info-value highlight">${accCredits > 0 && sumScore10Weighted > 0 ? (sumScore10Weighted / accCredits).toFixed(2) : '—'}</span></div>
   `);
 
   if (gradesData.length || currentProgram.allSubjects.length) {
@@ -794,16 +814,13 @@ function renderResult(data) {
 
   lastResult = data;
   resultsLayout.classList.remove('hidden');
-  // Cuộn lên đầu trang khi vào kết quả phân tích
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  
-  // Hiển thị chatbot AI inline ngay sau khi có kết quả
+
   const aiChatSection = document.getElementById('aiChatSection');
   if (aiChatSection) {
     aiChatSection.classList.remove('hidden');
   }
-  
-  // Update chatbot with study data
+
   if (window.studyChatBot) {
     const studyAnalysis = {
       studentId: merged.studentId,
@@ -836,7 +853,7 @@ function formatNumber(val, dec = 2, trimZero = true) {
   // Sửa lại: luôn có 1 số thập phân cho điểm TK(10)
   const fixed = val.toFixed(dec);
   if (dec === 1) return fixed; // luôn giữ 1 số thập phân
-  return trimZero ? fixed.replace(/(\.\d*?[1-9])0+$/,'$1').replace(/\.0+$/,'') : fixed;
+  return trimZero ? fixed.replace(/(\.\d*?[1-9])0+$/, '$1').replace(/\.0+$/, '') : fixed;
 }
 
 function formatGpa4(val) {
@@ -852,10 +869,26 @@ function renderGradesPage(page) {
   let displayData = [];
   const learnedCodes = new Set(gradesData.map(g => (g.courseCode ?? g.CourseCode ?? '').trim().toUpperCase()));
 
-  if (filterStatusValue === 'learned') {
+  if (filterStatusValue === 'all-learned') {
+    // Môn đã học: tất cả các môn có trong file excel
     displayData = gradesData;
     displayData = filterElectiveSubjects(displayData, filterElectiveValue);
+  } else if (filterStatusValue === 'passed') {
+    // Môn đã đậu: những môn đã học và không bị rớt
+    displayData = gradesData.filter(g => {
+      const isFailed = g.isFailed ?? g.IsFailed ?? false;
+      return !isFailed;
+    });
+    displayData = filterElectiveSubjects(displayData, filterElectiveValue);
+  } else if (filterStatusValue === 'failed') {
+    // Môn đã rớt: những môn đã học và bị rớt
+    displayData = gradesData.filter(g => {
+      const isFailed = g.isFailed ?? g.IsFailed ?? false;
+      return isFailed;
+    });
+    displayData = filterElectiveSubjects(displayData, filterElectiveValue);
   } else if (filterStatusValue === 'not-learned') {
+    // Môn chưa học: những môn chưa có trong file excel
     let notLearned = getNotLearnedSubjects();
     displayData = notLearned;
 
@@ -916,9 +949,27 @@ function renderGradesPage(page) {
     const letter = g.letterGrade ?? g.LetterGrade ?? '';
     const gpa4Num = Number(g.gpa ?? g.Gpa ?? g.gpa4 ?? g.Gpa4);
     const isNonAcc = !!(nonAccSet && nonAccSet.has(codeU));
-    let rowClass = 'incorrect';
-    if (inProgram) rowClass = isNonAcc ? 'nonacc' : 'correct';
-    if (Number.isNaN(score10Num)) rowClass = 'not-learned';
+    const isFailed = g.isFailed ?? g.IsFailed ?? false;
+
+    // XÁC ĐỊNH CLASS CHO DÒNG - KIỂM TRA isFailed TRƯỚC TIÊN
+    let rowClass = '';
+
+    // 1. KIỂM TRA MÔN RỚT TRƯỚC (ưu tiên cao nhất)
+    if (isFailed) {
+      rowClass = 'failed';
+    }
+    // 2. Sau đó mới kiểm tra môn chưa học (không có điểm)
+    else if (Number.isNaN(score10Num)) {
+      rowClass = 'not-learned';
+    }
+    // 3. Môn đã học và đậu - kiểm tra thuộc CTĐT
+    else if (inProgram) {
+      rowClass = isNonAcc ? 'nonacc' : 'correct';
+    }
+    // 4. Ngoài CTĐT
+    else {
+      rowClass = 'incorrect';
+    }
 
     return `<tr class="${rowClass}">
       <td class="stt">${abs + 1}</td>
@@ -986,9 +1037,9 @@ function escapeHtml(str) {
 
 resultYearSelect.addEventListener('change', () => {
   resultDeptSelect.innerHTML = '<option value="">-- Chọn khoa / viện --</option>';
-  if (!resultYearSelect.value) { 
-    resultDeptSelect.disabled = true; 
-    return; 
+  if (!resultYearSelect.value) {
+    resultDeptSelect.disabled = true;
+    return;
   }
   const list = programs[resultYearSelect.value] || [];
   list.forEach(p => {
@@ -1212,76 +1263,3 @@ if (filterMajor) {
     renderGradesPage(1);
   });
 }
-
-// Thêm client-side ping để hỗ trợ server-side ping
-/* class ClientPingHelper {
-  constructor() {
-    this.isActive = false;
-    this.pingCount = 0;
-  }
-
-  startPinging() {
-    if (this.isActive) return;
-    this.isActive = true;
-    this.pingCount = 0;
-    console.log('🔄 Client ping helper khởi động');
-    this.scheduleNextPing();
-  }
-
-  stopPinging() {
-    this.isActive = false;
-    console.log('⏹️ Client ping helper dừng');
-  }
-
-  async scheduleNextPing() {
-    if (!this.isActive) return;
-    
-    // Ping mỗi 10 phút từ client
-    const delay = 10 * 60 * 1000; 
-    setTimeout(() => this.performPing(), delay);
-  }
-
-  async performPing() {
-    if (!this.isActive) return;
-    
-    try {
-      this.pingCount++;
-      const start = performance.now();
-      
-      // Ping đơn giản bằng fetch
-      const response = await fetch('/', { 
-        method: 'HEAD',
-        cache: 'no-cache'
-      });
-      
-      const duration = Math.round(performance.now() - start);
-      
-      if (response.ok) {
-        console.log(`✅ Client ping #${this.pingCount} thành công (${duration}ms)`);
-      } else {
-        console.warn(`⚠️ Client ping #${this.pingCount} lỗi ${response.status} (${duration}ms)`);
-      }
-    } catch (error) {
-      console.warn(`❌ Client ping #${this.pingCount} thất bại:`, error.message);
-    }
-    
-    this.scheduleNextPing();
-  }
-}
-
-// Khởi tạo client ping helper
-const clientPingHelper = new ClientPingHelper();
-
-// Bắt đầu ping khi trang load
-document.addEventListener('DOMContentLoaded', () => {
-  // Delay 30 giây sau khi trang load
-  setTimeout(() => {
-    clientPingHelper.startPinging();
-  }, 30000);
-});
-
-// Dừng ping khi trang sắp đóng
-window.addEventListener('beforeunload', () => {
-  clientPingHelper.stopPinging();
-});
-*/

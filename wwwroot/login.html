@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - HUTECH StudyMate</title>
+    <link rel="icon" type="image/x-icon" href="img/hutech.ico">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .auth-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .auth-container img {
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .auth-container h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            /* Fix width overflow */
+        }
+
+        .form-group input:focus {
+            border-color: #e53935;
+            outline: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.8rem;
+            background: #e53935;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background: #d32f2f;
+        }
+
+        .auth-footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .auth-footer a {
+            color: #e53935;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <img src="https://hutech.edu.vn/images/logo.png" alt="HUTECH Logo">
+        <h2>Đăng nhập</h2>
+        <div id="errorMessage" class="error-message"></div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Tên đăng nhập</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn-submit">Đăng nhập</button>
+        </form>
+        <div class="auth-footer" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <div style="display: flex; align-items: center; margin: 1rem 0;">
+                <div style="flex: 1; height: 1px; background: #ddd;"></div>
+                <div style="padding: 0 10px; color: #666; font-size: 0.9rem;">HOẶC</div>
+                <div style="flex: 1; height: 1px; background: #ddd;"></div>
+            </div>
+            <a href="/api/account/login-google" class="btn-google"
+                style="display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; color: #333; font-weight: 600; transition: all 0.2s; background: white; box-sizing: border-box;">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"
+                    style="height: 20px; width: 20px; margin: 0;">
+                Đăng nhập bằng Google
+            </a>
+        </div>
+        <div class="auth-footer">
+            Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
+            <br><br>
+            <a href="index.html">← Quay lại trang chủ</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+            const btn = this.querySelector('button');
+
+            btn.disabled = true;
+            btn.innerText = "Đang xử lý...";
+            errorDiv.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/account/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    window.location.href = 'handbook.html';
+                } else {
+                    errorDiv.innerText = data.message || "Đăng nhập thất bại";
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.innerText = "Lỗi kết nối server";
+                errorDiv.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Đăng nhập";
+            }
+        });
+    </script>
+</body>
+
+</html>

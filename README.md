@@ -1,97 +1,64 @@
 # Hutech-StudyMate – Phân tích bảng điểm & CTĐT + AI
 
-Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại đây nè:  <a href="https://hutech-studymate.onrender.com/" target="_blank">Hutech-StudyMate</a>
+Chờ xíu xiu cho trang load nha :> | Bạn có thể truy cập dự án tại đây nè: <a href="https://hutech-studymate.onrender.com/" target="_blank">Hutech-StudyMate</a>
 
 ## Giới thiệu
 
-**Hutech-StudyMate** là ứng dụng web giúp sinh viên tải bảng điểm (Excel) và tự động:
-- Nhận diện các môn học đã học
-- Đối chiếu với Chương Trình Đào Tạo (CTĐT) theo Niên khóa + Khoa/Viện
-- Thống kê tín chỉ tích lũy / chưa tích lũy / ngoài CTĐT
-- Tính GPA có trọng số
-- Phân loại môn đúng CTĐT, ngoài CTĐT, không tích lũy
-- Hỗ trợ nhiều định dạng bảng điểm (kể cả .xls cũ, xuất web, CSV / HTML bảng)
-- **Trợ lý AI học tập**: Tư vấn cá nhân hóa dựa trên kết quả phân tích, với giao diện chatbot sinh động (mô hình 3D từ Sketchfab)
+**Hutech-StudyMate** là ứng dụng web toàn diện giúp sinh viên HUTECH quản lý lộ trình học tập hiệu quả. Ứng dụng cho phép tải lên bảng điểm (Excel), tự động phân tích tiến độ dựa trên Chương Trình Đào Tạo (CTĐT), và cung cấp trợ lý AI thông minh để tư vấn học tập.
 
-Ứng dụng thuần **ASP.NET Core (Minimal Hosting)** + **Vanilla JS** (không framework front-end nặng).
+Phiên bản mới nhất đã được nâng cấp với giao diện hiện đại, tích hợp hệ thống tài khoản, sổ tay điện tử và khả năng phân tích chuyên sâu hơn.
+
+Ứng dụng được xây dựng trên nền tảng **ASP.NET Core 9.0 (Minimal API)** kết hợp với **Vanilla JS** và **MongoDB**.
 
 ## Tính năng chính
 
-### Trợ lý AI học tập
-- **Tư vấn cá nhân hóa**: Dựa trên kết quả phân tích thực tế của bạn (GPA, tín chỉ, môn còn thiếu)
-- **Gợi ý đăng ký môn**: Môn nào nên học tiếp theo dựa trên CTĐT
-- **Chiến lược cải thiện GPA**: Lời khuyên cụ thể để nâng cao điểm số
-- **Tư vấn chuyên ngành**: Hướng dẫn chọn môn tự chọn phù hợp
-- **Lập kế hoạch học tập**: Lộ trình rõ ràng tới tốt nghiệp
-- **Chat thời gian thực**: Tương tác trực tiếp bằng tiếng Việt, với mô hình 3D anime sinh động (từ Sketchfab)
-- **Sử dụng Groq AI**: API miễn phí, phản hồi nhanh (Llama 3.1 70B)
-- **Tích hợp tự động**: Chatbot ẩn/hiện theo trạng thái kết quả phân tích
+### Trợ lý AI học tập (Groq AI)
+- **Tư vấn cá nhân hóa**: Phân tích dữ liệu điểm số để đưa ra lời khuyên cụ thể.
+- **Gợi ý đăng ký môn**: Đề xuất các môn học tiếp theo dựa trên tiên quyết và lộ trình.
+- **Chiến lược cải thiện GPA**: Tư vấn cách nâng cao điểm số hiệu quả.
+- **Chat thời gian thực**: Tương tác mượt mà với tốc độ phản hồi nhanh từ Llama 3.1 70B.
 
-### Phân tích bảng điểm
-- Upload kéo thả / chọn file (.xlsx, .xls) – tự kiểm tra định dạng
-- Parser đa tầng:
-  - EPPlus cho .xlsx
-  - ExcelDataReader cho .xls hoặc fallback
-  - Tự động fallback sang phân tích văn bản (CSV / TSV / bảng HTML)
-- Nhận dạng mã môn qua regex linh hoạt (VD: CMP1074, COS120, LAW123…)
+### Phân tích bảng điểm chuyên sâu
+- **Upload linh hoạt**: Hỗ trợ kéo thả file `.xlsx`, `.xls`.
+- **Parser đa tầng**: Xử lý tốt các định dạng file cũ và mới, tự động fallback khi gặp lỗi.
+- **Nhận diện thông minh**: Tự động khớp mã môn học (VD: CMP1074, COS120) với CTĐT.
 
-### Chương trình đào tạo (CTĐT)
-- Tải JSON CTĐT động theo Niên khóa + Khoa/Viện
-- Hợp nhất map mã môn → tên môn
-- Phân loại:
-  - Môn tích lũy
-  - Môn không tích lũy (ví dụ: thể chất / quy định "không tích lũy")
-  - Môn ngoài CTĐT
-- Tổng hợp số tín chỉ yêu cầu / đã đạt (tách tích lũy & không tích lũy)
+### Quản lý Chương trình đào tạo (CTĐT)
+- **Dữ liệu động**: Tải CTĐT theo Niên khóa và Khoa/Viện.
+- **Phân loại môn học**:
+  - Môn tích lũy / Không tích lũy.
+  - Môn bắt buộc / Tự chọn.
+  - Môn ngoài CTĐT.
+- **Bộ lọc nâng cao**: Lọc theo Chuyên ngành, Khối tự chọn (4 môn thay thế, Đồ án tốt nghiệp...).
 
-### Thống kê & Trình bày
-- Bảng kết quả phân trang (mặc định 10 dòng/trang)
-- Gắn màu trạng thái từng môn (✓ đúng CTĐT, ⚠ không tích lũy, ✗ ngoài CTĐT)
-- Tính GPA hệ 4 và điểm 10 có trọng số theo tín chỉ
-- Tổng hợp:
-  - Số môn đã học
-  - Số môn khớp / lệch CTĐT
-  - Tín chỉ tích lũy / không tích lũy / yêu cầu
+### Thống kê & Báo cáo
+- **Trực quan hóa**: Bảng kết quả phân trang, màu sắc trạng thái rõ ràng (✓ Đạt, ⚠ Cảnh báo, ✗ Rớt/Chưa học).
+- **Tính toán điểm**: GPA hệ 4, điểm trung bình hệ 10 có trọng số.
+- **Tổng hợp tín chỉ**: Theo dõi sát sao số tín chỉ đã đạt và còn thiếu.
 
-### Giao diện người dùng
-- Thuần HTML/CSS/JS (không phụ thuộc framework UI)
-- Drag & drop khu vực upload
-- Tự động cuộn tới phần kết quả sau khi xử lý
-- Khả năng chọn lại CTĐT khác để so sánh mà không cần upload lại file
-- **Chatbot tích hợp**: Nút nổi trợ lý AI luôn sẵn sàng hỗ trợ, với mô hình 3D responsive trên mobile
-- Responsive design: Tối ưu cho màn hình nhỏ (ẩn cột không cần thiết, điều chỉnh layout)
-
-### Khả năng phục vụ & Triển khai
-- Phục vụ tĩnh thư mục wwwroot + ProgramJson thông qua StaticFileProvider
-- Hỗ trợ PORT động (Render / dịch vụ hosting)
-- Dockerfile đa stage (build → runtime)
-- Encoding provider đăng ký để đọc .xls (mã hóa Windows-1252 / code pages)
-- **SelfPingService**: Ping server tự động mỗi 10 phút để tránh idle timeout trên hosting miễn phí (như Render)
-
-### Xử lý lỗi & Độ bền
-- Fallback nhiều lớp đọc Excel
-- Chặn file rỗng / định dạng không hợp lệ với thông báo thân thiện
-- Không crash nếu thiếu trường trong JSON CTĐT (bỏ qua an toàn)
-
-## Lưu ý bảo trì
-
-- Khi thêm CTĐT mới: đặt vào `ProgramJson/<năm>/...json`
-- Hiện tại hỗ trợ niên khóa: **2022**, **2023**, **2024**
-- Giữ đồng nhất `code` (UPPERCASE không bắt buộc nhưng parser chuẩn hóa)
-- Tránh đổi format JSON trừ khi cập nhật logic parse
-- Khi thêm niên khóa mới, cần cập nhật object `programs` trong `wwwroot/js/app.js`
+### Hệ thống tài khoản & Tiện ích
+- **Đăng nhập/Đăng ký**: Hỗ trợ đăng nhập nhanh qua **Google** hoặc tài khoản thường.
+- **Sổ tay điện tử**: Tra cứu nhanh các quy chế, quy định và hướng dẫn học vụ.
+- **Giao diện hiện đại**: Thiết kế Responsive, tối ưu cho cả Mobile và Desktop.
 
 ## Công nghệ sử dụng
 
 - **Backend**: ASP.NET Core 9.0, Minimal API
-- **Frontend**: Vanilla JavaScript, HTML5, CSS3
-- **AI**: Groq API (Llama 3.1 70B)
-- **Excel**: EPPlus + ExcelDataReader
-- **3D Model**: Sketchfab (iframe nhúng mô hình anime)
-- **Hosting**: Render.com với Docker
+- **Frontend**: Vanilla JavaScript, HTML5, CSS3 (Inter font, Modern UI)
+- **Database**: MongoDB (Lưu trữ người dùng, dữ liệu ứng dụng)
+- **AI**: Groq API (Model Llama 3.1 70B)
+- **Excel Processing**: EPPlus + ExcelDataReader
+- **Authentication**: Cookie Auth + Google OAuth 2.0
+- **Deployment**: Docker + Render.com
+
+## Lưu ý bảo trì
+
+- **Dữ liệu CTĐT**: Các file JSON CTĐT nằm trong thư mục `ProgramJson/<năm>/`.
+- **Niên khóa hỗ trợ**: Hiện tại hỗ trợ đầy đủ các niên khóa từ 2022 đến nay.
+- **Cập nhật CTĐT**: Khi thêm mới, đảm bảo giữ đúng cấu trúc JSON để parser hoạt động chính xác.
 
 ## Giấy phép
 
-Dự án mục đích học tập 
+Dự án được phát triển với mục đích học tập và phục vụ cộng đồng sinh viên HUTECH.
 
 **Phát triển bởi**: Nhóm phát triển Hutech-StudyMate

@@ -22,6 +22,20 @@ builder.Services.AddSingleton<IProgramService, ProgramService>();
 builder.Services.AddSingleton<IExcelGradeParser, ExcelGradeParser>();
 builder.Services.AddSingleton<IAIService, GroqAIService>();
 builder.Services.AddHttpClient(); // thêm
+builder.Services.AddSingleton<MongoDbContext>();
+builder.Services.AddSingleton<UserService>();
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Logout";
+    })
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration["Authentication:Google:ClientId"] ?? "MISSING_CLIENT_ID";
+        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"] ?? "MISSING_CLIENT_SECRET";
+    });
+
 
 // Cấu hình HttpClient cho ping với timeout và retry policy tốt hơn
 builder.Services.AddHttpClient("SelfPing", client =>
@@ -49,6 +63,8 @@ app.UseStaticFiles(new StaticFileOptions {
 app.MapFallbackToFile("index.html");
 
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 // Giữ duy nhất một lệnh Run

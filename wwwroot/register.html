@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - HUTECH StudyMate</title>
+    <link rel="icon" type="image/x-icon" href="img/hutech.ico">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .auth-container img {
+            height: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .auth-container h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #e53935;
+            outline: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.8rem;
+            background: #e53935;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background: #d32f2f;
+        }
+
+        .auth-footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .auth-footer a {
+            color: #e53935;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <img src="https://hutech.edu.vn/images/logo.png" alt="HUTECH Logo">
+        <h2>Đăng ký tài khoản</h2>
+        <div id="errorMessage" class="error-message"></div>
+        <form id="registerForm">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label for="fullName">Họ và tên</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentId">MSSV</label>
+                    <input type="text" id="studentId" name="studentId" required>
+                </div>
+                <div class="form-group">
+                    <label for="className">Lớp</label>
+                    <input type="text" id="className" name="className">
+                </div>
+                <div class="form-group full-width">
+                    <label for="faculty">Khoa / Viện</label>
+                    <input type="text" id="faculty" name="faculty">
+                </div>
+                <div class="form-group full-width">
+                    <label for="major">Chuyên Ngành</label>
+                    <input type="text" id="major" name="major">
+                </div>
+                <div class="form-group full-width">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-submit">Đăng ký</button>
+        </form>
+        <div class="auth-footer">
+            Đã có tài khoản? <a href="login.html">Đăng nhập</a>
+            <br><br>
+            <a href="index.html">← Quay lại trang chủ</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            const errorDiv = document.getElementById('errorMessage');
+            const btn = this.querySelector('button');
+
+            btn.disabled = true;
+            btn.innerText = "Đang xử lý...";
+            errorDiv.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/account/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert("Đăng ký thành công! Vui lòng đăng nhập.");
+                    window.location.href = 'login.html';
+                } else {
+                    errorDiv.innerText = result.message || "Đăng ký thất bại";
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.innerText = "Lỗi kết nối server";
+                errorDiv.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Đăng ký";
+            }
+        });
+    </script>
+</body>
+
+</html>

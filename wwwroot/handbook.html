@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ tay điện tử - HUTECH StudyMate</title>
+    <link rel="icon" type="image/x-icon" href="https://hutech.edu.vn/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e53935;
+            --secondary: #ffb300;
+            --bg: #f5f7fa;
+            --text: #333;
+            --white: #ffffff;
+            --sidebar-width: 280px;
+            --header-height: 60px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--white);
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .sidebar-header img {
+            height: 50px;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 1rem 0;
+            margin: 0;
+            flex: 1;
+        }
+
+        .menu-item {
+            padding: 0;
+        }
+
+        .menu-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .menu-link:hover {
+            background: #fff3e0;
+            color: var(--primary);
+        }
+
+        .menu-link.active {
+            background: #ffebee;
+            color: var(--primary);
+            border-left-color: var(--primary);
+            font-weight: 600;
+        }
+
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .btn-logout {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 8px;
+            color: #333;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: #e0e0e0;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            height: var(--header-height);
+            background: var(--white);
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            flex-shrink: 0;
+        }
+
+        .page-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-name {
+            font-weight: 500;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        /* User Info Grid */
+        .info-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .info-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .info-header h3 {
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .user-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .error {
+            color: #e53935;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-control[readonly] {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background: #d32f2f;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+                height: auto;
+                overflow: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .main-content {
+                height: auto;
+                overflow: visible;
+            }
+
+            body {
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://hutech.edu.vn/images/logo.png" alt="HUTECH Logo">
+                <h2>Sổ tay điện tử</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item">
+                    <a href="#overview" class="menu-link active" data-tab="overview">Tổng quan</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#sv5t" class="menu-link" data-tab="sv5t">Hồ sơ SV5T</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#activities" class="menu-link" data-tab="activities">Hoạt động & Sự kiện</a>
+                </li>
+                <li class="menu-item">
+                    <a href="index.html" class="menu-link">🏠 Quay về trang chủ</a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">Đăng xuất</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 class="page-title" id="pageTitle">Tổng quan</h1>
+                <div class="user-profile">
+                    <span class="user-name" id="headerUserName">Đang tải...</span>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Overview Tab -->
+                <div id="overview" class="tab-content active">
+                    <div class="info-card">
+                        <div class="info-header">
+                            <h3>Thông tin sinh viên</h3>
+                        </div>
+                        <div id="userInfoContainer">
+                            <div class="loading">Đang tải thông tin...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SV5T Tab -->
+                <div id="sv5t" class="tab-content">
+                    <div class="info-card">
+                        <div class="info-header">
+                            <h3>Hồ sơ Sinh viên 5 tốt</h3>
+                        </div>
+                        <form id="sv5tForm">
+                            <div class="form-group">
+                                <label class="form-label">Họ và tên</label>
+                                <input type="text" id="sv5tName" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">MSSV</label>
+                                <input type="text" id="sv5tStudentId" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chuyên ngành</label>
+                                <input type="text" id="sv5tMajor" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Năm học đăng ký</label>
+                                <select id="sv5tYear" class="form-control" required>
+                                    <option value="">-- Chọn năm học --</option>
+                                    <option value="2023-2024">2023-2024</option>
+                                    <option value="2024-2025">2024-2025</option>
+                                    <option value="2025-2026">2025-2026</option>
+                                    <option value="2026-2027">2026-2027</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Lý do đăng ký</label>
+                                <textarea id="sv5tReason" class="form-control"
+                                    placeholder="Nhập lý do và nguyện vọng của bạn..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">Đăng ký</button>
+                        </form>
+                    </div>
+
+                    <div class="history-section"
+                        style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                        <h4 style="color: var(--primary); margin-bottom: 1rem;">Lịch sử đăng ký</h4>
+                        <div id="sv5tHistoryContainer">
+                            <div class="loading">Đang tải lịch sử...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="activities" class="tab-content">
+                    <div class="info-card">
+                        <div class="info-header"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>Hoạt động & Sự kiện</h3>
+                            <button id="btnAddActivity" class="btn-submit" style="width: auto;">+ Thêm mới</button>
+                        </div>
+
+                        <!-- Form (Hidden by default) -->
+                        <div id="activityFormContainer"
+                            style="display: none; margin-bottom: 2rem; background: #f9f9f9; padding: 1.5rem; border-radius: 8px;">
+                            <h4 style="margin-top: 0;">Cập nhật hoạt động</h4>
+                            <form id="activityForm">
+                                <div class="form-group">
+                                    <label class="form-label">Tên hoạt động & Sự kiện</label>
+                                    <input type="text" name="activityName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Ngày tham gia</label>
+                                    <input type="date" name="participationDate" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Họ tên sinh viên</label>
+                                    <input type="text" id="actStudentName" class="form-control" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">MSSV</label>
+                                    <input type="text" id="actStudentId" class="form-control" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Hình ảnh minh chứng</label>
+                                    <input type="file" name="image" class="form-control" accept="image/*" required>
+                                </div>
+                                <div style="display: flex; gap: 1rem;">
+                                    <button type="submit" class="btn-submit">Lưu hoạt động</button>
+                                    <button type="button" id="btnCancelActivity" class="btn-submit"
+                                        style="background: #757575;">Hủy</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- List Container -->
+                        <div id="activitiesList">
+                            <div class="loading">Đang tải dữ liệu...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="certificates" class="tab-content">
+                    <div class="info-card">
+                        <h3>Giấy chứng nhận</h3>
+                        <p>Chức năng đang được phát triển.</p>
+                    </div>
+                </div>
+
+                <div id="score-analysis" class="tab-content">
+                    <div class="info-card">
+                        <h3>Phân tích điểm</h3>
+                        <p>Chức năng đang được phát triển.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const userInfoContainer = document.getElementById('userInfoContainer');
+            const headerUserName = document.getElementById('headerUserName');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const pageTitle = document.getElementById('pageTitle');
+            const menuLinks = document.querySelectorAll('.menu-link[data-tab]');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            // Tab Switching Logic
+            menuLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    // Remove active class from all links and contents
+                    menuLinks.forEach(l => l.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    // Add active class to clicked link
+                    link.classList.add('active');
+
+                    // Show corresponding tab content
+                    const tabId = link.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+
+                    // Update page title
+                    pageTitle.textContent = link.textContent;
+                });
+            });
+
+            // Fetch User Info
+            try {
+                const response = await fetch('/api/account/me');
+                if (response.ok) {
+                    const user = await response.json();
+                    console.log('User data loaded:', user);
+
+                    // Update header
+                    headerUserName.textContent = user.fullName;
+
+                    // Display user info
+                    userInfoContainer.innerHTML = `
+            <div class="user-info-grid">
+              <div class="info-item">
+                <span class="info-label">Họ và tên</span>
+                <div class="info-value">${user.fullName || 'Chưa cập nhật'}</div>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Mã số sinh viên</span>
+                <div class="info-value">${user.studentId || 'Chưa cập nhật'}</div>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Lớp</span>
+                <div class="info-value">${user.className || 'Chưa cập nhật'}</div>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Khoa / Viện</span>
+                <div class="info-value">${user.faculty || 'Chưa cập nhật'}</div>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Chuyên ngành</span>
+                <div class="info-value">${user.major || 'Chưa cập nhật'}</div>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Tên đăng nhập</span>
+                <div class="info-value">${user.username}</div>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Vai trò</span>
+                <div class="info-value">${user.role}</div>
+              </div>
+            </div>
+          `;
+
+                    // Auto-fill SV5T Form
+                    if (document.getElementById('sv5tName')) {
+                        document.getElementById('sv5tName').value = user.fullName || '';
+                        document.getElementById('sv5tStudentId').value = user.studentId || '';
+                        document.getElementById('sv5tMajor').value = user.major || '';
+                    }
+
+                    // Auto-fill Activity Form
+                    if (document.getElementById('actStudentName')) {
+                        document.getElementById('actStudentName').value = user.fullName || '';
+                        document.getElementById('actStudentId').value = user.studentId || '';
+                    }
+
+                } else {
+                    console.warn('User not logged in or session expired');
+                    // Not logged in
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+                userInfoContainer.innerHTML = '<div class="error">Có lỗi xảy ra khi tải thông tin. Vui lòng thử lại sau. <br> Chi tiết lỗi: ' + error.message + '</div>';
+            }
+
+            // Logout Logic
+            logoutBtn.addEventListener('click', async () => {
+                try {
+                    await fetch('/api/account/logout', { method: 'POST' });
+                    window.location.href = 'login.html';
+                } catch (error) {
+                    console.error('Logout failed:', error);
+                }
+            });
+
+            // Load SV5T History
+            async function loadSV5THistory() {
+                const historyContainer = document.getElementById('sv5tHistoryContainer');
+                if (!historyContainer) return;
+
+                try {
+                    const response = await fetch('/api/sv5t/history');
+                    if (response.ok) {
+                        const history = await response.json();
+                        if (history.length === 0) {
+                            historyContainer.innerHTML = '<p style="color: #666; font-style: italic;">Chưa có lịch sử đăng ký nào.</p>';
+                            return;
+                        }
+
+                        let html = '<div class="history-list">';
+                        history.forEach(item => {
+                            const date = new Date(item.createdAt).toLocaleDateString('vi-VN');
+                            let statusText = 'Đang chờ duyệt';
+                            let statusColor = '#ffb300'; // Orange for pending
+
+                            if (item.status === 'Approved') {
+                                statusText = 'Đã duyệt';
+                                statusColor = '#4caf50'; // Green
+                            } else if (item.status === 'Rejected') {
+                                statusText = 'Từ chối';
+                                statusColor = '#f44336'; // Red
+                            }
+
+                            html += `
+                                <div class="history-item" style="background: #f8f9fa; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; border-left: 4px solid ${statusColor}; border: 1px solid #eee; border-left-width: 4px;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; flex-wrap: wrap;">
+                                        <strong style="color: #333;">Năm học: ${item.academicYear}</strong>
+                                        <span style="font-weight: bold; color: ${statusColor};">${statusText}</span>
+                                    </div>
+                                    <div style="font-size: 0.9rem; color: #555;">
+                                        <p style="margin: 0.2rem 0;"><strong>Chuyên ngành:</strong> ${item.major}</p>
+                                        <p style="margin: 0.2rem 0;"><strong>Ngày đăng ký:</strong> ${date}</p>
+                                        <p style="margin: 0.2rem 0;"><strong>Lý do:</strong> ${item.reason}</p>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        html += '</div>';
+                        historyContainer.innerHTML = html;
+                    } else {
+                        historyContainer.innerHTML = '<p class="error">Không thể tải lịch sử.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error loading history:', error);
+                    historyContainer.innerHTML = '<p class="error">Lỗi kết nối.</p>';
+                }
+            }
+
+            // Call load history initially
+            if (document.getElementById('sv5tHistoryContainer')) {
+                loadSV5THistory();
+            }
+
+            // SV5T Form Submission
+            const sv5tForm = document.getElementById('sv5tForm');
+            if (sv5tForm) {
+                sv5tForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const submitBtn = sv5tForm.querySelector('button[type="submit"]');
+                    const originalBtnText = submitBtn.textContent;
+                    submitBtn.textContent = 'Đang xử lý...';
+                    submitBtn.disabled = true;
+
+                    const data = {
+                        studentName: document.getElementById('sv5tName').value,
+                        studentId: document.getElementById('sv5tStudentId').value,
+                        major: document.getElementById('sv5tMajor').value,
+                        academicYear: document.getElementById('sv5tYear').value,
+                        reason: document.getElementById('sv5tReason').value
+                    };
+
+                    try {
+                        const response = await fetch('/api/sv5t/register', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            alert(result.message);
+                            sv5tForm.reset();
+                            // Re-fill read-only data
+                            document.getElementById('sv5tName').value = data.studentName;
+                            document.getElementById('sv5tStudentId').value = data.studentId;
+                            document.getElementById('sv5tMajor').value = data.major;
+
+                            // Reload history
+                            loadSV5THistory();
+                        } else {
+                            alert(result.message || 'Có lỗi xảy ra');
+                        }
+                    } catch (error) {
+                        console.error('Error submitting form:', error);
+                        alert('Có lỗi xảy ra khi kết nối đến máy chủ');
+                    } finally {
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
+
+            // --- Activity Logic ---
+            const btnAddActivity = document.getElementById('btnAddActivity');
+            const btnCancelActivity = document.getElementById('btnCancelActivity');
+            const activityFormContainer = document.getElementById('activityFormContainer');
+            const activityForm = document.getElementById('activityForm');
+            const activitiesList = document.getElementById('activitiesList');
+
+            if (btnAddActivity) {
+                btnAddActivity.addEventListener('click', () => {
+                    activityFormContainer.style.display = 'block';
+                    btnAddActivity.style.display = 'none';
+                });
+            }
+
+            if (btnCancelActivity) {
+                btnCancelActivity.addEventListener('click', () => {
+                    activityFormContainer.style.display = 'none';
+                    btnAddActivity.style.display = 'block';
+                    activityForm.reset();
+                });
+            }
+
+            async function loadActivities() {
+                try {
+                    const response = await fetch('/api/studentactivity');
+                    if (response.ok) {
+                        const activities = await response.json();
+                        renderActivities(activities);
+                    } else {
+                        activitiesList.innerHTML = '<p class="error">Không thể tải dữ liệu.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error loading activities:', error);
+                    activitiesList.innerHTML = '<p class="error">Lỗi kết nối.</p>';
+                }
+            }
+
+            function renderActivities(activities) {
+                if (!activities || activities.length === 0) {
+                    activitiesList.innerHTML = '<p style="font-style: italic; color: #666;">Chưa có hoạt động nào được ghi nhận.</p>';
+                    return;
+                }
+
+                // Group by Academic Year
+                const groups = {};
+                activities.forEach(act => {
+                    if (!groups[act.academicYear]) groups[act.academicYear] = [];
+                    groups[act.academicYear].push(act);
+                });
+
+                // Sort years descending
+                const sortedYears = Object.keys(groups).sort().reverse();
+
+                let html = '';
+                sortedYears.forEach(year => {
+                    html += `
+            <div class="activity-block" style="margin-bottom: 2rem;">
+                <h4 style="background: #eee; padding: 0.5rem 1rem; border-radius: 4px; border-left: 4px solid var(--primary); margin-bottom: 1rem;">
+                    Năm học: ${year}
+                </h4>
+                <div class="activity-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;">
+        `;
+
+                    groups[year].forEach(act => {
+                        const date = new Date(act.participationDate).toLocaleDateString('vi-VN');
+                        html += `
+                <div class="activity-item" style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <div style="height: 160px; overflow: hidden; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                        <img src="${act.imageUrl}" alt="${act.activityName}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                    </div>
+                    <div style="padding: 1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #333; font-size: 1rem; line-height: 1.4;">${act.activityName}</h5>
+                        <p style="margin: 0; font-size: 0.85rem; color: #666;">📅 ${date}</p>
+                    </div>
+                </div>
+            `;
+                    });
+
+                    html += `</div></div>`;
+                });
+
+                activitiesList.innerHTML = html;
+            }
+
+            if (activityForm) {
+                activityForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const submitBtn = activityForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Đang lưu...';
+                    submitBtn.disabled = true;
+
+                    const formData = new FormData(activityForm);
+
+                    try {
+                        const response = await fetch('/api/studentactivity', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        if (response.ok) {
+                            alert('Thêm hoạt động thành công!');
+                            activityForm.reset();
+                            activityFormContainer.style.display = 'none';
+                            btnAddActivity.style.display = 'block';
+
+                            // Re-fill user info
+                            const userResponse = await fetch('/api/account/me');
+                            if (userResponse.ok) {
+                                const user = await userResponse.json();
+                                document.getElementById('actStudentName').value = user.fullName || '';
+                                document.getElementById('actStudentId').value = user.studentId || '';
+                            }
+
+                            loadActivities();
+                        } else {
+                            alert('Có lỗi xảy ra.');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Lỗi kết nối.');
+                    } finally {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
+
+            // Initial load
+            if (document.getElementById('activitiesList')) {
+                loadActivities();
+            }
+        });
+    </script>
+</body>
+
+</html>

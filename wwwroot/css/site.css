@@ -253,67 +253,6 @@ button:disabled {
   border: 1px solid #bee5eb;
 }
 
-/* Results layout with sidebar */
-.results-layout {
-  display: grid;
-  grid-template-columns: 1fr 350px;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.results-main {
-  min-width: 0;
-  width: 100%;
-}
-
-.ai-sidebar {
-  position: sticky;
-  top: 2rem;
-  height: fit-content;
-}
-
-/* Panel styles */
-.panel {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  margin-bottom: 1rem;
-}
-
-.panel h2, .panel h3 {
-  margin-top: 0;
-  color: #667eea;
-}
-
-/* Summary grid */
-.summary-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.summary-grid .item {
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.summary-grid .k {
-  display: block;
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 0.5rem;
-}
-
-.summary-grid .v {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-}
-
 /* Color coding for subjects */
 .correct {
   background-color: #d4edda !important;
@@ -328,6 +267,16 @@ button:disabled {
 .incorrect {
   background-color: #f8d7da !important;
   color: #721c24;
+}
+
+.failed {
+  background-color: #dc3545 !important; /* Màu đỏ đậm cho môn rớt */
+  color: #ffffff !important; /* Chữ trắng để dễ đọc */
+}
+
+.not-learned {
+  background-color: #e2e3e5 !important; /* Màu xám nhạt cho môn chưa học */
+  color: #383d41;
 }
 
 /* Color legend */
@@ -368,7 +317,7 @@ td.num {
   text-align: right;
 }
 
-tr:hover {
+tr:hover {  
   background: #f8f9fa;
 }
 

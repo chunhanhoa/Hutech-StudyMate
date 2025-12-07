@@ -9,10 +9,12 @@ namespace Check.Controllers;
 public class AdviceController : ControllerBase
 {
     private readonly IAdviceService _advice;
+    private readonly IExcelGradeParser _parser;
 
-    public AdviceController(IAdviceService advice)
+    public AdviceController(IAdviceService advice, IExcelGradeParser parser)
     {
         _advice = advice;
+        _parser = parser;
     }
 
     public record GradeDto(string courseCode, string? courseName, int? credits, double? score10, string? letterGrade, double? gpa4);
@@ -50,4 +52,5 @@ public class AdviceController : ControllerBase
         var reply = await _advice.ChatAsync(req.mssv, grades, msgs, ct);
         return Ok(new { reply });
     }
+    
 }

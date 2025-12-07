@@ -26,7 +26,7 @@ class StudyChatBot {
         if (this.inlineSendButton) {
             this.inlineSendButton.addEventListener('click', () => this.sendMessage());
         }
-        
+
         if (this.inlineChatInput) {
             this.inlineChatInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
@@ -39,12 +39,12 @@ class StudyChatBot {
 
     updateStudyData(data) {
         this.currentStudyData = data;
-        
+
         // Đảm bảo chatbot inline được hiển thị
         if (this.inlineChatSection) {
             this.inlineChatSection.classList.remove('hidden');
         }
-        
+
         if (data && data.grades && data.grades.length > 0) {
             // Xóa tin nhắn cũ và thêm tin nhắn chào mừng mới
             if (this.inlineMessagesContainer) {
@@ -52,7 +52,7 @@ class StudyChatBot {
                 this.chatHistory = [];
                 this.isFirstInteraction = true; // Reset flag khi có dữ liệu mới
             }
-            
+
             this.addMessage(`📊 Đã phân tích xong bảng điểm!
 
 Tôi thấy bạn đã học ${data.grades.length} môn, GPA hiện tại ${data.summary.gpa4 ? data.summary.gpa4.toFixed(2) : 'N/A'}/4.0.
@@ -99,7 +99,7 @@ Hãy đặt câu hỏi cho tui nhé! 😊`, 'ai');
 
             const data = await response.json();
             this.addMessage(data.response, 'ai');
-            
+
             // Đánh dấu không còn là lần đầu nữa
             this.isFirstInteraction = false;
 
@@ -114,12 +114,34 @@ Hãy đặt câu hỏi cho tui nhé! 😊`, 'ai');
     }
 
     // Function để convert markdown **text** thành HTML bold
+    // formatMessage(content) {
+    //     if (!content) return '';
+
+    //     // Convert **text** thành <strong>text</strong>
+    //     return content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    // }
+    // Function để convert markdown **text** thành HTML bold + giữ xuống dòng
+    // Function để convert markdown **text** thành HTML bold + giữ xuống dòng
+    // Function de convert markdown **text** thanh HTML + giu xuong dong
     formatMessage(content) {
         if (!content) return '';
-        
-        // Convert **text** thành <strong>text</strong>
-        return content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Escape HTML co ban
+        let safe = content
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+
+        // **text** -> <strong>text</strong>
+        safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Xu ly tat ca xuong dong: \r\n, \r, \n
+        safe = safe.replace(/\r\n|\r|\n/g, '<br>');
+
+        return safe;
     }
+
+
 
     addMessage(content, type) {
         const container = this.inlineMessagesContainer;
@@ -134,15 +156,15 @@ Hãy đặt câu hỏi cho tui nhé! 😊`, 'ai');
             <div class="message-content">${formattedContent}</div>
         `;
         container.appendChild(messageDiv);
-        
+
         // Lưu vào lịch sử chat
         this.chatHistory.push({ role: type === 'user' ? 'user' : 'assistant', content: content });
-        
+
         // Giới hạn lịch sử chat (chỉ giữ 10 tin nhắn gần nhất)
         if (this.chatHistory.length > 10) {
             this.chatHistory = this.chatHistory.slice(-10);
         }
-        
+
         this.scrollToBottom();
     }
 
@@ -179,6 +201,7 @@ Hãy đặt câu hỏi cho tui nhé! 😊`, 'ai');
             container.scrollTop = container.scrollHeight;
         }
     }
+
 }
 
 // Initialize chatbot

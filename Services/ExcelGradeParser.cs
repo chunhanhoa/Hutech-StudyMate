@@ -182,7 +182,7 @@ public class ExcelGradeParser : IExcelGradeParser
         double? score10 = null;
         bool IsLetter(string s) => s.Length is > 0 and <= 3 && Regex.IsMatch(s, @"^(A|B|C|D|F)(\+|-)?$", RegexOptions.IgnoreCase);
 
-        for (int i = cells.Length - 1; i >= 0; i--)
+        for (int i = cells.Length - 1; i > codeIndex + 4; i--)
         {
             var raw = cells[i];
             if (string.IsNullOrWhiteSpace(raw)) continue;
@@ -208,10 +208,31 @@ public class ExcelGradeParser : IExcelGradeParser
             }
             if (gpa4 != null && score10 != null) break;
         }
+        
+        // Kiểm tra môn Quốc phòng (mã NDF + 3 số)
+        bool isNationalDefense = code.Length == 6 && 
+                                 code.StartsWith("NDF", StringComparison.OrdinalIgnoreCase) &&
+                                 code.Substring(3).All(char.IsDigit);
 
-        if (gpa4 == null) return;
-        if (seen.Add(code))
-            target.Add(new ParsedGrade(code, courseName, credits, score10, letter, gpa4));
+        // Xác định môn có bị rớt không (điểm hệ 10 < 4 HOẶC điểm hệ 4 < 1)
+        bool isFailed = (score10.HasValue && score10.Value < 4.0) || 
+                        (gpa4.HasValue && gpa4.Value < 1.0);
+
+        if (isNationalDefense)
+        {
+            // Môn Quốc phòng: chỉ cần score10 >= 0 (bao gồm cả lần rớt)
+            // if (score10 == null || score10.Value < 0) return;
+            // KHÔNG kiểm tra seen nữa - giữ tất cả các lần học
+            target.Add(new ParsedGrade(code, courseName, credits, score10, null, null, isFailed));
+        }
+        else
+        {
+            // Môn thông thường: phải có điểm hợp lệ
+            //if (score10 == null || score10.Value <= 0) return;
+            
+            // KHÔNG kiểm tra seen nữa - giữ tất cả các lần học
+            target.Add(new ParsedGrade(code, courseName, credits, score10, letter, gpa4, isFailed));
+        }
     }
 
     private static bool IsXls(Stream s)
