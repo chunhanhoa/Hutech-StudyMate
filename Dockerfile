@@ -16,4 +16,6 @@ COPY --from=build /out .
 # Render sẽ set PORT; nếu không có dùng 8080
 ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT:-8080}
 EXPOSE 8080
+ENV DOTNET_HOSTBUILDER__RELOADCONFIGONCHANGE=false
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
 ENTRYPOINT ["dotnet","Check.dll"]
