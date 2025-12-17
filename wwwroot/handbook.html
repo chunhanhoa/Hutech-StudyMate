@@ -302,6 +302,22 @@
             body {
                 overflow: auto;
             }
+            
+            .top-bar, .content-area, .info-card {
+                padding: 1rem;
+            }
+
+            .sidebar-footer {
+                display: none; /* Hide footer logout in sidebar, maybe add to top bar? */
+                /* Actually, sidebar becomes top block, so keep it visible but simpler */
+                display: block; 
+                text-align: center;
+            }
+            
+            /* Make user info grid 1 col */
+            .user-info-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>

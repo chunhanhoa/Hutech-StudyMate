@@ -486,18 +486,167 @@
     }
 
     @media screen and (max-width: 768px) {
+      /* General Layout adjustments */
+      .container {
+        padding: 1rem;
+      }
+      
+      .panel {
+        padding: 1.25rem;
+      }
+
+      /* Header Responsive */
+      .app-header {
+        padding: 1rem 0 2rem 0; /* Add bottom padding for content */
+        text-align: center;
+      }
+
+      .app-header-content {
+        flex-direction: column;
+        padding: 0 1rem;
+        gap: 1rem;
+        margin-top: 3rem; /* Space for absolute positioned auth buttons */
+      }
+      
+      .app-header img {
+        height: 60px;
+        margin: 0 auto;
+      }
+
+      .app-header-title {
+        text-align: center;
+        width: 100%;
+      }
+
+      .app-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .app-header .intro {
+        font-size: 1rem;
+        margin: 0 auto;
+      }
+
+      /* Auth Buttons on Mobile */
+      #authButtons {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        gap: 10px;
+        left: 0;
+        right: 0;
+        top: 1rem;
+      }
+      
+      /* Info Section */
+      .info-section {
+        margin: 1rem auto;
+        padding: 1.25rem;
+        border-radius: 12px;
+      }
+      
+      .info-section > div {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .info-section ul {
+        padding-left: 1rem;
+      }
+
+      /* Upload Panel */
+      .upload-panel-center {
+        margin: 1rem auto;
+        padding: 1rem;
+      }
+      
+      .actions {
+        flex-direction: column;
+      }
+      
+      /* Only target action buttons, not all buttons (like pagination) */
+      .actions button {
+        width: 100%;
+      }
+
+      /* Summary Grid - 2 columns for compactness */
       .summary-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-      .color-legend {
-        flex-direction: column;
         gap: 8px;
-        font-size: 14px;
-        align-items: flex-start;
+        margin-bottom: 1rem;
       }
+
+      .info-box {
+        padding: 0.5rem;
+      }
+      
+      .info-label {
+        font-size: 0.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .info-value {
+        font-size: 0.95rem;
+        word-break: break-all; /* Prevent overflow */
+      }
+      
+      /* Pagination - Horizontal & Compact */
+      .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 1rem;
+      }
+
+      .page-btn, .nav-btn {
+        width: auto !important; /* Override any global width */
+        min-width: 32px;
+        height: 32px;
+        padding: 0 8px;
+        font-size: 0.85rem;
+      }
+      
+      .color-legend {
+        flex-direction: row; /* Keep horizontal if possible, or wrap */
+        flex-wrap: wrap;
+        gap: 5px;
+        font-size: 12px;
+        align-items: center;
+      }
+      
       .legend-controls-container {
         flex-direction: column;
         align-items: flex-start;
+      }
+      
+      /* Table scrolling */
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      
+      /* Filter Controls - Stack Vertically on Mobile */
+      .results-controls {
+        flex-direction: column;
+        align-items: stretch; /* Full width */
+        width: 100%;
+        gap: 1rem;
+      }
+
+      .field-inline {
+        flex-direction: column; /* Label on top of select */
+        align-items: flex-start;
+        width: 100%;
+        gap: 0.5rem;
+      }
+      
+      .field-inline select {
+        width: 100%; /* Full width select */
       }
     }
 
@@ -667,13 +816,35 @@
       background-color: #e2e3e5 !important;
       color: #383d41;
     }
+
+    .auth-buttons-container {
+      position: absolute; 
+      top: 1rem; 
+      right: 1rem; 
+      display: flex; 
+      gap: 10px;
+      z-index: 10;
+    }
+
+    @media screen and (max-width: 768px) {
+      .auth-buttons-container {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+    }
   </style>
 </head>
+
+
 
 <body class="light">
   <!-- Modern Header with HUTECH branding -->
   <header class="app-header">
-    <div style="position: absolute; top: 1rem; right: 1rem; display: flex; gap: 10px;">
+    <div class="auth-buttons-container">
       <div id="authButtons">
         <a href="login.html"
           style="color: white; text-decoration: none; font-weight: 600; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px;">Đăng
