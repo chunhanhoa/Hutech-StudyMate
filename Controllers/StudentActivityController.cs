@@ -40,21 +40,14 @@ public class StudentActivityController : ControllerBase
         string imageUrl = "";
         if (request.Image != null && request.Image.Length > 0)
         {
-            var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads", "activities");
-            if (!Directory.Exists(uploadsFolder))
+            using (var ms = new MemoryStream())
             {
-                Directory.CreateDirectory(uploadsFolder);
+                await request.Image.CopyToAsync(ms);
+                var fileBytes = ms.ToArray();
+                var base64String = Convert.ToBase64String(fileBytes);
+                var contentType = request.Image.ContentType ?? "image/jpeg"; // Default fallback
+                imageUrl = $"data:{contentType};base64,{base64String}";
             }
-
-            var uniqueFileName = Guid.NewGuid().ToString() + "_" + request.Image.FileName;
-            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await request.Image.CopyToAsync(fileStream);
-            }
-
-            imageUrl = "/uploads/activities/" + uniqueFileName;
         }
 
         // Calculate Academic Year
