@@ -159,19 +159,20 @@
     /* Summary Grid */
     .summary-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.25rem;
+      /* Force 6 columns as requested */
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
       margin-bottom: 2rem;
     }
 
     .info-box {
       background: #fff;
       border: 1px solid #e0e0e0;
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      padding: 0.75rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.25rem;
       transition: box-shadow 0.2s, transform 0.2s;
     }
 
@@ -182,15 +183,18 @@
     }
 
     .info-label {
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       color: #666;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .info-value {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #333;
       word-break: break-word;
@@ -198,7 +202,7 @@
 
     .info-value.highlight {
       color: var(--primary);
-      font-size: 1.5rem;
+      font-size: 1.25rem;
     }
 
     /* Table Styles */
@@ -389,15 +393,20 @@
       text-decoration: none;
     }
 
-    /* Color Legend */
+    /* Color Legend & Filters */
     .color-legend {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 8px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      font-size: 13px;
+      gap: 10px;
       margin-bottom: 1rem;
+    }
+
+    .legend-items {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
     }
 
     .legend-item {
@@ -435,33 +444,60 @@
       border: 1px dashed #bdbdbd;
     }
 
+    .legend-controls-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        padding: 10px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        width: 100%;
+    }
+    
     .color-legend .legend-controls {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: nowrap;
+      /* Removed old style, now using legend-controls-container */
+      display: contents; 
     }
 
-    .color-legend .legend-controls select {
-      font-size: 12px;
-      height: 30px;
-      padding: 2px 6px;
-      width: auto;
-      max-width: 180px;
+    .legend-controls-container .field-inline {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .legend-controls-container label {
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    .legend-controls-container select {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.9rem;
+        border-radius: 6px;
+    }
+
+
+    @media screen and (max-width: 1024px) {
+       .summary-grid {
+          grid-template-columns: repeat(3, 1fr);
+       }
     }
 
     @media screen and (max-width: 768px) {
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
       .color-legend {
         flex-direction: column;
         gap: 8px;
         font-size: 14px;
+        align-items: flex-start;
       }
-
-      .color-legend .legend-controls {
-        width: 100%;
-        justify-content: space-between;
-        flex-wrap: wrap;
+      .legend-controls-container {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
 
@@ -774,12 +810,15 @@
           <div id="gradesWrapper" class="hidden wide">
             <h3>Môn đã nhận dạng</h3>
             <div class="color-legend">
-              <span class="legend-item correct">✓ Tích lũy</span>
-              <span class="legend-item nonacc">⚠ Không tích lũy</span>
-              <span class="legend-item incorrect">✗ Ngoài CTĐT</span>
-              <span class="legend-item failed">✗ Rớt</span>
-              <span class="legend-item not-learned">⬜ Chưa học</span>
-              <div class="legend-controls">
+              <div class="legend-items">
+                <span class="legend-item correct">✓ Tích lũy</span>
+                <span class="legend-item nonacc">⚠ Không tích lũy</span>
+                <span class="legend-item incorrect">✗ Ngoài CTĐT</span>
+                <span class="legend-item failed">✗ Rớt</span>
+                <span class="legend-item not-learned">⬜ Chưa học</span>
+              </div>
+              
+              <div class="legend-controls-container">
                 <div class="field-inline">
                   <label for="filterStatus">Trạng thái môn học:</label>
                   <select id="filterStatus">
