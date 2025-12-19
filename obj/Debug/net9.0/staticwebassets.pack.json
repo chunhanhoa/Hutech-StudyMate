@@ -1,0 +1,89 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\change-password.html",
+      "PackagePath": "staticwebassets\\change-password.html"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\css\\chat.css",
+      "PackagePath": "staticwebassets\\css\\chat.css"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\google39df57f868aa5aa6.html",
+      "PackagePath": "staticwebassets\\google39df57f868aa5aa6.html"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\handbook.html",
+      "PackagePath": "staticwebassets\\handbook.html"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\img\\hutech.ico",
+      "PackagePath": "staticwebassets\\img\\hutech.ico"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\js\\app.js",
+      "PackagePath": "staticwebassets\\js\\app.js"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\js\\chat.js",
+      "PackagePath": "staticwebassets\\js\\chat.js"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\login.html",
+      "PackagePath": "staticwebassets\\login.html"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\register.html",
+      "PackagePath": "staticwebassets\\register.html"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\uploads\\activities\\0401ad92-de8c-4f69-88fe-f3c868a6e9c2_Photo-1.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\activities\\0401ad92-de8c-4f69-88fe-f3c868a6e9c2_Photo-1.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\uploads\\activities\\4c25004d-31ce-420f-8d14-05fa323f043a__Cat-tastic Moments_ Silly Cat Profile Pic Inspirations_ pfp cat cat icon cat pfp cat aesthetic.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\activities\\4c25004d-31ce-420f-8d14-05fa323f043a__Cat-tastic Moments_ Silly Cat Profile Pic Inspirations_ pfp cat cat icon cat pfp cat aesthetic.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\uploads\\activities\\81af6a68-4839-4b19-99c5-6e31d2df464d_1.png",
+      "PackagePath": "staticwebassets\\uploads\\activities\\81af6a68-4839-4b19-99c5-6e31d2df464d_1.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\uploads\\activities\\a28387d8-3fde-46c2-a4e6-8c3a0de2acf3_ha1.png",
+      "PackagePath": "staticwebassets\\uploads\\activities\\a28387d8-3fde-46c2-a4e6-8c3a0de2acf3_ha1.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Máy tính\\Code\\All_File\\Do an chuyen nganh\\Hutech-StudyMate\\wwwroot\\uploads\\activities\\c82a5c8a-1b6d-4fb0-a4a5-07e81d778f85_nq2.jpg",
+      "PackagePath": "staticwebassets\\uploads\\activities\\c82a5c8a-1b6d-4fb0-a4a5-07e81d778f85_nq2.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Check.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Check.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.Check.props",
+      "PackagePath": "build\\Check.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.Check.props",
+      "PackagePath": "buildMultiTargeting\\Check.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.Check.props",
+      "PackagePath": "buildTransitive\\Check.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,661 @@
+{
+  "department": "Kỹ thuật cơ điện tử",
+  "program_code": "7520114",
+  "academic_year": "2023",
+  "total_credits": 150,
+  "non_accumulated_credits": 5,
+  "non_accumulated_program": "Chương trình Giáo dục Quốc phòng và an ninh",
+  "courses": [
+    {
+      "category": "Kiến thức giáo dục đại cương",
+      "total_credits": 47,
+      "subjects": [
+        {
+          "code": "MAT101",
+          "name": "Đại số tuyến tính",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "MAT118",
+          "name": "Giải tích",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "PHY101",
+          "name": "Vật lý cơ",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "CAP221",
+          "name": "Tin học kỹ thuật",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "LAW106",
+          "name": "Pháp luật đại cương",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS104",
+          "name": "Triết học Mác - Lênin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS105",
+          "name": "Kinh tế Chính trị Mác - Lênin",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS106",
+          "name": "Chủ nghĩa xã hội khoa học",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS107",
+          "name": "Lịch sử Đảng Cộng sản Việt Nam",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS103",
+          "name": "Tư tưởng Hồ Chí Minh",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC120",
+          "name": "Anh ngữ 1",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC121",
+          "name": "Anh ngữ 2",
+          "credits": 3,
+          "prerequisites": ["ENC120"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC122",
+          "name": "Anh ngữ 3",
+          "credits": 3,
+          "prerequisites": ["ENC121"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC123",
+          "name": "Anh ngữ 4",
+          "credits": 3,
+          "prerequisites": ["ENC122"],
+          "corequisites": []
+        },
+        {
+          "code": "MET645",
+          "name": "Nhập môn ngành Kỹ thuật cơ điện tử",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL115",
+          "name": "Tư duy thiết kế dự án",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL116",
+          "name": "Đổi mới sáng tạo và tư duy khởi nghiệp",
+          "credits": 3,
+          "prerequisites": ["SKL115"],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức giáo dục chuyên nghiệp",
+      "total_credits": 103,
+      "subcategories": [
+        {
+          "name": "Kiến thức bắt buộc",
+          "total_credits": 88,
+          "subjects": [
+            {
+              "code": "CAP220",
+              "name": "CAD",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET105",
+              "name": "Công nghệ chế tạo máy",
+              "credits": 3,
+              "prerequisites": ["MET103"],
+              "corequisites": []
+            },
+            {
+              "code": "EGM104",
+              "name": "Cơ học lý thuyết",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET101",
+              "name": "Cơ học máy",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET103",
+              "name": "Cơ sở thiết kế máy",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET109",
+              "name": "Đo lường cơ khí và dung sai lắp ghép",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET423",
+              "name": "Đồ án công nghệ chế tạo máy",
+              "credits": 1,
+              "prerequisites": ["MET105"],
+              "corequisites": []
+            },
+            {
+              "code": "MET425",
+              "name": "Đồ án cơ sở thiết kế máy",
+              "credits": 1,
+              "prerequisites": ["MET103"],
+              "corequisites": []
+            },
+            {
+              "code": "MET422",
+              "name": "Đồ án hệ thống cơ điện tử",
+              "credits": 1,
+              "prerequisites": ["MET111"],
+              "corequisites": []
+            },
+            {
+              "code": "ELE445",
+              "name": "Đồ án kỹ thuật điện tử",
+              "credits": 1,
+              "prerequisites": ["ELE116"],
+              "corequisites": []
+            },
+            {
+              "code": "MET180",
+              "name": "Công nghệ CAD/CAM/CNC",
+              "credits": 3,
+              "prerequisites": ["CAP220"],
+              "corequisites": []
+            },
+            {
+              "code": "MET111",
+              "name": "Hệ thống cơ điện tử",
+              "credits": 3,
+              "prerequisites": ["MET105"],
+              "corequisites": []
+            },
+            {
+              "code": "MET135",
+              "name": "Hệ thống thủy lực khí nén",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE113",
+              "name": "Kỹ thuật điện",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CTR103",
+              "name": "Kỹ thuật điều khiển tự động",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE116",
+              "name": "Kỹ thuật điện tử",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CMP104",
+              "name": "Lập trình đồ họa",
+              "credits": 3,
+              "prerequisites": ["ELE116"],
+              "corequisites": []
+            },
+            {
+              "code": "CTR104",
+              "name": "Lập trình PLC",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CMP2070",
+              "name": "Lập trình Python",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CMP1010",
+              "name": "Mạng truyền thông trong công nghiệp",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE128",
+              "name": "SCADA",
+              "credits": 3,
+              "prerequisites": ["CTR104"],
+              "corequisites": []
+            },
+            {
+              "code": "MET336",
+              "name": "Thực hành hệ thống thủy lực khí nén",
+              "credits": 1,
+              "prerequisites": ["MET135"],
+              "corequisites": []
+            },
+            {
+              "code": "ELE340",
+              "name": "Thực hành kỹ thuật điện tử",
+              "credits": 1,
+              "prerequisites": ["ELE116"],
+              "corequisites": []
+            },
+            {
+              "code": "CMP343",
+              "name": "Thực hành lập trình đồ họa",
+              "credits": 1,
+              "prerequisites": ["CMP104"],
+              "corequisites": []
+            },
+            {
+              "code": "ELE342",
+              "name": "Thực hành lập trình PLC",
+              "credits": 1,
+              "prerequisites": ["CTR104"],
+              "corequisites": []
+            },
+            {
+              "code": "ELD310",
+              "name": "Thực hành vi điều khiển",
+              "credits": 1,
+              "prerequisites": ["ELD105"],
+              "corequisites": []
+            },
+            {
+              "code": "MET321",
+              "name": "Thực tập công nhân cơ khí",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE356",
+              "name": "Thực tập công nhân điện",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE357",
+              "name": "Thực tập công nhân điện tử",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET382",
+              "name": "Thực tập gia công CNC",
+              "credits": 1,
+              "prerequisites": ["MET180"],
+              "corequisites": []
+            },
+            {
+              "code": "MET118",
+              "name": "Vật liệu kỹ thuật cơ khí",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET176",
+              "name": "Vẽ kỹ thuật cơ khí",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELD105",
+              "name": "Vi điều khiển",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET546",
+              "name": "Thực tập tốt nghiệp ngành Kỹ thuật cơ điện tử (*)",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET447",
+              "name": "Đồ án tốt nghiệp ngành Kỹ thuật cơ điện tử (*)",
+              "credits": 12,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        },
+        {
+          "name": "Kiến thức tự chọn",
+          "total_credits": 15,
+          "groups": [
+            {
+              "group_name": "Công nghệ chế tạo",
+              "subjects": [
+                {
+                  "code": "MET108",
+                  "name": "Công nghệ hàn",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "MET132",
+                  "name": "Kỹ thuật tiện",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "MET133",
+                  "name": "Kỹ thuật phay",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "MET424",
+                  "name": "Đồ án công nghệ hàn",
+                  "credits": 3,
+                  "prerequisites": ["MET108"],
+                  "corequisites": []
+                },
+                {
+                  "code": "MET426",
+                  "name": "Đồ án thiết kế chế tạo máy",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Tự động hóa",
+              "subjects": [
+                {
+                  "code": "CTR105",
+                  "name": "Hệ thống sản xuất tích hợp",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "CTR106",
+                  "name": "Hệ thống điều khiển số",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "CTR107",
+                  "name": "Robot công nghiệp",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "CTR108",
+                  "name": "Tự động hóa quá trình sản xuất",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "CTR423",
+                  "name": "Đồ án tự động hóa",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức không tích lũy",
+      "total_credits": 5,
+      "subcategories": [
+        {
+          "name": "Giáo dục thể chất",
+          "total_credits": 5,
+          "note": "tự chọn 1 trong 5 nhóm",
+          "groups": [
+            {
+              "group_name": "Nhóm 1",
+              "subjects": [
+                {
+                  "code": "PHT304",
+                  "name": "Bóng chuyền 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT305",
+                  "name": "Bóng chuyền 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT306",
+                  "name": "Bóng chuyền 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 2",
+              "subjects": [
+                {
+                  "code": "PHT307",
+                  "name": "Bóng rổ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT308",
+                  "name": "Bóng rổ 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT309",
+                  "name": "Bóng rổ 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 3",
+              "subjects": [
+                {
+                  "code": "PHT310",
+                  "name": "Thể hình - Thẩm mỹ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT311",
+                  "name": "Thể hình - Thẩm mỹ 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT312",
+                  "name": "Thể hình - Thẩm mỹ 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 4",
+              "subjects": [
+                {
+                  "code": "PHT313",
+                  "name": "Vovinam 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT314",
+                  "name": "Vovinam 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT315",
+                  "name": "Vovinam 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 5",
+              "subjects": [
+                {
+                  "code": "PHT316",
+                  "name": "Bóng đá 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT317",
+                  "name": "Bóng đá 2",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT318",
+                  "name": "Bóng đá 3",
+                  "credits": 1,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chương trình Giáo dục quốc phòng và an ninh",
+          "note": "Bắt buộc, không tích lũy",
+          "subjects": [
+            {
+              "code": "NDF108",
+              "name": "Quốc phòng, an ninh 1",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF109",
+              "name": "Quốc phòng, an ninh 2",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF210",
+              "name": "Quốc phòng, an ninh 3",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF211",
+              "name": "Quốc phòng, an ninh 4",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "additional_info": {
+    "decision_number": "1698/QĐ-ĐKC",
+    "decision_date": "12 tháng 6 năm 2023",
+    "signed_by": "GS. TS. Nguyễn Trung Kiên",
+    "note": "Sinh viên được xét điều kiện Thực tập, Khóa luận tốt nghiệp theo quy định của Khoa."
+  }
+}

@@ -568,6 +568,66 @@
             margin-bottom: 1rem;
         }
     </style>
+    <style>
+        /* Toast Notification Styles */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 1rem;
+            animation: slideIn 0.3s ease-out forwards;
+            min-width: 300px;
+            border-left: 5px solid #2e7d32;
+        }
+
+        .toast.error {
+            border-left-color: #d32f2f;
+        }
+
+        .toast.info {
+            border-left-color: #0288d1;
+        }
+
+        .toast-icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+
+        .toast-message {
+            color: #333;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -587,9 +647,11 @@
             </ul>
 
             <div class="nav-actions">
-                <div class="user-profile-header">
-                    <span>👋</span>
-                    <span id="headerUserName">Sinh viên</span>
+                <div class="sidebar" id="sidebar">
+                    <div class="user-profile-header">
+                        <span>👋</span>
+                        <span id="headerUserName">Sinh viên</span>
+                    </div>
                 </div>
                 <button id="logoutBtn" class="btn-logout-nav">Đăng xuất</button>
             </div>
@@ -1190,13 +1252,15 @@
                         const result = await response.json();
 
                         if (response.ok) {
-                            alert(result.message);
-                            window.location.reload();
+                            showToast(result.message);
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 1000);
                         } else {
-                            alert(result.message || 'Cập nhật thất bại');
+                            showToast(result.message || 'Cập nhật thất bại', 'error');
                         }
                     } catch (error) {
-                        alert('Lỗi kết nối server');
+                        showToast('Lỗi kết nối server', 'error');
                     } finally {
                         btnSaveProfile.disabled = false;
                         btnSaveProfile.textContent = '💾 Lưu thay đổi';
@@ -1305,7 +1369,7 @@
                         const result = await response.json();
 
                         if (response.ok) {
-                            alert(result.message);
+                            showToast(result.message);
                             sv5tForm.reset();
                             // Re-fill read-only data
                             document.getElementById('sv5tName').value = data.studentName;
@@ -1315,11 +1379,11 @@
                             // Reload history
                             loadSV5THistory();
                         } else {
-                            alert(result.message || 'Có lỗi xảy ra');
+                            showToast(result.message || 'Có lỗi xảy ra', 'error');
                         }
                     } catch (error) {
                         console.error('Error submitting form:', error);
-                        alert('Có lỗi xảy ra khi kết nối đến máy chủ');
+                        showToast('Có lỗi xảy ra khi kết nối đến máy chủ', 'error');
                     } finally {
                         submitBtn.textContent = originalBtnText;
                         submitBtn.disabled = false;
@@ -1429,7 +1493,7 @@
                         });
 
                         if (response.ok) {
-                            alert('Thêm hoạt động thành công!');
+                            showToast('Thêm hoạt động thành công!');
                             activityForm.reset();
                             activityFormContainer.style.display = 'none';
                             btnAddActivity.style.display = 'block';
@@ -1444,11 +1508,11 @@
 
                             loadActivities();
                         } else {
-                            alert('Có lỗi xảy ra.');
+                            showToast('Có lỗi xảy ra.', 'error');
                         }
                     } catch (error) {
                         console.error('Error:', error);
-                        alert('Lỗi kết nối.');
+                        showToast('Lỗi kết nối.', 'error');
                     } finally {
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;
@@ -1460,6 +1524,37 @@
             if (document.getElementById('activitiesList')) {
                 loadActivities();
             }
+            // Toast Notification Function
+            window.showToast = function(message, type = 'success') {
+                const container = document.getElementById('toastContainer');
+                if (!container) return;
+
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                
+                let icon = '✅';
+                if (type === 'error') icon = '❌';
+                if (type === 'info') icon = 'ℹ️';
+
+                toast.innerHTML = `
+                    <div class="toast-icon">${icon}</div>
+                    <div class="toast-message">${message}</div>
+                `;
+
+                container.appendChild(toast);
+
+                // Auto remove after 3 seconds
+                setTimeout(() => {
+                    toast.style.animation = 'fadeOut 0.3s ease-out forwards';
+                    toast.addEventListener('animationend', () => {
+                        toast.remove();
+                    });
+                }, 3000);
+            };
+
+            // Override alert for convenience (optional, but requested behavior is to replace alert)
+            // window.alert = function(msg) { showToast(msg, 'info'); }
+
         });
     </script>
 </body>

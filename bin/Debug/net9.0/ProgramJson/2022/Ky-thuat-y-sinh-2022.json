@@ -1,0 +1,654 @@
+{
+  "department": "Kỹ thuật y sinh",
+  "program_code": "7520212",
+  "academic_year": "2022",
+  "total_credits": 150,
+  "non_accumulated_credits": 5,
+  "non_accumulated_program": "Chương trình Giáo dục Quốc phòng và an ninh",
+  "courses": [
+    {
+      "category": "Kiến thức giáo dục đại cương",
+      "total_credits": 47,
+      "subjects": [
+        {
+          "code": "POS104",
+          "name": "Triết học Mác - Lênin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS105",
+          "name": "Kinh tế chính trị Mác - Lênin",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS106",
+          "name": "Chủ nghĩa xã hội khoa học",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS107",
+          "name": "Lịch sử Đảng Cộng sản Việt Nam",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS103",
+          "name": "Tư tưởng Hồ Chí Minh",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC101",
+          "name": "Tiếng Anh 1",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC102",
+          "name": "Tiếng Anh 2",
+          "credits": 3,
+          "prerequisites": ["ENC101"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC103",
+          "name": "Tiếng Anh 3",
+          "credits": 3,
+          "prerequisites": ["ENC102"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC104",
+          "name": "Tiếng Anh 4",
+          "credits": 3,
+          "prerequisites": ["ENC103"],
+          "corequisites": []
+        },
+        {
+          "code": "MAT101",
+          "name": "Đại số tuyến tính",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "MAT118",
+          "name": "Giải tích",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "BME619",
+          "name": "Nhập môn ngành Kỹ thuật y sinh",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "PHY104",
+          "name": "Vật lý y sinh",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "CAP221",
+          "name": "Tin học kỹ thuật",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "LAW106",
+          "name": "Pháp luật đại cương",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL115",
+          "name": "Tư duy thiết kế dự án",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL116",
+          "name": "Đổi mới sáng tạo và tư duy khởi nghiệp",
+          "credits": 3,
+          "prerequisites": ["SKL115"],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức giáo dục chuyên nghiệp",
+      "total_credits": 103,
+      "subcategories": [
+        {
+          "name": "Kiến thức bắt buộc",
+          "total_credits": 91,
+          "subjects": [
+            {
+              "code": "BME101",
+              "name": "An toàn bức xạ và an toàn điện",
+              "credits": 3,
+              "prerequisites": ["ELE108"],
+              "corequisites": []
+            },
+            {
+              "code": "MED111",
+              "name": "Bệnh học và vi sinh vật",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MED1002",
+              "name": "Giải phẫu và sinh lý học",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CMP2070",
+              "name": "Lập trình Python",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET175",
+              "name": "Trí tuệ nhân tạo và ứng dụng",
+              "credits": 3,
+              "prerequisites": ["CMP2070"],
+              "corequisites": []
+            },
+            {
+              "code": "ELE237",
+              "name": "CAD trong kỹ thuật điện tử",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "EGM114",
+              "name": "Cơ lưu chất sinh học",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE183",
+              "name": "Mạch điện tử",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE484",
+              "name": "Đồ án mạch điện tử",
+              "credits": 1,
+              "prerequisites": ["ELE183"],
+              "corequisites": []
+            },
+            {
+              "code": "ELD413",
+              "name": "Đồ án vi điều khiển",
+              "credits": 1,
+              "prerequisites": ["ELD105"],
+              "corequisites": []
+            },
+            {
+              "code": "BME404",
+              "name": "Đồ án xử lý ảnh trong y tế",
+              "credits": 1,
+              "prerequisites": ["BME118"],
+              "corequisites": []
+            },
+            {
+              "code": "ELE108",
+              "name": "Giải tích mạch điện",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE113",
+              "name": "Kỹ thuật điện",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CTR103",
+              "name": "Kỹ thuật điều khiển tự động",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME106",
+              "name": "Kỹ thuật đo trong y tế",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME107",
+              "name": "Kỹ thuật hình ảnh trong y học",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELD101",
+              "name": "Kỹ thuật số",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE155",
+              "name": "Linh kiện điện tử",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE385",
+              "name": "Thực hành mạch điện tử",
+              "credits": 1,
+              "prerequisites": ["ELE183"],
+              "corequisites": []
+            },
+            {
+              "code": "BME314",
+              "name": "Thực hành kỹ thuật đo trong y tế",
+              "credits": 1,
+              "prerequisites": ["BME106"],
+              "corequisites": []
+            },
+            {
+              "code": "ELD308",
+              "name": "Thực hành kỹ thuật số",
+              "credits": 1,
+              "prerequisites": ["ELD101"],
+              "corequisites": []
+            },
+            {
+              "code": "ELD310",
+              "name": "Thực hành vi điều khiển",
+              "credits": 1,
+              "prerequisites": ["ELD105"],
+              "corequisites": []
+            },
+            {
+              "code": "BME315",
+              "name": "Thực hành xử lý ảnh trong y tế",
+              "credits": 1,
+              "prerequisites": ["BME118"],
+              "corequisites": []
+            },
+            {
+              "code": "ELE356",
+              "name": "Thực tập công nhân điện",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE357",
+              "name": "Thực tập công nhân điện tử",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME117",
+              "name": "Vật liệu sinh học và các bộ phận cơ thể nhân tạo",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELD105",
+              "name": "Vi điều khiển",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME118",
+              "name": "Xử lý ảnh trong y tế",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME122",
+              "name": "Quang sinh học và ứng dụng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME110",
+              "name": "Thiết bị chẩn đoán và điều trị",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME123",
+              "name": "Thiết kế kỹ thuật y sinh",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME424",
+              "name": "Đồ án thiết kế kỹ thuật y sinh",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME425",
+              "name": "Đồ án vật liệu sinh học và các bộ phận cơ thể nhân tạo",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME426",
+              "name": "Đồ án công nghệ sức khoẻ thông minh",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME520",
+              "name": "Thực tập tốt nghiệp ngành Kỹ thuật y sinh",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "BME421",
+              "name": "Đồ án tốt nghiệp ngành Kỹ thuật y sinh",
+              "credits": 12,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        },
+        {
+          "name": "Kiến thức tự chọn",
+          "total_credits": 12,
+          "groups": [
+            {
+              "group_name": "Điện tử y sinh",
+              "subjects": [
+                {
+                  "code": "BME102",
+                  "name": "Cảm biến đặc biệt và dụng cụ",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "MIS124",
+                  "name": "Hệ thống thông tin y tế",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "BME127",
+                  "name": "Thiết kế mạch điện tử y sinh",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "BME128",
+                  "name": "Xử lý tín hiệu y sinh",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Quản trị thiết bị y tế",
+              "subjects": [
+                {
+                  "code": "MAN155",
+                  "name": "Quản trị thiết bị y tế",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "BME129",
+                  "name": "Tư vấn và giám sát thi công thiết bị y tế",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "BME130",
+                  "name": "Kinh thầu trong y sinh",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "MAN1090",
+                  "name": "Quản trị doanh nghiệp trong y sinh",
+                  "credits": 3,
+                  "prerequisites": [],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức không tích lũy",
+      "total_credits": 5,
+      "subcategories": [
+        {
+          "name": "Giáo dục thể chất",
+          "total_credits": 5,
+          "note": "Tự chọn 1 trong 5 nhóm",
+          "groups": [
+            {
+              "group_name": "Nhóm 1: Bóng chuyền",
+              "subjects": [
+                {
+                  "code": "PHT304",
+                  "name": "Bóng chuyền 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT305",
+                  "name": "Bóng chuyền 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT304"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT306",
+                  "name": "Bóng chuyền 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT305"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 2: Bóng rổ",
+              "subjects": [
+                {
+                  "code": "PHT307",
+                  "name": "Bóng rổ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT308",
+                  "name": "Bóng rổ 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT307"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT309",
+                  "name": "Bóng rổ 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT308"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 3: Thể hình - Thẩm mỹ",
+              "subjects": [
+                {
+                  "code": "PHT310",
+                  "name": "Thể hình - Thẩm mỹ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT311",
+                  "name": "Thể hình - Thẩm mỹ 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT310"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT312",
+                  "name": "Thể hình - Thẩm mỹ 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT311"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 4: Vovinam",
+              "subjects": [
+                {
+                  "code": "PHT313",
+                  "name": "Vovinam 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT314",
+                  "name": "Vovinam 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT313"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT315",
+                  "name": "Vovinam 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT314"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 5: Bóng đá",
+              "subjects": [
+                {
+                  "code": "PHT316",
+                  "name": "Bóng đá 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT317",
+                  "name": "Bóng đá 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT316"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT318",
+                  "name": "Bóng đá 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT317"],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chương trình Giáo dục quốc phòng và an ninh",
+          "note": "Bắt buộc, không tích lũy",
+          "subjects": [
+            {
+              "code": "NDF108",
+              "name": "Quốc phòng, an ninh 1",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF109",
+              "name": "Quốc phòng, an ninh 2",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF210",
+              "name": "Quốc phòng, an ninh 3",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF211",
+              "name": "Quốc phòng, an ninh 4",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "additional_info": {
+    "decision_number": "1488/QĐ-ĐKC",
+    "decision_date": "15 tháng 6 năm 2022",
+    "signed_by": "GS. TS. Nguyễn Trung Kiên",
+    "note": "Sinh viên được xét điều kiện Thực tập, Đồ án tốt nghiệp theo quy định của Viện."
+  }
+}

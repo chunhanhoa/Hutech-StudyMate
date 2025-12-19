@@ -142,6 +142,13 @@
     </div>
 
     <script>
+        // Check for auto-saved password
+        const tempPass = sessionStorage.getItem('temp_auto_pass');
+        if (tempPass) {
+             const passInput = document.getElementById('password');
+             if(passInput) passInput.value = tempPass;
+        }
+
         document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const username = document.getElementById('username').value;

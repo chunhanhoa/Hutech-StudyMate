@@ -1,0 +1,640 @@
+{
+  "department": "Kỹ thuật nhiệt",
+  "program_code": "7520115",
+  "academic_year": "2024",
+  "total_credits": 150,
+  "non_accumulated_credits": 5,
+  "non_accumulated_program": "Chương trình Giáo dục Quốc phòng và an ninh",
+  "courses": [
+    {
+      "category": "Kiến thức giáo dục đại cương",
+      "total_credits": 47,
+      "subjects": [
+        {
+          "code": "MAT118",
+          "name": "Giải tích",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "MAT101",
+          "name": "Đại số tuyến tính",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "THE601",
+          "name": "Nhập môn ngành Kỹ thuật nhiệt",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "PHY111",
+          "name": "Vật lý nhiệt",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "CAP221",
+          "name": "Tin học kỹ thuật",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS104",
+          "name": "Triết học Mác - Lênin",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS105",
+          "name": "Kinh tế chính trị Mác - Lênin",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS106",
+          "name": "Chủ nghĩa xã hội khoa học",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS107",
+          "name": "Lịch sử Đảng Cộng sản Việt Nam",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "POS103",
+          "name": "Tư tưởng Hồ Chí Minh",
+          "credits": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC120",
+          "name": "Anh ngữ 1",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "ENC121",
+          "name": "Anh ngữ 2",
+          "credits": 3,
+          "prerequisites": ["ENC120"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC122",
+          "name": "Anh ngữ 3",
+          "credits": 3,
+          "prerequisites": ["ENC121"],
+          "corequisites": []
+        },
+        {
+          "code": "ENC123",
+          "name": "Anh ngữ 4",
+          "credits": 3,
+          "prerequisites": ["ENC122"],
+          "corequisites": []
+        },
+        {
+          "code": "LAW106",
+          "name": "Pháp luật đại cương",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL115",
+          "name": "Tư duy thiết kế dự án",
+          "credits": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "code": "SKL116",
+          "name": "Đổi mới sáng tạo và tư duy khởi nghiệp",
+          "credits": 3,
+          "prerequisites": ["SKL115"],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức giáo dục chuyên nghiệp",
+      "total_credits": 103,
+      "subcategories": [
+        {
+          "name": "Kiến thức bắt buộc",
+          "total_credits": 91,
+          "subjects": [
+            {
+              "code": "MET176",
+              "name": "Vẽ kỹ thuật cơ khí",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "EGM115",
+              "name": "Cơ học kỹ thuật",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET118",
+              "name": "Vật liệu kỹ thuật cơ khí",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET109",
+              "name": "Đo lường cơ khí và dung sai lắp ghép",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE228",
+              "name": "CAD trong kỹ thuật nhiệt",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE113",
+              "name": "Kỹ thuật điện",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE116",
+              "name": "Kỹ thuật điện tử",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE340",
+              "name": "Thực hành kỹ thuật điện tử",
+              "credits": 1,
+              "prerequisites": ["ELE116"],
+              "corequisites": []
+            },
+            {
+              "code": "ELD105",
+              "name": "Vi điều khiển",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELD310",
+              "name": "Thực hành vi điều khiển",
+              "credits": 1,
+              "prerequisites": ["ELD105"],
+              "corequisites": []
+            },
+            {
+              "code": "MET321",
+              "name": "Thực tập công nhân cơ khí",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE102",
+              "name": "Cơ lưu chất ứng dụng",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "MET103",
+              "name": "Cơ sở thiết kế máy",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE103",
+              "name": "Nhiệt động lực học kỹ thuật",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE104",
+              "name": "Truyền nhiệt và thiết bị trao đổi nhiệt",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE105",
+              "name": "Máy nén và thiết bị lạnh",
+              "credits": 3,
+              "prerequisites": ["THE104"],
+              "corequisites": []
+            },
+            {
+              "code": "MET135",
+              "name": "Hệ thống thủy lực khí nén",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CTR103",
+              "name": "Kỹ thuật điều khiển tự động",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE106",
+              "name": "Cơ sở kỹ thuật lạnh",
+              "credits": 3,
+              "prerequisites": ["THE103"],
+              "corequisites": []
+            },
+            {
+              "code": "THE107",
+              "name": "Điều hòa không khí và thông gió",
+              "credits": 3,
+              "prerequisites": ["THE104"],
+              "corequisites": []
+            },
+            {
+              "code": "THE108",
+              "name": "Kỹ thuật sấy và chưng cất",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE109",
+              "name": "Lò hơi và mạng nhiệt",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "ELE159",
+              "name": "Năng lượng tái tạo",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "CTR104",
+              "name": "Lập trình PLC",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE310",
+              "name": "Thực tập lạnh dân dụng",
+              "credits": 1,
+              "prerequisites": ["THE106"],
+              "corequisites": []
+            },
+            {
+              "code": "THE111",
+              "name": "Đo lường và tự động hóa các quá trình nhiệt lạnh",
+              "credits": 3,
+              "prerequisites": ["THE106"],
+              "corequisites": []
+            },
+            {
+              "code": "THE412",
+              "name": "Đồ án thiết kế hệ thống sấy",
+              "credits": 1,
+              "prerequisites": ["THE108"],
+              "corequisites": []
+            },
+            {
+              "code": "THE413",
+              "name": "Đồ án thiết kế hệ thống lạnh",
+              "credits": 1,
+              "prerequisites": ["THE106"],
+              "corequisites": []
+            },
+            {
+              "code": "THE314",
+              "name": "Thực tập lạnh công nghiệp",
+              "credits": 1,
+              "prerequisites": ["THE106"],
+              "corequisites": []
+            },
+            {
+              "code": "THE315",
+              "name": "Thực tập điều hòa không khí",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE316",
+              "name": "Thực tập sấy",
+              "credits": 1,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE317",
+              "name": "Thực tập lò hơi",
+              "credits": 1,
+              "prerequisites": ["THE109"],
+              "corequisites": []
+            },
+            {
+              "code": "THE524",
+              "name": "Thực tập tốt nghiệp ngành Kỹ thuật nhiệt (*)",
+              "credits": 3,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "THE425",
+              "name": "Đồ án tốt nghiệp ngành Kỹ thuật nhiệt (*)",
+              "credits": 12,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        },
+        {
+          "name": "Kiến thức tự chọn",
+          "total_credits": 12,
+          "groups": [
+            {
+              "group_name": "Nhóm 1 : Công nghệ lạnh và điều hòa không khí",
+              "subjects": [
+                {
+                  "code": "THE121",
+                  "name": "Hệ thống điều hòa không khí VRV",
+                  "credits": 3,
+                  "prerequisites": ["THE106"],
+                  "corequisites": []
+                },
+                {
+                  "code": "THE119",
+                  "name": "Chuyên đề lạnh ứng dụng",
+                  "credits": 3,
+                  "prerequisites": ["THE106"],
+                  "corequisites": []
+                },
+                {
+                  "code": "THE126",
+                  "name": "Máy lạnh hấp thụ trong kỹ thuật điều hòa không khí",
+                  "credits": 3,
+                  "prerequisites": ["THE107"],
+                  "corequisites": []
+                },
+                {
+                  "code": "THE422",
+                  "name": "Đồ án thiết kế hệ thống điều hòa không khí",
+                  "credits": 3,
+                  "prerequisites": ["THE107"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 2 : Công nghệ nhiệt và nhà máy nhiệt điện",
+              "subjects": [
+                {
+                  "code": "THE118",
+                  "name": "Bơm nhiệt",
+                  "credits": 3,
+                  "prerequisites": ["THE106"],
+                  "corequisites": []
+                },
+                {
+                  "code": "THE120",
+                  "name": "Chuyên đề nhiệt ứng dụng",
+                  "credits": 3,
+                  "prerequisites": ["THE109"],
+                  "corequisites": []
+                },
+                {
+                  "code": "THE127",
+                  "name": "Nhà máy nhiệt điện",
+                  "credits": 3,
+                  "prerequisites": ["THE109"],
+                  "corequisites": []
+                },
+                {
+                  "code": "THE423",
+                  "name": "Đồ án thiết kế hệ thống lò hơi",
+                  "credits": 3,
+                  "prerequisites": ["THE109"],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Kiến thức không tích lũy",
+      "total_credits": 5,
+      "subcategories": [
+        {
+          "name": "Giáo dục thể chất",
+          "total_credits": 5,
+          "note": "tự chọn 1 trong 5 nhóm",
+          "groups": [
+            {
+              "group_name": "Nhóm 1",
+              "subjects": [
+                {
+                  "code": "PHT304",
+                  "name": "Bóng chuyền 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT305",
+                  "name": "Bóng chuyền 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT304"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT306",
+                  "name": "Bóng chuyền 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT305"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 2",
+              "subjects": [
+                {
+                  "code": "PHT307",
+                  "name": "Bóng rổ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT308",
+                  "name": "Bóng rổ 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT307"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT309",
+                  "name": "Bóng rổ 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT308"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 3",
+              "subjects": [
+                {
+                  "code": "PHT310",
+                  "name": "Thể hình - Thẩm mỹ 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT311",
+                  "name": "Thể hình - Thẩm mỹ 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT310"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT312",
+                  "name": "Thể hình - Thẩm mỹ 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT311"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 4",
+              "subjects": [
+                {
+                  "code": "PHT313",
+                  "name": "Vovinam 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT314",
+                  "name": "Vovinam 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT313"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT315",
+                  "name": "Vovinam 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT314"],
+                  "corequisites": []
+                }
+              ]
+            },
+            {
+              "group_name": "Nhóm 5",
+              "subjects": [
+                {
+                  "code": "PHT316",
+                  "name": "Bóng đá 1",
+                  "credits": 2,
+                  "prerequisites": [],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT317",
+                  "name": "Bóng đá 2",
+                  "credits": 2,
+                  "prerequisites": ["PHT316"],
+                  "corequisites": []
+                },
+                {
+                  "code": "PHT318",
+                  "name": "Bóng đá 3",
+                  "credits": 1,
+                  "prerequisites": ["PHT317"],
+                  "corequisites": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chương trình Giáo dục quốc phòng và an ninh",
+          "note": "Bắt buộc, không tích lũy",
+          "subjects": [
+            {
+              "code": "NDF108",
+              "name": "Quốc phòng, an ninh 1",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF109",
+              "name": "Quốc phòng, an ninh 2",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF210",
+              "name": "Quốc phòng, an ninh 3",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            },
+            {
+              "code": "NDF211",
+              "name": "Quốc phòng, an ninh 4",
+              "credits": 0,
+              "prerequisites": [],
+              "corequisites": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "additional_info": {
+    "decision_number": "884/QĐ-ĐKC",
+    "decision_date": "25 tháng 3 năm 2024",
+    "signed_by": "GS. TS. Nguyễn Trung Kiên",
+    "note": "Sinh viên được xét điều kiện Thực tập, Đồ án tốt nghiệp theo quy định của Viện."
+  }
+}

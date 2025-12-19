@@ -1744,6 +1744,12 @@ function copyPassword() {
 // Close success modal and redirect to login
 function closeSuccessModalAndLogin() {
   const modal = document.getElementById('autoRegisterSuccessModal');
+  const passwordEl = document.getElementById('generatedPassword');
+  
+  if (passwordEl && passwordEl.textContent) {
+    sessionStorage.setItem('temp_auto_pass', passwordEl.textContent.trim());
+  }
+
   if (modal) {
     modal.style.display = 'none';
   }
@@ -1754,7 +1760,7 @@ function closeSuccessModalAndLogin() {
     pendingActionAfterPrompt = null;
   }
 
-  window.location.href = '/login.html';
+  window.location.href = 'login.html';
 }
 
 // Make functions available globally
