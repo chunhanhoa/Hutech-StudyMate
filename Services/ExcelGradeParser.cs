@@ -59,6 +59,8 @@ public class ExcelGradeParser : IExcelGradeParser
 
             var list = new List<ParsedGrade>();
             var seenX = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            string? currentSemester = null;
+            
             foreach (var ws in pkg.Workbook.Worksheets)
             {
                 if (ws == null) continue;
@@ -91,7 +93,20 @@ public class ExcelGradeParser : IExcelGradeParser
                         cells[c - 1] = text;
                     }
                     if (allEmpty) continue;
-                    ProcessRow(cells, seenX, list);
+                    
+                    // Detect semester header and update currentSemester
+                    var joinedText = string.Join(' ', cells).Trim();
+                    var semMatch = Regex.Match(joinedText, @"Học kỳ\s+(\d+)\s*-?\s*Năm học\s+(\d{4})-(\d{4})", RegexOptions.IgnoreCase);
+                    if (semMatch.Success)
+                    {
+                        var semNum = semMatch.Groups[1].Value;
+                        var year1 = semMatch.Groups[2].Value.Substring(2); // "2022" -> "22"
+                        var year2 = semMatch.Groups[3].Value.Substring(2); // "2023" -> "23"
+                        currentSemester = $"HK{semNum} {year1}-{year2}";
+                        continue;
+                    }
+                    
+                    ProcessRow(cells, seenX, list, currentSemester);
                 }
             }
             if (list.Count > 0) return list;
@@ -113,6 +128,8 @@ public class ExcelGradeParser : IExcelGradeParser
         using var reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream);
         var all = new List<ParsedGrade>();
         var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        string? currentSemester = null;
+        
         do
         {
             while (reader.Read())
@@ -134,14 +151,27 @@ public class ExcelGradeParser : IExcelGradeParser
                     cells[i] = text;
                 }
                 if (allEmpty) continue;
-                ProcessRow(cells, seen, all);
+                
+                // Detect semester header and update currentSemester
+                var joinedText = string.Join(' ', cells).Trim();
+                var semMatch = Regex.Match(joinedText, @"Học kỳ\s+(\d+)\s*-?\s*Năm học\s+(\d{4})-(\d{4})", RegexOptions.IgnoreCase);
+                if (semMatch.Success)
+                {
+                    var semNum = semMatch.Groups[1].Value;
+                    var year1 = semMatch.Groups[2].Value.Substring(2); // "2022" -> "22"
+                    var year2 = semMatch.Groups[3].Value.Substring(2); // "2023" -> "23"
+                    currentSemester = $"HK{semNum} {year1}-{year2}";
+                    continue;
+                }
+                
+                ProcessRow(cells, seen, all, currentSemester);
             }
         } while (reader.NextResult());
         return all;
     }
 
     // Tách logic xử lý 1 dòng (dùng chung)
-    private void ProcessRow(string[] cells, HashSet<string> seen, List<ParsedGrade> target)
+    private void ProcessRow(string[] cells, HashSet<string> seen, List<ParsedGrade> target, string? semester = null)
     {
         var joinedLower = string.Join(' ', cells).ToLowerInvariant();
         if (joinedLower.Contains("điểm trung bình")
@@ -223,7 +253,7 @@ public class ExcelGradeParser : IExcelGradeParser
             // Môn Quốc phòng: chỉ cần score10 >= 0 (bao gồm cả lần rớt)
             // if (score10 == null || score10.Value < 0) return;
             // KHÔNG kiểm tra seen nữa - giữ tất cả các lần học
-            target.Add(new ParsedGrade(code, courseName, credits, score10, null, null, isFailed));
+            target.Add(new ParsedGrade(code, courseName, credits, score10, null, null, isFailed, semester));
         }
         else
         {
@@ -231,7 +261,7 @@ public class ExcelGradeParser : IExcelGradeParser
             //if (score10 == null || score10.Value <= 0) return;
             
             // KHÔNG kiểm tra seen nữa - giữ tất cả các lần học
-            target.Add(new ParsedGrade(code, courseName, credits, score10, letter, gpa4, isFailed));
+            target.Add(new ParsedGrade(code, courseName, credits, score10, letter, gpa4, isFailed, semester));
         }
     }
 
@@ -261,6 +291,8 @@ public class ExcelGradeParser : IExcelGradeParser
     {
         var list = new List<ParsedGrade>();
         var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        string? currentSemester = null;
+        
         if (stream.CanSeek) stream.Position = 0;
         using var reader = new StreamReader(stream, Encoding.UTF8, true, 8192, leaveOpen: true);
         var text = reader.ReadToEnd();
@@ -281,7 +313,20 @@ public class ExcelGradeParser : IExcelGradeParser
                     cellsList.Add(raw);
                 }
                 if (cellsList.Count == 0) continue;
-                ProcessRow(cellsList.ToArray(), seen, list);
+                
+                // Detect semester header
+                var joinedText = string.Join(' ', cellsList).Trim();
+                var semMatch = Regex.Match(joinedText, @"Học kỳ\s+(\d+)\s*-?\s*Năm học\s+(\d{4})-(\d{4})", RegexOptions.IgnoreCase);
+                if (semMatch.Success)
+                {
+                    var semNum = semMatch.Groups[1].Value;
+                    var year1 = semMatch.Groups[2].Value.Substring(2);
+                    var year2 = semMatch.Groups[3].Value.Substring(2);
+                    currentSemester = $"HK{semNum} {year1}-{year2}";
+                    continue;
+                }
+                
+                ProcessRow(cellsList.ToArray(), seen, list, currentSemester);
             }
             return list;
         }
@@ -303,7 +348,20 @@ public class ExcelGradeParser : IExcelGradeParser
             // Chuẩn hóa
             for (int i = 0; i < cells.Length; i++)
                 cells[i] = cells[i].Trim();
-            ProcessRow(cells, seen, list);
+            
+            // Detect semester header
+            var joinedText = string.Join(' ', cells).Trim();
+            var semMatch = Regex.Match(joinedText, @"Học kỳ\s+(\d+)\s*-?\s*Năm học\s+(\d{4})-(\d{4})", RegexOptions.IgnoreCase);
+            if (semMatch.Success)
+            {
+                var semNum = semMatch.Groups[1].Value;
+                var year1 = semMatch.Groups[2].Value.Substring(2);
+                var year2 = semMatch.Groups[3].Value.Substring(2);
+                currentSemester = $"HK{semNum} {year1}-{year2}";
+                continue;
+            }
+            
+            ProcessRow(cells, seen, list, currentSemester);
         }
         return list;
     }

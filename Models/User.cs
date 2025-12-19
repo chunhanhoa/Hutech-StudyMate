@@ -19,4 +19,6 @@ public class User
     public string? Major { get; set; } // Chuyên Ngành
     public string? Email { get; set; } // Email for OAuth2 mapping
     public string? GoogleId { get; set; } // Google Unique ID
+    public bool MustChangePassword { get; set; } = false; // True for auto-registered users
+    public string? AvatarUrl { get; set; } // Profile picture URL or Base64
 }

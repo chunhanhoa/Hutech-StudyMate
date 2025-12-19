@@ -20,4 +20,5 @@ public class MongoDbContext
     public IMongoCollection<UserActivity> UserActivities => _database.GetCollection<UserActivity>("UserActivities");
     public IMongoCollection<SV5TRegistration> SV5TRegistrations => _database.GetCollection<SV5TRegistration>("SV5TRegistrations");
     public IMongoCollection<StudentActivity> StudentActivities => _database.GetCollection<StudentActivity>("StudentActivities");
+    public IMongoCollection<ActivityArticle> ActivityArticles => _database.GetCollection<ActivityArticle>("ActivityArticles");
 }

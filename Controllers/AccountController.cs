@@ -44,7 +44,7 @@ public class AccountController : ControllerBase
 
         await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity), authProperties);
 
-        return Ok(new { message = "Đăng nhập thành công", fullName = user.FullName });
+        return Ok(new { message = "Đăng nhập thành công", fullName = user.FullName, mustChangePassword = user.MustChangePassword });
     }
 
     [HttpPost("register")]
@@ -52,7 +52,7 @@ public class AccountController : ControllerBase
     {
         var user = new User
         {
-            Username = request.Username,
+            Username = request.StudentId, // Username = StudentId
             FullName = request.FullName,
             StudentId = request.StudentId,
             ClassName = request.ClassName,
@@ -63,10 +63,39 @@ public class AccountController : ControllerBase
         var result = await _userService.RegisterAsync(user, request.Password);
         if (!result)
         {
-            return BadRequest(new { message = "Tên đăng nhập đã tồn tại" });
+            return BadRequest(new { message = "MSSV đã được đăng ký" });
         }
 
         return Ok(new { message = "Đăng ký thành công" });
+    }
+
+    [HttpPost("auto-register")]
+    public async Task<IActionResult> AutoRegister([FromBody] AutoRegisterRequest request)
+    {
+        if (string.IsNullOrWhiteSpace(request.StudentId))
+        {
+            return BadRequest(new { message = "MSSV không được để trống" });
+        }
+
+        var (user, password) = await _userService.AutoRegisterAsync(request.StudentId);
+        
+        if (user == null || password == null)
+        {
+            return BadRequest(new { message = "MSSV đã được đăng ký" });
+        }
+
+        return Ok(new { 
+            message = "Đăng ký thành công", 
+            username = user.Username,
+            password = password 
+        });
+    }
+
+    [HttpGet("check-mssv/{mssv}")]
+    public async Task<IActionResult> CheckMSSV(string mssv)
+    {
+        var exists = await _userService.CheckStudentIdExistsAsync(mssv);
+        return Ok(new { exists });
     }
 
     [HttpPost("logout")]
@@ -98,9 +127,67 @@ public class AccountController : ControllerBase
             role = user.Role,
             studentId = user.StudentId,
             className = user.ClassName,
-            faculty = user.Faculty
+            faculty = user.Faculty,
+            mustChangePassword = user.MustChangePassword,
+            avatarUrl = user.AvatarUrl,
+            email = user.Email
         });
     }
+
+    [HttpPut("update-profile")]
+    public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequest request)
+    {
+        if (!User.Identity?.IsAuthenticated ?? true)
+        {
+            return Unauthorized();
+        }
+
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userId))
+        {
+            return Unauthorized();
+        }
+
+        var success = await _userService.UpdateProfileAsync(
+            userId,
+            request.FullName,
+            request.ClassName,
+            request.Major,
+            request.Email,
+            request.AvatarUrl
+        );
+
+        if (!success)
+        {
+            return BadRequest(new { message = "Cập nhật thất bại" });
+        }
+
+        return Ok(new { message = "Cập nhật thông tin thành công" });
+    }
+    [HttpPost("change-password")]
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
+    {
+        if (!User.Identity?.IsAuthenticated ?? true)
+        {
+            return Unauthorized();
+        }
+
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(userId))
+        {
+            return Unauthorized();
+        }
+
+        var success = await _userService.ChangePasswordAsync(userId, request.OldPassword, request.NewPassword);
+        
+        if (!success)
+        {
+            return BadRequest(new { message = "Mật khẩu cũ không đúng" });
+        }
+
+        return Ok(new { message = "Đổi mật khẩu thành công" });
+    }
+
     [HttpGet("login-google")]
     public IActionResult LoginGoogle()
     {
@@ -179,4 +266,24 @@ public class RegisterRequest
     public string? ClassName { get; set; }
     public string? Faculty { get; set; }
     public string? Major { get; set; }
+}
+
+public class AutoRegisterRequest
+{
+    public string StudentId { get; set; } = string.Empty;
+}
+
+public class ChangePasswordRequest
+{
+    public string OldPassword { get; set; } = string.Empty;
+    public string NewPassword { get; set; } = string.Empty;
+}
+
+public class UpdateProfileRequest
+{
+    public string FullName { get; set; } = string.Empty;
+    public string? ClassName { get; set; }
+    public string? Major { get; set; }
+    public string? Email { get; set; }
+    public string? AvatarUrl { get; set; }
 }

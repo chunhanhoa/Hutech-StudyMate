@@ -15,6 +15,7 @@ public class SV5TRegistration
     public string Major { get; set; } = string.Empty; // Chuyên Ngành
     public string AcademicYear { get; set; } = string.Empty; // Năm học đăng ký
     public string Reason { get; set; } = string.Empty; // Lý do
+    public string Level { get; set; } = string.Empty; // Cấp (Khoa/Viện, Trường, Thành, Trung ương)
     public string Status { get; set; } = "Pending"; // Pending, Approved, Rejected
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

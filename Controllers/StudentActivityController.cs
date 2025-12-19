@@ -44,9 +44,7 @@ public class StudentActivityController : ControllerBase
             {
                 await request.Image.CopyToAsync(ms);
                 var fileBytes = ms.ToArray();
-                var base64String = Convert.ToBase64String(fileBytes);
-                var contentType = request.Image.ContentType ?? "image/jpeg"; // Default fallback
-                imageUrl = $"data:{contentType};base64,{base64String}";
+                imageUrl = "data:" + request.Image.ContentType + ";base64," + Convert.ToBase64String(fileBytes);
             }
         }
 

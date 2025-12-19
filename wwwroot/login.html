@@ -103,15 +103,6 @@
             display: none;
             font-size: 0.9rem;
         }
-
-        @media (max-width: 480px) {
-            .auth-container {
-                padding: 1.5rem;
-            }
-            body {
-                padding: 1rem;
-            }
-        }
     </style>
 </head>
 
@@ -145,7 +136,6 @@
             </a>
         </div>
         <div class="auth-footer">
-            Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
             <br><br>
             <a href="index.html">← Quay lại trang chủ</a>
         </div>
@@ -173,7 +163,13 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    window.location.href = 'handbook.html';
+                    // Check if user must change password
+                    if (data.mustChangePassword) {
+                        // Redirect to change password page
+                        window.location.href = 'change-password.html';
+                    } else {
+                        window.location.href = 'handbook.html';
+                    }
                 } else {
                     errorDiv.innerText = data.message || "Đăng nhập thất bại";
                     errorDiv.style.display = 'block';

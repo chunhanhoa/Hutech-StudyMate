@@ -214,6 +214,8 @@ private static bool LooksOffTopic(string text)
         // Chỉ lấy từ biến môi trường
         _apiKey = Environment.GetEnvironmentVariable("GROQ_API_KEY") ?? "";
 
+        //need delete
+        //hard code api key for testing
         if (!string.IsNullOrEmpty(_apiKey))
         {
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");

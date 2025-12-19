@@ -234,6 +234,16 @@ function clearResult() {
     aiChatSection.classList.add('hidden');
   }
 
+  // Ẩn dashboard và destroy chart
+  const dashboardSection = document.getElementById('dashboardSection');
+  if (dashboardSection) {
+    dashboardSection.classList.add('hidden');
+  }
+  if (window.gpaChartInstance) {
+    window.gpaChartInstance.destroy();
+    window.gpaChartInstance = null;
+  }
+
   resultsLayout.classList.add('hidden');
   uploadPanel.classList.remove('hidden');
   gradesData = [];
@@ -708,6 +718,271 @@ function filterElectiveSubjects(subjects, filterValue) {
   return subjects;
 }
 
+// Dashboard functions
+function aggregateDataBySemester(grades) {
+  if (!grades || grades.length === 0) return [];
+
+  // Group grades by semester
+  const semesterMap = new Map();
+
+  for (const grade of grades) {
+    const semester = (grade.semester || grade.Semester || '').trim();
+    if (!semester) continue;
+
+    const credits = Number(grade.credits || grade.Credits) || 0;
+    const score10 = Number(grade.score10 || grade.Score10);
+    const gpa4 = Number(grade.gpa || grade.Gpa || grade.gpa4 || grade.Gpa4);
+
+    if (!Number.isFinite(credits) || credits === 0) continue;
+    if (!Number.isFinite(gpa4)) continue;
+
+    if (!semesterMap.has(semester)) {
+      semesterMap.set(semester, {
+        semester,
+        grades: []
+      });
+    }
+
+    semesterMap.get(semester).grades.push({
+      credits,
+      gpa4,
+      score10
+    });
+  }
+
+  // Calculate semester GPA and accumulated GPA
+  const semesterData = [];
+  let totalWeightedGpa = 0;
+  let totalCredits = 0;
+
+  // Sort semesters chronologically
+  const sortedSemesters = Array.from(semesterMap.values()).sort((a, b) => {
+    // Extract year and semester number for sorting
+    const parseS = (s) => {
+      // Try to match "HK1 22-23" or "1-2022" format
+      const match = s.match(/(\d+)\s*-\s*(\d+)/);
+      if (match) {
+        return { year: parseInt(match[1]), sem: parseInt(match[2]) };
+      }
+      // Try to match "Nhóm X" format (fallback)
+      const groupMatch = s.match(/Nhóm\s+(\d+)/);
+      if (groupMatch) {
+        return { year: 0, sem: parseInt(groupMatch[1]) };
+      }
+      return { year: 0, sem: 0 };
+    };
+    const aInfo = parseS(a.semester);
+    const bInfo = parseS(b.semester);
+    if (aInfo.year !== bInfo.year) return aInfo.year - bInfo.year;
+    return aInfo.sem - bInfo.sem;
+  });
+
+  for (const semData of sortedSemesters) {
+    let semWeightedGpa = 0;
+    let semCredits = 0;
+
+    for (const g of semData.grades) {
+      semWeightedGpa += g.gpa4 * g.credits;
+      semCredits += g.credits;
+      totalWeightedGpa += g.gpa4 * g.credits;
+      totalCredits += g.credits;
+    }
+
+    const semesterGPA = semCredits > 0 ? semWeightedGpa / semCredits : 0;
+    const accumulatedGPA = totalCredits > 0 ? totalWeightedGpa / totalCredits : 0;
+
+    semesterData.push({
+      semester: semData.semester,
+      semesterGPA: parseFloat(semesterGPA.toFixed(2)),
+      accumulatedGPA: parseFloat(accumulatedGPA.toFixed(2)),
+      credits: semCredits
+    });
+  }
+
+  return semesterData;
+}
+
+function renderDashboard(semesterData) {
+  if (!semesterData || semesterData.length === 0) return;
+
+  const dashboardSection = document.getElementById('dashboardSection');
+  const canvas = document.getElementById('gpaChart');
+
+  if (!dashboardSection || !canvas) return;
+
+  // Destroy existing chart if any
+  if (window.gpaChartInstance) {
+    window.gpaChartInstance.destroy();
+  }
+
+  const ctx = canvas.getContext('2d');
+
+  window.gpaChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: semesterData.map(d => d.semester),
+      datasets: [
+        {
+          type: 'line',
+          label: 'Điểm TB tích lũy (hệ 4)',
+          data: semesterData.map(d => d.accumulatedGPA),
+          borderColor: '#e64444d6',
+          backgroundColor: 'rgba(255, 107, 107, 0.1)',
+          borderWidth: 3,
+          tension: 0.3,
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          pointBackgroundColor: '#fe7f7fff',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 2,
+          order: 1
+        },
+        {
+          type: 'bar',
+          label: 'Điểm TB học kỳ (hệ 4)',
+          data: semesterData.map(d => d.semesterGPA),
+          backgroundColor: '#6CBEEF',
+          borderColor: '#4FAEEB',
+          borderWidth: 1,
+          borderRadius: 6,
+          order: 2
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            usePointStyle: true,
+            padding: 15,
+            font: {
+              size: 13,
+              weight: '600'
+            }
+          }
+        },
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          padding: 12,
+          titleFont: {
+            size: 14,
+            weight: 'bold'
+          },
+          bodyFont: {
+            size: 13
+          },
+          callbacks: {
+            label: function (context) {
+              let label = context.dataset.label || '';
+              if (label) {
+                label += ': ';
+              }
+              label += context.parsed.y.toFixed(2);
+              return label;
+            }
+          }
+        },
+        zoom: {
+          pan: {
+            enabled: true,
+            mode: 'x',
+            modifierKey: null,
+          },
+          zoom: {
+            wheel: {
+              enabled: true,
+              speed: 0.1,
+            },
+            pinch: {
+              enabled: true
+            },
+            mode: 'x',
+          },
+          limits: {
+            x: { min: 'original', max: 'original' },
+            y: { min: 0, max: 4.0 }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 4.5,
+          ticks: {
+            stepSize: 0.5,
+            font: {
+              size: 12
+            },
+            callback: function (value) {
+              // Only display tick marks up to 4.0
+              if (value <= 4.0) {
+                // Always show 1 decimal place (e.g., 0.0, 0.5, 1.0, 2.0, 3.0, 4.0)
+                return value.toFixed(1);
+              }
+              return null; // Hide ticks above 4.0
+            }
+          },
+          grid: {
+            color: 'rgba(0, 0, 0, 0.05)'
+          }
+        },
+        x: {
+          ticks: {
+            font: {
+              size: 12,
+              weight: '500'
+            }
+          },
+          grid: {
+            display: false
+          }
+        }
+      },
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      }
+    }
+  });
+
+  // Zoom button handlers
+  const zoomInBtn = document.getElementById('zoomIn');
+  const zoomOutBtn = document.getElementById('zoomOut');
+  const resetZoomBtn = document.getElementById('resetZoom');
+
+  if (zoomInBtn) {
+    zoomInBtn.onclick = () => {
+      if (window.gpaChartInstance) {
+        window.gpaChartInstance.zoom(1.2);
+      }
+    };
+  }
+
+  if (zoomOutBtn) {
+    zoomOutBtn.onclick = () => {
+      if (window.gpaChartInstance) {
+        window.gpaChartInstance.zoom(0.8);
+      }
+    };
+  }
+
+  if (resetZoomBtn) {
+    resetZoomBtn.onclick = () => {
+      if (window.gpaChartInstance) {
+        window.gpaChartInstance.resetZoom();
+      }
+    };
+  }
+
+  dashboardSection.classList.remove('hidden');
+}
+
 function renderResult(data) {
   uploadPanel.classList.add('hidden');
   const merged = {
@@ -727,22 +1002,6 @@ function renderResult(data) {
       (list.find(p => p.department === merged.department)?.key);
     if (desiredKey) resultDeptSelect.value = desiredKey;
   }
-
-  const baseItems = [
-    ['MSSV', merged.studentId],
-    ['Program Code', merged.programCode || '—'],
-    ['Khoa', merged.department || '—'],
-    ['Niên khóa', merged.academicYear || '—'],
-    ['Tổng TC CTĐT', merged.totalCredits],
-    ['Tổng môn đã học', data.grades.length]
-  ];
-  summary.innerHTML = baseItems.map(([k, v]) =>
-    `<div class="info-box">
-       <span class="info-label">${k}:</span>
-       <span class="info-value">${escapeHtml(String(v))}</span>
-     </div>`
-  ).join('');
-  summary.classList.remove('hidden');
 
   const map = currentProgram && currentProgram.codeNameMap;
   const nonAccSet = currentProgram && currentProgram.nonAccCodes;
@@ -788,15 +1047,32 @@ function renderResult(data) {
     }
   }
 
-  const { totalElectiveCredits, missingCredits, required } = checkElectiveCredits();
-  summary.insertAdjacentHTML('beforeend', `
-    <div class="info-box"><span class="info-label">Thuộc CTĐT:</span><span class="info-value">${matched}</span></div>
-    <div class="info-box"><span class="info-label">Ngoài CTĐT:</span><span class="info-value">${unmatched}</span></div>
-    <div class="info-box"><span class="info-label">TC tích lũy:</span><span class="info-value">${accCredits} / ${currentProgram.totalCredits}</span></div>
-    <div class="info-box"><span class="info-label">TC không tích lũy:</span><span class="info-value">${nonAccCredits} / ${currentProgram.nonAccTotal}</span></div>
-    <div class="info-box"><span class="info-label">GPA TL (4):</span><span class="info-value highlight">${accCredits > 0 && sumGpa4Weighted > 0 ? (sumGpa4Weighted / accCredits).toFixed(2) : '—'}</span></div>
-    <div class="info-box"><span class="info-label">GPA TL (10):</span><span class="info-value highlight">${accCredits > 0 && sumScore10Weighted > 0 ? (sumScore10Weighted / accCredits).toFixed(2) : '—'}</span></div>
-  `);
+  // Create colorful stat cards
+  const totalRequiredCredits = Number(currentProgram.totalCredits) || 0;
+  const remainingCredits = Math.max(0, totalRequiredCredits - accCredits);
+  const gpa4 = accCredits > 0 && sumGpa4Weighted > 0 ? (sumGpa4Weighted / accCredits).toFixed(2) : '0.00';
+  const gpa10 = accCredits > 0 && sumScore10Weighted > 0 ? (sumScore10Weighted / accCredits).toFixed(2) : '0.00';
+
+  const statsCards = [
+    { label: 'Tổng môn học', value: data.grades.length, color: 'blue' },
+    { label: 'Tín chỉ tích lũy', value: accCredits, color: 'yellow' },
+    { label: 'Điểm trung bình (10)', value: gpa10, color: 'light-blue' },
+    { label: 'GPA hiện tại (4)', value: gpa4, color: 'green', highlight: true },
+  ];
+
+  summary.innerHTML = statsCards.map(card =>
+    `<div class="info-box ${card.color}">
+       <span class="info-label">${card.label}</span>
+       <span class="info-value${card.highlight ? ' highlight' : ''}">${escapeHtml(String(card.value))}</span>
+     </div>`
+  ).join('');
+  summary.classList.remove('hidden');
+
+  // Render dashboard with GPA trends
+  const semesterData = aggregateDataBySemester(gradesData);
+  if (semesterData.length > 0) {
+    renderDashboard(semesterData);
+  }
 
   if (gradesData.length || currentProgram.allSubjects.length) {
     renderGradesPage(1);
@@ -838,10 +1114,10 @@ function renderResult(data) {
         nonAccumulatedCredits: nonAccCredits,
         gpa4: accCredits > 0 && sumGpa4Weighted > 0 ? (sumGpa4Weighted / accCredits) : null,
         gpa10: accCredits > 0 && sumScore10Weighted > 0 ? (sumScore10Weighted / accCredits) : null,
-        electiveCredits: totalElectiveCredits,
-        missingElectiveCredits: missingCredits,
-        requiredElectiveCredits: required,
-        notLearnedSubjects: getNotLearnedSubjects()
+        /* electiveCredits: totalElectiveCredits,
+         missingElectiveCredits: missingCredits,
+         requiredElectiveCredits: required,
+         notLearnedSubjects: getNotLearnedSubjects()*/
       }
     };
     window.studyChatBot.updateStudyData(studyAnalysis);
@@ -1242,7 +1518,30 @@ resultDeptSelect.addEventListener('change', async () => {
 });
 
 if (btnNewAnalysis) {
-  btnNewAnalysis.addEventListener('click', () => {
+  btnNewAnalysis.addEventListener('click', async () => {
+    // Check if we should prompt for registration
+    if (hasAnalysisResult && currentStudentId && !hasShownRegisterPrompt) {
+      const loggedIn = await isUserLoggedIn();
+      const alreadyRegistered = await isStudentIdRegistered(currentStudentId);
+
+      // Show prompt if not logged in and not registered
+      if (!loggedIn && !alreadyRegistered) {
+        hasShownRegisterPrompt = true;
+
+        // Define callback to clear result after prompt is handled
+        const clearResultCallback = () => {
+          clearResult();
+          form.reset();
+          setStatus('', '');
+          if (dropZoneText) dropZoneText.textContent = 'Chọn hoặc kéo thả file vào đây';
+        };
+
+        showRegisterPromptModal(clearResultCallback);
+        return; // Don't clear yet, wait for user decision
+      }
+    }
+
+    // Clear result and reset form
     clearResult();
     form.reset();
     setStatus('', '');
@@ -1263,3 +1562,202 @@ if (filterMajor) {
     renderGradesPage(1);
   });
 }
+
+// ==================== AUTO-REGISTRATION FEATURE ====================
+let hasAnalysisResult = false;
+let currentStudentId = null;
+let hasShownRegisterPrompt = false;
+let isLoggedIn = false; // Track login status
+let studentIdRegistered = false; // Track if student is registered
+
+// Track when analysis is complete
+function markAnalysisComplete(studentId) {
+  hasAnalysisResult = true;
+  currentStudentId = studentId;
+  hasShownRegisterPrompt = false;
+
+  // Check login and registration status immediately
+  checkUserStatus();
+}
+
+// Check user login and registration status
+async function checkUserStatus() {
+  if (!currentStudentId) return;
+
+  isLoggedIn = await isUserLoggedIn();
+  studentIdRegistered = await isStudentIdRegistered(currentStudentId);
+}
+
+// Update renderResult to mark analysis as complete
+const originalRenderResult = window.renderResult || renderResult;
+window.renderResult = function (data) {
+  if (typeof originalRenderResult === 'function') {
+    originalRenderResult.call(this, data);
+  }
+  if (data && data.studentId) {
+    markAnalysisComplete(data.studentId);
+  }
+};
+
+// Check if user is logged in
+async function isUserLoggedIn() {
+  try {
+    const res = await fetch('/api/account/me');
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+// Check if StudentId already registered
+async function isStudentIdRegistered(studentId) {
+  try {
+    const res = await fetch(`/api/account/check-mssv/${encodeURIComponent(studentId)}`);
+    if (res.ok) {
+      const data = await res.json();
+      return data.exists;
+    }
+  } catch {
+  }
+  return false;
+}
+
+// Auto-register function
+async function autoRegisterStudent(studentId) {
+  try {
+    const res = await fetch('/api/account/auto-register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ studentId })
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      return { success: true, username: data.username, password: data.password };
+    } else {
+      const data = await res.json();
+      return { success: false, message: data.message };
+    }
+  } catch (error) {
+    return { success: false, message: 'Lỗi kết nối server' };
+  }
+}
+
+// Show success modal with password
+function showSuccessModal(username, password) {
+  const modal = document.getElementById('autoRegisterSuccessModal');
+  const usernameEl = document.getElementById('generatedUsername');
+  const passwordEl = document.getElementById('generatedPassword');
+
+  if (modal && usernameEl && passwordEl) {
+    usernameEl.textContent = username;
+    passwordEl.textContent = password;
+    modal.style.display = 'flex';
+  }
+}
+
+// Beforeunload handler - MUST be synchronous
+window.addEventListener('beforeunload', function (e) {
+  // Only show prompt if we have analysis result and haven't shown it yet
+  if (!hasAnalysisResult || !currentStudentId || hasShownRegisterPrompt) {
+    return;
+  }
+
+  // Only show if user is NOT logged in and NOT already registered
+  if (isLoggedIn || studentIdRegistered) {
+    return;
+  }
+
+  // Show browser's default confirmation dialog
+  e.preventDefault();
+  e.returnValue = 'Bạn chưa lưu kết quả phân tích. Bạn có muốn tạo tài khoản để lưu lại không?';
+  return e.returnValue;
+});
+
+// Show register prompt modal
+let pendingActionAfterPrompt = null;
+
+function showRegisterPromptModal(afterPromptCallback) {
+  const modal = document.getElementById('autoRegisterPromptModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    pendingActionAfterPrompt = afterPromptCallback;
+  }
+}
+
+// Handle register prompt response
+function handleRegisterPrompt(shouldRegister) {
+  const modal = document.getElementById('autoRegisterPromptModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+
+  if (shouldRegister && currentStudentId) {
+    performAutoRegistration();
+  } else {
+    // User declined - execute pending action if any
+    if (pendingActionAfterPrompt) {
+      pendingActionAfterPrompt();
+      pendingActionAfterPrompt = null;
+    }
+  }
+}
+
+// Perform auto-registration
+async function performAutoRegistration() {
+  const result = await autoRegisterStudent(currentStudentId);
+
+  if (result.success) {
+    showSuccessModal(result.username, result.password);
+  } else {
+    alert(result.message || 'Đăng ký thất bại');
+    // Still execute pending action even if registration failed
+    if (pendingActionAfterPrompt) {
+      pendingActionAfterPrompt();
+      pendingActionAfterPrompt = null;
+    }
+  }
+}
+
+// Copy password to clipboard
+function copyPassword() {
+  const passwordEl = document.getElementById('generatedPassword');
+  if (passwordEl) {
+    const textArea = document.createElement('textarea');
+    textArea.value = passwordEl.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+
+    const btn = document.getElementById('copyPasswordBtn');
+    if (btn) {
+      const originalText = btn.textContent;
+      btn.textContent = '✓ Đã sao chép!';
+      setTimeout(() => {
+        btn.textContent = originalText;
+      }, 2000);
+    }
+  }
+}
+
+// Close success modal and redirect to login
+function closeSuccessModalAndLogin() {
+  const modal = document.getElementById('autoRegisterSuccessModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+
+  // Execute pending action if any (e.g., clear result for new analysis)
+  if (pendingActionAfterPrompt) {
+    pendingActionAfterPrompt();
+    pendingActionAfterPrompt = null;
+  }
+
+  window.location.href = '/login.html';
+}
+
+// Make functions available globally
+window.handleRegisterPrompt = handleRegisterPrompt;
+window.copyPassword = copyPassword;
+window.closeSuccessModalAndLogin = closeSuccessModalAndLogin;

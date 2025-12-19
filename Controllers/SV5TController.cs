@@ -43,6 +43,7 @@ public class SV5TController : ControllerBase
             Major = request.Major,
             AcademicYear = request.AcademicYear,
             Reason = request.Reason,
+            Level = request.Level,
             Status = "Pending",
             CreatedAt = DateTime.UtcNow
         };
@@ -73,4 +74,5 @@ public class SV5TRegistrationRequest
     public string Major { get; set; } = string.Empty;
     public string AcademicYear { get; set; } = string.Empty;
     public string Reason { get; set; } = string.Empty;
+    public string Level { get; set; } = string.Empty;
 }

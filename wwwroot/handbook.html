@@ -14,9 +14,9 @@
             --bg: #f5f7fa;
             --text: #333;
             --white: #ffffff;
-            --sidebar-width: 280px;
-            --header-height: 60px;
+            --header-height: 70px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --max-width: 1200px;
         }
 
         body {
@@ -24,186 +24,177 @@
             background: var(--bg);
             color: var(--text);
             margin: 0;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .app-container {
-            display: flex;
-            height: 100vh;
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: var(--sidebar-width);
-            background: var(--white);
-            border-right: 1px solid #e0e0e0;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            flex-shrink: 0;
+            overflow-x: hidden;
         }
 
-        .sidebar-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid #eee;
-            text-align: center;
+        /* Top Navigation */
+        .main-header {
+            background: var(--white);
+            height: var(--header-height);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .sidebar-header img {
-            height: 50px;
-            margin-bottom: 0.5rem;
+        .header-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
         }
 
-        .sidebar-header h2 {
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .brand-section img {
+            height: 40px;
+        }
+
+        .brand-section h2 {
             margin: 0;
             font-size: 1.2rem;
             color: var(--primary);
             font-weight: 700;
         }
 
-        .sidebar-menu {
+        .nav-menu {
+            display: flex;
+            gap: 1rem;
             list-style: none;
-            padding: 1rem 0;
             margin: 0;
-            flex: 1;
-        }
-
-        .menu-item {
             padding: 0;
+            align-items: center;
         }
 
-        .menu-link {
-            display: block;
-            padding: 1rem 1.5rem;
+        .nav-link {
             text-decoration: none;
             color: #555;
             font-weight: 500;
-            transition: all 0.2s;
-            border-left: 4px solid transparent;
-        }
-
-        .menu-link:hover {
-            background: #fff3e0;
-            color: var(--primary);
-        }
-
-        .menu-link.active {
-            background: #ffebee;
-            color: var(--primary);
-            border-left-color: var(--primary);
-            font-weight: 600;
-        }
-
-        .sidebar-footer {
-            padding: 1rem;
-            border-top: 1px solid #eee;
-        }
-
-        .btn-logout {
-            display: block;
-            width: 100%;
-            padding: 0.75rem;
-            background: #f5f5f5;
-            border: none;
+            padding: 0.5rem 1rem;
             border-radius: 8px;
-            color: #333;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            font-size: 0.95rem;
         }
 
-        .btn-logout:hover {
-            background: #e0e0e0;
+        .nav-link:hover {
+            color: var(--primary);
+            background: #fff3e0;
         }
 
-        /* Main Content Styles */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+        .nav-link.active {
+            color: var(--white);
+            background: var(--primary);
         }
 
-        .top-bar {
-            height: var(--header-height);
-            background: var(--white);
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 2rem;
-            flex-shrink: 0;
-        }
-
-        .page-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text);
-            margin: 0;
-        }
-
-        .user-profile {
+        .nav-actions {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
-        .user-name {
-            font-weight: 500;
+        .btn-logout-nav {
+            padding: 0.5rem 1rem;
+            border: 1px solid #eee;
+            background: white;
+            color: #666;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
         }
 
-        .content-area {
+        .btn-logout-nav:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
             flex: 1;
             padding: 2rem;
-            overflow-y: auto;
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+            display: block;
+            /* Override flex */
         }
 
-        /* User Info Grid */
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .nav-link {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --header-height: auto;
+            }
+
+            .header-content {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .profile-left {
+                position: static !important;
+            }
+        }
+
+        /* Existing Styles Reuse */
+        .page-title {
+            display: none;
+            /* Hide old page title as nav covers it */
+        }
+
+        .user-profile-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+            background: #f5f5f5;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        /* Keep form styles, cards, etc. */
         .info-card {
             background: var(--white);
             border-radius: 12px;
             padding: 2rem;
             box-shadow: var(--shadow);
-        }
-
-        .info-header {
             margin-bottom: 2rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
-        }
-
-        .info-header h3 {
-            margin: 0;
-            color: var(--primary);
-        }
-
-        .user-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .info-item {
-            background: #f8f9fa;
-            padding: 1.25rem;
-            border-radius: 8px;
-            border: 1px solid #eee;
-        }
-
-        .info-label {
-            font-size: 0.85rem;
-            color: #666;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .info-value {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #333;
         }
 
         .loading {
@@ -220,58 +211,114 @@
 
         .tab-content {
             display: none;
+            animation: fadeIn 0.3s ease;
         }
 
         .tab-content.active {
             display: block;
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Form Styles */
         .form-group {
             margin-bottom: 1.5rem;
+            position: relative;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #333;
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .form-control {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
             font-family: inherit;
             font-size: 1rem;
-            transition: border-color 0.2s;
+            background: #ffffff;
+            color: #334155;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            box-sizing: border-box;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(229, 57, 53, 0.1);
+            background: #fff;
         }
 
         .form-control[readonly] {
-            background-color: #f5f5f5;
-            cursor: not-allowed;
+            background-color: #f8fafc;
+            border-color: #f1f5f9;
+            color: #64748b;
+            cursor: default;
+            box-shadow: none;
         }
 
+        /* Enhanced Buttons */
         .btn-submit {
-            background: var(--primary);
-            color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            border-radius: 50px;
             font-weight: 600;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: background 0.2s;
-            width: 100%;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .btn-submit:hover {
-            background: #d32f2f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Button Variants */
+        #btnEditProfile {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+        }
+
+        #btnSaveProfile {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        #btnCancelEdit {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        #btnUploadAvatar {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
         }
 
         textarea.form-control {
@@ -279,208 +326,516 @@
             min-height: 100px;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .app-container {
+        /* Avatar & Profile Grid */
+        .avatar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .avatar-wrapper {
+            background: #fff;
+            padding: 5px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0.5rem;
+            width: 100%;
+            /* Fill the column */
+            display: block;
+        }
+
+        #userAvatar {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Info Boxes */
+        .info-box-status {
+            background-color: #dcedc8;
+            /* Light green */
+            color: #33691e;
+            padding: 0.75rem;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #8bc34a;
+        }
+
+        .info-box-contact {
+            background-color: #e3f2fd;
+            /* Light blue */
+            color: #0d47a1;
+            padding: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-left: 4px solid #2196f3;
+        }
+
+        .info-box-contact ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .info-box-contact li {
+            margin-bottom: 0.25rem;
+        }
+
+        .info-box-contact strong {
+            font-weight: 700;
+        }
+
+        /* Profile Layout */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .profile-left {
+            position: sticky;
+            top: calc(var(--header-height) + 2rem);
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            /* Remove white background from container if shifting to boxes */
+            padding: 0;
+            box-shadow: none;
+            border: none;
+        }
+
+        /* Restore card style for just the avatar container if needed, or leave transparent to let boxes stand out */
+        .profile-left-content {
+            /* Removed extra padding wrapper */
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-right {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            min-width: 0;
+        }
+
+        .info-details {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+        }
+
+        .section-header {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin: 2rem 0 1rem 0;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-header:first-child {
+            margin-top: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Document Section Styles */
+        .document-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .document-item {
+            display: flex;
+            gap: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .document-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .document-thumb {
+            width: 200px;
+            height: 120px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .document-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .document-thumb:hover img {
+            transform: scale(1.05);
+        }
+
+        .document-content {
+            flex: 1;
+        }
+
+        .document-title {
+            color: #0056b3;
+            font-weight: 700;
+            font-size: 1rem;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.4;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .document-title:hover {
+            text-decoration: underline;
+            color: #003d80;
+        }
+
+        .document-desc {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-align: justify;
+        }
+
+        @media (max-width: 600px) {
+            .document-item {
                 flex-direction: column;
-                height: auto;
-                overflow: auto;
             }
 
-            .sidebar {
+            .document-thumb {
                 width: 100%;
-                height: auto;
-                border-right: none;
-                border-bottom: 1px solid #e0e0e0;
+                height: 180px;
             }
+        }
 
-            .main-content {
-                height: auto;
-                overflow: visible;
-            }
+        /* Article Detail View */
+        .article-detail {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
 
-            body {
-                overflow: auto;
-            }
-            
-            .top-bar, .content-area, .info-card {
-                padding: 1rem;
-            }
+        .article-detail-title {
+            text-align: center;
+            color: #333;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
 
-            .sidebar-footer {
-                display: none; /* Hide footer logout in sidebar, maybe add to top bar? */
-                /* Actually, sidebar becomes top block, so keep it visible but simpler */
-                display: block; 
-                text-align: center;
-            }
-            
-            /* Make user info grid 1 col */
-            .user-info-grid {
-                grid-template-columns: 1fr;
-            }
+        .article-meta {
+            text-align: left;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .article-content {
+            text-align: justify;
+            line-height: 1.6;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1rem;
         }
     </style>
 </head>
 
 <body>
-    <div class="app-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
+    <!-- Top Navigation -->
+    <header class="main-header">
+        <div class="header-content">
+            <a href="#" class="brand-section">
                 <img src="https://hutech.edu.vn/images/logo.png" alt="HUTECH Logo">
                 <h2>Sổ tay điện tử</h2>
-            </div>
-            <ul class="sidebar-menu">
-                <li class="menu-item">
-                    <a href="#overview" class="menu-link active" data-tab="overview">Tổng quan</a>
-                </li>
-                <li class="menu-item">
-                    <a href="#sv5t" class="menu-link" data-tab="sv5t">Hồ sơ SV5T</a>
-                </li>
-                <li class="menu-item">
-                    <a href="#activities" class="menu-link" data-tab="activities">Hoạt động & Sự kiện</a>
-                </li>
-                <li class="menu-item">
-                    <a href="index.html" class="menu-link">🏠 Quay về trang chủ</a>
-                </li>
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="#overview" class="nav-link active" data-tab="overview">Tổng quan</a></li>
+                <li><a href="#sv5t" class="nav-link" data-tab="sv5t">Hồ sơ SV5T</a></li>
+                <li><a href="#activities" class="nav-link" data-tab="activities">Hoạt động</a></li>
+                <li><a href="index.html" class="nav-link">Trang chủ</a></li>
             </ul>
-            <div class="sidebar-footer">
-                <button id="logoutBtn" class="btn-logout">Đăng xuất</button>
-            </div>
-        </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="top-bar">
-                <h1 class="page-title" id="pageTitle">Tổng quan</h1>
-                <div class="user-profile">
-                    <span class="user-name" id="headerUserName">Đang tải...</span>
+            <div class="nav-actions">
+                <div class="user-profile-header">
+                    <span>👋</span>
+                    <span id="headerUserName">Sinh viên</span>
                 </div>
-            </header>
+                <button id="logoutBtn" class="btn-logout-nav">Đăng xuất</button>
+            </div>
+        </div>
+    </header>
 
-            <div class="content-area">
-                <!-- Overview Tab -->
-                <div id="overview" class="tab-content active">
-                    <div class="info-card">
-                        <div class="info-header">
-                            <h3>Thông tin sinh viên</h3>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Removed inner header, now just content -->
+        <div class="content-area" style="padding: 0;">
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <!-- New 2-Column Profile Layout -->
+                <div class="profile-grid">
+                    <!-- Left Column: Avatar & Info -->
+                    <div class="profile-left">
+                        <div class="profile-left-content">
+                            <div class="avatar-wrapper">
+                                <img id="userAvatar" src="https://via.placeholder.com/150?text=Avatar" alt="Avatar">
+                            </div>
+                            <div style="text-align: center;">
+                                <button id="btnUploadAvatar" class="btn-submit"
+                                    style="display: none; padding: 0.5rem 1rem; font-size: 0.8rem; width: 100%;">
+                                    📷 Đổi ảnh
+                                </button>
+                                <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                            </div>
                         </div>
-                        <div id="userInfoContainer">
-                            <div class="loading">Đang tải thông tin...</div>
+                        <div class="info-box-contact">
+                            <div>Yêu cầu chỉnh sửa các thông tin khác xin liên hệ:</div>
+                            <ul>
+                                <li><strong>PHÒNG ĐÀO TẠO - KHẢO THÍ</strong></li>
+                                <li>Trụ sở: <strong>475A (số cũ:144/24)
+                                <li> Điện Biên Phủ, P.25, Q.Bình Thạnh,
+                                    TP.HCM</strong></li>
+                                </li>
+                                <li>ĐT: <strong>(028) 3 5120782</strong></li>
+                                <li>Fax: <strong>(028) 3 5120784</strong></li>
+                                <li>Email: <strong>daotao@hutech.edu.vn</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Unified Form -->
+                    <div class="profile-right">
+                        <div class="info-details" style="width: 100%;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                                <h3 class="section-header" style="margin: 0; border: none;">THÔNG TIN SINH VIÊN</h3>
+                                <div class="header-actions">
+                                    <button id="btnEditProfile" class="btn-submit"
+                                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                                        ✏️ Chỉnh sửa
+                                    </button>
+                                    <button id="btnCancelEdit" class="btn-submit"
+                                        style="display: none; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                                        ❌ Hủy
+                                    </button>
+                                    <button id="btnSaveProfile" class="btn-submit"
+                                        style="display: none; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                                        💾 Lưu
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="userInfoContainer">
+                                <!-- Dynamic Unified Form inserted here -->
+                                <div class="loading">Đang tải thông tin...</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- SV5T Tab -->
-                <div id="sv5t" class="tab-content">
-                    <div class="info-card">
-                        <div class="info-header">
-                            <h3>Hồ sơ Sinh viên 5 tốt</h3>
+            <!-- SV5T Tab -->
+            <div id="sv5t" class="tab-content">
+                <div class="info-card">
+                    <div class="info-header">
+                        <h3>Hồ sơ Sinh viên 5 tốt</h3>
+                    </div>
+                    <form id="sv5tForm">
+                        <div class="form-group">
+                            <label class="form-label">Họ và tên</label>
+                            <input type="text" id="sv5tName" class="form-control" readonly>
                         </div>
-                        <form id="sv5tForm">
+                        <div class="form-group">
+                            <label class="form-label">MSSV</label>
+                            <input type="text" id="sv5tStudentId" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Chuyên ngành</label>
+                            <input type="text" id="sv5tMajor" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Năm học đăng ký</label>
+                            <select id="sv5tYear" class="form-control" required>
+                                <option value="">-- Chọn năm học --</option>
+                                <option value="2025-2026">2025-2026</option>
+                                <option value="2026-2027">2026-2027</option>
+                            </select>
+                        </div>
+
+                        <!-- New Level Section -->
+                        <div class="form-group">
+                            <label class="form-label">Đăng ký phấn đấu CẤP <span style="color: red;">*</span></label>
+                            <div
+                                style="display: flex; justify-content: space-between; flex-wrap: wrap; padding: 0.5rem 0;">
+                                <label
+                                    style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; color: #333;">
+                                    <input type="radio" name="sv5tLevel" value="Khoa/Viện" required> Khoa/Viện
+                                </label>
+                                <label
+                                    style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; color: #333;">
+                                    <input type="radio" name="sv5tLevel" value="Trường"> Trường
+                                </label>
+                                <label
+                                    style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; color: #333;">
+                                    <input type="radio" name="sv5tLevel" value="Thành"> Thành
+                                </label>
+                                <label
+                                    style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; color: #333;">
+                                    <input type="radio" name="sv5tLevel" value="Trung ương"> Trung ương
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Những kiến nghị khó khăn gặp phải</label>
+                            <textarea id="sv5tReason" class="form-control"
+                                placeholder="Nhập kiến nghị (nếu có)..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Đăng ký</button>
+                    </form>
+                </div>
+
+                <div class="history-section" style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Lịch sử đăng ký</h4>
+                    <div id="sv5tHistoryContainer">
+                        <div class="loading">Đang tải lịch sử...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="activities" class="tab-content">
+                <div class="info-card">
+                    <div class="info-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3>Hoạt động & Sự kiện</h3>
+                        <button id="btnAddActivity" class="btn-submit" style="width: auto;">+ Thêm mới</button>
+                    </div>
+
+                    <!-- Form (Hidden by default) -->
+                    <div id="activityFormContainer"
+                        style="display: none; margin-bottom: 2rem; background: #f9f9f9; padding: 1.5rem; border-radius: 8px;">
+                        <h4 style="margin-top: 0;">Cập nhật hoạt động</h4>
+                        <form id="activityForm">
                             <div class="form-group">
-                                <label class="form-label">Họ và tên</label>
-                                <input type="text" id="sv5tName" class="form-control" readonly>
+                                <label class="form-label">Tên hoạt động & Sự kiện</label>
+                                <input type="text" name="activityName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Ngày tham gia</label>
+                                <input type="date" name="participationDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Họ tên sinh viên</label>
+                                <input type="text" id="actStudentName" class="form-control" readonly>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">MSSV</label>
-                                <input type="text" id="sv5tStudentId" class="form-control" readonly>
+                                <input type="text" id="actStudentId" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Chuyên ngành</label>
-                                <input type="text" id="sv5tMajor" class="form-control" readonly>
+                                <label class="form-label">Hình ảnh minh chứng</label>
+                                <input type="file" name="image" class="form-control" accept="image/*" required>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Năm học đăng ký</label>
-                                <select id="sv5tYear" class="form-control" required>
-                                    <option value="">-- Chọn năm học --</option>
-                                    <option value="2023-2024">2023-2024</option>
-                                    <option value="2024-2025">2024-2025</option>
-                                    <option value="2025-2026">2025-2026</option>
-                                    <option value="2026-2027">2026-2027</option>
-                                </select>
+                            <div style="display: flex; gap: 1rem;">
+                                <button type="submit" class="btn-submit">Lưu hoạt động</button>
+                                <button type="button" id="btnCancelActivity" class="btn-submit"
+                                    style="background: #757575;">Hủy</button>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Lý do đăng ký</label>
-                                <textarea id="sv5tReason" class="form-control"
-                                    placeholder="Nhập lý do và nguyện vọng của bạn..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn-submit">Đăng ký</button>
                         </form>
                     </div>
 
-                    <div class="history-section"
-                        style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">
-                        <h4 style="color: var(--primary); margin-bottom: 1rem;">Lịch sử đăng ký</h4>
-                        <div id="sv5tHistoryContainer">
-                            <div class="loading">Đang tải lịch sử...</div>
-                        </div>
+                    <!-- List Container -->
+                    <div id="activitiesList">
+                        <div class="loading">Đang tải dữ liệu...</div>
                     </div>
                 </div>
 
-                <div id="activities" class="tab-content">
-                    <div class="info-card">
-                        <div class="info-header"
-                            style="display: flex; justify-content: space-between; align-items: center;">
-                            <h3>Hoạt động & Sự kiện</h3>
-                            <button id="btnAddActivity" class="btn-submit" style="width: auto;">+ Thêm mới</button>
-                        </div>
+                <!-- New Document Section -->
+                <div class="info-card" style="margin-top: 2rem;">
+                    <!-- Document List View -->
+                    <div id="documentListContainer">
+                        <h3 class="section-header"
+                            style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            🔔 TÀI LIỆU, THÔNG TIN HOẠT ĐỘNG "SINH VIÊN 5 TỐT"
+                            <span
+                                style="font-size: 0.8rem; font-weight: 400; color: #666; margin-left: auto; text-transform: italic;">
+                                Sinh viên theo dõi các hoạt động sinh viên 5 tốt
+                            </span>
+                        </h3>
 
-                        <!-- Form (Hidden by default) -->
-                        <div id="activityFormContainer"
-                            style="display: none; margin-bottom: 2rem; background: #f9f9f9; padding: 1.5rem; border-radius: 8px;">
-                            <h4 style="margin-top: 0;">Cập nhật hoạt động</h4>
-                            <form id="activityForm">
-                                <div class="form-group">
-                                    <label class="form-label">Tên hoạt động & Sự kiện</label>
-                                    <input type="text" name="activityName" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Ngày tham gia</label>
-                                    <input type="date" name="participationDate" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Họ tên sinh viên</label>
-                                    <input type="text" id="actStudentName" class="form-control" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">MSSV</label>
-                                    <input type="text" id="actStudentId" class="form-control" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Hình ảnh minh chứng</label>
-                                    <input type="file" name="image" class="form-control" accept="image/*" required>
-                                </div>
-                                <div style="display: flex; gap: 1rem;">
-                                    <button type="submit" class="btn-submit">Lưu hoạt động</button>
-                                    <button type="button" id="btnCancelActivity" class="btn-submit"
-                                        style="background: #757575;">Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <!-- List Container -->
-                        <div id="activitiesList">
-                            <div class="loading">Đang tải dữ liệu...</div>
+                        <div class="document-list" id="documentList">
+                            <!-- Dynamic Items will be inserted here by JS -->
+                            <div class="loading">Đang tải tài liệu...</div>
                         </div>
                     </div>
-                </div>
 
-                <div id="certificates" class="tab-content">
-                    <div class="info-card">
-                        <h3>Giấy chứng nhận</h3>
-                        <p>Chức năng đang được phát triển.</p>
-                    </div>
-                </div>
+                    <!-- Article Detail View -->
+                    <div id="documentDetailContainer" class="article-detail">
+                        <div class="article-meta" style="border-bottom: none; margin-bottom: 1rem;">
+                            <span id="articleDate"></span>
+                        </div>
+                        <h2 class="article-detail-title" id="articleTitle"></h2>
+                        <div style="border-bottom: 1px solid #eee; margin-bottom: 1.5rem;"></div>
 
-                <div id="score-analysis" class="tab-content">
-                    <div class="info-card">
-                        <h3>Phân tích điểm</h3>
-                        <p>Chức năng đang được phát triển.</p>
+                        <div class="article-content" id="articleContent">
+                            <!-- Content goes here -->
+                        </div>
+
+                        <div style="text-align: right; margin-top: 2rem;">
+                            <button id="btnBackToDocs" class="btn-submit"
+                                style="background: #fff; color: #333; border: 1px solid #ccc;">
+                                ⬅ Quay lại
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </main>
+
+            <div id="certificates" class="tab-content">
+                <div class="info-card">
+                    <h3>Giấy chứng nhận</h3>
+                    <p>Chức năng đang được phát triển.</p>
+                </div>
+            </div>
+
+            <div id="score-analysis" class="tab-content">
+                <div class="info-card">
+                    <h3>Phân tích điểm</h3>
+                    <p>Chức năng đang được phát triển.</p>
+                </div>
+            </div>
+        </div>
+    </main>
     </div>
 
     <script>
@@ -489,7 +844,7 @@
             const headerUserName = document.getElementById('headerUserName');
             const logoutBtn = document.getElementById('logoutBtn');
             const pageTitle = document.getElementById('pageTitle');
-            const menuLinks = document.querySelectorAll('.menu-link[data-tab]');
+            const menuLinks = document.querySelectorAll('.nav-link[data-tab]');
             const tabContents = document.querySelectorAll('.tab-content');
 
             // Tab Switching Logic
@@ -497,65 +852,200 @@
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
 
-                    // Remove active class from all links and contents
+                    // Update Active State
                     menuLinks.forEach(l => l.classList.remove('active'));
-                    tabContents.forEach(c => c.classList.remove('active'));
-
-                    // Add active class to clicked link
                     link.classList.add('active');
 
-                    // Show corresponding tab content
                     const tabId = link.getAttribute('data-tab');
-                    document.getElementById(tabId).classList.add('active');
+                    tabContents.forEach(tab => {
+                        if (tab.id === tabId) {
+                            tab.classList.add('active');
+                            // If switching to activities, ensure list view is shown
+                            if (tabId === 'activities') {
+                                document.getElementById('documentListContainer').style.display = 'block';
+                                document.getElementById('documentDetailContainer').style.display = 'none';
+                            }
+                        } else {
+                            tab.classList.remove('active');
+                        }
+                    });
 
-                    // Update page title
-                    pageTitle.textContent = link.textContent;
+                    // Mobile sidebar auto-close
+                    if (window.innerWidth <= 768) {
+                        // Optional: close sidebar if implemented
+                    }
                 });
             });
 
+            // Document Data
+            let articles = [];
+
+            const fetchArticles = async () => {
+                try {
+                    const response = await fetch('/api/ActivityArticle');
+                    if (response.ok) {
+                        const data = await response.json();
+                        articles = data.map(item => ({
+                            id: item.id,
+                            title: item.title,
+                            date: item.publishDate,
+                            thumb: item.thumbnailUrl,
+                            desc: item.description,
+                            content: item.content
+                        }));
+                        renderDocuments();
+                    } else {
+                        console.error('Failed to fetch articles');
+                    }
+                } catch (error) {
+                    console.error('Error fetching articles:', error);
+                }
+            };
+
+            // Initial fetch
+            fetchArticles();
+
+            const renderDocuments = () => {
+                const list = document.getElementById('documentList');
+                if (!list) return;
+
+                list.innerHTML = articles.map(item => `
+                    <div class="document-item">
+                        <div class="document-thumb">
+                            <img src="${item.thumb}" alt="thumb">
+                        </div>
+                        <div class="document-content">
+                            <a href="#" class="document-title" onclick="viewArticle('${item.id}'); return false;">${item.title}</a>
+                            <p class="document-desc">${item.desc}</p>
+                        </div>
+                    </div>
+                `).join('');
+            };
+
+            // Global functions for inline onclick access
+            window.viewArticle = (id) => {
+                const article = articles.find(a => a.id === id);
+                if (!article) return;
+
+                document.getElementById('articleTitle').textContent = article.title;
+                document.getElementById('articleDate').textContent = `Ngày tạo: ${article.date}`;
+                document.getElementById('articleContent').innerHTML = article.content;
+
+                document.getElementById('documentListContainer').style.display = 'none';
+                document.getElementById('documentDetailContainer').style.display = 'block';
+
+                // Scroll to top of detail view
+                document.getElementById('documentDetailContainer').scrollIntoView({ behavior: 'smooth' });
+            };
+
+            window.closeArticle = () => {
+                document.getElementById('documentDetailContainer').style.display = 'none';
+                document.getElementById('documentListContainer').style.display = 'block';
+            };
+
+            document.getElementById('btnBackToDocs').addEventListener('click', window.closeArticle);
+
+            // Initial Render
+            renderDocuments();
             // Fetch User Info
+            let currentUserData = {};
+            let isEditMode = false;
+            let pendingAvatarBase64 = null;
+
             try {
                 const response = await fetch('/api/account/me');
                 if (response.ok) {
                     const user = await response.json();
                     console.log('User data loaded:', user);
+                    console.log('Email loaded:', user.email);
+                    currentUserData = user;
 
                     // Update header
                     headerUserName.textContent = user.fullName;
 
-                    // Display user info
+                    // Update avatar
+                    const avatarImg = document.getElementById('userAvatar');
+                    if (user.avatarUrl) {
+                        avatarImg.src = user.avatarUrl;
+                    }
+
+                    // Department mapping from MSSV (copied from index.html)
+                    const deptMapping = {
+                        '8060': 'Công nghệ thông tin',
+                        '8006': 'Công nghệ thông tin',
+                        '8640': 'Khoa học dữ liệu',
+                        '8046': 'Khoa học dữ liệu',
+                        '8770': 'An toàn thông tin',
+                        '8077': 'An toàn thông tin',
+                        '8202': 'Trí tuệ nhân tạo',
+                        '8064': 'Khoa học máy tính'
+                    };
+
+                    // Auto-fill faculty from MSSV if missing
+                    if (!user.faculty && user.studentId && user.studentId.length >= 6) {
+                        const deptCode = user.studentId.substring(2, 6);
+                        const facultyName = deptMapping[deptCode];
+                        if (facultyName) {
+                            user.faculty = facultyName;
+                        }
+                    }
+
+                    // Unified Profile Layout
+                    // No separate summary container needed
+
+                    // Display user info as a SINGLE unified form (Right Column)
                     userInfoContainer.innerHTML = `
-            <div class="user-info-grid">
-              <div class="info-item">
-                <span class="info-label">Họ và tên</span>
-                <div class="info-value">${user.fullName || 'Chưa cập nhật'}</div>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Mã số sinh viên</span>
-                <div class="info-value">${user.studentId || 'Chưa cập nhật'}</div>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Lớp</span>
-                <div class="info-value">${user.className || 'Chưa cập nhật'}</div>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Khoa / Viện</span>
-                <div class="info-value">${user.faculty || 'Chưa cập nhật'}</div>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Chuyên ngành</span>
-                <div class="info-value">${user.major || 'Chưa cập nhật'}</div>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Tên đăng nhập</span>
-                <div class="info-value">${user.username}</div>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Vai trò</span>
-                <div class="info-value">${user.role}</div>
-              </div>
-            </div>
-          `;
+                        <div class="user-info-form">
+                            <!-- Full Name -->
+                            <div class="form-group">
+                                <label class="form-label">Họ và tên <span style="color: red;">*</span></label>
+                                <input type="text" id="editFullName" class="form-control editable-field" value="${user.fullName || ''}" readonly>
+                            </div>
+
+                            <!-- Student ID -->
+                            <div class="form-group">
+                                <label class="form-label">Mã số sinh viên</label>
+                                <input type="text" id="editStudentId" class="form-control" value="${user.studentId || ''}" readonly style="background: #f0f0f0;">
+                            </div>
+
+                            <!-- Class -->
+                            <div class="form-group">
+                                <label class="form-label">Lớp</label>
+                                <input type="text" id="editClassName" class="form-control editable-field" value="${user.className || ''}" readonly>
+                            </div>
+
+                            <!-- Faculty -->
+                            <div class="form-group">
+                                <label class="form-label">Khoa / Viện</label>
+                                <input type="text" id="editFaculty" class="form-control" value="${user.faculty || ''}" readonly style="background: #f0f0f0;">
+                            </div>
+
+                            <!-- Major -->
+                            <div class="form-group">
+                                <label class="form-label">Chuyên ngành</label>
+                                <input type="text" id="editMajor" class="form-control editable-field" value="${user.major || ''}" readonly>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" id="editEmail" class="form-control editable-field" value="${user.email || ''}" readonly>
+                            </div>
+
+                            <!-- Academic Year -->
+                            <div class="form-group">
+                                <label class="form-label">Niên khóa</label>
+                                <input type="text" id="editAcademicYear" class="form-control" value="${user.studentId ? '20' + user.studentId.substring(0, 2) : ''}" readonly style="background: #f0f0f0;">
+                            </div>
+
+                            <!-- Role -->
+                            <div class="form-group">
+                                <label class="form-label">Vai trò</label>
+                                <input type="text" class="form-control" value="${user.role}" readonly style="background: #f0f0f0;">
+                            </div>
+                        </div>
+                    `;
+
 
                     // Auto-fill SV5T Form
                     if (document.getElementById('sv5tName')) {
@@ -578,6 +1068,140 @@
             } catch (error) {
                 console.error('Error fetching user info:', error);
                 userInfoContainer.innerHTML = '<div class="error">Có lỗi xảy ra khi tải thông tin. Vui lòng thử lại sau. <br> Chi tiết lỗi: ' + error.message + '</div>';
+            }
+
+            // Profile Edit Logic
+            const btnEditProfile = document.getElementById('btnEditProfile');
+            const btnCancelEdit = document.getElementById('btnCancelEdit');
+            const btnSaveProfile = document.getElementById('btnSaveProfile');
+            const btnUploadAvatar = document.getElementById('btnUploadAvatar');
+            const avatarInput = document.getElementById('avatarInput');
+
+            function toggleEditMode(enable) {
+                isEditMode = enable;
+                const editableFields = document.querySelectorAll('.editable-field');
+
+                if (enable) {
+                    editableFields.forEach(field => field.removeAttribute('readonly'));
+                    btnEditProfile.style.display = 'none';
+                    btnCancelEdit.style.display = 'inline-flex';
+                    btnSaveProfile.style.display = 'inline-flex';
+                    btnUploadAvatar.style.display = 'inline-flex';
+                } else {
+                    editableFields.forEach(field => field.setAttribute('readonly', true));
+                    btnEditProfile.style.display = 'inline-flex';
+                    btnCancelEdit.style.display = 'none';
+                    btnSaveProfile.style.display = 'none';
+                    btnUploadAvatar.style.display = 'none';
+                }
+            }
+
+            if (btnEditProfile) {
+                btnEditProfile.addEventListener('click', () => toggleEditMode(true));
+            }
+
+            if (btnCancelEdit) {
+                btnCancelEdit.addEventListener('click', () => {
+                    if (confirm('Hủy các thay đổi?')) {
+                        // Reset to original values
+                        document.getElementById('editFullName').value = currentUserData.fullName || '';
+                        document.getElementById('editClassName').value = currentUserData.className || '';
+                        document.getElementById('editMajor').value = currentUserData.major || '';
+                        document.getElementById('editEmail').value = currentUserData.email || '';
+
+                        // Reset avatar
+                        const avatarImg = document.getElementById('userAvatar');
+                        if (currentUserData.avatarUrl) {
+                            avatarImg.src = currentUserData.avatarUrl;
+                        } else {
+                            avatarImg.src = 'https://via.placeholder.com/150?text=Avatar';
+                        }
+                        pendingAvatarBase64 = null;
+
+                        toggleEditMode(false);
+                    }
+                });
+            }
+
+            if (btnUploadAvatar) {
+                btnUploadAvatar.addEventListener('click', () => {
+                    avatarInput.click();
+                });
+            }
+
+            if (avatarInput) {
+                avatarInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    // Validate file type
+                    if (!file.type.startsWith('image/')) {
+                        alert('Vui lòng chọn file ảnh');
+                        return;
+                    }
+
+                    // Validate file size (max 2MB)
+                    if (file.size > 2 * 1024 * 1024) {
+                        alert('Kích thước ảnh không được vượt quá 2MB');
+                        return;
+                    }
+
+                    // Convert to Base64
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        document.getElementById('userAvatar').src = event.target.result;
+                        pendingAvatarBase64 = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            if (btnSaveProfile) {
+                btnSaveProfile.addEventListener('click', async () => {
+                    const fullName = document.getElementById('editFullName').value.trim();
+                    const className = document.getElementById('editClassName').value.trim();
+                    const major = document.getElementById('editMajor').value.trim();
+                    const email = document.getElementById('editEmail').value.trim();
+
+                    // Validation
+                    if (!fullName) {
+                        alert('Họ và tên không được để trống');
+                        return;
+                    }
+
+                    const data = {
+                        fullName,
+                        className: className || null,
+                        major: major || null,
+                        email: email || null,
+                        avatarUrl: pendingAvatarBase64
+                    };
+
+                    btnSaveProfile.disabled = true;
+                    btnSaveProfile.textContent = 'Đang lưu...';
+
+                    try {
+                        const response = await fetch('/api/account/update-profile', {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            alert(result.message);
+                            window.location.reload();
+                        } else {
+                            alert(result.message || 'Cập nhật thất bại');
+                        }
+                    } catch (error) {
+                        alert('Lỗi kết nối server');
+                    } finally {
+                        btnSaveProfile.disabled = false;
+                        btnSaveProfile.textContent = '💾 Lưu thay đổi';
+                    }
+                });
             }
 
             // Logout Logic
@@ -626,8 +1250,9 @@
                                     </div>
                                     <div style="font-size: 0.9rem; color: #555;">
                                         <p style="margin: 0.2rem 0;"><strong>Chuyên ngành:</strong> ${item.major}</p>
+                                        <p style="margin: 0.2rem 0;"><strong>Cấp đăng ký:</strong> ${item.level || 'Chưa cập nhật'}</p>
                                         <p style="margin: 0.2rem 0;"><strong>Ngày đăng ký:</strong> ${date}</p>
-                                        <p style="margin: 0.2rem 0;"><strong>Lý do:</strong> ${item.reason}</p>
+                                        <p style="margin: 0.2rem 0;"><strong>Kiến nghị:</strong> ${item.reason}</p>
                                     </div>
                                 </div>
                             `;
@@ -664,7 +1289,8 @@
                         studentId: document.getElementById('sv5tStudentId').value,
                         major: document.getElementById('sv5tMajor').value,
                         academicYear: document.getElementById('sv5tYear').value,
-                        reason: document.getElementById('sv5tReason').value
+                        reason: document.getElementById('sv5tReason').value,
+                        level: document.querySelector('input[name="sv5tLevel"]:checked')?.value || ''
                     };
 
                     try {

@@ -123,10 +123,6 @@
             .form-group.full-width {
                 grid-column: span 1;
             }
-
-            .auth-container {
-                padding: 1.5rem;
-            }
         }
     </style>
 </head>
@@ -177,10 +173,24 @@
     </div>
 
     <script>
+        // Auto-sync username with StudentId
+        document.getElementById('studentId').addEventListener('input', function (e) {
+            document.getElementById('username').value = e.target.value;
+        });
+
+        // Make username read-only and sync on load
+        document.getElementById('username').readOnly = true;
+        document.getElementById('username').style.backgroundColor = '#f0f0f0';
+        document.getElementById('username').style.cursor = 'not-allowed';
+
         document.getElementById('registerForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
+
+            // Ensure username equals studentId
+            data.username = data.studentId;
+
             const errorDiv = document.getElementById('errorMessage');
             const btn = this.querySelector('button');
 

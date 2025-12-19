@@ -73,4 +73,92 @@ public class UserService
         await _context.Users.InsertOneAsync(user);
         return user;
     }
+
+    public async Task<bool> CheckStudentIdExistsAsync(string studentId)
+    {
+        var user = await _context.Users.Find(u => u.StudentId == studentId || u.Username == studentId).FirstOrDefaultAsync();
+        return user != null;
+    }
+
+    public async Task<(User? user, string? password)> AutoRegisterAsync(string studentId)
+    {
+        // Check if student ID already exists
+        var exists = await CheckStudentIdExistsAsync(studentId);
+        if (exists) return (null, null);
+
+        // Generate random password
+        var password = GenerateRandomPassword();
+
+        // Create new user with Username = StudentId
+        var user = new User
+        {
+            Username = studentId,
+            StudentId = studentId,
+            FullName = "", // Empty, can be updated later
+            PasswordHash = HashPassword(password),
+            Role = "Student",
+            MustChangePassword = true // Require password change on first login
+        };
+
+        await _context.Users.InsertOneAsync(user);
+        return (user, password);
+    }
+
+    private string GenerateRandomPassword()
+    {
+        const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
+        var random = new Random();
+        var password = new char[10];
+        
+        for (int i = 0; i < password.Length; i++)
+        {
+            password[i] = chars[random.Next(chars.Length)];
+        }
+        
+        return new string(password);
+    }
+
+    public async Task<bool> ChangePasswordAsync(string userId, string oldPassword, string newPassword)
+    {
+        var user = await _context.Users.Find(u => u.Id == userId).FirstOrDefaultAsync();
+        if (user == null) return false;
+
+        // Verify old password
+        if (!VerifyPassword(oldPassword, user.PasswordHash))
+        {
+            return false;
+        }
+
+        // Update password and clear MustChangePassword flag
+        var update = Builders<User>.Update
+            .Set(u => u.PasswordHash, HashPassword(newPassword))
+            .Set(u => u.MustChangePassword, false);
+
+        var result = await _context.Users.UpdateOneAsync(u => u.Id == userId, update);
+        return result.ModifiedCount > 0;
+    }
+
+    public async Task<bool> UpdateProfileAsync(string userId, string fullName, string? className, string? major, string? email, string? avatarUrl)
+    {
+        var user = await _context.Users.Find(u => u.Id == userId).FirstOrDefaultAsync();
+        if (user == null) return false;
+
+        var update = Builders<User>.Update
+            .Set(u => u.FullName, fullName);
+
+        if (className != null)
+            update = update.Set(u => u.ClassName, className);
+
+        if (major != null)
+            update = update.Set(u => u.Major, major);
+
+        if (email != null)
+            update = update.Set(u => u.Email, email);
+
+        if (!string.IsNullOrEmpty(avatarUrl))
+            update = update.Set(u => u.AvatarUrl, avatarUrl);
+
+        var result = await _context.Users.UpdateOneAsync(u => u.Id == userId, update);
+        return result.ModifiedCount > 0;
+    }
 }
